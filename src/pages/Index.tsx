@@ -6,7 +6,6 @@ import { Assessment } from "@/types/course";
 import { Loader2, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Card, CardContent } from "@/components/ui/card";
 
 const Index = () => {
   const navigate = useNavigate();
@@ -209,21 +208,19 @@ const Index = () => {
         </p>
         
         {!isLoading ? (
-          <Card className="cosmic-card w-full max-w-2xl animate-fade-in">
-            <CardContent className="p-6">
-              <div className="chat-container">
-                <div className="chat-message assistant mb-4">
-                  <div className="bg-space-cosmic-blue/60 p-4 rounded-lg text-white">
-                    <p>{currentConversation.message}</p>
-                  </div>
-                </div>
-                
-                <div className="chat-response">
-                  {renderResponseArea()}
+          <div className="w-full max-w-2xl animate-fade-in">
+            <div className="chat-container">
+              <div className="chat-message assistant mb-6">
+                <div className="text-center">
+                  <p className="text-2xl font-medium text-white mb-6">{currentConversation.message}</p>
                 </div>
               </div>
-            </CardContent>
-          </Card>
+              
+              <div className="chat-response">
+                {renderResponseArea()}
+              </div>
+            </div>
+          </div>
         ) : (
           <div className="w-full max-w-lg">
             <div className="bg-space-cosmic-blue/40 backdrop-blur-md border border-purple-500/20 p-8 rounded-lg mb-6">
