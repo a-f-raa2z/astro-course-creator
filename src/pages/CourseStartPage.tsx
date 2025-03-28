@@ -39,7 +39,8 @@ const CourseStartPage = () => {
     xpPoints,
     level,
     levelProgress,
-    completedContents
+    completedContents,
+    setCurrentContentIndex
   } = useGameLearning(course);
 
   return (
