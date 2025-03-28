@@ -31,12 +31,12 @@ export const GameContentTabs = ({
 
   const getContentTitle = (type: ContentType) => {
     switch (type) {
-      case 'introduction': return 'Intro';
-      case 'video': return 'Video';
-      case 'keyPoints': return 'Points';
-      case 'shortVideo': return 'Bonus';
-      case 'image': return 'Visual';
-      case 'quiz': return 'Quiz';
+      case 'introduction': return 'Introduction';
+      case 'video': return 'Main Lesson';
+      case 'keyPoints': return 'Key Points';
+      case 'shortVideo': return 'Bonus Video';
+      case 'image': return 'Visual Guide';
+      case 'quiz': return 'Knowledge Check';
     }
   };
   

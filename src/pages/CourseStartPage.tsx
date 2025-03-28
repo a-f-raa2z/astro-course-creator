@@ -127,19 +127,10 @@ const CourseStartPage = () => {
                 setSelectedAnswer={setSelectedAnswer}
                 handleQuizSubmit={handleQuizSubmit}
                 handleNextContent={handleNextContent}
+                handlePreviousContent={handlePreviousContent}
+                isFirstContent={isFirstContent}
               />
             </div>
-          </div>
-
-          {/* Navigation buttons */}
-          <div className="flex justify-between mt-6">
-            <Button 
-              onClick={handlePreviousContent}
-              variant="outline"
-              className={`border-purple-500/30 text-purple-300 hover:bg-purple-900/30 ${isFirstContent ? 'invisible' : ''}`}
-            >
-              <ArrowLeft className="mr-1 h-4 w-4" /> Previous
-            </Button>
           </div>
         </div>
       </div>

@@ -16,6 +16,8 @@ interface GameContentRendererProps {
   setSelectedAnswer: (answer: number) => void;
   handleQuizSubmit: () => void;
   handleNextContent: () => void;
+  handlePreviousContent: () => void;
+  isFirstContent: boolean;
 }
 
 export const GameContentRenderer = ({
@@ -25,21 +27,48 @@ export const GameContentRenderer = ({
   selectedAnswer,
   setSelectedAnswer,
   handleQuizSubmit,
-  handleNextContent
+  handleNextContent,
+  handlePreviousContent,
+  isFirstContent
 }: GameContentRendererProps) => {
   
   switch (contentType) {
     case 'introduction':
-      return <IntroductionContent section={currentSection} onComplete={handleNextContent} />;
+      return <IntroductionContent 
+               section={currentSection} 
+               onComplete={handleNextContent} 
+               onPrevious={handlePreviousContent}
+               isFirstContent={isFirstContent}
+             />;
     case 'video':
-      return <VideoContent section={currentSection} onComplete={handleNextContent} />;
+      return <VideoContent 
+               section={currentSection} 
+               onComplete={handleNextContent}
+               onPrevious={handlePreviousContent}
+               isFirstContent={isFirstContent}
+             />;
     case 'keyPoints':
-      return <KeyPointsContent section={currentSection} onComplete={handleNextContent} />;
+      return <KeyPointsContent 
+               section={currentSection} 
+               onComplete={handleNextContent}
+               onPrevious={handlePreviousContent}
+               isFirstContent={isFirstContent}
+             />;
     case 'shortVideo':
       if (!currentSection.shortVideo) return null;
-      return <ShortVideoContent section={currentSection} onComplete={handleNextContent} />;
+      return <ShortVideoContent 
+               section={currentSection} 
+               onComplete={handleNextContent}
+               onPrevious={handlePreviousContent}
+               isFirstContent={isFirstContent}
+             />;
     case 'image':
-      return <ImageContent section={currentSection} onComplete={handleNextContent} />;
+      return <ImageContent 
+               section={currentSection} 
+               onComplete={handleNextContent}
+               onPrevious={handlePreviousContent} 
+               isFirstContent={isFirstContent}
+             />;
     case 'quiz':
       return (
         <QuizContent
@@ -49,6 +78,8 @@ export const GameContentRenderer = ({
           setSelectedAnswer={setSelectedAnswer}
           handleQuizSubmit={handleQuizSubmit}
           onComplete={handleNextContent}
+          onPrevious={handlePreviousContent}
+          isFirstContent={isFirstContent}
         />
       );
     default:
