@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -61,6 +62,13 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				space: {
+					'deep-blue': '#0A1128',
+					'cosmic-blue': '#1F2D5A',
+					'nebula-purple': '#5A3687',
+					'star-yellow': '#FFD166',
+					'mars-red': '#EF6351'
 				}
 			},
 			borderRadius: {
@@ -84,11 +92,30 @@ export default {
 					to: {
 						height: '0'
 					}
+				},
+				'star-pulse': {
+					'0%, 100%': { opacity: '0.4' },
+					'50%': { opacity: '1' }
+				},
+				'fade-in': {
+					'0%': { opacity: '0' },
+					'100%': { opacity: '1' }
+				},
+				'zoom-in': {
+					'0%': { transform: 'scale(0.95)' },
+					'100%': { transform: 'scale(1)' }
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'star-pulse': 'star-pulse 3s ease-in-out infinite',
+				'fade-in': 'fade-in 0.5s ease-out',
+				'zoom-in': 'zoom-in 0.5s ease-out'
+			},
+			backgroundImage: {
+				'space-gradient': 'linear-gradient(to bottom, #0A1128, #1F2D5A, #5A3687)',
+				'cosmic-glow': 'radial-gradient(circle at center, rgba(255,209,102,0.15) 0%, rgba(10,17,40,0) 70%)'
 			}
 		}
 	},
