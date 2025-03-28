@@ -70,6 +70,7 @@ export const generateMockCourse = (interest: string, level: string, learningStyl
         id: "section-1",
         title: "Foundations and Core Principles",
         introduction: "This section introduces key concepts that will form the foundation of your astronomy journey. Understanding these principles is essential before diving deeper into specialized topics.",
+        whyLearn: "Mastering these fundamental concepts will provide you with the necessary framework to understand how astronomers study the universe and interpret celestial phenomena.",
         videoUrl: "https://www.youtube.com/embed/0rHUDWjR5gg",
         keyPoints: [
           "The scale of cosmic distances and how they're measured",
@@ -77,6 +78,7 @@ export const generateMockCourse = (interest: string, level: string, learningStyl
           "How light and electromagnetic spectrum inform our understanding of space",
           "Tools and technologies used in modern astronomy"
         ],
+        shortVideo: "https://www.youtube.com/embed/mO3Q4bRQZ3k",
         image: {
           url: "https://images.unsplash.com/photo-1470813740244-df37b8c1edcb",
           description: "The night sky reveals billions of stars in our Milky Way galaxy, each one a potential host for planetary systems."
@@ -96,6 +98,7 @@ export const generateMockCourse = (interest: string, level: string, learningStyl
         id: "section-2",
         title: "Celestial Observations",
         introduction: "Learning to observe the night sky is both a practical skill and a gateway to deeper astronomical understanding. This section covers techniques for successful stargazing.",
+        whyLearn: "Developing observational skills enables you to connect theoretical knowledge with real celestial objects and phenomena you can see with your own eyes.",
         videoUrl: "https://www.youtube.com/embed/1sZ15SUeS9w",
         keyPoints: [
           "Identifying major constellations and celestial landmarks",
@@ -103,6 +106,7 @@ export const generateMockCourse = (interest: string, level: string, learningStyl
           "Techniques for naked-eye, binocular, and telescope observations",
           "Planning optimal observation sessions based on location and timing"
         ],
+        shortVideo: "https://www.youtube.com/embed/AwT8_KeZ7HA",
         image: {
           url: "https://images.unsplash.com/photo-1469474968028-56623f02e42e",
           description: "Mountain observatories provide ideal conditions for astronomical observations away from light pollution."
@@ -122,6 +126,7 @@ export const generateMockCourse = (interest: string, level: string, learningStyl
         id: "section-3",
         title: "Cosmic Phenomena",
         introduction: "The universe is filled with spectacular phenomena that challenge our understanding of physics. In this section, we explore some of the most fascinating cosmic events.",
+        whyLearn: "Understanding extreme cosmic events helps us comprehend the lifecycle of stars and galaxies, and provides insights into the fundamental forces that shape our universe.",
         videoUrl: "https://www.youtube.com/embed/G0V3j-itfBU",
         keyPoints: [
           "The life cycle of stars from formation to various end states",
@@ -129,6 +134,7 @@ export const generateMockCourse = (interest: string, level: string, learningStyl
           "Galaxy formation and evolution throughout cosmic history",
           "Transient phenomena like supernovae and gamma-ray bursts"
         ],
+        shortVideo: "https://www.youtube.com/embed/e-P5IFTqB98",
         image: {
           url: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05",
           description: "Nebulae are stellar nurseries where new stars are born from cosmic gas and dust."
@@ -148,6 +154,7 @@ export const generateMockCourse = (interest: string, level: string, learningStyl
         id: "section-4",
         title: "Current Research and Discoveries",
         introduction: "Astronomy is a rapidly evolving field with new discoveries announced regularly. This section highlights recent breakthroughs and active areas of research.",
+        whyLearn: "Staying informed about current astronomical research connects you with the cutting edge of human knowledge and the ongoing quest to understand our universe.",
         videoUrl: "https://www.youtube.com/embed/bUIU1kWk6HU",
         keyPoints: [
           "Latest findings from space telescopes and observatories",
@@ -155,8 +162,9 @@ export const generateMockCourse = (interest: string, level: string, learningStyl
           "Advances in understanding dark matter and dark energy",
           "Gravitational wave astronomy and multi-messenger observations"
         ],
+        shortVideo: "https://www.youtube.com/embed/AyFMPdHU1n0",
         image: {
-          url: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05",
+          url: "https://images.unsplash.com/photo-1462331940025-496dfbfc7564",
           description: "Space telescopes like James Webb allow us to peer deeper into the universe than ever before."
         },
         quiz: {
@@ -174,6 +182,7 @@ export const generateMockCourse = (interest: string, level: string, learningStyl
         id: "section-5",
         title: "Practical Applications",
         introduction: "Astronomy isn't just theoretical—it has practical applications that impact our daily lives and potential future as a spacefaring civilization.",
+        whyLearn: "Understanding the practical applications of astronomy reveals how cosmic knowledge directly benefits society, technology development, and our species' long-term survival.",
         videoUrl: "https://www.youtube.com/embed/HSJJxYu9ong",
         keyPoints: [
           "Spin-off technologies from astronomical research",
@@ -181,8 +190,9 @@ export const generateMockCourse = (interest: string, level: string, learningStyl
           "Asteroid detection and planetary defense",
           "Future of human space exploration and potential colonization"
         ],
+        shortVideo: "https://www.youtube.com/embed/r_qwxV7JEhM",
         image: {
-          url: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05",
+          url: "https://images.unsplash.com/photo-1446776811953-b23d57bd21aa",
           description: "Satellite technologies developed for astronomy now provide critical services for communication, navigation, and Earth observation."
         },
         quiz: {

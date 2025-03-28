@@ -28,6 +28,7 @@ export interface CourseSection {
   id: string;
   title: string;
   introduction: string;
+  whyLearn: string; // Added this for why we learn this section
   videoUrl: string;
   keyPoints: string[];
   shortVideo?: string;

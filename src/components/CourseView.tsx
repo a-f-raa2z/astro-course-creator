@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Course, CourseSection } from "@/types/course";
 import { Button } from "@/components/ui/button";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
-import { ChevronDown, ChevronUp, CheckCircle } from "lucide-react";
+import { ChevronDown, ChevronUp, CheckCircle, Youtube, Video } from "lucide-react";
 
 interface CourseViewProps {
   course: Course;
@@ -28,7 +28,7 @@ const SectionCard = ({ section, index }: { section: CourseSection; index: number
           </span>
           {section.title}
         </CardTitle>
-        <div className="p-2 hover:bg-purple-700/20 rounded-lg transition-all">
+        <div className="p-2 hover:bg-purple-700/20 rounded-lg transition-all cursor-pointer">
           {isOpen ? 
             <ChevronUp className="h-5 w-5 text-purple-300" /> : 
             <ChevronDown className="h-5 w-5 text-purple-300" />
@@ -40,17 +40,26 @@ const SectionCard = ({ section, index }: { section: CourseSection; index: number
         <CollapsibleContent>
           <CardContent className="pt-4">
             <div className="prose prose-invert max-w-none">
-              <h3 className="text-lg font-semibold text-purple-200 mb-2">Introduction</h3>
-              <p className="text-gray-200 mb-6">{section.introduction}</p>
+              <div className="mb-6">
+                <h3 className="text-lg font-semibold text-purple-200 mb-2">Introduction</h3>
+                <p className="text-gray-200">{section.introduction}</p>
+                <p className="text-gray-300 mt-2 italic">{section.whyLearn}</p>
+              </div>
               
-              <div className="my-6 aspect-video">
-                <iframe 
-                  className="w-full h-full rounded-lg"
-                  src={section.videoUrl}
-                  title={`Video for ${section.title}`}
-                  frameBorder="0"
-                  allowFullScreen
-                ></iframe>
+              <div className="my-6 rounded-lg overflow-hidden">
+                <h3 className="text-lg font-semibold text-purple-200 mb-3">
+                  <Youtube className="inline-block mr-2 text-red-500" />
+                  Main Lesson
+                </h3>
+                <div className="aspect-video">
+                  <iframe 
+                    className="w-full h-full rounded-lg"
+                    src={section.videoUrl}
+                    title={`Video for ${section.title}`}
+                    frameBorder="0"
+                    allowFullScreen
+                  ></iframe>
+                </div>
               </div>
 
               <h3 className="text-lg font-semibold text-purple-200 mt-8 mb-2">Key Points</h3>
@@ -63,7 +72,26 @@ const SectionCard = ({ section, index }: { section: CourseSection; index: number
                 ))}
               </ul>
               
+              {section.shortVideo && (
+                <div className="my-8 rounded-lg overflow-hidden">
+                  <h3 className="text-lg font-semibold text-purple-200 mb-3">
+                    <Video className="inline-block mr-2 text-blue-400" />
+                    Additional Short Video
+                  </h3>
+                  <div className="aspect-video">
+                    <iframe 
+                      className="w-full h-full rounded-lg"
+                      src={section.shortVideo}
+                      title={`Short video for ${section.title}`}
+                      frameBorder="0"
+                      allowFullScreen
+                    ></iframe>
+                  </div>
+                </div>
+              )}
+              
               <div className="my-6">
+                <h3 className="text-lg font-semibold text-purple-200 mb-3">Visual Example</h3>
                 <div className="relative overflow-hidden rounded-lg">
                   <img 
                     src={section.image.url} 
