@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { CourseSection } from "@/types/course";
 import { Button } from "@/components/ui/button";
-import { RotateCw, ArrowRight, Lightbulb, FileText, Sun, Circle } from "lucide-react";
+import { RotateCw, ArrowRight, ArrowLeft, Lightbulb, FileText, Sun, Circle } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
 import { TitleWrapper } from "./TitleWrapper";
