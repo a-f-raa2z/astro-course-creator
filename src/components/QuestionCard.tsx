@@ -1,5 +1,5 @@
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { AssessmentQuestion, BlankOption } from "@/types/course";
@@ -21,6 +21,12 @@ const QuestionCard = ({
 }: QuestionCardProps) => {
   const [draggedOption, setDraggedOption] = useState<BlankOption | null>(null);
   const [filledBlank, setFilledBlank] = useState<string | null>(null);
+  
+  // Reset state when question changes
+  useEffect(() => {
+    setFilledBlank(null);
+    setDraggedOption(null);
+  }, [question.id]);
   
   // Handle drag start of an option
   const handleDragStart = (option: BlankOption) => {
