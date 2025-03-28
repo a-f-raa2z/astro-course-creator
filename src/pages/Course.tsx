@@ -9,6 +9,7 @@ import { Card } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
+import SectionCard from "@/components/SectionCard";
 
 const CoursePage = () => {
   const location = useLocation();
@@ -22,6 +23,30 @@ const CoursePage = () => {
   const userScore = localStorage.getItem(`${course.id}-xp`) ? parseInt(localStorage.getItem(`${course.id}-xp`) || "0") : 0;
   const courseProgress = localStorage.getItem(`${course.id}-completed`) ? 
     (JSON.parse(localStorage.getItem(`${course.id}-completed`) || "[]").length / (course.sections.length * 6)) * 100 : 0;
+  
+  // Section data for the five new sections
+  const sectionData = [
+    {
+      title: "The Solar System",
+      description: "Explore our cosmic neighborhood including the Sun, eight planets, dwarf planets, moons, asteroids, comets, and other celestial objects bound by gravity."
+    },
+    {
+      title: "The Inner Planets",
+      description: "Discover Mercury, Venus, Earth, and Mars - the rocky terrestrial planets closest to the Sun with solid surfaces and relatively small sizes."
+    },
+    {
+      title: "Earth",
+      description: "Learn about our home planet - the only known world with liquid water on its surface, a protective atmosphere, and thriving ecosystems supporting diverse life forms."
+    },
+    {
+      title: "The Moon",
+      description: "Examine Earth's natural satellite, its formation, geological features, and the critical role it plays in stabilizing our planet's axial tilt and creating ocean tides."
+    },
+    {
+      title: "The Moon in Our Skies",
+      description: "Understand the Moon's phases, eclipses, and cultural significance throughout human history, plus how to observe and identify its prominent features."
+    }
+  ];
   
   const handleAddToCalendar = () => {
     // In a real app, this would integrate with the user's calendar via API
@@ -134,6 +159,21 @@ const CoursePage = () => {
                  courseProgress < 90 ? "Almost there!" : "Course nearly complete!"}
               </div>
             </Card>
+          </div>
+        </div>
+        
+        {/* New section for the five section cards */}
+        <div className="mb-12">
+          <h2 className="text-2xl font-bold text-white mb-6">Course Sections</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {sectionData.map((section, index) => (
+              <SectionCard 
+                key={index}
+                title={section.title}
+                description={section.description}
+                index={index}
+              />
+            ))}
           </div>
         </div>
         
