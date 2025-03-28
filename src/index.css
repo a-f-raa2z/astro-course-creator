@@ -92,6 +92,12 @@
 .rotate-y-180 {
   transform: rotateY(180deg);
 }
+.perspective-1000 {
+  perspective: 1000px;
+}
+.transform-style-preserve-3d {
+  transform-style: preserve-3d;
+}
 
 /* Custom cosmic styles */
 .cosmic-card {
@@ -137,4 +143,3 @@
   width: 3px;
   background: linear-gradient(to bottom, #9b87f5, #5A3687);
 }
-

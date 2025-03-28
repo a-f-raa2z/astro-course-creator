@@ -85,20 +85,12 @@ export default {
 			},
 			keyframes: {
 				'accordion-down': {
-					from: {
-						height: '0'
-					},
-					to: {
-						height: 'var(--radix-accordion-content-height)'
-					}
+					from: { height: '0' },
+					to: { height: 'var(--radix-accordion-content-height)' }
 				},
 				'accordion-up': {
-					from: {
-						height: 'var(--radix-accordion-content-height)'
-					},
-					to: {
-						height: '0'
-					}
+					from: { height: 'var(--radix-accordion-content-height)' },
+					to: { height: '0' }
 				},
 				'star-pulse': {
 					'0%, 100%': { opacity: '0.4' },
@@ -111,6 +103,14 @@ export default {
 				'zoom-in': {
 					'0%': { transform: 'scale(0.95)' },
 					'100%': { transform: 'scale(1)' }
+				},
+				'twinkle': {
+					'0%, 100%': { opacity: '0.3', transform: 'scale(1)' },
+					'50%': { opacity: '1', transform: 'scale(1.2)' }
+				},
+				'pulse': {
+					'0%, 100%': { opacity: '0.85' },
+					'50%': { opacity: '1' }
 				}
 			},
 			animation: {
@@ -118,7 +118,9 @@ export default {
 				'accordion-up': 'accordion-up 0.2s ease-out',
 				'star-pulse': 'star-pulse 3s ease-in-out infinite',
 				'fade-in': 'fade-in 0.5s ease-out',
-				'zoom-in': 'zoom-in 0.5s ease-out'
+				'zoom-in': 'zoom-in 0.5s ease-out',
+				'twinkle': 'twinkle 3s ease-in-out infinite',
+				'pulse': 'pulse 2s ease-in-out infinite'
 			},
 			backgroundImage: {
 				'space-gradient': 'linear-gradient(to bottom, #0A1128, #1F2D5A, #5A3687)',
