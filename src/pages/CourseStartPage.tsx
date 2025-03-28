@@ -19,9 +19,15 @@ const CourseStartPage = () => {
   const initialSectionIndex = location.state?.initialSectionIndex ?? 0;
   const { toast } = useToast();
   
-  // If no course data is available, redirect to the course page
+  // Redirect to the course page if no course data is available
+  useEffect(() => {
+    if (!course) {
+      navigate("/course");
+    }
+  }, [course, navigate]);
+
+  // Early return if no course data to prevent errors
   if (!course) {
-    navigate("/course");
     return null;
   }
 
@@ -59,6 +65,11 @@ const CourseStartPage = () => {
   const isFirstContent = currentContentIndex === 0 && currentSectionIndex === 0;
   const isLastContent = currentContentIndex === availableContentTypes.length - 1 && 
                         currentSectionIndex === totalSections - 1;
+
+  // Additional check to ensure currentSection exists
+  if (!currentSection) {
+    return null;
+  }
 
   return (
     <div className="bg-space min-h-screen py-8 px-4">
