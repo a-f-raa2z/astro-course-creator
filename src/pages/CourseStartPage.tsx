@@ -61,6 +61,9 @@ const CourseStartPage = () => {
 
   return (
     <div className="bg-space min-h-screen py-8 px-4">
+      {/* XP Popup - Positioned at the top corner */}
+      <XPPopup xpPoints={xpPoints} level={level} levelProgress={levelProgress} />
+      
       <div className="max-w-4xl mx-auto">
         <header className="mb-6">
           <div className="flex justify-between items-center mb-2">
@@ -79,7 +82,7 @@ const CourseStartPage = () => {
                 {course.title}
               </h1>
             </div>
-            <XPPopup xpPoints={xpPoints} level={level} levelProgress={levelProgress} />
+            {/* XP display removed from here as it's now in the top corner */}
           </div>
           
           {/* Game progress display - Above the section title */}
