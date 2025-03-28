@@ -8,6 +8,7 @@ import { ShortVideoContent } from "./content/ShortVideoContent";
 import { ImageContent } from "./content/ImageContent";
 import { QuizContent } from "./content/QuizContent";
 import { BonusVideoContent } from "./content/BonusVideoContent";
+import { SectionTransition } from "./content/SectionTransition";
 
 interface GameContentRendererProps {
   contentType: ContentType;
@@ -19,6 +20,9 @@ interface GameContentRendererProps {
   handleNextContent: () => void;
   handlePreviousContent: () => void;
   isFirstContent: boolean;
+  showSectionTransition?: boolean;
+  nextSectionTitle?: string;
+  onStartNextSection?: () => void;
 }
 
 export const GameContentRenderer = ({
@@ -30,8 +34,21 @@ export const GameContentRenderer = ({
   handleQuizSubmit,
   handleNextContent,
   handlePreviousContent,
-  isFirstContent
+  isFirstContent,
+  showSectionTransition = false,
+  nextSectionTitle,
+  onStartNextSection
 }: GameContentRendererProps) => {
+  
+  if (showSectionTransition && nextSectionTitle) {
+    return (
+      <SectionTransition 
+        currentSectionTitle={currentSection.title}
+        nextSectionTitle={nextSectionTitle}
+        onStartNextSection={onStartNextSection || handleNextContent}
+      />
+    );
+  }
   
   switch (contentType) {
     case 'introduction':

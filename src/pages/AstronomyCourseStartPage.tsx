@@ -9,7 +9,7 @@ import { GameProgress } from "@/components/course/GameProgress";
 import { GameContentRenderer } from "@/components/course/GameContentRenderer";
 import { GameContentTabs } from "@/components/course/GameContentTabs";
 import { XPPopup } from "@/components/course/XPPopup";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Separator } from "@/components/ui/separator";
 
 const AstronomyCourseStartPage = () => {
@@ -18,11 +18,13 @@ const AstronomyCourseStartPage = () => {
   const course = location.state?.course;
   const initialSectionIndex = location.state?.initialSectionIndex ?? 0;
   const { toast } = useToast();
+  const [showSectionTransition, setShowSectionTransition] = useState(false);
   
   // Redirect to the course page if no course data is available
   useEffect(() => {
     if (!course) {
       navigate("/astronomy-course");
+      return;
     }
   }, [course, navigate]);
 
@@ -43,7 +45,7 @@ const AstronomyCourseStartPage = () => {
     overallProgress,
     quizSubmitted,
     selectedAnswer,
-    handleNextContent,
+    handleNextContent: originalHandleNextContent,
     handlePreviousContent,
     setSelectedAnswer,
     handleQuizSubmit,
@@ -53,6 +55,25 @@ const AstronomyCourseStartPage = () => {
     completedContents,
     setCurrentContentIndex
   } = useGameLearning(course);
+
+  // Handle next content with section transition logic
+  const handleNextContent = () => {
+    // Check if this is the last content of the current section but not the last section overall
+    const isLastContentInSection = currentContentIndex === availableContentTypes.length - 1;
+    const isNotLastSection = currentSectionIndex < course.sections.length - 1;
+    
+    if (isLastContentInSection && isNotLastSection) {
+      setShowSectionTransition(true);
+    } else {
+      originalHandleNextContent();
+    }
+  };
+  
+  // Handle starting the next section
+  const handleStartNextSection = () => {
+    setShowSectionTransition(false);
+    originalHandleNextContent(); // This will move to the next section
+  };
 
   // Set initial section index from route state
   useEffect(() => {
@@ -65,6 +86,14 @@ const AstronomyCourseStartPage = () => {
   const isFirstContent = currentContentIndex === 0 && currentSectionIndex === 0;
   const isLastContent = currentContentIndex === availableContentTypes.length - 1 && 
                         currentSectionIndex === totalSections - 1;
+  
+  // Get the next section title for transition screen
+  const getNextSectionTitle = () => {
+    if (currentSectionIndex < course.sections.length - 1) {
+      return course.sections[currentSectionIndex + 1].title;
+    }
+    return "";
+  };
 
   // Additional check to ensure currentSection exists
   if (!currentSection) {
@@ -140,6 +169,9 @@ const AstronomyCourseStartPage = () => {
                 handleNextContent={handleNextContent}
                 handlePreviousContent={handlePreviousContent}
                 isFirstContent={isFirstContent}
+                showSectionTransition={showSectionTransition}
+                nextSectionTitle={getNextSectionTitle()}
+                onStartNextSection={handleStartNextSection}
               />
             </div>
           </div>
