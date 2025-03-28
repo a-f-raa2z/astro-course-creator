@@ -2,7 +2,7 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { ChevronLeft, Check, Award, Star, Rocket, Flag } from "lucide-react";
+import { ChevronLeft, Check, Award, Star, Rocket, Flag, Sparkles } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { useGameLearning } from "@/hooks/useGameLearning";
 import { GameProgress } from "@/components/course/GameProgress";
@@ -47,10 +47,21 @@ const CourseStartPage = () => {
       <div className="max-w-4xl mx-auto">
         <header className="mb-6">
           <div className="flex justify-between items-center mb-2">
-            <h1 className="text-2xl font-bold text-white flex items-center">
-              <Rocket className="mr-2 h-6 w-6 text-purple-400" />
-              {course.title}
-            </h1>
+            <div className="flex items-center">
+              <Button 
+                variant="ghost" 
+                size="sm" 
+                className="mr-2 text-purple-300 hover:text-purple-100 hover:bg-purple-900/30"
+                onClick={() => navigate("/course")}
+              >
+                <ChevronLeft className="h-5 w-5 mr-1" />
+                Back
+              </Button>
+              <h1 className="text-2xl font-bold text-white flex items-center">
+                <Rocket className="mr-2 h-6 w-6 text-purple-400" />
+                {course.title}
+              </h1>
+            </div>
             <div className="flex items-center space-x-2 bg-space-cosmic-blue/40 backdrop-blur-sm px-3 py-1.5 rounded-lg border border-purple-500/20">
               <Star className="h-5 w-5 text-yellow-400" />
               <span className="text-yellow-200 font-semibold">{xpPoints} XP</span>
@@ -93,7 +104,6 @@ const CourseStartPage = () => {
                 });
               } else {
                 setSelectedAnswer(null);
-                setSelectedAnswer(null);
               }
             } else {
               toast({
@@ -133,9 +143,9 @@ const CourseStartPage = () => {
           </Button>
           <Button 
             onClick={handleNextContent}
-            className="bg-purple-600 hover:bg-purple-700 text-white py-2 px-6 rounded-lg shadow-md transition-all duration-300 active:scale-95"
+            className="bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white py-2 px-6 rounded-lg shadow-md transition-all duration-300 active:scale-95"
           >
-            <Check className="mr-2" /> I Got It
+            <Sparkles className="mr-2 h-4 w-4" /> I Got It
           </Button>
         </div>
       </div>

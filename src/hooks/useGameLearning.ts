@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { Course, CourseSection } from "@/types/course";
 
@@ -11,8 +11,20 @@ export const useGameLearning = (course: Course) => {
   const [currentContentIndex, setCurrentContentIndex] = useState(0);
   const [quizSubmitted, setQuizSubmitted] = useState(false);
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
-  const [xpPoints, setXpPoints] = useState(0);
-  const [completedContents, setCompletedContents] = useState<string[]>([]);
+  const [xpPoints, setXpPoints] = useState(() => {
+    const savedXp = localStorage.getItem(`${course.id}-xp`);
+    return savedXp ? parseInt(savedXp, 10) : 0;
+  });
+  const [completedContents, setCompletedContents] = useState<string[]>(() => {
+    const saved = localStorage.getItem(`${course.id}-completed`);
+    return saved ? JSON.parse(saved) : [];
+  });
+  
+  // Save progress to localStorage
+  useEffect(() => {
+    localStorage.setItem(`${course.id}-xp`, xpPoints.toString());
+    localStorage.setItem(`${course.id}-completed`, JSON.stringify(completedContents));
+  }, [xpPoints, completedContents, course.id]);
   
   // Content types to display in order
   const contentTypes: ContentType[] = ['introduction', 'video', 'keyPoints', 'shortVideo', 'image', 'quiz'];
@@ -51,27 +63,38 @@ export const useGameLearning = (course: Course) => {
         // Bonus points for correct quiz answers
         if (selectedAnswer === currentSection.quiz.correctAnswer) {
           pointsToAdd = 20;
+          toast({
+            title: `+${pointsToAdd} XP gained!`,
+            description: "Excellent! Correct answer bonus!",
+          });
         } else {
           pointsToAdd = 5;
+          toast({
+            title: `+${pointsToAdd} XP gained!`,
+            description: "Keep practicing to improve!",
+          });
         }
       } else if (currentContentType === 'video') {
         pointsToAdd = 10;
+        toast({
+          title: `+${pointsToAdd} XP gained!`,
+          description: "Video content completed!",
+        });
+      } else {
+        toast({
+          title: `+${pointsToAdd} XP gained!`,
+          description: "Keep learning to earn more rewards",
+        });
       }
       
       setXpPoints(prev => prev + pointsToAdd);
-      
-      // Show toast for XP gain
-      toast({
-        title: `+${pointsToAdd} XP gained!`,
-        description: "Keep learning to earn more rewards",
-      });
     }
   };
 
   const handleNextContent = () => {
     // If it's a quiz and not submitted but has a selected answer, submit it first
     if (currentContentType === 'quiz' && !quizSubmitted && selectedAnswer !== null) {
-      setQuizSubmitted(true);
+      handleQuizSubmit();
       return;
     }
     
@@ -113,6 +136,17 @@ export const useGameLearning = (course: Course) => {
         title: "🎉 Course Complete! 🎉",
         description: "Congratulations! You've completed the entire course!",
       });
+      
+      // Add special achievement for completing course
+      if (completedContents.length === getTotalContentCount() && !completedContents.includes('course-complete')) {
+        setCompletedContents(prev => [...prev, 'course-complete']);
+        setXpPoints(prev => prev + 50);
+        
+        toast({
+          title: "Achievement Unlocked: Course Master",
+          description: "+50 XP Bonus for completing the entire course!",
+        });
+      }
     }
   };
 
@@ -136,6 +170,19 @@ export const useGameLearning = (course: Course) => {
   const handleQuizSubmit = () => {
     if (selectedAnswer !== null) {
       setQuizSubmitted(true);
+      
+      // Show appropriate toast based on answer correctness
+      if (selectedAnswer === currentSection.quiz.correctAnswer) {
+        toast({
+          title: "Correct Answer!",
+          description: "Great job! You got it right.",
+        });
+      } else {
+        toast({
+          title: "Keep Learning",
+          description: "That's not quite right, but you're making progress!",
+        });
+      }
     } else {
       toast({
         title: "No answer selected",
@@ -145,6 +192,14 @@ export const useGameLearning = (course: Course) => {
     }
   };
 
+  // Calculate total content count across all sections
+  const getTotalContentCount = () => {
+    return course.sections.reduce((total, section, idx) => {
+      const types = getAvailableContentTypes(idx);
+      return total + types.length;
+    }, 0);
+  };
+  
   const totalContentCount = availableContentTypes.length;
   const totalSections = course.sections.length;
   const overallProgress = ((currentSectionIndex * 100) + ((currentContentIndex + 1) * 100 / totalContentCount)) / totalSections;
