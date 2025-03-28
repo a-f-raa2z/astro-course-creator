@@ -28,9 +28,9 @@ const HomePage = () => {
 
   const handleCourseSelect = (course: string) => {
     if (course === "astronomy") {
-      navigate("/assessment");
+      navigate("/assessment", { state: { courseType: "astronomy" } });
     } else if (course === "ai") {
-      navigate("/assessment");
+      navigate("/assessment", { state: { courseType: "ai" } });
     }
   };
 
@@ -76,7 +76,7 @@ const HomePage = () => {
                   onClick={() => handleCourseSelect("astronomy")}
                   className="bg-purple-600 hover:bg-purple-700 text-white"
                 >
-                  Start Journey <ChevronRight className="ml-1 h-4 w-4" />
+                  Generate Course <ChevronRight className="ml-1 h-4 w-4" />
                 </Button>
               </div>
             </CardContent>
@@ -100,7 +100,7 @@ const HomePage = () => {
                   onClick={() => handleCourseSelect("ai")}
                   className="bg-blue-600 hover:bg-blue-700 text-white"
                 >
-                  Start Journey <ChevronRight className="ml-1 h-4 w-4" />
+                  Generate Course <ChevronRight className="ml-1 h-4 w-4" />
                 </Button>
               </div>
             </CardContent>

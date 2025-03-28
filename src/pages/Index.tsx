@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import QuestionCard from "@/components/QuestionCard";
@@ -22,7 +21,6 @@ const Index = () => {
   const [loadingText, setLoadingText] = useState("");
   const [stars, setStars] = useState<{ id: number; x: number; y: number; size: number; opacity: number }[]>([]);
   
-  // Determine course type based on referrer or default to astronomy
   const courseType = location.state?.courseType || "astronomy";
   const isAICourse = courseType === "ai";
 
@@ -149,7 +147,6 @@ const Index = () => {
         
         {!isLoading ? (
           <div className="flex flex-col md:flex-row gap-8 items-center md:items-start">
-            {/* Left side - Planet Progress Tracker */}
             <div className="w-full md:w-2/5 flex justify-center">
               <div className="relative">
                 <PlanetProgressTracker 
@@ -160,7 +157,6 @@ const Index = () => {
               </div>
             </div>
             
-            {/* Right side - Question Card */}
             <div className="w-full md:w-3/5">
               <div className="mb-6">
                 <div className="flex justify-between items-center mb-3">

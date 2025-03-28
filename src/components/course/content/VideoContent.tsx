@@ -15,6 +15,31 @@ interface VideoContentProps {
 }
 
 export const VideoContent = ({ section, onComplete, onPrevious, isFirstContent }: VideoContentProps) => {
+  // Map section titles to specific video URLs
+  const getVideoUrl = (sectionTitle: string) => {
+    const videoMap: Record<string, string> = {
+      "The Inner Planets": "https://www.youtube.com/embed/05E1uMh15QQ",
+      "Earth": "https://www.youtube.com/embed/HCDVN7DCzYE",
+      "The Moon": "https://www.youtube.com/embed/6AviDjR9mmo"
+    };
+    
+    return videoMap[sectionTitle] || section.videoUrl;
+  };
+  
+  // Get video description based on section title
+  const getVideoDescription = (sectionTitle: string) => {
+    const descriptionMap: Record<string, string> = {
+      "The Inner Planets": "Explore Mercury, Venus, Earth, and Mars - the four terrestrial planets closest to the Sun.",
+      "Earth": "Our home planet - the blue marble of the Solar System and the only known world with abundant liquid water.",
+      "The Moon": "Earth's natural satellite and our closest celestial neighbor."
+    };
+    
+    return descriptionMap[sectionTitle] || "A comprehensive overview of our cosmic neighborhood and the celestial bodies within it.";
+  };
+  
+  const videoUrl = getVideoUrl(section.title);
+  const videoDescription = getVideoDescription(section.title);
+
   return (
     <div className="w-full h-full flex flex-col">
       <Card className="w-full h-full overflow-hidden flex flex-col bg-space-cosmic-blue/20 backdrop-blur-sm border border-purple-500/20">
@@ -25,7 +50,7 @@ export const VideoContent = ({ section, onComplete, onPrevious, isFirstContent }
             color="bg-red-900/30"
           />
           <p className="text-lg text-transparent bg-gradient-to-r from-red-300 to-red-100 bg-clip-text font-medium mb-4 px-1">
-            Solar System 101: A comprehensive overview of our cosmic neighborhood and the celestial bodies within it.
+            {videoDescription}
           </p>
         </div>
         
@@ -33,7 +58,7 @@ export const VideoContent = ({ section, onComplete, onPrevious, isFirstContent }
           <AspectRatio ratio={16/9} className="h-full">
             <iframe 
               className="w-full h-full"
-              src="https://www.youtube.com/embed/libKVRa01L8"
+              src={videoUrl}
               title={`Video for ${section.title}`}
               frameBorder="0"
               allowFullScreen

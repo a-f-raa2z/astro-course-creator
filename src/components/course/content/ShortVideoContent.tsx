@@ -17,16 +17,30 @@ interface ShortVideoContentProps {
 export const ShortVideoContent = ({ section, onComplete, onPrevious, isFirstContent }: ShortVideoContentProps) => {
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
   
-  const videos = [
-    { 
-      url: "https://www.youtube.com/embed/shorts/lzsf1-vMUdY",
-      title: "Amazing Solar System Facts"
-    },
-    { 
-      url: "https://www.youtube.com/embed/shorts/HDSKuln-5qU",
-      title: "More Fascinating Space Facts"
-    }
-  ];
+  // Define videos based on section title
+  const getSectionVideos = (sectionTitle: string) => {
+    const videoMap: Record<string, { url: string, title: string }[]> = {
+      "The Inner Planets": [
+        { url: "https://www.youtube.com/embed/shorts/_rzAbPtUamA", title: "Inner Planets Facts" },
+        { url: "https://www.youtube.com/embed/shorts/4qCczin1Muo", title: "More Inner Planets Facts" }
+      ],
+      "Earth": [
+        { url: "https://www.youtube.com/embed/shorts/HRwNdMoNUq4", title: "Earth Facts" },
+        { url: "https://www.youtube.com/embed/shorts/eCj5KgfRRGQ", title: "More Earth Facts" }
+      ],
+      "The Moon": [
+        { url: "https://www.youtube.com/embed/shorts/rVMvzH1FxfE", title: "Moon Facts" },
+        { url: "https://www.youtube.com/embed/shorts/fTok7usLXb4", title: "More Moon Facts" }
+      ]
+    };
+    
+    return videoMap[sectionTitle] || [
+      { url: "https://www.youtube.com/embed/shorts/lzsf1-vMUdY", title: "Amazing Solar System Facts" },
+      { url: "https://www.youtube.com/embed/shorts/HDSKuln-5qU", title: "More Fascinating Space Facts" }
+    ];
+  };
+  
+  const videos = getSectionVideos(section.title);
 
   const nextVideo = () => {
     setCurrentVideoIndex((prev) => (prev + 1) % videos.length);
@@ -46,7 +60,7 @@ export const ShortVideoContent = ({ section, onComplete, onPrevious, isFirstCont
             color="bg-blue-900/30"
           />
           <p className="text-lg text-transparent bg-gradient-to-r from-blue-300 to-blue-100 bg-clip-text font-medium mb-4 px-1">
-            Highlight hidden things and fascinating trivia about our solar system.
+            Highlight hidden things and fascinating trivia about {section.title.toLowerCase()}.
           </p>
         </div>
         
