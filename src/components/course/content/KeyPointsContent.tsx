@@ -7,6 +7,7 @@ import { Card } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useToast } from "@/hooks/use-toast";
 import { TitleWrapper } from "./TitleWrapper";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
 
 interface KeyPointsContentProps {
   section: CourseSection;
@@ -36,56 +37,58 @@ export const KeyPointsContent = ({ section, onComplete }: KeyPointsContentProps)
   const allChecked = checkedPoints.length === section.keyPoints.length;
   
   return (
-    <div className="h-[400px] w-full">
-      <Card className="w-full h-full overflow-auto p-4 bg-space-cosmic-blue/20 backdrop-blur-sm border border-purple-500/20">
-        <TitleWrapper 
-          icon={<CheckCircle className="h-5 w-5 text-green-500 mr-2" />}
-          title="Key Points" 
-          color="bg-green-900/30"
-        />
-        
-        <div className="space-y-3 mb-4">
-          {section.keyPoints.map((point, idx) => (
-            <div 
-              key={idx} 
-              className={`flex items-start p-3 rounded-md border ${
-                checkedPoints.includes(idx) 
-                  ? "border-green-500/50 bg-green-900/20" 
-                  : "border-purple-500/20 bg-space-cosmic-blue/10"
-              }`}
-            >
-              <Checkbox 
-                id={`point-${idx}`} 
-                checked={checkedPoints.includes(idx)}
-                onCheckedChange={() => handleCheck(idx)}
-                className="mr-2 mt-1 data-[state=checked]:bg-green-600 data-[state=checked]:border-green-600"
-              />
-              <label 
-                htmlFor={`point-${idx}`} 
-                className={`text-gray-200 ${checkedPoints.includes(idx) ? "line-through text-gray-400" : ""}`}
+    <div className="w-full">
+      <AspectRatio ratio={1}>
+        <Card className="w-full h-full overflow-auto p-4 bg-space-cosmic-blue/20 backdrop-blur-sm border border-purple-500/20">
+          <TitleWrapper 
+            icon={<CheckCircle className="h-5 w-5 text-green-500 mr-2" />}
+            title="Key Points" 
+            color="bg-green-900/30"
+          />
+          
+          <div className="space-y-3 mb-4">
+            {section.keyPoints.map((point, idx) => (
+              <div 
+                key={idx} 
+                className={`flex items-start p-3 rounded-md border ${
+                  checkedPoints.includes(idx) 
+                    ? "border-green-500/50 bg-green-900/20" 
+                    : "border-purple-500/20 bg-space-cosmic-blue/10"
+                }`}
               >
-                {point}
-              </label>
-            </div>
-          ))}
-        </div>
-        
-        <div className="flex justify-end">
-          <Button 
-            onClick={onComplete}
-            className={`
-              transition-all ${allChecked 
-                ? "bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800" 
-                : "bg-gray-700 text-gray-300 cursor-not-allowed"
-              }
-            `}
-            disabled={!allChecked}
-          >
-            <CheckSquare className="h-4 w-4 mr-2" />
-            {allChecked ? "Continue" : `Check all points (${checkedPoints.length}/${section.keyPoints.length})`}
-          </Button>
-        </div>
-      </Card>
+                <Checkbox 
+                  id={`point-${idx}`} 
+                  checked={checkedPoints.includes(idx)}
+                  onCheckedChange={() => handleCheck(idx)}
+                  className="mr-2 mt-1 data-[state=checked]:bg-green-600 data-[state=checked]:border-green-600"
+                />
+                <label 
+                  htmlFor={`point-${idx}`} 
+                  className={`text-gray-200 ${checkedPoints.includes(idx) ? "line-through text-gray-400" : ""}`}
+                >
+                  {point}
+                </label>
+              </div>
+            ))}
+          </div>
+          
+          <div className="flex justify-end">
+            <Button 
+              onClick={onComplete}
+              className={`
+                transition-all ${allChecked 
+                  ? "bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800" 
+                  : "bg-gray-700 text-gray-300 cursor-not-allowed"
+                }
+              `}
+              disabled={!allChecked}
+            >
+              <CheckSquare className="h-4 w-4 mr-2" />
+              {allChecked ? "Continue" : `Check all points (${checkedPoints.length}/${section.keyPoints.length})`}
+            </Button>
+          </div>
+        </Card>
+      </AspectRatio>
     </div>
   );
 };

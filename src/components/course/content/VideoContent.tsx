@@ -6,6 +6,7 @@ import { Youtube, ArrowRight } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
 import { TitleWrapper } from "./TitleWrapper";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
 
 interface VideoContentProps {
   section: CourseSection;
@@ -35,53 +36,55 @@ export const VideoContent = ({ section, onComplete }: VideoContentProps) => {
   };
   
   return (
-    <div className="h-[400px] w-full">
-      <Card className="w-full h-full overflow-hidden flex flex-col bg-space-cosmic-blue/20 backdrop-blur-sm border border-purple-500/20">
-        <div className="p-4">
-          <TitleWrapper 
-            icon={<Youtube className="h-5 w-5 text-red-500 mr-2" />}
-            title="Main Lesson" 
-            color="bg-red-900/30"
-          />
-        </div>
-        
-        <div className="flex-grow relative overflow-hidden">
-          <iframe 
-            className="w-full h-full"
-            src={section.videoUrl}
-            title={`Video for ${section.title}`}
-            frameBorder="0"
-            allowFullScreen
-          ></iframe>
-        </div>
-        
-        <div className="p-4">
-          <p className="text-sm text-purple-300 mb-2">
-            Drag to complete the video:
-          </p>
-          
-          <div 
-            className="h-4 bg-gray-800 rounded-full overflow-hidden cursor-pointer"
-            onClick={handleVideoProgress}
-          >
-            <div 
-              className="h-full bg-gradient-to-r from-purple-600 to-purple-500 rounded-full transition-all"
-              style={{ width: `${videoProgress}%` }}
-            ></div>
+    <div className="w-full">
+      <AspectRatio ratio={1}>
+        <Card className="w-full h-full overflow-hidden flex flex-col bg-space-cosmic-blue/20 backdrop-blur-sm border border-purple-500/20">
+          <div className="p-4">
+            <TitleWrapper 
+              icon={<Youtube className="h-5 w-5 text-red-500 mr-2" />}
+              title="Main Lesson" 
+              color="bg-red-900/30"
+            />
           </div>
           
-          {showContinue && (
-            <div className="flex justify-end mt-4">
-              <Button 
-                onClick={onComplete}
-                className="bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 animate-fade-in"
-              >
-                Continue <ArrowRight className="h-4 w-4 ml-2" />
-              </Button>
+          <div className="flex-grow relative overflow-hidden">
+            <iframe 
+              className="w-full h-full"
+              src={section.videoUrl}
+              title={`Video for ${section.title}`}
+              frameBorder="0"
+              allowFullScreen
+            ></iframe>
+          </div>
+          
+          <div className="p-4">
+            <p className="text-sm text-purple-300 mb-2">
+              Drag to complete the video:
+            </p>
+            
+            <div 
+              className="h-4 bg-gray-800 rounded-full overflow-hidden cursor-pointer"
+              onClick={handleVideoProgress}
+            >
+              <div 
+                className="h-full bg-gradient-to-r from-purple-600 to-purple-500 rounded-full transition-all"
+                style={{ width: `${videoProgress}%` }}
+              ></div>
             </div>
-          )}
-        </div>
-      </Card>
+            
+            {showContinue && (
+              <div className="flex justify-end mt-4">
+                <Button 
+                  onClick={onComplete}
+                  className="bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 animate-fade-in"
+                >
+                  Continue <ArrowRight className="h-4 w-4 ml-2" />
+                </Button>
+              </div>
+            )}
+          </div>
+        </Card>
+      </AspectRatio>
     </div>
   );
 };
