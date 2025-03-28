@@ -3,13 +3,14 @@ import { useRef } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Sphere, OrbitControls } from "@react-three/drei";
 import { MathUtils } from "three";
+import type { Mesh } from "three";
 
 interface PlanetProps {
   progress: number; // 0 to 100
 }
 
 function PlanetMesh({ progress }: { progress: number }) {
-  const meshRef = useRef<THREE.Mesh>(null);
+  const meshRef = useRef<Mesh>(null);
   
   // Rotate the planet
   useFrame(({ clock }) => {
