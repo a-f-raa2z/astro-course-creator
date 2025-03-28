@@ -1,3 +1,4 @@
+
 import { ContentType } from "@/hooks/useGameLearning";
 import { FileText, Youtube, CheckCircle, Video, Image, HelpCircle, Star, Gamepad2 } from "lucide-react";
 
@@ -62,6 +63,7 @@ export const GameContentTabs = ({
   };
 
   const isQuizTab = (type: ContentType) => type === 'quiz';
+  const isPlaygroundTab = (type: ContentType) => type === 'playground';
 
   return (
     <div className="relative mb-8">
@@ -75,6 +77,7 @@ export const GameContentTabs = ({
           const isDone = isCompleted(index);
           const stepNumber = index + 1;
           const isQuiz = isQuizTab(type);
+          const isPlayground = isPlaygroundTab(type);
           
           return (
             <div key={index} className="flex flex-col items-center">
@@ -86,14 +89,18 @@ export const GameContentTabs = ({
                     ${isActive 
                       ? isQuiz 
                         ? "bg-orange-600 text-white shadow-md shadow-orange-500/30" 
-                        : "bg-purple-600 text-white shadow-md shadow-purple-500/30"
+                        : isPlayground
+                          ? "bg-green-600 text-white shadow-md shadow-green-500/30"
+                          : "bg-purple-600 text-white shadow-md shadow-purple-500/30"
                       : isDone
                         ? "bg-purple-800/80 text-purple-300 border border-purple-500/50"
                         : isQuiz
                           ? "bg-orange-900/80 text-orange-300 border border-orange-500/50 hover:bg-orange-800"
-                          : "bg-gray-800/80 text-gray-400 border border-purple-500/20 hover:bg-gray-700"
+                          : isPlayground
+                            ? "bg-green-900/80 text-green-300 border border-green-500/50 hover:bg-green-800"
+                            : "bg-gray-800/80 text-gray-400 border border-purple-500/20 hover:bg-gray-700"
                     }
-                    ${isQuiz && !isActive && !isDone ? "animate-pulse" : ""}
+                    ${(isQuiz || isPlayground) && !isActive && !isDone ? "animate-pulse" : ""}
                   `}
                   aria-label={`Step ${stepNumber}: ${getContentTitle(type)}`}
                 >
@@ -106,7 +113,7 @@ export const GameContentTabs = ({
                 
                 <div className={`flex items-center gap-1 text-xs font-medium ${
                   isActive 
-                    ? isQuiz ? "text-orange-300" : "text-purple-300" 
+                    ? isQuiz ? "text-orange-300" : isPlayground ? "text-green-300" : "text-purple-300" 
                     : "text-gray-400"
                 }`}>
                   <span className={getContentColor(type)}>
@@ -114,7 +121,7 @@ export const GameContentTabs = ({
                   </span>
                   <span className="hidden sm:inline">
                     {getContentTitle(type)}
-                    {isQuiz && !isDone && (
+                    {(isQuiz || isPlayground) && !isDone && (
                       <span className="ml-1 text-orange-400 font-bold">★</span>
                     )}
                   </span>

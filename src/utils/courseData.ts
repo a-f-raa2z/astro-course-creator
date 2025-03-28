@@ -45,7 +45,8 @@ export const generateMockCourse = (interest: string, level: string, learningStyl
     planets: "Exploring Our Solar System and Beyond",
     galaxies: "Galaxy Formation and Cosmic Structure",
     cosmology: "The Universe's Beginning and Ultimate Fate",
-    "space-tech": "Space Exploration: Technologies and Missions"
+    "space-tech": "Space Exploration: Technologies and Missions",
+    "ai": "Artificial Intelligence: Concepts and Applications"
   };
 
   const levelDescriptors: Record<string, string> = {
@@ -54,8 +55,12 @@ export const generateMockCourse = (interest: string, level: string, learningStyl
     advanced: "advanced"
   };
 
-  const courseTitle = interestTitles[interest] || "Personalized Astronomy Journey";
+  const courseTitle = interestTitles[interest] || "Personalized Learning Journey";
   const levelAdjective = levelDescriptors[level] || "personalized";
+
+  if (interest === "ai") {
+    return generateAICourse(level, learningStyle);
+  }
 
   return {
     id: `course-${interest}-${level}-${Date.now()}`,
@@ -368,3 +373,321 @@ export const generateMockCourse = (interest: string, level: string, learningStyl
     ]
   };
 };
+
+export const astronomyCourseData = generateMockCourse("planets", "intermediate", "visual");
+export const aiCourseData = generateAICourse("intermediate", "visual");
+
+function generateAICourse(level: string, learningStyle: string): Course {
+  const levelAdjective = level === "beginner" ? "foundational" : level === "advanced" ? "advanced" : "comprehensive";
+  
+  return {
+    id: `course-ai-${level}-${Date.now()}`,
+    title: "Artificial Intelligence: Concepts and Applications",
+    description: `A ${levelAdjective} journey through the world of artificial intelligence, tailored to your learning preferences.`,
+    forInterest: "ai",
+    forLevel: level,
+    forLearningStyle: learningStyle,
+    sections: [
+      {
+        id: "section-ai-1",
+        title: "Introduction to AI",
+        introduction: "This section introduces the fundamental concepts of artificial intelligence and machine learning. We'll explore the history, key terminology, and core principles.",
+        whyLearn: "Understanding these fundamentals is essential as they form the foundation for all AI knowledge. These concepts will help you grasp the big picture of AI development and application.",
+        videoUrl: "https://www.youtube.com/embed/mJeNghZXtMo",
+        keyPoints: [
+          "AI refers to systems or machines that mimic human intelligence",
+          "Machine Learning is a subset of AI focused on data learning",
+          "Neural networks are computing systems inspired by biological brains",
+          "Deep Learning uses multiple layers of neural networks for complex tasks"
+        ],
+        shortVideo: "https://www.youtube.com/embed/ad79nYk2keg",
+        image: {
+          url: "https://images.unsplash.com/photo-1677442135073-8edf721c002b",
+          description: "AI systems analyze and process data to make predictions and decisions based on patterns they've learned."
+        },
+        quiz: {
+          question: "Which of the following is NOT a major type of machine learning?",
+          options: [
+            "Supervised Learning",
+            "Unsupervised Learning",
+            "Predictive Learning",
+            "Reinforcement Learning"
+          ],
+          correctAnswer: 2
+        },
+        quizzes: [
+          {
+            question: "Which of the following is NOT a major type of machine learning?",
+            options: [
+              "Supervised Learning",
+              "Unsupervised Learning",
+              "Predictive Learning",
+              "Reinforcement Learning"
+            ],
+            correctAnswer: 2
+          },
+          {
+            question: "What year was the term 'Artificial Intelligence' first coined?",
+            options: [
+              "1943",
+              "1956",
+              "1969",
+              "1981"
+            ],
+            correctAnswer: 1
+          },
+          {
+            question: "Which of these is an example of narrow AI?",
+            options: [
+              "HAL 9000 from 2001: A Space Odyssey",
+              "A chess-playing program",
+              "A fully autonomous robot with consciousness",
+              "A system that can solve any intellectual task a human can"
+            ],
+            correctAnswer: 1
+          }
+        ]
+      },
+      {
+        id: "section-ai-2",
+        title: "Machine Learning Fundamentals",
+        introduction: "Machine learning is at the core of modern AI applications. This section covers how machines learn from data and make predictions.",
+        whyLearn: "Machine learning drives most practical AI applications today. Understanding these concepts will help you recognize how AI systems learn and improve over time.",
+        videoUrl: "https://www.youtube.com/embed/Gv9_4yMHFhI",
+        keyPoints: [
+          "Data preparation is critical for effective machine learning",
+          "Feature selection impacts model performance significantly",
+          "Algorithms learn patterns from training data to make predictions",
+          "Model evaluation helps measure performance and prevent overfitting"
+        ],
+        shortVideo: "https://www.youtube.com/embed/YFxVHBcGi7k",
+        image: {
+          url: "https://images.unsplash.com/photo-1591453089816-0fbb971b454c",
+          description: "Machine learning models continuously improve by analyzing patterns in data to make better predictions."
+        },
+        quiz: {
+          question: "What is overfitting in machine learning?",
+          options: [
+            "When a model performs poorly on both training and test data",
+            "When a model performs well on training data but poorly on new data",
+            "When a model takes too long to train",
+            "When a model requires too much computing power"
+          ],
+          correctAnswer: 1
+        },
+        quizzes: [
+          {
+            question: "What is overfitting in machine learning?",
+            options: [
+              "When a model performs poorly on both training and test data",
+              "When a model performs well on training data but poorly on new data",
+              "When a model takes too long to train",
+              "When a model requires too much computing power"
+            ],
+            correctAnswer: 1
+          },
+          {
+            question: "Which of these is NOT a common machine learning algorithm?",
+            options: [
+              "Decision Trees",
+              "Neural Networks",
+              "Quantum Regression",
+              "Support Vector Machines"
+            ],
+            correctAnswer: 2
+          },
+          {
+            question: "What is the primary goal of the training phase in supervised learning?",
+            options: [
+              "To minimize the number of features",
+              "To maximize computational efficiency",
+              "To minimize prediction error on training data",
+              "To identify hidden patterns without labeled data"
+            ],
+            correctAnswer: 2
+          }
+        ]
+      },
+      {
+        id: "section-ai-3",
+        title: "Neural Networks & Deep Learning",
+        introduction: "Neural networks form the basis of deep learning, enabling AI to perform complex tasks like image and speech recognition.",
+        whyLearn: "Deep learning powers the most advanced AI applications today. Understanding neural networks is essential for working with cutting-edge AI technologies.",
+        videoUrl: "https://www.youtube.com/embed/aircAruvnKk",
+        keyPoints: [
+          "Artificial neurons (perceptrons) are the building blocks of neural networks",
+          "Deep networks contain multiple hidden layers between input and output",
+          "Backpropagation adjusts weights to minimize prediction error",
+          "Activation functions introduce non-linearity essential for complex learning"
+        ],
+        shortVideo: "https://www.youtube.com/embed/B1xF0ETssYE",
+        image: {
+          url: "https://images.unsplash.com/photo-1544383835-bda2bc66a55d",
+          description: "Neural networks mimic human brain structure to process complex relationships between inputs and outputs."
+        },
+        quiz: {
+          question: "Which component allows neural networks to learn non-linear relationships?",
+          options: [
+            "Weights",
+            "Biases",
+            "Activation functions",
+            "Loss functions"
+          ],
+          correctAnswer: 2
+        },
+        quizzes: [
+          {
+            question: "Which component allows neural networks to learn non-linear relationships?",
+            options: [
+              "Weights",
+              "Biases",
+              "Activation functions",
+              "Loss functions"
+            ],
+            correctAnswer: 2
+          },
+          {
+            question: "What is a convolutional neural network (CNN) primarily used for?",
+            options: [
+              "Text processing",
+              "Image recognition",
+              "Time series forecasting",
+              "Reinforcement learning"
+            ],
+            correctAnswer: 1
+          },
+          {
+            question: "Which of these is NOT a common activation function?",
+            options: [
+              "ReLU",
+              "Sigmoid",
+              "Tanh",
+              "MaxPool"
+            ],
+            correctAnswer: 3
+          }
+        ]
+      },
+      {
+        id: "section-ai-4",
+        title: "Natural Language Processing",
+        introduction: "Natural Language Processing (NLP) enables computers to understand, interpret, and generate human language.",
+        whyLearn: "NLP applications are transforming how we interact with technology. Understanding these concepts helps you make sense of chatbots, translation services, and text analysis tools.",
+        videoUrl: "https://www.youtube.com/embed/CMrHM8a3hqw",
+        keyPoints: [
+          "Text preprocessing cleans and standardizes language data",
+          "Word embeddings convert text into numerical representations",
+          "Recurrent neural networks process sequential data like sentences",
+          "Transformer models like BERT and GPT have revolutionized NLP tasks"
+        ],
+        shortVideo: "https://www.youtube.com/embed/9OkrPdDKc3c",
+        image: {
+          url: "https://images.unsplash.com/photo-1555952494-efd681c7e3f9",
+          description: "Natural Language Processing enables computers to understand and generate human language, powering chatbots and translation services."
+        },
+        quiz: {
+          question: "What NLP model architecture introduced the concept of 'attention' mechanisms?",
+          options: [
+            "Recurrent Neural Networks",
+            "Convolutional Neural Networks",
+            "Transformer Models",
+            "Generative Adversarial Networks"
+          ],
+          correctAnswer: 2
+        },
+        quizzes: [
+          {
+            question: "What NLP model architecture introduced the concept of 'attention' mechanisms?",
+            options: [
+              "Recurrent Neural Networks",
+              "Convolutional Neural Networks",
+              "Transformer Models",
+              "Generative Adversarial Networks"
+            ],
+            correctAnswer: 2
+          },
+          {
+            question: "Which of these is NOT a common step in text preprocessing?",
+            options: [
+              "Tokenization",
+              "Lemmatization",
+              "Stop word removal",
+              "Quantization"
+            ],
+            correctAnswer: 3
+          },
+          {
+            question: "What is the primary purpose of word embeddings like Word2Vec?",
+            options: [
+              "To compress text data",
+              "To represent words as numerical vectors that capture semantic meaning",
+              "To translate between languages",
+              "To count word frequencies"
+            ],
+            correctAnswer: 1
+          }
+        ]
+      },
+      {
+        id: "section-ai-5",
+        title: "AI Ethics & Future Trends",
+        introduction: "As AI grows more powerful, we must consider its ethical implications and the future direction of the field.",
+        whyLearn: "Understanding AI ethics is essential for responsible development and deployment of AI systems. This knowledge helps you navigate the societal impacts of AI technologies.",
+        videoUrl: "https://www.youtube.com/embed/HSJJxYu9ong",
+        keyPoints: [
+          "AI bias can reflect and amplify existing social inequalities",
+          "Transparency and explainability are crucial for trustworthy AI",
+          "Privacy concerns arise from AI's data requirements",
+          "Future AI development may lead to artificial general intelligence (AGI)"
+        ],
+        shortVideo: "https://www.youtube.com/embed/mjR5Sxj26DY",
+        image: {
+          url: "https://images.unsplash.com/photo-1507146153580-69a1fe6d8aa1",
+          description: "AI ethics considers how artificial intelligence impacts society, addressing issues like bias, privacy, and transparency."
+        },
+        quiz: {
+          question: "Which of the following is NOT one of the common ethical challenges in AI development?",
+          options: [
+            "Algorithmic bias",
+            "Privacy concerns",
+            "Accessibility for all users",
+            "Job displacement"
+          ],
+          correctAnswer: 2
+        },
+        quizzes: [
+          {
+            question: "Which of the following is NOT one of the common ethical challenges in AI development?",
+            options: [
+              "Algorithmic bias",
+              "Privacy concerns",
+              "Accessibility for all users",
+              "Job displacement"
+            ],
+            correctAnswer: 2
+          },
+          {
+            question: "What is algorithmic bias?",
+            options: [
+              "When an AI system favors certain mathematical operations",
+              "When an AI produces unfair outcomes for certain groups",
+              "When an AI runs more slowly over time",
+              "When an AI uses too much computing power"
+            ],
+            correctAnswer: 1
+          },
+          {
+            question: "Which term describes AI systems that can perform any intellectual task that a human can?",
+            options: [
+              "Narrow AI",
+              "Artificial General Intelligence (AGI)",
+              "Machine Learning",
+              "Expert Systems"
+            ],
+            correctAnswer: 1
+          }
+        ]
+      }
+    ]
+  };
+}

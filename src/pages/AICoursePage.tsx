@@ -1,11 +1,12 @@
+
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import { ChevronLeft, Brain, ArrowRight, Database, Network, Cpu, BrainCircuit, Bot, FileText, Youtube, CheckCircle, HelpCircle } from "lucide-react";
+import { ChevronLeft, Cpu, ArrowRight } from "lucide-react";
 import { Course } from "@/types/course";
 import LoadingAnimation from "@/components/LoadingAnimation";
-import { aiCourseData } from "@/utils/courseData";
+import { generateMockCourse } from "@/utils/courseData";
+import AISectionCard from "@/components/AISectionCard";
 
 const AICoursePage = () => {
   const navigate = useNavigate();
@@ -18,8 +19,8 @@ const AICoursePage = () => {
     if (location.state?.course) {
       setCourse(location.state.course);
     } else {
-      // Otherwise, use the mock course data
-      setCourse(aiCourseData);
+      // Use the mock course data with AI topic
+      setCourse(generateMockCourse("ai", "intermediate", "visual"));
     }
   }, [location.state]);
 
