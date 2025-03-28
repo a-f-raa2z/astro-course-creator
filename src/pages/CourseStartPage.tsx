@@ -1,3 +1,4 @@
+
 import { useLocation, useNavigate } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -61,7 +62,7 @@ const CourseStartPage = () => {
 
   return (
     <div className="bg-space min-h-screen py-8 px-4">
-      {/* XP Popup - Positioned at the top corner */}
+      {/* XPPopup - Positioned at the top corner */}
       <XPPopup xpPoints={xpPoints} level={level} levelProgress={levelProgress} />
       
       <div className="max-w-4xl mx-auto">
@@ -114,8 +115,8 @@ const CourseStartPage = () => {
           sectionIndex={currentSectionIndex}
         />
         
-        {/* Main content card with adjusted size - 80% of viewport height */}
-        <div className="animate-fade-in h-[80vh] max-w-full mx-auto">
+        {/* Main content card with adjusted size - 70% of viewport height */}
+        <div className="animate-fade-in h-[70vh] max-w-full mx-auto">
           <div className="relative w-full h-full max-h-full">
             <div className="absolute inset-0">
               <GameContentRenderer 
