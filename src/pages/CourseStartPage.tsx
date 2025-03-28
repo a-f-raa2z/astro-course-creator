@@ -8,6 +8,7 @@ import { useGameLearning } from "@/hooks/useGameLearning";
 import { GameProgress } from "@/components/course/GameProgress";
 import { GameContentRenderer } from "@/components/course/GameContentRenderer";
 import { GameContentTabs } from "@/components/course/GameContentTabs";
+import { XPPopup } from "@/components/course/XPPopup";
 import { useEffect } from "react";
 
 const CourseStartPage = () => {
@@ -40,6 +41,8 @@ const CourseStartPage = () => {
     setSelectedAnswer,
     handleQuizSubmit,
     xpPoints,
+    level,
+    levelProgress,
     completedContents,
     setCurrentContentIndex
   } = useGameLearning(course);
@@ -76,13 +79,10 @@ const CourseStartPage = () => {
                 {course.title}
               </h1>
             </div>
-            <div className="flex items-center space-x-2 bg-space-cosmic-blue/40 backdrop-blur-sm px-3 py-1.5 rounded-lg border border-purple-500/20">
-              <Star className="h-5 w-5 text-yellow-400" />
-              <span className="text-yellow-200 font-semibold">{xpPoints} XP</span>
-            </div>
+            <XPPopup xpPoints={xpPoints} level={level} levelProgress={levelProgress} />
           </div>
           
-          {/* Game progress display - Moved above the section title */}
+          {/* Game progress display - Above the section title */}
           <GameProgress
             overallProgress={overallProgress}
             currentSectionIndex={currentSectionIndex}
