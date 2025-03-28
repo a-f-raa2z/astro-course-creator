@@ -1,8 +1,10 @@
 
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import CourseView from "@/components/CourseView";
 import { Course } from "@/types/course";
 import { generateMockCourse } from "@/utils/courseData";
+import { Button } from "@/components/ui/button";
+import { BookOpen } from "lucide-react";
 
 const CoursePage = () => {
   const location = useLocation();
@@ -15,6 +17,15 @@ const CoursePage = () => {
         <header className="mb-10">
           <h1 className="text-4xl font-bold text-white mb-3">{course.title}</h1>
           <p className="text-purple-300 text-lg">{course.description}</p>
+          
+          <div className="mt-6">
+            <Link to="/course-start" state={{ course }}>
+              <Button className="bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-8 rounded-lg text-lg">
+                <BookOpen className="mr-2" />
+                Start Course
+              </Button>
+            </Link>
+          </div>
         </header>
         
         <CourseView course={course} />
