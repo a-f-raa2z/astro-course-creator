@@ -26,6 +26,7 @@ export const GameContentTabs = ({
       case 'shortVideo': return <Video className="h-4 w-4" />;
       case 'image': return <Image className="h-4 w-4" />;
       case 'quiz': return <HelpCircle className="h-4 w-4" />;
+      case 'bonus': return <Star className="h-4 w-4" />;
     }
   };
 
@@ -37,6 +38,7 @@ export const GameContentTabs = ({
       case 'shortVideo': return 'Bonus Video';
       case 'image': return 'Visual Guide';
       case 'quiz': return 'Knowledge Check';
+      case 'bonus': return 'Bonus Content';
     }
   };
   
@@ -48,6 +50,7 @@ export const GameContentTabs = ({
       case 'shortVideo': return 'text-blue-400';
       case 'image': return 'text-yellow-400';
       case 'quiz': return 'text-orange-400';
+      case 'bonus': return 'text-yellow-400';
     }
   };
 
@@ -95,53 +98,10 @@ export const GameContentTabs = ({
                   <span className={getContentColor(type)}>
                     {getContentIcon(type)}
                   </span>
-                  <span>{getContentTitle(type)}</span>
+                  <span className="hidden sm:inline">{getContentTitle(type)}</span>
                 </div>
               </div>
             </div>
-          );
-        })}
-      </div>
-      
-      {/* Mobile view - scrollable tabs */}
-      <div className="md:hidden flex overflow-x-auto py-2 mt-4 gap-2 px-1">
-        {contentTypes.map((type, index) => {
-          const isActive = currentContentIndex === index;
-          const isDone = isCompleted(index);
-          const stepNumber = index + 1;
-          
-          return (
-            <button
-              key={index}
-              onClick={() => onTabClick(index)}
-              className={`
-                flex items-center gap-2 px-3 py-2 rounded-lg whitespace-nowrap flex-shrink-0
-                ${isActive 
-                  ? "bg-purple-800 text-white" 
-                  : isDone
-                    ? "bg-purple-900/50 text-purple-300 border border-purple-500/30"
-                    : "bg-gray-800/50 text-gray-400 border border-purple-500/20"
-                }
-              `}
-            >
-              <div className={`
-                w-4 h-4 rounded-full flex items-center justify-center
-                ${isActive 
-                  ? "bg-purple-600" 
-                  : isDone
-                    ? "bg-purple-800"
-                    : "bg-gray-700"
-                }
-              `}>
-                {isDone ? (
-                  <Star className="h-2 w-2 text-yellow-400" />
-                ) : (
-                  <span className="text-[10px]">{stepNumber}</span>
-                )}
-              </div>
-              <span className={getContentColor(type)}>{getContentIcon(type)}</span>
-              <span>{getContentTitle(type)}</span>
-            </button>
           );
         })}
       </div>
