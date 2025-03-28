@@ -5,11 +5,19 @@ export interface AssessmentAnswer {
   value: string;
 }
 
+export interface BlankOption {
+  id: string;
+  text: string;
+  value: string;
+}
+
 export interface AssessmentQuestion {
   id: string;
   question: string;
   description?: string;
-  answers: AssessmentAnswer[];
+  answers?: AssessmentAnswer[];
+  template?: string;
+  blanks?: BlankOption[];
 }
 
 export interface Assessment {
