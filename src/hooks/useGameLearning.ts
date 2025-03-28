@@ -43,14 +43,8 @@ export const useGameLearning = (course: Course) => {
   const currentSection = course.sections[currentSectionIndex];
   const availableContentTypes = getAvailableContentTypes(currentSectionIndex);
   const currentContentType = availableContentTypes[currentContentIndex];
-  
-  // Check if a content has been completed
-  const isContentCompleted = (sectionIndex: number, contentIndex: number) => {
-    const key = `${sectionIndex}-${contentIndex}`;
-    return completedContents.includes(key);
-  };
 
-  // Mark current content as completed
+  // Mark current content as completed and award XP
   const markContentAsCompleted = () => {
     const contentKey = `${currentSectionIndex}-${currentContentIndex}`;
     if (!completedContents.includes(contentKey)) {
@@ -98,16 +92,6 @@ export const useGameLearning = (course: Course) => {
       return;
     }
     
-    // If it's a quiz and no answer is selected, show toast
-    if (currentContentType === 'quiz' && !quizSubmitted && selectedAnswer === null) {
-      toast({
-        title: "Quiz not submitted",
-        description: "Please select and submit your answer before moving on.",
-        variant: "destructive"
-      });
-      return;
-    }
-    
     // Mark current content as completed and award XP
     markContentAsCompleted();
     
@@ -117,7 +101,7 @@ export const useGameLearning = (course: Course) => {
       setSelectedAnswer(null);
     }
     
-    // Move to next content or section
+    // Simple navigation logic - move to next content or section
     if (currentContentIndex < availableContentTypes.length - 1) {
       // Move to next content card within the same section
       setCurrentContentIndex(prevIndex => prevIndex + 1);
@@ -138,7 +122,7 @@ export const useGameLearning = (course: Course) => {
       });
       
       // Add special achievement for completing course
-      if (completedContents.length === getTotalContentCount() && !completedContents.includes('course-complete')) {
+      if (!completedContents.includes('course-complete')) {
         setCompletedContents(prev => [...prev, 'course-complete']);
         setXpPoints(prev => prev + 50);
         
@@ -230,7 +214,7 @@ export const useGameLearning = (course: Course) => {
     xpPoints,
     level,
     levelProgress,
-    isContentCompleted,
-    completedContents
+    completedContents,
+    setCurrentContentIndex
   };
 };

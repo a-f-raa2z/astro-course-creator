@@ -2,7 +2,7 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { ChevronLeft, Check, Award, Star, Rocket, Flag, Sparkles } from "lucide-react";
+import { ChevronLeft, Check, Award, Star, Rocket, Flag, ArrowRight } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { useGameLearning } from "@/hooks/useGameLearning";
 import { GameProgress } from "@/components/course/GameProgress";
@@ -84,34 +84,13 @@ const CourseStartPage = () => {
           levelProgress={levelProgress}
         />
         
-        {/* Content tabs */}
+        {/* Content tabs - Updated to allow clicking any tab */}
         <GameContentTabs 
           contentTypes={availableContentTypes}
           currentContentIndex={currentContentIndex}
           onTabClick={(index) => {
-            // Only allow navigation to completed content
-            const contentKey = `${currentSectionIndex}-${index}`;
-            const isContentComplete = completedContents.includes(contentKey);
-            const isCurrentOrPrevious = index <= currentContentIndex;
-            
-            if (isContentComplete || isCurrentOrPrevious) {
-              if (currentContentType === 'quiz' && !quizSubmitted && selectedAnswer !== null) {
-                // If on quiz with selected answer, ask to submit first
-                toast({
-                  title: "Submit your answer",
-                  description: "Please submit your quiz answer before navigating.",
-                  variant: "destructive"
-                });
-              } else {
-                setSelectedAnswer(null);
-              }
-            } else {
-              toast({
-                title: "Locked content",
-                description: "Complete the previous content first to unlock this.",
-                variant: "destructive"
-              });
-            }
+            setSelectedAnswer(null);
+            setCurrentContentIndex(index);
           }}
           completedContents={completedContents}
           sectionIndex={currentSectionIndex}
@@ -145,7 +124,7 @@ const CourseStartPage = () => {
             onClick={handleNextContent}
             className="bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white py-2 px-6 rounded-lg shadow-md transition-all duration-300 active:scale-95"
           >
-            <Sparkles className="mr-2 h-4 w-4" /> I Got It
+            Next <ArrowRight className="ml-1 h-4 w-4" />
           </Button>
         </div>
       </div>
