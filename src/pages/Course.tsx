@@ -2,28 +2,12 @@
 import { useLocation } from "react-router-dom";
 import CourseView from "@/components/CourseView";
 import { Course } from "@/types/course";
+import { generateMockCourse } from "@/utils/courseData";
 
 const CoursePage = () => {
   const location = useLocation();
-  const course = location.state?.course;
-
-  if (!course) {
-    return (
-      <div className="flex flex-col items-center justify-center min-h-screen p-4">
-        <h1 className="text-2xl font-bold text-white mb-4">Course Not Found</h1>
-        <p className="text-purple-300 mb-6">
-          We couldn't load your personalized astronomy course. Please return to the home page
-          and complete the assessment again.
-        </p>
-        <a
-          href="/"
-          className="bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 px-6 rounded-lg"
-        >
-          Return to Home
-        </a>
-      </div>
-    );
-  }
+  // Use the passed course from state, or generate a default example course
+  const course = location.state?.course || generateMockCourse("planets", "intermediate", "visual");
 
   return (
     <div className="bg-space min-h-screen py-12">

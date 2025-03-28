@@ -21,22 +21,22 @@ const SectionCard = ({ section, index }: { section: CourseSection; index: number
 
   return (
     <Card className="cosmic-card mb-6 overflow-visible">
-      <CardHeader className="flex flex-row items-start justify-between space-y-0 pb-2">
-        <CardTitle className="text-xl text-purple-100">
-          <span className="inline-block w-8 h-8 mr-3 rounded-full bg-purple-600 text-white text-center leading-8">
-            {index + 1}
-          </span>
-          {section.title}
-        </CardTitle>
-        <div className="p-2 hover:bg-purple-700/20 rounded-lg transition-all cursor-pointer">
-          {isOpen ? 
-            <ChevronUp className="h-5 w-5 text-purple-300" /> : 
-            <ChevronDown className="h-5 w-5 text-purple-300" />
-          }
-        </div>
-      </CardHeader>
       <Collapsible open={isOpen} onOpenChange={setIsOpen}>
-        <CollapsibleTrigger className="sr-only">Toggle content</CollapsibleTrigger>
+        <div className="flex flex-row items-start justify-between p-6 pb-2">
+          <CardTitle className="text-xl text-purple-100">
+            <span className="inline-block w-8 h-8 mr-3 rounded-full bg-purple-600 text-white text-center leading-8">
+              {index + 1}
+            </span>
+            {section.title}
+          </CardTitle>
+          <CollapsibleTrigger className="p-2 hover:bg-purple-700/20 rounded-lg transition-all cursor-pointer">
+            {isOpen ? 
+              <ChevronUp className="h-5 w-5 text-purple-300" /> : 
+              <ChevronDown className="h-5 w-5 text-purple-300" />
+            }
+          </CollapsibleTrigger>
+        </div>
+        
         <CollapsibleContent>
           <CardContent className="pt-4">
             <div className="prose prose-invert max-w-none">
