@@ -2,14 +2,17 @@
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { Course, CourseSection } from "@/types/course";
-import { ContentType } from "@/pages/CourseStartPage";
 
-export const useContentNavigation = (course: Course) => {
+export type ContentType = 'introduction' | 'video' | 'keyPoints' | 'shortVideo' | 'image' | 'quiz';
+
+export const useGameLearning = (course: Course) => {
   const { toast } = useToast();
   const [currentSectionIndex, setCurrentSectionIndex] = useState(0);
   const [currentContentIndex, setCurrentContentIndex] = useState(0);
   const [quizSubmitted, setQuizSubmitted] = useState(false);
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
+  const [xpPoints, setXpPoints] = useState(0);
+  const [completedContents, setCompletedContents] = useState<string[]>([]);
   
   // Content types to display in order
   const contentTypes: ContentType[] = ['introduction', 'video', 'keyPoints', 'shortVideo', 'image', 'quiz'];
@@ -29,6 +32,42 @@ export const useContentNavigation = (course: Course) => {
   const availableContentTypes = getAvailableContentTypes(currentSectionIndex);
   const currentContentType = availableContentTypes[currentContentIndex];
   
+  // Check if a content has been completed
+  const isContentCompleted = (sectionIndex: number, contentIndex: number) => {
+    const key = `${sectionIndex}-${contentIndex}`;
+    return completedContents.includes(key);
+  };
+
+  // Mark current content as completed
+  const markContentAsCompleted = () => {
+    const contentKey = `${currentSectionIndex}-${currentContentIndex}`;
+    if (!completedContents.includes(contentKey)) {
+      setCompletedContents(prev => [...prev, contentKey]);
+      
+      // Award XP based on content type
+      let pointsToAdd = 5; // Base points
+      
+      if (currentContentType === 'quiz' && quizSubmitted) {
+        // Bonus points for correct quiz answers
+        if (selectedAnswer === currentSection.quiz.correctAnswer) {
+          pointsToAdd = 20;
+        } else {
+          pointsToAdd = 5;
+        }
+      } else if (currentContentType === 'video') {
+        pointsToAdd = 10;
+      }
+      
+      setXpPoints(prev => prev + pointsToAdd);
+      
+      // Show toast for XP gain
+      toast({
+        title: `+${pointsToAdd} XP gained!`,
+        description: "Keep learning to earn more rewards",
+      });
+    }
+  };
+
   const handleNextContent = () => {
     // If it's a quiz and not submitted but has a selected answer, submit it first
     if (currentContentType === 'quiz' && !quizSubmitted && selectedAnswer !== null) {
@@ -45,6 +84,9 @@ export const useContentNavigation = (course: Course) => {
       });
       return;
     }
+    
+    // Mark current content as completed and award XP
+    markContentAsCompleted();
     
     // Reset quiz state if we're moving from a quiz
     if (currentContentType === 'quiz') {
@@ -68,8 +110,8 @@ export const useContentNavigation = (course: Course) => {
     } else {
       // Course completed
       toast({
-        title: "Course Complete!",
-        description: "You've completed all sections of this course.",
+        title: "🎉 Course Complete! 🎉",
+        description: "Congratulations! You've completed the entire course!",
       });
     }
   };
@@ -107,6 +149,14 @@ export const useContentNavigation = (course: Course) => {
   const totalSections = course.sections.length;
   const overallProgress = ((currentSectionIndex * 100) + ((currentContentIndex + 1) * 100 / totalContentCount)) / totalSections;
 
+  // Calculate user's current level based on XP
+  const level = Math.floor(xpPoints / 50) + 1;
+  
+  // Calculate progress to next level
+  const xpForNextLevel = level * 50;
+  const xpForCurrentLevel = (level - 1) * 50;
+  const levelProgress = ((xpPoints - xpForCurrentLevel) / (xpForNextLevel - xpForCurrentLevel)) * 100;
+
   return {
     currentSectionIndex,
     currentContentIndex,
@@ -121,6 +171,11 @@ export const useContentNavigation = (course: Course) => {
     handleNextContent,
     handlePreviousContent,
     setSelectedAnswer,
-    handleQuizSubmit
+    handleQuizSubmit,
+    xpPoints,
+    level,
+    levelProgress,
+    isContentCompleted,
+    completedContents
   };
 };

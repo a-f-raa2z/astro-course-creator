@@ -1,24 +1,19 @@
 
-import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { Course } from "@/types/course";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { ChevronLeft, Check } from "lucide-react";
+import { ChevronLeft, Check, Award, Star, Rocket, Flag } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
-import { Progress } from "@/components/ui/progress";
-import { ContentNavigation } from "@/components/course/ContentNavigation";
-import { CourseProgress } from "@/components/course/CourseProgress";
-import { ContentRenderer } from "@/components/course/ContentRenderer";
-import { useContentNavigation } from "@/hooks/useContentNavigation";
-
-// Define the content types for each card (keep this in the main file as it's referenced in multiple places)
-export type ContentType = 'introduction' | 'video' | 'keyPoints' | 'shortVideo' | 'image' | 'quiz';
+import { useGameLearning } from "@/hooks/useGameLearning";
+import { GameProgress } from "@/components/course/GameProgress";
+import { GameContentRenderer } from "@/components/course/GameContentRenderer";
+import { GameContentTabs } from "@/components/course/GameContentTabs";
 
 const CourseStartPage = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const course = location.state?.course;
+  const { toast } = useToast();
   
   // If no course data is available, redirect to the course page
   if (!course) {
@@ -40,37 +35,82 @@ const CourseStartPage = () => {
     handleNextContent,
     handlePreviousContent,
     setSelectedAnswer,
-    handleQuizSubmit
-  } = useContentNavigation(course);
+    handleQuizSubmit,
+    xpPoints,
+    level,
+    levelProgress,
+    completedContents
+  } = useGameLearning(course);
 
   return (
     <div className="bg-space min-h-screen py-8 px-4">
       <div className="max-w-4xl mx-auto">
-        <div className="flex justify-between items-center mb-6">
-          <h1 className="text-2xl font-bold text-white">
-            {course.title} - Section {currentSectionIndex + 1}
-          </h1>
-          <div className="text-purple-200">
-            Card {currentContentIndex + 1} of {totalContentCount}
+        <header className="mb-6">
+          <div className="flex justify-between items-center mb-2">
+            <h1 className="text-2xl font-bold text-white flex items-center">
+              <Rocket className="mr-2 h-6 w-6 text-purple-400" />
+              {course.title}
+            </h1>
+            <div className="flex items-center space-x-2 bg-space-cosmic-blue/40 backdrop-blur-sm px-3 py-1.5 rounded-lg border border-purple-500/20">
+              <Star className="h-5 w-5 text-yellow-400" />
+              <span className="text-yellow-200 font-semibold">{xpPoints} XP</span>
+            </div>
           </div>
-        </div>
+          
+          <div className="flex items-center text-purple-200 mb-4">
+            <Flag className="h-4 w-4 mr-1 text-purple-400" />
+            <span>Section {currentSectionIndex + 1}: {currentSection.title}</span>
+          </div>
+        </header>
 
-        <CourseProgress 
-          overallProgress={overallProgress} 
-          currentSectionIndex={currentSectionIndex} 
-          totalSections={totalSections} 
+        {/* Game progress display */}
+        <GameProgress
+          overallProgress={overallProgress}
+          currentSectionIndex={currentSectionIndex}
+          totalSections={totalSections}
+          xpPoints={xpPoints}
+          level={level}
+          levelProgress={levelProgress}
         />
         
+        {/* Content tabs */}
+        <GameContentTabs 
+          contentTypes={availableContentTypes}
+          currentContentIndex={currentContentIndex}
+          onTabClick={(index) => {
+            // Only allow navigation to completed content
+            const contentKey = `${currentSectionIndex}-${index}`;
+            const isContentComplete = completedContents.includes(contentKey);
+            const isCurrentOrPrevious = index <= currentContentIndex;
+            
+            if (isContentComplete || isCurrentOrPrevious) {
+              if (currentContentType === 'quiz' && !quizSubmitted && selectedAnswer !== null) {
+                // If on quiz with selected answer, ask to submit first
+                toast({
+                  title: "Submit your answer",
+                  description: "Please submit your quiz answer before navigating.",
+                  variant: "destructive"
+                });
+              } else {
+                setSelectedAnswer(null);
+                setSelectedAnswer(null);
+              }
+            } else {
+              toast({
+                title: "Locked content",
+                description: "Complete the previous content first to unlock this.",
+                variant: "destructive"
+              });
+            }
+          }}
+          completedContents={completedContents}
+          sectionIndex={currentSectionIndex}
+        />
+        
+        {/* Main content card */}
         <Card className="cosmic-card overflow-visible mb-8 animate-fade-in">
           <CardContent className="p-6">
-            <ContentNavigation 
-              title={currentSection.title} 
-              contentType={currentContentType}
-              availableContentTypes={availableContentTypes} 
-              currentContentIndex={currentContentIndex} 
-            />
-            
-            <ContentRenderer 
+            <GameContentRenderer 
               contentType={currentContentType}
               currentSection={currentSection}
               quizSubmitted={quizSubmitted}
@@ -81,7 +121,8 @@ const CourseStartPage = () => {
           </CardContent>
         </Card>
         
-        <div className="flex justify-between mt-6">
+        {/* Navigation buttons */}
+        <div className="flex justify-between mt-6 mb-12">
           <Button 
             onClick={handlePreviousContent} 
             disabled={currentContentIndex === 0 && currentSectionIndex === 0}
