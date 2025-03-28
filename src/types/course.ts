@@ -45,6 +45,7 @@ export interface CourseSection {
     description: string;
   };
   quiz: QuizQuestion;
+  quizzes?: QuizQuestion[]; // Added to support multiple quiz questions
 }
 
 export interface Course {

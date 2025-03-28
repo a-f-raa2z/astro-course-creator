@@ -59,6 +59,8 @@ export const GameContentTabs = ({
     return completedContents.includes(contentKey);
   };
 
+  const isQuizTab = (type: ContentType) => type === 'quiz';
+
   return (
     <div className="relative mb-8">
       {/* Progress line connecting the steps */}
@@ -70,6 +72,7 @@ export const GameContentTabs = ({
           const isActive = currentContentIndex === index;
           const isDone = isCompleted(index);
           const stepNumber = index + 1;
+          const isQuiz = isQuizTab(type);
           
           return (
             <div key={index} className="flex flex-col items-center">
@@ -79,11 +82,16 @@ export const GameContentTabs = ({
                   className={`
                     w-6 h-6 rounded-full flex items-center justify-center transition-all 
                     ${isActive 
-                      ? "bg-purple-600 text-white shadow-md shadow-purple-500/30" 
+                      ? isQuiz 
+                        ? "bg-orange-600 text-white shadow-md shadow-orange-500/30" 
+                        : "bg-purple-600 text-white shadow-md shadow-purple-500/30"
                       : isDone
                         ? "bg-purple-800/80 text-purple-300 border border-purple-500/50"
-                        : "bg-gray-800/80 text-gray-400 border border-purple-500/20 hover:bg-gray-700"
+                        : isQuiz
+                          ? "bg-orange-900/80 text-orange-300 border border-orange-500/50 hover:bg-orange-800"
+                          : "bg-gray-800/80 text-gray-400 border border-purple-500/20 hover:bg-gray-700"
                     }
+                    ${isQuiz && !isActive && !isDone ? "animate-pulse" : ""}
                   `}
                   aria-label={`Step ${stepNumber}: ${getContentTitle(type)}`}
                 >
@@ -94,11 +102,20 @@ export const GameContentTabs = ({
                   )}
                 </button>
                 
-                <div className={`flex items-center gap-1 text-xs font-medium ${isActive ? "text-purple-300" : "text-gray-400"}`}>
+                <div className={`flex items-center gap-1 text-xs font-medium ${
+                  isActive 
+                    ? isQuiz ? "text-orange-300" : "text-purple-300" 
+                    : "text-gray-400"
+                }`}>
                   <span className={getContentColor(type)}>
                     {getContentIcon(type)}
                   </span>
-                  <span className="hidden sm:inline">{getContentTitle(type)}</span>
+                  <span className="hidden sm:inline">
+                    {getContentTitle(type)}
+                    {isQuiz && !isDone && (
+                      <span className="ml-1 text-orange-400 font-bold">★</span>
+                    )}
+                  </span>
                 </div>
               </div>
             </div>

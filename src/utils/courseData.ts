@@ -1,4 +1,3 @@
-
 import { AssessmentQuestion, Course } from "@/types/course";
 
 export const assessmentQuestions: AssessmentQuestion[] = [
@@ -92,7 +91,39 @@ export const generateMockCourse = (interest: string, level: string, learningStyl
             "Color temperature"
           ],
           correctAnswer: 1
-        }
+        },
+        quizzes: [
+          {
+            question: "Which property of light allows astronomers to determine the chemical composition of stars?",
+            options: [
+              "Reflection",
+              "Absorption and emission spectra",
+              "Luminosity",
+              "Color temperature"
+            ],
+            correctAnswer: 1
+          },
+          {
+            question: "What is the primary force that shapes the large-scale structure of the universe?",
+            options: [
+              "Electromagnetic force",
+              "Strong nuclear force",
+              "Weak nuclear force",
+              "Gravity"
+            ],
+            correctAnswer: 3
+          },
+          {
+            question: "Which type of telescope is best for observing objects that emit radio waves?",
+            options: [
+              "Refracting telescope",
+              "Reflecting telescope",
+              "Radio telescope",
+              "X-ray telescope"
+            ],
+            correctAnswer: 2
+          }
+        ]
       },
       {
         id: "section-2",
@@ -120,7 +151,39 @@ export const generateMockCourse = (interest: string, level: string, learningStyl
             "The new moon phase causes more meteors to enter Earth's atmosphere"
           ],
           correctAnswer: 2
-        }
+        },
+        quizzes: [
+          {
+            question: "Why do astronomers often prefer observing the night sky during a new moon?",
+            options: [
+              "The moon's gravity affects telescope accuracy",
+              "Stars are brighter during the new moon phase",
+              "Less light pollution from moonlight allows better visibility of dim objects",
+              "The new moon phase causes more meteors to enter Earth's atmosphere"
+            ],
+            correctAnswer: 2
+          },
+          {
+            question: "Which of these is NOT a type of telescope?",
+            options: [
+              "Refractor",
+              "Reflector",
+              "Catadioptric",
+              "Spectroscopic"
+            ],
+            correctAnswer: 3
+          },
+          {
+            question: "What celestial object appears to move about 1° westward against the background stars each day?",
+            options: [
+              "The Sun",
+              "The Moon",
+              "Mars",
+              "Jupiter"
+            ],
+            correctAnswer: 0
+          }
+        ]
       },
       {
         id: "section-3",
@@ -148,7 +211,39 @@ export const generateMockCourse = (interest: string, level: string, learningStyl
             "Aurora borealis"
           ],
           correctAnswer: 1
-        }
+        },
+        quizzes: [
+          {
+            question: "What cosmic event results from the complete gravitational collapse of a massive star?",
+            options: [
+              "Planetary nebula",
+              "Supernova explosion",
+              "Solar flare",
+              "Aurora borealis"
+            ],
+            correctAnswer: 1
+          },
+          {
+            question: "Which of these is NOT a type of galaxy?",
+            options: [
+              "Spiral",
+              "Elliptical",
+              "Irregular",
+              "Circular"
+            ],
+            correctAnswer: 3
+          },
+          {
+            question: "What is the event horizon of a black hole?",
+            options: [
+              "The center point where matter is crushed to infinite density",
+              "The boundary beyond which nothing can escape, not even light",
+              "The outer edge of the accretion disk",
+              "The point where time stops completely"
+            ],
+            correctAnswer: 1
+          }
+        ]
       },
       {
         id: "section-4",
@@ -176,7 +271,39 @@ export const generateMockCourse = (interest: string, level: string, learningStyl
             "Radio telescope arrays"
           ],
           correctAnswer: 1
-        }
+        },
+        quizzes: [
+          {
+            question: "Which recent technological advancement has allowed astronomers to directly detect gravitational waves?",
+            options: [
+              "The Hubble Space Telescope",
+              "LIGO (Laser Interferometer Gravitational-Wave Observatory)",
+              "The International Space Station",
+              "Radio telescope arrays"
+            ],
+            correctAnswer: 1
+          },
+          {
+            question: "What is the main constituent of the 'dark matter' that astronomers believe makes up about 27% of the universe?",
+            options: [
+              "Black holes",
+              "Neutrinos",
+              "Unknown - its nature remains one of the biggest mysteries in physics",
+              "Hydrogen gas that doesn't emit light"
+            ],
+            correctAnswer: 2
+          },
+          {
+            question: "Which space telescope, launched in 2021, is designed to observe primarily in the infrared spectrum?",
+            options: [
+              "Hubble Space Telescope",
+              "Chandra X-ray Observatory",
+              "James Webb Space Telescope",
+              "Spitzer Space Telescope"
+            ],
+            correctAnswer: 2
+          }
+        ]
       },
       {
         id: "section-5",
@@ -204,7 +331,39 @@ export const generateMockCourse = (interest: string, level: string, learningStyl
             "It determines optimal growing seasons for agriculture"
           ],
           correctAnswer: 2
-        }
+        },
+        quizzes: [
+          {
+            question: "How does astronomical research on solar activity benefit life on Earth?",
+            options: [
+              "It helps predict climate change over millennia",
+              "It enables more accurate weather forecasting",
+              "It provides early warnings for solar storms that could damage power grids and satellites",
+              "It determines optimal growing seasons for agriculture"
+            ],
+            correctAnswer: 2
+          },
+          {
+            question: "Which NASA program is focused on returning humans to the Moon as a stepping stone to Mars?",
+            options: [
+              "Apollo",
+              "Gemini",
+              "Artemis",
+              "Mercury"
+            ],
+            correctAnswer: 2
+          },
+          {
+            question: "Which of these technologies was NOT initially developed for space exploration but later adapted for everyday use?",
+            options: [
+              "Smartphone cameras",
+              "Memory foam",
+              "Water purification systems",
+              "Social media platforms"
+            ],
+            correctAnswer: 3
+          }
+        ]
       }
     ]
   };
