@@ -40,6 +40,9 @@ export interface CourseSection {
   videoUrl: string;
   keyPoints: string[];
   shortVideo?: string;
+  additionalShortVideos?: string[]; // Added missing property
+  visualUrl?: string; // Added missing property
+  bonusVideos?: string[]; // Added missing property
   image: {
     url: string;
     description: string;
