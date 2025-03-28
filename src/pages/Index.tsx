@@ -1,15 +1,14 @@
 
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import QuestionCard from "@/components/QuestionCard";
 import { assessmentQuestions, generateMockCourse } from "@/utils/courseData";
-import { Assessment } from "@/types/course";
-import { Loader2, ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Card, CardContent } from "@/components/ui/card";
+import { Assessment, Course } from "@/types/course";
+import { Loader2 } from "lucide-react";
 
 const Index = () => {
   const navigate = useNavigate();
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [assessment, setAssessment] = useState<Assessment>({
     interest: "",
     level: "",
@@ -18,85 +17,23 @@ const Index = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [loadingProgress, setLoadingProgress] = useState(0);
   const [loadingText, setLoadingText] = useState("");
-  const [currentStep, setCurrentStep] = useState(0);
-  
-  const conversationSteps = [
-    {
-      id: "welcome",
-      message: "Welcome to your personalized astronomy learning journey! I'm excited to help you explore the cosmos in a way that's perfect for you.",
-      responseType: "button",
-      options: [{ text: "Let's get started!", value: "start" }]
-    },
-    {
-      id: "interest",
-      message: "I'm curious to know what fascinates you most about the vast universe. Complete this sentence: \"When I look up at the night sky, I'm most interested in learning about...\"",
-      responseType: "fillBlank",
-      blanks: [
-        { 
-          options: [
-            { id: "stars", text: "stars and stellar evolution" },
-            { id: "planets", text: "planets and our solar system" },
-            { id: "galaxies", text: "galaxies and deep space" },
-            { id: "cosmology", text: "cosmology and the early universe" },
-            { id: "space-tech", text: "space technology and exploration" }
-          ],
-          field: "interest"
-        }
-      ]
-    },
-    {
-      id: "level",
-      message: "Great choice! Now, to tailor your learning experience, I'd like to know: \"When it comes to astronomy knowledge, I would consider myself...\"",
-      responseType: "fillBlank",
-      blanks: [
-        {
-          options: [
-            { id: "beginner", text: "a beginner with basic knowledge" },
-            { id: "intermediate", text: "intermediate with solid understanding" },
-            { id: "advanced", text: "advanced and looking to deepen my expertise" }
-          ],
-          field: "level"
-        }
-      ]
-    },
-    {
-      id: "learningStyle",
-      message: "Perfect! Last question to customize your journey: \"I learn best when information is presented through...\"",
-      responseType: "fillBlank",
-      blanks: [
-        {
-          options: [
-            { id: "visual", text: "visual elements like images and diagrams" },
-            { id: "interactive", text: "interactive, hands-on activities" },
-            { id: "conceptual", text: "deep theoretical explanations" },
-            { id: "practical", text: "real-world applications and examples" }
-          ],
-          field: "learningStyle"
-        }
-      ]
-    },
-    {
-      id: "confirmation",
-      message: "Wonderful! I've got everything I need to create your personalized astronomy course.",
-      responseType: "button",
-      options: [{ text: "Create my course", value: "create" }]
-    }
-  ];
 
-  const currentConversation = conversationSteps[currentStep];
-
-  const handleOptionSelect = (field: string, value: string) => {
+  const handleAnswer = (questionId: string, answer: string) => {
     setAssessment(prev => ({
       ...prev,
-      [field]: value
+      [questionId]: answer
     }));
-  };
 
-  const handleNextStep = () => {
-    if (currentStep < conversationSteps.length - 1) {
-      setCurrentStep(currentStep + 1);
+    if (currentQuestionIndex < assessmentQuestions.length - 1) {
+      setCurrentQuestionIndex(currentQuestionIndex + 1);
     } else {
       startCourseGeneration();
+    }
+  };
+
+  const handlePrevious = () => {
+    if (currentQuestionIndex > 0) {
+      setCurrentQuestionIndex(currentQuestionIndex - 1);
     }
   };
 
@@ -147,58 +84,6 @@ const Index = () => {
     }, 500);
   };
 
-  const renderFillBlanks = (blanks) => {
-    return blanks.map((blank, index) => (
-      <div key={`blank-${index}`} className="my-4">
-        <div className="flex flex-wrap gap-2">
-          {blank.options.map(option => (
-            <Button
-              key={option.id}
-              variant={assessment[blank.field] === option.id ? "default" : "outline"}
-              className={`mb-2 ${assessment[blank.field] === option.id ? 'bg-purple-600 hover:bg-purple-700' : 'text-purple-300 border-purple-500/30 hover:bg-purple-900/30 hover:text-purple-200'}`}
-              onClick={() => handleOptionSelect(blank.field, option.id)}
-            >
-              {option.text}
-            </Button>
-          ))}
-        </div>
-      </div>
-    ));
-  };
-
-  const renderResponseArea = () => {
-    if (currentConversation.responseType === "button") {
-      return (
-        <div className="mt-4 text-center">
-          <Button 
-            onClick={handleNextStep}
-            className="bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white py-2 px-6 rounded-lg shadow-md transition-all duration-300"
-          >
-            {currentConversation.options[0].text}
-            <ArrowRight className="ml-1 h-4 w-4" />
-          </Button>
-        </div>
-      );
-    } else if (currentConversation.responseType === "fillBlank") {
-      return (
-        <div className="mt-3">
-          {renderFillBlanks(currentConversation.blanks)}
-          <div className="mt-6 text-center">
-            <Button
-              onClick={handleNextStep}
-              disabled={!assessment[currentConversation.blanks[0].field]}
-              className="bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white py-2 px-6 rounded-lg shadow-md transition-all duration-300"
-            >
-              Continue
-              <ArrowRight className="ml-1 h-4 w-4" />
-            </Button>
-          </div>
-        </div>
-      );
-    }
-    return null;
-  };
-
   return (
     <div className="bg-space min-h-screen">
       <div className="container mx-auto px-4 py-16 flex flex-col items-center">
@@ -209,21 +94,18 @@ const Index = () => {
         </p>
         
         {!isLoading ? (
-          <Card className="cosmic-card w-full max-w-2xl animate-fade-in">
-            <CardContent className="p-6">
-              <div className="chat-container">
-                <div className="chat-message assistant mb-4">
-                  <div className="bg-space-cosmic-blue/60 p-4 rounded-lg text-white">
-                    <p>{currentConversation.message}</p>
-                  </div>
-                </div>
-                
-                <div className="chat-response">
-                  {renderResponseArea()}
-                </div>
-              </div>
-            </CardContent>
-          </Card>
+          <>
+            <QuestionCard 
+              question={assessmentQuestions[currentQuestionIndex]}
+              onAnswer={handleAnswer}
+              onPrevious={handlePrevious}
+              isFirst={currentQuestionIndex === 0}
+              isLast={currentQuestionIndex === assessmentQuestions.length - 1}
+            />
+            <div className="mt-8 text-purple-400">
+              Question {currentQuestionIndex + 1} of {assessmentQuestions.length}
+            </div>
+          </>
         ) : (
           <div className="w-full max-w-lg">
             <div className="bg-space-cosmic-blue/40 backdrop-blur-md border border-purple-500/20 p-8 rounded-lg mb-6">
