@@ -1,4 +1,3 @@
-
 import { useLocation, useNavigate } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -115,21 +114,19 @@ const CourseStartPage = () => {
           sectionIndex={currentSectionIndex}
         />
         
-        {/* Main content card with adjusted size - 80% of viewport height with fixed 4:3 aspect ratio */}
+        {/* Main content card with adjusted size - 80% of viewport height */}
         <div className="animate-fade-in h-[80vh] max-w-full mx-auto">
           <div className="relative w-full h-full max-h-full">
             <div className="absolute inset-0">
-              <div className="w-full h-full" style={{ aspectRatio: '4/3', maxHeight: '100%', margin: '0 auto' }}>
-                <GameContentRenderer 
-                  contentType={currentContentType}
-                  currentSection={currentSection}
-                  quizSubmitted={quizSubmitted}
-                  selectedAnswer={selectedAnswer}
-                  setSelectedAnswer={setSelectedAnswer}
-                  handleQuizSubmit={handleQuizSubmit}
-                  handleNextContent={handleNextContent}
-                />
-              </div>
+              <GameContentRenderer 
+                contentType={currentContentType}
+                currentSection={currentSection}
+                quizSubmitted={quizSubmitted}
+                selectedAnswer={selectedAnswer}
+                setSelectedAnswer={setSelectedAnswer}
+                handleQuizSubmit={handleQuizSubmit}
+                handleNextContent={handleNextContent}
+              />
             </div>
           </div>
 
