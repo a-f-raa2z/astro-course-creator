@@ -115,17 +115,23 @@ const CourseStartPage = () => {
           sectionIndex={currentSectionIndex}
         />
         
-        {/* Main content card with fixed size and interactive elements */}
-        <div className="animate-fade-in">
-          <GameContentRenderer 
-            contentType={currentContentType}
-            currentSection={currentSection}
-            quizSubmitted={quizSubmitted}
-            selectedAnswer={selectedAnswer}
-            setSelectedAnswer={setSelectedAnswer}
-            handleQuizSubmit={handleQuizSubmit}
-            handleNextContent={handleNextContent}
-          />
+        {/* Main content card with adjusted size - 80% of viewport height with fixed 4:3 aspect ratio */}
+        <div className="animate-fade-in h-[80vh] max-w-full mx-auto">
+          <div className="relative w-full h-full max-h-full">
+            <div className="absolute inset-0">
+              <div className="w-full h-full" style={{ aspectRatio: '4/3', maxHeight: '100%', margin: '0 auto' }}>
+                <GameContentRenderer 
+                  contentType={currentContentType}
+                  currentSection={currentSection}
+                  quizSubmitted={quizSubmitted}
+                  selectedAnswer={selectedAnswer}
+                  setSelectedAnswer={setSelectedAnswer}
+                  handleQuizSubmit={handleQuizSubmit}
+                  handleNextContent={handleNextContent}
+                />
+              </div>
+            </div>
+          </div>
 
           {/* Navigation buttons */}
           <div className="flex justify-between mt-6">
