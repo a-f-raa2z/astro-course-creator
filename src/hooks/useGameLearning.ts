@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { Course, CourseSection } from "@/types/course";
@@ -198,6 +197,7 @@ export const useGameLearning = (course: Course) => {
 
   return {
     currentSectionIndex,
+    setCurrentSectionIndex,
     currentContentIndex,
     currentSection,
     currentContentType,

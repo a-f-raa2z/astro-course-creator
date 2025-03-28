@@ -8,11 +8,13 @@ import { useGameLearning } from "@/hooks/useGameLearning";
 import { GameProgress } from "@/components/course/GameProgress";
 import { GameContentRenderer } from "@/components/course/GameContentRenderer";
 import { GameContentTabs } from "@/components/course/GameContentTabs";
+import { useEffect } from "react";
 
 const CourseStartPage = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const course = location.state?.course;
+  const initialSectionIndex = location.state?.initialSectionIndex ?? 0;
   const { toast } = useToast();
   
   // If no course data is available, redirect to the course page
@@ -23,6 +25,7 @@ const CourseStartPage = () => {
 
   const {
     currentSectionIndex,
+    setCurrentSectionIndex,
     currentContentIndex,
     currentSection,
     currentContentType,
@@ -42,6 +45,14 @@ const CourseStartPage = () => {
     completedContents,
     setCurrentContentIndex
   } = useGameLearning(course);
+
+  // Set initial section index from route state
+  useEffect(() => {
+    if (initialSectionIndex !== undefined && initialSectionIndex !== currentSectionIndex) {
+      setCurrentSectionIndex(initialSectionIndex);
+      setCurrentContentIndex(0); // Reset to first content of the section
+    }
+  }, [initialSectionIndex, currentSectionIndex, setCurrentSectionIndex, setCurrentContentIndex]);
 
   return (
     <div className="bg-space min-h-screen py-8 px-4">
@@ -120,8 +131,6 @@ const CourseStartPage = () => {
             </div>
           </CardContent>
         </Card>
-        
-        {/* Remove original navigation buttons that were outside the card */}
       </div>
     </div>
   );
