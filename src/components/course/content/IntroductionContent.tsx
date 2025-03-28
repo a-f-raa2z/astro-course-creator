@@ -12,9 +12,11 @@ import { useIsMobile } from "@/hooks/use-mobile";
 interface IntroductionContentProps {
   section: CourseSection;
   onComplete: () => void;
+  onPrevious: () => void;
+  isFirstContent: boolean;
 }
 
-export const IntroductionContent = ({ section, onComplete }: IntroductionContentProps) => {
+export const IntroductionContent = ({ section, onComplete, onPrevious, isFirstContent }: IntroductionContentProps) => {
   const [flipped, setFlipped] = useState(false);
   const { toast } = useToast();
   const isMobile = useIsMobile();
@@ -37,6 +39,10 @@ export const IntroductionContent = ({ section, onComplete }: IntroductionContent
           title="Introduction" 
           color="bg-purple-800/50"
         />
+        
+        <p className="text-sm text-gray-300 ml-1 mb-4">
+          Welcome to Solar System Learning! We'll explore planets, moons, asteroids, and other fascinating celestial objects in our cosmic neighborhood.
+        </p>
         
         {/* 4:3 Flashcard container */}
         <div className="flex-1 flex items-center justify-center p-2">
@@ -109,14 +115,24 @@ export const IntroductionContent = ({ section, onComplete }: IntroductionContent
         
         {/* Navigation buttons at the bottom */}
         <div className="mt-4 flex justify-between">
-          <div></div> {/* Empty div for spacing */}
-          <Button 
-            onClick={onComplete}
-            className={`bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 transition-all ${flipped ? 'opacity-100 animate-pulse' : 'opacity-50'}`}
-            disabled={!flipped}
-          >
-            Continue <ArrowRight className="h-4 w-4 ml-2" />
-          </Button>
+          {!isFirstContent && (
+            <Button 
+              onClick={onPrevious}
+              variant="outline"
+              className="border-purple-500/30 text-purple-300 hover:bg-purple-900/30"
+            >
+              <ArrowLeft className="h-4 w-4 mr-2" /> Previous
+            </Button>
+          )}
+          <div className={!isFirstContent ? "" : "ml-auto"}>
+            <Button 
+              onClick={onComplete}
+              className={`bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 transition-all ${flipped ? 'opacity-100 animate-pulse' : 'opacity-50'}`}
+              disabled={!flipped}
+            >
+              Continue <ArrowRight className="h-4 w-4 ml-2" />
+            </Button>
+          </div>
         </div>
       </Card>
     </div>
