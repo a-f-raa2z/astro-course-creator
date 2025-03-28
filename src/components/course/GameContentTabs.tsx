@@ -70,31 +70,33 @@ export const GameContentTabs = ({
           
           return (
             <div key={index} className="flex flex-col items-center">
-              <button
-                onClick={() => onTabClick(index)}
-                className={`
-                  w-8 h-8 rounded-full flex items-center justify-center transition-all 
-                  ${isActive 
-                    ? "bg-purple-600 text-white shadow-lg shadow-purple-500/30" 
-                    : isDone
-                      ? "bg-purple-800/80 text-purple-300 border border-purple-500/50"
-                      : "bg-gray-800/80 text-gray-400 border border-purple-500/20 hover:bg-gray-700"
-                  }
-                `}
-                aria-label={`Step ${stepNumber}: ${getContentTitle(type)}`}
-              >
-                {isDone ? (
-                  <Star className="h-3 w-3 text-yellow-400" />
-                ) : (
-                  <span className="text-xs font-semibold">{stepNumber}</span>
-                )}
-              </button>
-              
-              <div className={`mt-2 flex items-center gap-1 text-xs font-medium ${isActive ? "text-purple-300" : "text-gray-400"}`}>
-                <span className={getContentColor(type)}>
-                  {getContentIcon(type)}
-                </span>
-                <span>{getContentTitle(type)}</span>
+              <div className="flex items-center gap-1.5">
+                <button
+                  onClick={() => onTabClick(index)}
+                  className={`
+                    w-6 h-6 rounded-full flex items-center justify-center transition-all 
+                    ${isActive 
+                      ? "bg-purple-600 text-white shadow-md shadow-purple-500/30" 
+                      : isDone
+                        ? "bg-purple-800/80 text-purple-300 border border-purple-500/50"
+                        : "bg-gray-800/80 text-gray-400 border border-purple-500/20 hover:bg-gray-700"
+                    }
+                  `}
+                  aria-label={`Step ${stepNumber}: ${getContentTitle(type)}`}
+                >
+                  {isDone ? (
+                    <Star className="h-3 w-3 text-yellow-400" />
+                  ) : (
+                    <span className="text-xs font-semibold">{stepNumber}</span>
+                  )}
+                </button>
+                
+                <div className={`flex items-center gap-1 text-xs font-medium ${isActive ? "text-purple-300" : "text-gray-400"}`}>
+                  <span className={getContentColor(type)}>
+                    {getContentIcon(type)}
+                  </span>
+                  <span>{getContentTitle(type)}</span>
+                </div>
               </div>
             </div>
           );
@@ -134,7 +136,7 @@ export const GameContentTabs = ({
                 {isDone ? (
                   <Star className="h-2 w-2 text-yellow-400" />
                 ) : (
-                  <span className="text-xs">{stepNumber}</span>
+                  <span className="text-[10px]">{stepNumber}</span>
                 )}
               </div>
               <span className={getContentColor(type)}>{getContentIcon(type)}</span>
