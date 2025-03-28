@@ -1,4 +1,3 @@
-
 import { AssessmentQuestion, Course } from "@/types/course";
 
 export const assessmentQuestions: AssessmentQuestion[] = [
@@ -38,7 +37,6 @@ export const assessmentQuestions: AssessmentQuestion[] = [
 ];
 
 export const generateMockCourse = (interest: string, level: string, learningStyle: string): Course => {
-  // Map interests to course themes
   const interestTitles: Record<string, string> = {
     stars: "Stellar Evolution: From Dust to Supernovae",
     planets: "Exploring Our Solar System and Beyond",
@@ -47,14 +45,12 @@ export const generateMockCourse = (interest: string, level: string, learningStyl
     "space-tech": "Space Exploration: Technologies and Missions"
   };
 
-  // Determine complexity based on level
   const levelDescriptors: Record<string, string> = {
     beginner: "foundational",
     intermediate: "comprehensive",
     advanced: "advanced"
   };
 
-  // Create course title based on interest and level
   const courseTitle = interestTitles[interest] || "Personalized Astronomy Journey";
   const levelAdjective = levelDescriptors[level] || "personalized";
 
@@ -69,27 +65,27 @@ export const generateMockCourse = (interest: string, level: string, learningStyl
       {
         id: "section-1",
         title: "Foundations and Core Principles",
-        introduction: "This section introduces key concepts that will form the foundation of your astronomy journey. Understanding these principles is essential before diving deeper into specialized topics.",
-        whyLearn: "Mastering these fundamental concepts will provide you with the necessary framework to understand how astronomers study the universe and interpret celestial phenomena.",
+        introduction: "This section introduces the fundamental concepts of astronomy that serve as building blocks for understanding the universe. We'll explore the basic principles that astronomers use to study celestial objects and phenomena.",
+        whyLearn: "Understanding these core principles is essential as they form the foundation for all astronomical knowledge. These concepts will help you grasp how we measure the vast distances in space and understand the nature of light as our primary source of cosmic information.",
         videoUrl: "https://www.youtube.com/embed/0rHUDWjR5gg",
         keyPoints: [
-          "The scale of cosmic distances and how they're measured",
-          "Basic principles of observational astronomy", 
-          "How light and electromagnetic spectrum inform our understanding of space",
-          "Tools and technologies used in modern astronomy"
+          "The scale of the universe spans from subatomic particles to superclusters of galaxies",
+          "Light is our primary source of information about distant objects", 
+          "The electromagnetic spectrum reveals different properties of celestial objects",
+          "Modern astronomy combines observations across multiple wavelengths"
         ],
         shortVideo: "https://www.youtube.com/embed/mO3Q4bRQZ3k",
         image: {
           url: "https://images.unsplash.com/photo-1470813740244-df37b8c1edcb",
-          description: "The night sky reveals billions of stars in our Milky Way galaxy, each one a potential host for planetary systems."
+          description: "The night sky reveals countless stars, each one potentially hosting planetary systems similar or vastly different from our own."
         },
         quiz: {
-          question: "What is the primary tool astronomers use to study distant objects in space?",
+          question: "Which property of light allows astronomers to determine the chemical composition of stars?",
           options: [
-            "Microscopes",
-            "Telescopes that capture various wavelengths of light",
-            "Rovers and physical exploration",
-            "Sound wave detection equipment"
+            "Reflection",
+            "Absorption and emission spectra",
+            "Luminosity",
+            "Color temperature"
           ],
           correctAnswer: 1
         }
