@@ -4,7 +4,7 @@ import CourseView from "@/components/CourseView";
 import { Course } from "@/types/course";
 import { generateMockCourse } from "@/utils/courseData";
 import { Button } from "@/components/ui/button";
-import { BookOpen, Rocket, MapPin, Clock, Calendar, Star, Trophy } from "lucide-react";
+import { BookOpen, Rocket, MapPin, Clock, Calendar, Star } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { useState } from "react";
@@ -37,9 +37,15 @@ const CoursePage = () => {
     <div className="bg-space min-h-screen py-12">
       <div className="course-container max-w-5xl mx-auto px-4">
         <header className="mb-10">
-          <div className="flex items-center mb-3">
-            <Rocket className="h-8 w-8 text-purple-400 mr-3" />
-            <h1 className="text-4xl font-bold text-white">{course.title}</h1>
+          <div className="flex justify-between items-center mb-3">
+            <div className="flex items-center">
+              <Rocket className="h-8 w-8 text-purple-400 mr-3" />
+              <h1 className="text-4xl font-bold text-white">{course.title}</h1>
+            </div>
+            <div className="flex items-center space-x-2 bg-space-cosmic-blue/40 backdrop-blur-sm px-3 py-1.5 rounded-lg border border-purple-500/20">
+              <Star className="h-5 w-5 text-yellow-400" />
+              <span className="text-yellow-200 font-semibold">{userScore} XP</span>
+            </div>
           </div>
           
           <p className="text-purple-300 text-lg">{course.description}</p>
@@ -104,7 +110,7 @@ const CoursePage = () => {
             <Card className="cosmic-card p-5">
               <div className="flex items-center mb-4">
                 <div className="bg-yellow-600/30 p-3 rounded-full mr-3">
-                  <Trophy className="h-6 w-6 text-yellow-300" />
+                  <Star className="h-6 w-6 text-yellow-300" />
                 </div>
                 <h3 className="text-xl font-semibold text-purple-100">Your Progress</h3>
               </div>

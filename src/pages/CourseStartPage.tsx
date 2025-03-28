@@ -2,7 +2,7 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { ChevronLeft, Check, Award, Star, Rocket, Flag, ArrowRight } from "lucide-react";
+import { ChevronLeft, Star, Rocket, Flag, ArrowRight } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { useGameLearning } from "@/hooks/useGameLearning";
 import { GameProgress } from "@/components/course/GameProgress";
