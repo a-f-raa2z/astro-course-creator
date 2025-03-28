@@ -73,7 +73,7 @@ export const GameContentTabs = ({
               <button
                 onClick={() => onTabClick(index)}
                 className={`
-                  w-12 h-12 rounded-full flex items-center justify-center transition-all 
+                  w-10 h-10 rounded-full flex items-center justify-center transition-all 
                   ${isActive 
                     ? "bg-purple-600 text-white shadow-lg shadow-purple-500/30" 
                     : isDone
@@ -84,9 +84,9 @@ export const GameContentTabs = ({
                 aria-label={`Step ${stepNumber}: ${getContentTitle(type)}`}
               >
                 {isDone ? (
-                  <Star className="h-5 w-5 text-yellow-400" />
+                  <Star className="h-4 w-4 text-yellow-400" />
                 ) : (
-                  <span className="text-md font-semibold">{stepNumber}</span>
+                  <span className="text-sm font-semibold">{stepNumber}</span>
                 )}
               </button>
               
@@ -123,7 +123,7 @@ export const GameContentTabs = ({
               `}
             >
               <div className={`
-                w-6 h-6 rounded-full flex items-center justify-center
+                w-5 h-5 rounded-full flex items-center justify-center
                 ${isActive 
                   ? "bg-purple-600" 
                   : isDone

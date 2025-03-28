@@ -5,9 +5,6 @@ interface GameProgressProps {
   overallProgress: number;
   currentSectionIndex: number;
   totalSections: number;
-  xpPoints: number;
-  level: number;
-  levelProgress: number;
 }
 
 export const GameProgress = ({
