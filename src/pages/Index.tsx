@@ -103,7 +103,10 @@ const Index = () => {
               isLast={currentQuestionIndex === assessmentQuestions.length - 1}
             />
             <div className="mt-8 text-purple-400">
-              Question {currentQuestionIndex + 1} of {assessmentQuestions.length}
+              <span className="text-xl font-medium">Question {currentQuestionIndex + 1} of {assessmentQuestions.length}</span>
+              <div className="mt-2 bg-purple-500/30 border border-purple-400/20 rounded-lg p-3 text-white text-lg font-medium">
+                Discover your cosmic journey
+              </div>
             </div>
           </>
         ) : (
