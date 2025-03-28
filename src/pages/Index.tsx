@@ -6,6 +6,7 @@ import { Assessment } from "@/types/course";
 import { Loader2, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Card, CardContent } from "@/components/ui/card";
 
 const Index = () => {
   const navigate = useNavigate();
@@ -18,6 +19,7 @@ const Index = () => {
   const [loadingProgress, setLoadingProgress] = useState(0);
   const [loadingText, setLoadingText] = useState("");
   const [currentStep, setCurrentStep] = useState(0);
+  const [selectedOption, setSelectedOption] = useState<string | null>(null);
   
   const conversationSteps = [
     {
@@ -28,7 +30,8 @@ const Index = () => {
     },
     {
       id: "interest",
-      message: "I'm curious to know what fascinates you most about the vast universe. Complete this sentence: \"When I look up at the night sky, I'm most interested in learning about...\"",
+      message: "I'm curious to know what fascinates you most about the vast universe. Complete this sentence:",
+      prompt: "When I look up at the night sky, I'm most interested in learning about...",
       responseType: "fillBlank",
       blanks: [
         { 
@@ -45,7 +48,8 @@ const Index = () => {
     },
     {
       id: "level",
-      message: "Great choice! Now, to tailor your learning experience, I'd like to know: \"When it comes to astronomy knowledge, I would consider myself...\"",
+      message: "Great choice! Now, to tailor your learning experience, I'd like to know:",
+      prompt: "When it comes to astronomy knowledge, I would consider myself...",
       responseType: "fillBlank",
       blanks: [
         {
@@ -60,7 +64,8 @@ const Index = () => {
     },
     {
       id: "learningStyle",
-      message: "Perfect! Last question to customize your journey: \"I learn best when information is presented through...\"",
+      message: "Perfect! Last question to customize your journey:",
+      prompt: "I learn best when information is presented through...",
       responseType: "fillBlank",
       blanks: [
         {
@@ -89,9 +94,11 @@ const Index = () => {
       ...prev,
       [field]: value
     }));
+    setSelectedOption(value);
   };
 
   const handleNextStep = () => {
+    setSelectedOption(null);
     if (currentStep < conversationSteps.length - 1) {
       setCurrentStep(currentStep + 1);
     } else {
@@ -149,18 +156,45 @@ const Index = () => {
   const renderFillBlanks = (blanks) => {
     return blanks.map((blank, index) => (
       <div key={`blank-${index}`} className="my-4">
-        <div className="flex flex-wrap gap-2">
-          {blank.options.map(option => (
-            <Button
-              key={option.id}
-              variant={assessment[blank.field] === option.id ? "default" : "outline"}
-              className={`mb-2 ${assessment[blank.field] === option.id ? 'bg-purple-600 hover:bg-purple-700' : 'text-purple-300 border-purple-500/30 hover:bg-purple-900/30 hover:text-purple-200'}`}
-              onClick={() => handleOptionSelect(blank.field, option.id)}
-            >
-              {option.text}
-            </Button>
-          ))}
+        <div className="relative">
+          {currentConversation.prompt && (
+            <p className="text-white mb-3 text-lg">{currentConversation.prompt}</p>
+          )}
+          
+          <div className="fake-text-input flex items-center mb-4 py-2 px-3 bg-space-cosmic-blue/40 border border-purple-500/30 rounded-md min-h-[42px] cursor-pointer">
+            <span className="text-purple-300">
+              {assessment[blank.field] 
+                ? blank.options.find(opt => opt.id === assessment[blank.field])?.text 
+                : "Click to choose an option..."}
+            </span>
+          </div>
+          
+          <div className={`dropdown-options absolute left-0 w-full mt-1 rounded-md overflow-hidden shadow-lg z-10 transition-all duration-300 ${selectedOption ? 'opacity-0 invisible' : 'opacity-100 visible'}`}>
+            <div className="bg-space-cosmic-blue/95 backdrop-blur-lg border border-purple-500/30 rounded-md">
+              {blank.options.map(option => (
+                <div 
+                  key={option.id}
+                  className="py-2 px-3 hover:bg-purple-700/40 cursor-pointer transition-colors duration-200 text-white"
+                  onClick={() => handleOptionSelect(blank.field, option.id)}
+                >
+                  {option.text}
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
+        
+        {assessment[blank.field] && (
+          <div className="mt-6 text-center">
+            <Button
+              onClick={handleNextStep}
+              className="bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white py-2 px-6 rounded-lg shadow-md transition-all duration-300"
+            >
+              Continue
+              <ArrowRight className="ml-1 h-4 w-4" />
+            </Button>
+          </div>
+        )}
       </div>
     ));
   };
@@ -182,16 +216,6 @@ const Index = () => {
       return (
         <div className="mt-3">
           {renderFillBlanks(currentConversation.blanks)}
-          <div className="mt-6 text-center">
-            <Button
-              onClick={handleNextStep}
-              disabled={!assessment[currentConversation.blanks[0].field]}
-              className="bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white py-2 px-6 rounded-lg shadow-md transition-all duration-300"
-            >
-              Continue
-              <ArrowRight className="ml-1 h-4 w-4" />
-            </Button>
-          </div>
         </div>
       );
     }
@@ -208,19 +232,21 @@ const Index = () => {
         </p>
         
         {!isLoading ? (
-          <div className="w-full max-w-2xl animate-fade-in">
-            <div className="chat-container">
-              <div className="chat-message assistant mb-6">
-                <div className="text-center">
-                  <p className="text-2xl font-medium text-white mb-6">{currentConversation.message}</p>
+          <Card className="cosmic-card w-full max-w-2xl animate-fade-in">
+            <CardContent className="p-6">
+              <div className="chat-container">
+                <div className="chat-message assistant mb-4">
+                  <div className="bg-space-cosmic-blue/60 p-4 rounded-lg text-white">
+                    <p>{currentConversation.message}</p>
+                  </div>
+                </div>
+                
+                <div className="chat-response">
+                  {renderResponseArea()}
                 </div>
               </div>
-              
-              <div className="chat-response">
-                {renderResponseArea()}
-              </div>
-            </div>
-          </div>
+            </CardContent>
+          </Card>
         ) : (
           <div className="w-full max-w-lg">
             <div className="bg-space-cosmic-blue/40 backdrop-blur-md border border-purple-500/20 p-8 rounded-lg mb-6">
