@@ -40,7 +40,7 @@ export const IntroductionContent = ({ section, onComplete, onPrevious, isFirstCo
           color="bg-purple-800/50"
         />
         
-        <p className="text-sm text-gray-300 ml-1 mb-4">
+        <p className="text-lg text-transparent bg-gradient-to-r from-purple-300 to-purple-100 bg-clip-text font-medium mb-4 px-1">
           Welcome to Solar System Learning! We'll explore planets, moons, asteroids, and other fascinating celestial objects in our cosmic neighborhood.
         </p>
         

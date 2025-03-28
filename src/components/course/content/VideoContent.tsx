@@ -24,7 +24,7 @@ export const VideoContent = ({ section, onComplete, onPrevious, isFirstContent }
             title="Main Video Lesson" 
             color="bg-red-900/30"
           />
-          <p className="text-sm text-gray-300 ml-1 mb-4">
+          <p className="text-lg text-transparent bg-gradient-to-r from-red-300 to-red-100 bg-clip-text font-medium mb-4 px-1">
             Solar System 101: A comprehensive overview of our cosmic neighborhood and the celestial bodies within it.
           </p>
         </div>

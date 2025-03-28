@@ -24,7 +24,7 @@ export const ShortVideoContent = ({ section, onComplete, onPrevious, isFirstCont
             title="Fun Facts" 
             color="bg-blue-900/30"
           />
-          <p className="text-sm text-gray-300 ml-1 mb-4">
+          <p className="text-lg text-transparent bg-gradient-to-r from-blue-300 to-blue-100 bg-clip-text font-medium mb-4 px-1">
             Highlight hidden things and fascinating trivia about our solar system.
           </p>
         </div>

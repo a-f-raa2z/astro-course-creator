@@ -47,7 +47,7 @@ export const KeyPointsContent = ({ section, onComplete, onPrevious, isFirstConte
           color="bg-green-900/30"
         />
         
-        <p className="text-sm text-gray-300 ml-1 mb-4">
+        <p className="text-lg text-transparent bg-gradient-to-r from-green-300 to-green-100 bg-clip-text font-medium mb-4 px-1">
           After watching Solar System 101, check off the key facts you remember about our cosmic neighborhood.
         </p>
         
