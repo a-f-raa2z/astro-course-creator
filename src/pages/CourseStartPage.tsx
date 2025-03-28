@@ -10,6 +10,7 @@ import { GameContentRenderer } from "@/components/course/GameContentRenderer";
 import { GameContentTabs } from "@/components/course/GameContentTabs";
 import { XPPopup } from "@/components/course/XPPopup";
 import { useEffect } from "react";
+import { Separator } from "@/components/ui/separator";
 
 const CourseStartPage = () => {
   const location = useLocation();
@@ -66,7 +67,8 @@ const CourseStartPage = () => {
       
       <div className="max-w-4xl mx-auto">
         <header className="mb-6">
-          <div className="flex justify-between items-center mb-2">
+          {/* Course title and back button row with progress bar */}
+          <div className="flex items-center space-x-4 mb-4">
             <div className="flex items-center">
               <Button 
                 variant="ghost" 
@@ -77,24 +79,27 @@ const CourseStartPage = () => {
                 <ChevronLeft className="h-5 w-5 mr-1" />
                 Back
               </Button>
-              <h1 className="text-2xl font-bold text-white flex items-center">
-                <Rocket className="mr-2 h-6 w-6 text-purple-400" />
+              <h1 className="text-xl font-bold text-white flex items-center">
+                <Rocket className="mr-2 h-5 w-5 text-purple-400" />
                 {course.title}
               </h1>
             </div>
-            {/* XP display removed from here as it's now in the top corner */}
+            <div className="flex-grow">
+              <GameProgress
+                overallProgress={overallProgress}
+                currentSectionIndex={currentSectionIndex}
+                totalSections={totalSections}
+              />
+            </div>
           </div>
           
-          {/* Game progress display - Above the section title */}
-          <GameProgress
-            overallProgress={overallProgress}
-            currentSectionIndex={currentSectionIndex}
-            totalSections={totalSections}
-          />
+          {/* Separator between course title and section title */}
+          <Separator className="my-4 bg-purple-500/30" />
           
+          {/* Section title with larger size */}
           <div className="flex items-center text-purple-200 mt-4 mb-4">
-            <Flag className="h-4 w-4 mr-1 text-purple-400" />
-            <span>Section {currentSectionIndex + 1}: {currentSection.title}</span>
+            <Flag className="h-5 w-5 mr-2 text-purple-400" />
+            <span className="text-lg font-medium">Section {currentSectionIndex + 1}: {currentSection.title}</span>
           </div>
         </header>
         

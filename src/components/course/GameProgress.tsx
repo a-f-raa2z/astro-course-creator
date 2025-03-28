@@ -13,12 +13,12 @@ export const GameProgress = ({
   totalSections,
 }: GameProgressProps) => {
   return (
-    <div className="space-y-2 my-3">
+    <div className="w-full">
       {/* Course progress */}
       <div>
         <div className="flex items-center justify-between mb-1">
-          <div className="text-sm text-purple-300">Course Progress</div>
-          <div className="text-sm text-purple-300">
+          <div className="text-xs text-purple-300">Course Progress</div>
+          <div className="text-xs text-purple-300">
             Section {currentSectionIndex + 1}/{totalSections}
           </div>
         </div>
