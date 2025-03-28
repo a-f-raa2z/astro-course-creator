@@ -8,6 +8,7 @@ import { ShortVideoContent } from "./content/ShortVideoContent";
 import { ImageContent } from "./content/ImageContent";
 import { QuizContent } from "./content/QuizContent";
 import { BonusVideoContent } from "./content/BonusVideoContent";
+import { PlaygroundContent } from "./content/PlaygroundContent";
 import { SectionTransition } from "./content/SectionTransition";
 
 interface GameContentRendererProps {
@@ -85,6 +86,13 @@ export const GameContentRenderer = ({
                section={currentSection} 
                onComplete={handleNextContent}
                onPrevious={handlePreviousContent} 
+               isFirstContent={isFirstContent}
+             />;
+    case 'playground':
+      return <PlaygroundContent
+               section={currentSection}
+               onComplete={handleNextContent}
+               onPrevious={handlePreviousContent}
                isFirstContent={isFirstContent}
              />;
     case 'bonus':

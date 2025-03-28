@@ -1,9 +1,8 @@
-
 import { useState, useEffect } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { Course, CourseSection } from "@/types/course";
 
-export type ContentType = 'introduction' | 'video' | 'keyPoints' | 'shortVideo' | 'image' | 'quiz' | 'bonus';
+export type ContentType = 'introduction' | 'video' | 'keyPoints' | 'shortVideo' | 'image' | 'playground' | 'bonus' | 'quiz';
 
 export const useGameLearning = (course: Course) => {
   const { toast } = useToast();
@@ -20,41 +19,47 @@ export const useGameLearning = (course: Course) => {
     return saved ? JSON.parse(saved) : [];
   });
   
-  // Save progress to localStorage
   useEffect(() => {
     localStorage.setItem(`${course.id}-xp`, xpPoints.toString());
     localStorage.setItem(`${course.id}-completed`, JSON.stringify(completedContents));
   }, [xpPoints, completedContents, course.id]);
   
-  // Content types to display in order
-  const contentTypes: ContentType[] = ['introduction', 'video', 'keyPoints', 'shortVideo', 'image', 'bonus', 'quiz'];
+  const contentTypes: ContentType[] = ['introduction', 'video', 'keyPoints', 'shortVideo', 'image', 'playground', 'bonus', 'quiz'];
   
-  // Filter out content types that don't exist for the current section
-  const getAvailableContentTypes = (sectionIndex: number) => {
-    const section = course?.sections[sectionIndex];
-    if (!section) return [];
+  const getAvailableContentTypes = (section: CourseSection): ContentType[] => {
+    const contentTypes: ContentType[] = ['introduction', 'video', 'keyPoints'];
     
-    return contentTypes.filter(type => {
-      if (type === 'shortVideo') return !!section.shortVideo;
-      return true;
-    });
+    if (section.shortVideo) {
+      contentTypes.push('shortVideo');
+    }
+    
+    contentTypes.push('image');
+    
+    if (section.title === "Earth" || section.title === "The Moon") {
+      contentTypes.push('playground');
+    }
+    
+    if (section.bonusVideos && section.bonusVideos.length > 0) {
+      contentTypes.push('bonus');
+    }
+    
+    contentTypes.push('quiz');
+    
+    return contentTypes;
   };
 
   const currentSection = course.sections[currentSectionIndex];
-  const availableContentTypes = getAvailableContentTypes(currentSectionIndex);
+  const availableContentTypes = getAvailableContentTypes(currentSection);
   const currentContentType = availableContentTypes[currentContentIndex];
 
-  // Mark current content as completed and award XP
   const markContentAsCompleted = () => {
     const contentKey = `${currentSectionIndex}-${currentContentIndex}`;
     if (!completedContents.includes(contentKey)) {
       setCompletedContents(prev => [...prev, contentKey]);
       
-      // Award XP based on content type
-      let pointsToAdd = 5; // Base points
+      let pointsToAdd = 5;
       
       if (currentContentType === 'quiz' && quizSubmitted) {
-        // Bonus points for correct quiz answers
         if (selectedAnswer === currentSection.quiz.correctAnswer) {
           pointsToAdd = 20;
           toast({
@@ -86,27 +91,21 @@ export const useGameLearning = (course: Course) => {
   };
 
   const handleNextContent = () => {
-    // If it's a quiz and not submitted but has a selected answer, submit it first
     if (currentContentType === 'quiz' && !quizSubmitted && selectedAnswer !== null) {
       handleQuizSubmit();
       return;
     }
     
-    // Mark current content as completed and award XP
     markContentAsCompleted();
     
-    // Reset quiz state if we're moving from a quiz
     if (currentContentType === 'quiz') {
       setQuizSubmitted(false);
       setSelectedAnswer(null);
     }
     
-    // Simple navigation logic - move to next content or section
     if (currentContentIndex < availableContentTypes.length - 1) {
-      // Move to next content card within the same section
       setCurrentContentIndex(prevIndex => prevIndex + 1);
     } else if (currentSectionIndex < course.sections.length - 1) {
-      // Move to the first content card of the next section
       setCurrentSectionIndex(prevIndex => prevIndex + 1);
       setCurrentContentIndex(0);
       
@@ -115,13 +114,11 @@ export const useGameLearning = (course: Course) => {
         description: `Moving to ${course.sections[currentSectionIndex + 1].title}`,
       });
     } else {
-      // Course completed
       toast({
         title: "🎉 Course Complete! 🎉",
         description: "Congratulations! You've completed the entire course!",
       });
       
-      // Add special achievement for completing course
       if (!completedContents.includes('course-complete')) {
         setCompletedContents(prev => [...prev, 'course-complete']);
         setXpPoints(prev => prev + 50);
@@ -136,15 +133,13 @@ export const useGameLearning = (course: Course) => {
 
   const handlePreviousContent = () => {
     if (currentContentIndex > 0) {
-      // Move to previous content card within the same section
       setCurrentContentIndex(prevIndex => prevIndex - 1);
       setQuizSubmitted(false);
       setSelectedAnswer(null);
     } else if (currentSectionIndex > 0) {
-      // Move to the last content card of the previous section
       const prevSectionIndex = currentSectionIndex - 1;
       setCurrentSectionIndex(prevSectionIndex);
-      const prevAvailableContentTypes = getAvailableContentTypes(prevSectionIndex);
+      const prevAvailableContentTypes = getAvailableContentTypes(course.sections[prevSectionIndex]);
       setCurrentContentIndex(prevAvailableContentTypes.length - 1);
       setQuizSubmitted(false);
       setSelectedAnswer(null);
@@ -155,7 +150,6 @@ export const useGameLearning = (course: Course) => {
     if (selectedAnswer !== null) {
       setQuizSubmitted(true);
       
-      // Show appropriate toast based on answer correctness
       if (selectedAnswer === currentSection.quiz.correctAnswer) {
         toast({
           title: "Correct Answer!",
@@ -176,10 +170,9 @@ export const useGameLearning = (course: Course) => {
     }
   };
 
-  // Calculate total content count across all sections
   const getTotalContentCount = () => {
     return course.sections.reduce((total, section, idx) => {
-      const types = getAvailableContentTypes(idx);
+      const types = getAvailableContentTypes(section);
       return total + types.length;
     }, 0);
   };
@@ -188,10 +181,8 @@ export const useGameLearning = (course: Course) => {
   const totalSections = course.sections.length;
   const overallProgress = ((currentSectionIndex * 100) + ((currentContentIndex + 1) * 100 / totalContentCount)) / totalSections;
 
-  // Calculate user's current level based on XP
   const level = Math.floor(xpPoints / 50) + 1;
   
-  // Calculate progress to next level
   const xpForNextLevel = level * 50;
   const xpForCurrentLevel = (level - 1) * 50;
   const levelProgress = ((xpPoints - xpForCurrentLevel) / (xpForNextLevel - xpForCurrentLevel)) * 100;

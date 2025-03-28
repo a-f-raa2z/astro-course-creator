@@ -1,4 +1,3 @@
-
 import { useLocation, Link } from "react-router-dom";
 import CourseView from "@/components/CourseView";
 import { Course } from "@/types/course";
@@ -63,16 +62,6 @@ const AstronomyCoursePage = () => {
     {
       title: "The Moon",
       description: "Examine Earth's natural satellite, its formation, geological features, and the critical role it plays in stabilizing our planet's axial tilt and creating ocean tides.",
-      videoUrl: "https://www.youtube.com/embed/6AviDjR9mmo",
-      shortVideoUrls: [
-        "https://www.youtube.com/embed/shorts/rVMvzH1FxfE",
-        "https://www.youtube.com/embed/shorts/fTok7usLXb4"
-      ],
-      visualUrl: "https://eyes.nasa.gov/apps/solar-system/#/earth/moons/moon"
-    },
-    {
-      title: "The Moon in Our Skies",
-      description: "Understand the Moon's phases, eclipses, and cultural significance throughout human history, plus how to observe and identify its prominent features.",
       videoUrl: "https://www.youtube.com/embed/6AviDjR9mmo",
       shortVideoUrls: [
         "https://www.youtube.com/embed/shorts/rVMvzH1FxfE",
