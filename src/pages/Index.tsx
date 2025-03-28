@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import QuestionCard from "@/components/QuestionCard";
 import Planet from "@/components/Planet";
 import { assessmentQuestions, generateMockCourse } from "@/utils/courseData";
-import { Assessment, Course } from "@/types/course";
+import { Assessment } from "@/types/course";
 import { Loader2 } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
 
@@ -108,18 +108,15 @@ const Index = () => {
       {stars.map(star => (
         <div
           key={star.id}
-          className="star animate-twinkle"
+          className="star animate-twinkle absolute rounded-full bg-white pointer-events-none"
           style={{
             left: `${star.x}%`,
             top: `${star.y}%`,
             width: `${star.size}px`,
             height: `${star.size}px`,
             opacity: star.opacity,
-            animationDelay: `${star.id * 0.1}s`,
-            '--delay': star.id * 0.1,
-            '--min-opacity': star.opacity * 0.5,
-            '--max-opacity': Math.min(star.opacity + 0.3, 1)
-          } as React.CSSProperties}
+            animationDelay: `${star.id * 0.1}s`
+          }}
         />
       ))}
       
