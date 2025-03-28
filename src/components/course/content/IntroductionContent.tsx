@@ -7,6 +7,7 @@ import { Card } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
 import { TitleWrapper } from "./TitleWrapper";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface IntroductionContentProps {
   section: CourseSection;
@@ -16,6 +17,7 @@ interface IntroductionContentProps {
 export const IntroductionContent = ({ section, onComplete }: IntroductionContentProps) => {
   const [flipped, setFlipped] = useState(false);
   const { toast } = useToast();
+  const isMobile = useIsMobile();
   
   const handleFlip = () => {
     setFlipped(!flipped);
@@ -28,8 +30,8 @@ export const IntroductionContent = ({ section, onComplete }: IntroductionContent
   };
   
   return (
-    <div className="w-full">
-      <AspectRatio ratio={1}>
+    <div className="w-full max-w-3xl mx-auto">
+      <AspectRatio ratio={1} className="max-w-md mx-auto">
         <Card className="w-full h-full flex flex-col p-4 bg-space-cosmic-blue/20 backdrop-blur-sm border border-purple-500/20">
           <TitleWrapper 
             icon={<FileText className="h-5 w-5 text-purple-400 mr-2" />}
