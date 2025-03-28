@@ -69,7 +69,14 @@ export default {
 					'nebula-purple': '#5A3687',
 					'star-yellow': '#FFD166',
 					'mars-red': '#EF6351'
-				}
+				},
+				// Add direct color references to match the CSS class names
+				'nebula-purple': '#5A3687',
+				'purple': {
+					'400': '#9B87F5',
+					'500': '#7E69AB',
+					'700': '#6E59A5',
+				},
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
