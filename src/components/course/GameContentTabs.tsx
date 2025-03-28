@@ -1,6 +1,5 @@
-
 import { ContentType } from "@/hooks/useGameLearning";
-import { FileText, Youtube, CheckCircle, Video, Image, HelpCircle, Star } from "lucide-react";
+import { FileText, Youtube, CheckCircle, Video, Image, HelpCircle, Star, Gamepad2 } from "lucide-react";
 
 interface GameContentTabsProps {
   contentTypes: ContentType[];
@@ -27,6 +26,7 @@ export const GameContentTabs = ({
       case 'image': return <Image className="h-4 w-4" />;
       case 'quiz': return <HelpCircle className="h-4 w-4" />;
       case 'bonus': return <Star className="h-4 w-4" />;
+      case 'playground': return <Gamepad2 className="h-4 w-4" />;
     }
   };
 
@@ -39,6 +39,7 @@ export const GameContentTabs = ({
       case 'image': return 'Visual Guide';
       case 'quiz': return 'Knowledge Check';
       case 'bonus': return 'Bonus Content';
+      case 'playground': return 'Interactive';
     }
   };
   
@@ -51,6 +52,7 @@ export const GameContentTabs = ({
       case 'image': return 'text-yellow-400';
       case 'quiz': return 'text-orange-400';
       case 'bonus': return 'text-yellow-400';
+      case 'playground': return 'text-green-400';
     }
   };
 

@@ -1,13 +1,16 @@
 
-import React from "react";
+import React, { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { ChevronRight, Rocket, Brain } from "lucide-react";
+import LoadingAnimation from "@/components/LoadingAnimation";
 
 const HomePage = () => {
   const navigate = useNavigate();
-  const [stars, setStars] = React.useState<{ id: number; x: number; y: number; size: number; opacity: number }[]>([]);
+  const [stars, setStars] = useState<{ id: number; x: number; y: number; size: number; opacity: number }[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [loadingCourse, setLoadingCourse] = useState<"astronomy" | "ai" | null>(null);
 
   React.useEffect(() => {
     const newStars = [];
@@ -28,11 +31,45 @@ const HomePage = () => {
 
   const handleCourseSelect = (course: string) => {
     if (course === "astronomy") {
-      navigate("/astronomy-course");
+      setIsLoading(true);
+      setLoadingCourse("astronomy");
+      setTimeout(() => {
+        setIsLoading(false);
+        navigate("/astronomy-course");
+      }, 3000);
     } else if (course === "ai") {
-      navigate("/ai-course");
+      setIsLoading(true);
+      setLoadingCourse("ai");
+      setTimeout(() => {
+        setIsLoading(false);
+        navigate("/ai-course");
+      }, 3000);
     }
   };
+
+  if (isLoading) {
+    return (
+      <div className="bg-space min-h-screen flex items-center justify-center">
+        {stars.map(star => (
+          <div
+            key={star.id}
+            className="star absolute bg-white rounded-full pointer-events-none"
+            style={{
+              left: `${star.x}%`,
+              top: `${star.y}%`,
+              width: `${star.size}px`,
+              height: `${star.size}px`,
+              opacity: star.opacity,
+              boxShadow: "0 0 10px 2px rgba(255, 255, 255, 0.4)"
+            }}
+          />
+        ))}
+        <LoadingAnimation 
+          onComplete={() => {}} 
+        />
+      </div>
+    );
+  }
 
   return (
     <div className="bg-space min-h-screen">

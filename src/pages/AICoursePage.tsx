@@ -1,188 +1,144 @@
-
-import { useLocation, Link } from "react-router-dom";
-import CourseView from "@/components/CourseView";
-import { Course } from "@/types/course";
-import { generateMockCourse } from "@/utils/courseData";
+import React, { useState, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { BookOpen, Brain, Clock, Calendar, Star, Home } from "lucide-react";
-import { Card } from "@/components/ui/card";
-import { Progress } from "@/components/ui/progress";
-import { useState } from "react";
-import { useToast } from "@/hooks/use-toast";
-import AISectionCard from "@/components/AISectionCard";
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import { ChevronLeft, Brain, ArrowRight, Database, Network, Cpu, BrainCircuit, Bot, FileText, Youtube, CheckCircle, HelpCircle } from "lucide-react";
+import { Course } from "@/types/course";
+import LoadingAnimation from "@/components/LoadingAnimation";
+import { aiCourseData } from "@/utils/courseData";
 
 const AICoursePage = () => {
+  const navigate = useNavigate();
   const location = useLocation();
-  // Use the passed course from state, or generate a default example course
-  const course = location.state?.course || generateMockCourse("artificial intelligence", "intermediate", "visual");
-  const { toast } = useToast();
-  const [isAddedToCalendar, setIsAddedToCalendar] = useState(false);
+  const [course, setCourse] = useState<Course | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
   
-  // Mock data - in a real app, these would come from the user's progress
-  const estimatedHours = course.sections.length * 2; // 2 hours per section average
-  const userScore = localStorage.getItem(`${course.id}-xp`) ? parseInt(localStorage.getItem(`${course.id}-xp`) || "0") : 0;
-  const courseProgress = localStorage.getItem(`${course.id}-completed`) ? 
-    (JSON.parse(localStorage.getItem(`${course.id}-completed`) || "[]").length / (course.sections.length * 6)) * 100 : 0;
-  
-  // Section data for the five new sections
-  const sectionData = [
-    {
-      title: "Introduction to AI",
-      description: "Explore the foundational concepts of artificial intelligence, its history, and the key principles that drive modern AI systems."
-    },
-    {
-      title: "Machine Learning Basics",
-      description: "Discover the core concepts of machine learning, including supervised and unsupervised learning, training data, and model evaluation."
-    },
-    {
-      title: "Neural Networks",
-      description: "Learn about artificial neural networks, their structure, how they mimic human brain function, and their role in deep learning."
-    },
-    {
-      title: "Natural Language Processing",
-      description: "Examine how AI understands and generates human language, enabling applications like chatbots, translation, and text analysis."
-    },
-    {
-      title: "AI Ethics and the Future",
-      description: "Understand the ethical considerations in AI development, bias in algorithms, and how artificial intelligence may shape our future."
+  useEffect(() => {
+    // If we already have course data passed from state, use that
+    if (location.state?.course) {
+      setCourse(location.state.course);
+    } else {
+      // Otherwise, use the mock course data
+      setCourse(aiCourseData);
     }
-  ];
-  
-  const handleAddToCalendar = () => {
-    // In a real app, this would integrate with the user's calendar via API
-    // For now, we'll just show a toast
-    toast({
-      title: "Added to calendar",
-      description: `${course.title} has been added to your learning schedule`,
-    });
-    setIsAddedToCalendar(true);
+  }, [location.state]);
+
+  const handleStartCourse = () => {
+    setIsLoading(true);
+    setTimeout(() => {
+      setIsLoading(false);
+      navigate("/ai-course-start", { state: { course } });
+    }, 1500);
   };
 
+  const handleExploreSection = (sectionIndex: number) => {
+    navigate("/ai-course-start", { state: { course, initialSectionIndex: sectionIndex } });
+  };
+
+  // Helper function to get the appropriate icon for each section
+  const getSectionIcon = (sectionTitle: string) => {
+    switch (sectionTitle) {
+      case "Introduction to AI":
+        return <Brain className="h-6 w-6 text-blue-400" />;
+      case "Machine Learning":
+        return <Database className="h-6 w-6 text-green-400" />;
+      case "Neural Networks":
+        return <Network className="h-6 w-6 text-yellow-400" />;
+      case "Deep Learning":
+        return <BrainCircuit className="h-6 w-6 text-purple-400" />;
+      case "AI Applications":
+        return <Bot className="h-6 w-6 text-pink-400" />;
+      default:
+        return <Cpu className="h-6 w-6 text-blue-400" />;
+    }
+  };
+
+  if (isLoading) {
+    return (
+      <div className="bg-space min-h-screen flex items-center justify-center p-4">
+        <LoadingAnimation onComplete={() => {}} />
+      </div>
+    );
+  }
+
+  if (!course) {
+    return (
+      <div className="bg-space min-h-screen flex items-center justify-center">
+        <p className="text-white text-xl">Loading course data...</p>
+      </div>
+    );
+  }
+
   return (
-    <div className="bg-space min-h-screen py-12">
-      <div className="course-container max-w-5xl mx-auto px-4">
-        <header className="mb-10">
-          <div className="flex justify-between items-center mb-3">
-            <div className="flex items-center">
-              <Brain className="h-8 w-8 text-blue-400 mr-3" />
-              <h1 className="text-4xl font-bold text-white">Personalized Journey to Master AI</h1>
-            </div>
-            <Link to="/">
-              <Button variant="outline" className="border-blue-500 text-blue-300 hover:bg-blue-900/20 hover:text-blue-200">
-                <Home className="mr-2 h-4 w-4" /> Home
-              </Button>
-            </Link>
-          </div>
-          
-          <p className="text-blue-300 text-lg">A comprehensive journey through the wonders of AI, tailored to your specific interests and learning preferences.</p>
-          
-          <div className="mt-6 flex flex-wrap gap-4 items-center">
-            <Link to="/ai-course-start" state={{ course }}>
-              <Button className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-lg text-lg">
-                <BookOpen className="mr-2" />
-                Start Course
-              </Button>
-            </Link>
-          </div>
-        </header>
-        
-        {/* Learning Plan Section */}
-        <div className="mb-12">
-          <h2 className="text-2xl font-bold text-white mb-6">Your Learning Plan</h2>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {/* Course Duration Card */}
-            <Card className="cosmic-card p-5">
-              <div className="flex items-center mb-4">
-                <div className="bg-blue-600/30 p-3 rounded-full mr-3">
-                  <Clock className="h-6 w-6 text-blue-300" />
-                </div>
-                <h3 className="text-xl font-semibold text-blue-100">Course Duration</h3>
-              </div>
-              <p className="text-blue-200 mb-3">Estimated completion time:</p>
-              <div className="flex items-baseline">
-                <span className="text-3xl font-bold text-white">{estimatedHours}</span>
-                <span className="text-blue-300 ml-2">hours</span>
-              </div>
-              <p className="text-blue-400 text-sm mt-2">
-                {Math.ceil(estimatedHours / 2)} days at 2 hours/day
-              </p>
-            </Card>
-            
-            {/* Calendar Integration Card */}
-            <Card className="cosmic-card p-5">
-              <div className="flex items-center mb-4">
-                <div className="bg-blue-600/30 p-3 rounded-full mr-3">
-                  <Calendar className="h-6 w-6 text-blue-300" />
-                </div>
-                <h3 className="text-xl font-semibold text-blue-100">Schedule Learning</h3>
-              </div>
-              <p className="text-blue-200 mb-4">Add this course to your learning calendar</p>
-              <Button 
-                onClick={handleAddToCalendar}
-                className={`w-full ${isAddedToCalendar ? 'bg-green-600 hover:bg-green-700' : 'bg-blue-600 hover:bg-blue-700'} text-white`}
-                disabled={isAddedToCalendar}
-              >
-                {isAddedToCalendar ? 'Added to Calendar' : 'Add to Calendar'}
-              </Button>
-            </Card>
-            
-            {/* Scores and Progress Card */}
-            <Card className="cosmic-card p-5">
-              <div className="flex items-center mb-4">
-                <div className="bg-yellow-600/30 p-3 rounded-full mr-3">
-                  <Star className="h-6 w-6 text-yellow-300" />
-                </div>
-                <h3 className="text-xl font-semibold text-blue-100">Your Progress</h3>
-              </div>
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-blue-200">XP Earned:</span>
-                <div className="flex items-center">
-                  <Star className="h-5 w-5 text-yellow-400 mr-1" />
-                  <span className="text-lg font-bold text-white">{userScore}</span>
-                </div>
-              </div>
-              <div className="mb-4">
-                <div className="flex justify-between text-xs text-blue-300 mb-1">
-                  <span>Course Progress</span>
-                  <span>{Math.round(courseProgress)}%</span>
-                </div>
-                <Progress value={courseProgress} className="h-2" />
-              </div>
-              <div className="text-blue-400 text-sm">
-                {courseProgress < 10 ? "Just getting started!" : 
-                 courseProgress < 50 ? "Making good progress!" :
-                 courseProgress < 90 ? "Almost there!" : "Course nearly complete!"}
-              </div>
-            </Card>
-          </div>
+    <div className="bg-space min-h-screen py-8 px-4">
+      <div className="max-w-4xl mx-auto">
+        <div className="flex items-center mb-8">
+          <Button 
+            variant="ghost" 
+            size="sm" 
+            className="mr-2 text-blue-300 hover:text-blue-100 hover:bg-blue-900/30"
+            onClick={() => navigate("/")}
+          >
+            <ChevronLeft className="h-5 w-5 mr-1" />
+            Back
+          </Button>
+          <h1 className="text-2xl font-bold text-white flex items-center">
+            <Brain className="mr-2 h-6 w-6 text-blue-400" />
+            {course.title}
+          </h1>
         </div>
         
-        {/* New section for the five section cards */}
-        <div className="mb-12">
-          <h2 className="text-2xl font-bold text-white mb-6">Course Sections</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {sectionData.map((section, index) => (
-              <AISectionCard 
-                key={index}
-                title={section.title}
-                description={section.description}
-                index={index}
-              />
-            ))}
-          </div>
+        <p className="text-gray-300 mb-8 max-w-3xl">{course.description}</p>
+        
+        <div className="mb-8">
+          <Button 
+            onClick={handleStartCourse}
+            className="bg-blue-600 hover:bg-blue-700 text-white"
+          >
+            Start Course <ArrowRight className="ml-1 h-4 w-4" />
+          </Button>
         </div>
-        
-        <CourseView course={course} />
-        
-        <footer className="mt-16 pt-8 border-t border-blue-500/20">
-          <p className="text-blue-300 text-center">
-            This course was personalized based on your interests in 
-            <span className="text-blue-400 font-medium"> {course.forInterest || "artificial intelligence"}</span>, 
-            at a <span className="text-blue-400 font-medium">{course.forLevel || "intermediate"}</span> level,
-            with a <span className="text-blue-400 font-medium">{course.forLearningStyle || "visual"}</span> learning style.
-          </p>
-        </footer>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {course.sections.map((section, index) => (
+            <Card key={section.id} className="cosmic-card hover:shadow-blue-500/10 hover:shadow-md transition-all border-blue-500/20">
+              <CardHeader className="pb-2">
+                <CardTitle className="text-xl text-blue-100 flex items-center">
+                  {getSectionIcon(section.title)}
+                  <span className="ml-2">{section.title}</span>
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-gray-300 mb-4 line-clamp-3">{section.introduction}</p>
+                
+                <div className="grid grid-cols-4 gap-2 mb-4">
+                  <div className="bg-blue-900/30 p-2 rounded flex items-center justify-center" title="Introduction">
+                    <FileText className="h-4 w-4 text-blue-300" />
+                  </div>
+                  <div className="bg-red-900/30 p-2 rounded flex items-center justify-center" title="Video Lesson">
+                    <Youtube className="h-4 w-4 text-red-400" />
+                  </div>
+                  <div className="bg-green-900/30 p-2 rounded flex items-center justify-center" title="Key Points">
+                    <CheckCircle className="h-4 w-4 text-green-400" />
+                  </div>
+                  <div className="bg-orange-900/30 p-2 rounded flex items-center justify-center" title="Quiz">
+                    <HelpCircle className="h-4 w-4 text-orange-400" />
+                  </div>
+                </div>
+                
+                <div className="flex justify-end">
+                  <Button 
+                    variant="outline" 
+                    className="border-blue-500/30 text-blue-300 hover:bg-blue-900/30"
+                    onClick={() => handleExploreSection(index)}
+                  >
+                    Explore <ArrowRight className="ml-1 h-4 w-4" />
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
       </div>
     </div>
   );
