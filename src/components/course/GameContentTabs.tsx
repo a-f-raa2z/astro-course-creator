@@ -57,29 +57,91 @@ export const GameContentTabs = ({
   };
 
   return (
-    <div className="flex justify-center mt-2 mb-6">
-      <div className="flex space-x-1 p-1 bg-space-cosmic-blue/30 backdrop-blur-sm rounded-xl overflow-x-auto">
-        {contentTypes.map((type, index) => (
-          <button
-            key={index}
-            onClick={() => onTabClick(index)}
-            className={`px-3 py-2 rounded-lg flex items-center transition-all ${
-              currentContentIndex === index
-                ? "bg-purple-800/80 text-white shadow-md"
-                : isCompleted(index)
-                ? "bg-space-cosmic-blue/50 text-purple-300"
-                : "bg-transparent text-purple-400/70 hover:bg-space-cosmic-blue/20"
-            }`}
-          >
-            <span className={`mr-1.5 ${getContentColor(type)}`}>
-              {getContentIcon(type)}
-            </span>
-            <span className="text-sm whitespace-nowrap">{getContentTitle(type)}</span>
-            {isCompleted(index) && (
-              <Star className="ml-1.5 h-3.5 w-3.5 text-yellow-400" />
-            )}
-          </button>
-        ))}
+    <div className="relative mb-8">
+      {/* Progress line connecting the steps */}
+      <div className="hidden md:block absolute top-1/2 left-0 right-0 h-0.5 bg-purple-500/30 -translate-y-1/2 z-0"></div>
+      
+      {/* Steps container */}
+      <div className="flex justify-between relative z-10">
+        {contentTypes.map((type, index) => {
+          const isActive = currentContentIndex === index;
+          const isDone = isCompleted(index);
+          const stepNumber = index + 1;
+          
+          return (
+            <div key={index} className="flex flex-col items-center">
+              <button
+                onClick={() => onTabClick(index)}
+                className={`
+                  w-12 h-12 rounded-full flex items-center justify-center transition-all 
+                  ${isActive 
+                    ? "bg-purple-600 text-white shadow-lg shadow-purple-500/30" 
+                    : isDone
+                      ? "bg-purple-800/80 text-purple-300 border border-purple-500/50"
+                      : "bg-gray-800/80 text-gray-400 border border-purple-500/20 hover:bg-gray-700"
+                  }
+                `}
+                aria-label={`Step ${stepNumber}: ${getContentTitle(type)}`}
+              >
+                {isDone ? (
+                  <Star className="h-5 w-5 text-yellow-400" />
+                ) : (
+                  <span className="text-md font-semibold">{stepNumber}</span>
+                )}
+              </button>
+              
+              <div className={`mt-2 text-xs font-medium ${isActive ? "text-purple-300" : "text-gray-400"}`}>
+                <span className={getContentColor(type)}>
+                  {getContentIcon(type)}
+                </span>
+                <span className="block text-center mt-1">{getContentTitle(type)}</span>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+      
+      {/* Mobile view - scrollable tabs */}
+      <div className="md:hidden flex overflow-x-auto py-2 mt-4 gap-2 px-1">
+        {contentTypes.map((type, index) => {
+          const isActive = currentContentIndex === index;
+          const isDone = isCompleted(index);
+          const stepNumber = index + 1;
+          
+          return (
+            <button
+              key={index}
+              onClick={() => onTabClick(index)}
+              className={`
+                flex items-center gap-2 px-3 py-2 rounded-lg whitespace-nowrap flex-shrink-0
+                ${isActive 
+                  ? "bg-purple-800 text-white" 
+                  : isDone
+                    ? "bg-purple-900/50 text-purple-300 border border-purple-500/30"
+                    : "bg-gray-800/50 text-gray-400 border border-purple-500/20"
+                }
+              `}
+            >
+              <div className={`
+                w-6 h-6 rounded-full flex items-center justify-center
+                ${isActive 
+                  ? "bg-purple-600" 
+                  : isDone
+                    ? "bg-purple-800"
+                    : "bg-gray-700"
+                }
+              `}>
+                {isDone ? (
+                  <Star className="h-3 w-3 text-yellow-400" />
+                ) : (
+                  <span className="text-xs">{stepNumber}</span>
+                )}
+              </div>
+              <span className={getContentColor(type)}>{getContentIcon(type)}</span>
+              <span>{getContentTitle(type)}</span>
+            </button>
+          );
+        })}
       </div>
     </div>
   );

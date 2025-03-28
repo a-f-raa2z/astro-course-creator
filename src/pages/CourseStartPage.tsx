@@ -2,7 +2,7 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { ChevronLeft, Star, Rocket, Flag, ArrowRight } from "lucide-react";
+import { ChevronLeft, Star, Rocket, Flag, ArrowRight, ArrowLeft } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { useGameLearning } from "@/hooks/useGameLearning";
 import { GameProgress } from "@/components/course/GameProgress";
@@ -40,8 +40,6 @@ const CourseStartPage = () => {
     setSelectedAnswer,
     handleQuizSubmit,
     xpPoints,
-    level,
-    levelProgress,
     completedContents,
     setCurrentContentIndex
   } = useGameLearning(course);
@@ -53,6 +51,10 @@ const CourseStartPage = () => {
       setCurrentContentIndex(0); // Reset to first content of the section
     }
   }, [initialSectionIndex, currentSectionIndex, setCurrentSectionIndex, setCurrentContentIndex]);
+
+  const isFirstContent = currentContentIndex === 0 && currentSectionIndex === 0;
+  const isLastContent = currentContentIndex === availableContentTypes.length - 1 && 
+                        currentSectionIndex === totalSections - 1;
 
   return (
     <div className="bg-space min-h-screen py-8 px-4">
@@ -91,12 +93,9 @@ const CourseStartPage = () => {
           overallProgress={overallProgress}
           currentSectionIndex={currentSectionIndex}
           totalSections={totalSections}
-          xpPoints={xpPoints}
-          level={level}
-          levelProgress={levelProgress}
         />
         
-        {/* Content tabs */}
+        {/* Content tabs showing linear progress */}
         <GameContentTabs 
           contentTypes={availableContentTypes}
           currentContentIndex={currentContentIndex}
@@ -120,13 +119,21 @@ const CourseStartPage = () => {
               handleQuizSubmit={handleQuizSubmit}
             />
 
-            {/* Next button inside the card content */}
-            <div className="flex justify-center mt-6">
+            {/* Navigation buttons */}
+            <div className="flex justify-between mt-6">
+              <Button 
+                onClick={handlePreviousContent}
+                variant="outline"
+                className={`border-purple-500/30 text-purple-300 hover:bg-purple-900/30 ${isFirstContent ? 'invisible' : ''}`}
+              >
+                <ArrowLeft className="mr-1 h-4 w-4" /> Previous
+              </Button>
+              
               <Button 
                 onClick={handleNextContent}
                 className="bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white py-2 px-6 rounded-lg shadow-md transition-all duration-300 active:scale-95"
               >
-                Next <ArrowRight className="ml-1 h-4 w-4" />
+                {isLastContent ? 'Complete' : 'Next'} <ArrowRight className="ml-1 h-4 w-4" />
               </Button>
             </div>
           </CardContent>
