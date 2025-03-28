@@ -24,27 +24,61 @@ const AstronomyCoursePage = () => {
   const courseProgress = localStorage.getItem(`${course.id}-completed`) ? 
     (JSON.parse(localStorage.getItem(`${course.id}-completed`) || "[]").length / (course.sections.length * 6)) * 100 : 0;
   
-  // Section data for the five new sections
+  // Section data for the sections
   const sectionData = [
     {
       title: "The Solar System",
-      description: "Explore our cosmic neighborhood including the Sun, eight planets, dwarf planets, moons, asteroids, comets, and other celestial objects bound by gravity."
+      description: "Explore our cosmic neighborhood including the Sun, eight planets, dwarf planets, moons, asteroids, comets, and other celestial objects bound by gravity.",
+      videoUrl: "https://www.youtube.com/embed/0rHUDWjR5gg",
+      shortVideoUrls: [
+        "https://www.youtube.com/embed/shorts/lzsf1-vMUdY",
+        "https://www.youtube.com/embed/shorts/HDSKuln-5qU"
+      ],
+      visualUrl: null
     },
     {
       title: "The Inner Planets",
-      description: "Discover Mercury, Venus, Earth, and Mars - the rocky terrestrial planets closest to the Sun with solid surfaces and relatively small sizes."
+      description: "Discover Mercury, Venus, Earth, and Mars - the rocky terrestrial planets closest to the Sun with solid surfaces and relatively small sizes.",
+      videoUrl: "https://www.youtube.com/embed/05E1uMh15QQ",
+      shortVideoUrls: [
+        "https://www.youtube.com/embed/shorts/_rzAbPtUamA",
+        "https://www.youtube.com/embed/shorts/4qCczin1Muo"
+      ],
+      visualUrl: null
     },
     {
       title: "Earth",
-      description: "Learn about our home planet - the only known world with liquid water on its surface, a protective atmosphere, and thriving ecosystems supporting diverse life forms."
+      description: "Learn about our home planet - the only known world with liquid water on its surface, a protective atmosphere, and thriving ecosystems supporting diverse life forms.",
+      videoUrl: "https://www.youtube.com/embed/HCDVN7DCzYE",
+      shortVideoUrls: [
+        "https://www.youtube.com/embed/shorts/HRwNdMoNUq4",
+        "https://www.youtube.com/embed/shorts/eCj5KgfRRGQ"
+      ],
+      bonusUrls: [
+        "https://www.youtube.com/embed/videoseries?list=PL50KW6aT4Ugw65Ex89Z2XrBxQVZLdyOZ9",
+        "https://www.youtube.com/embed/mrYjJ9Jl9dA?list=PL2gLpWRK0QlCXPhOqQD0wqPhLIvjq0BUj"
+      ],
+      visualUrl: "https://world-geography-games.com/en/world_earth.html"
     },
     {
       title: "The Moon",
-      description: "Examine Earth's natural satellite, its formation, geological features, and the critical role it plays in stabilizing our planet's axial tilt and creating ocean tides."
+      description: "Examine Earth's natural satellite, its formation, geological features, and the critical role it plays in stabilizing our planet's axial tilt and creating ocean tides.",
+      videoUrl: "https://www.youtube.com/embed/6AviDjR9mmo",
+      shortVideoUrls: [
+        "https://www.youtube.com/embed/shorts/rVMvzH1FxfE",
+        "https://www.youtube.com/embed/shorts/fTok7usLXb4"
+      ],
+      visualUrl: "https://eyes.nasa.gov/apps/solar-system/#/earth/moons/moon"
     },
     {
       title: "The Moon in Our Skies",
-      description: "Understand the Moon's phases, eclipses, and cultural significance throughout human history, plus how to observe and identify its prominent features."
+      description: "Understand the Moon's phases, eclipses, and cultural significance throughout human history, plus how to observe and identify its prominent features.",
+      videoUrl: "https://www.youtube.com/embed/6AviDjR9mmo",
+      shortVideoUrls: [
+        "https://www.youtube.com/embed/shorts/rVMvzH1FxfE",
+        "https://www.youtube.com/embed/shorts/fTok7usLXb4"
+      ],
+      visualUrl: "https://eyes.nasa.gov/apps/solar-system/#/earth/moons/moon"
     }
   ];
   
@@ -158,7 +192,7 @@ const AstronomyCoursePage = () => {
           </div>
         </div>
         
-        {/* New section for the five section cards */}
+        {/* Course Sections Cards */}
         <div className="mb-12">
           <h2 className="text-2xl font-bold text-white mb-6">Course Sections</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
