@@ -35,7 +35,7 @@ export const QuizContent = ({
         color="bg-orange-900/30"
       />
       
-      <p className="text-sm text-gray-300 ml-1 mb-4">
+      <p className="text-lg text-transparent bg-gradient-to-r from-orange-300 to-orange-100 bg-clip-text font-medium mb-4 px-1">
         Complete this knowledge check to demonstrate your understanding and move to the next section.
       </p>
       

@@ -56,7 +56,7 @@ export const ImageContent = ({ section, onComplete, onPrevious, isFirstContent }
             title="Visual Guide" 
             color="bg-yellow-900/30"
           />
-          <p className="text-sm text-gray-300 ml-1 mb-4">
+          <p className="text-lg text-transparent bg-gradient-to-r from-yellow-300 to-yellow-100 bg-clip-text font-medium mb-4 px-1">
             Explore the true colors and relative sizes of planets in our solar system.
           </p>
         </div>

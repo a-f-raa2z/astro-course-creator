@@ -7,6 +7,7 @@ import { KeyPointsContent } from "./content/KeyPointsContent";
 import { ShortVideoContent } from "./content/ShortVideoContent";
 import { ImageContent } from "./content/ImageContent";
 import { QuizContent } from "./content/QuizContent";
+import { BonusVideoContent } from "./content/BonusVideoContent";
 
 interface GameContentRendererProps {
   contentType: ContentType;
@@ -67,6 +68,13 @@ export const GameContentRenderer = ({
                section={currentSection} 
                onComplete={handleNextContent}
                onPrevious={handlePreviousContent} 
+               isFirstContent={isFirstContent}
+             />;
+    case 'bonus':
+      return <BonusVideoContent
+               section={currentSection}
+               onComplete={handleNextContent}
+               onPrevious={handlePreviousContent}
                isFirstContent={isFirstContent}
              />;
     case 'quiz':
