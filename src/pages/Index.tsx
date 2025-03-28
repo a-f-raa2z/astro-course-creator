@@ -1,10 +1,12 @@
+
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import QuestionCard from "@/components/QuestionCard";
 import { assessmentQuestions, generateMockCourse } from "@/utils/courseData";
-import { Assessment, Course } from "@/types/course";
+import { Assessment } from "@/types/course";
 import { Loader2 } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
+import PlanetProgressTracker from "@/components/PlanetProgressTracker";
 
 const Index = () => {
   const navigate = useNavigate();
@@ -106,53 +108,68 @@ const Index = () => {
       {stars.map(star => (
         <div
           key={star.id}
-          className="star animate-star-pulse"
+          className="star absolute bg-white rounded-full pointer-events-none"
           style={{
             left: `${star.x}%`,
             top: `${star.y}%`,
             width: `${star.size}px`,
             height: `${star.size}px`,
-            opacity: star.opacity
+            opacity: star.opacity,
+            boxShadow: "0 0 10px 2px rgba(255, 255, 255, 0.4)"
           }}
         />
       ))}
       
-      <div className="container mx-auto px-4 py-16 flex flex-col items-center">
-        <h1 className="text-4xl font-bold text-white mb-2">Astronomy Journey</h1>
-        <p className="text-xl text-purple-300 mb-10 text-center max-w-2xl">
+      <div className="container mx-auto px-4 py-10 md:py-16">
+        <h1 className="text-4xl font-bold text-white mb-2 text-center">Astronomy Journey</h1>
+        <p className="text-xl text-purple-300 mb-8 text-center max-w-2xl mx-auto">
           Discover the cosmos through a personalized learning experience
           tailored to your interests and learning style.
         </p>
         
         {!isLoading ? (
-          <>
-            <div className="w-full max-w-2xl mb-6">
-              <div className="flex justify-between items-center mb-3">
-                <h2 className="text-xl font-medium text-purple-200">
-                  Question {currentQuestionIndex + 1} of {assessmentQuestions.length}
-                </h2>
-                <span className="text-purple-400">{Math.round(progressPercentage)}% Complete</span>
+          <div className="flex flex-col md:flex-row gap-8 items-center md:items-start">
+            {/* Left side - Planet Progress Tracker */}
+            <div className="w-full md:w-2/5 flex justify-center">
+              <div className="relative">
+                <PlanetProgressTracker 
+                  progress={progressPercentage} 
+                  questionNumber={currentQuestionIndex + 1}
+                  totalQuestions={assessmentQuestions.length}
+                />
               </div>
-              <Progress value={progressPercentage} className="h-2 bg-purple-900/30" />
-              
-              <div className="mt-4 text-2xl font-semibold text-white mb-4">
-                {assessmentQuestions[currentQuestionIndex].question}
-              </div>
-              {assessmentQuestions[currentQuestionIndex].description && (
-                <p className="mb-6 text-purple-200/80">{assessmentQuestions[currentQuestionIndex].description}</p>
-              )}
             </div>
             
-            <QuestionCard 
-              question={assessmentQuestions[currentQuestionIndex]}
-              onAnswer={handleAnswer}
-              onPrevious={handlePrevious}
-              isFirst={currentQuestionIndex === 0}
-              isLast={currentQuestionIndex === assessmentQuestions.length - 1}
-            />
-          </>
+            {/* Right side - Question Card */}
+            <div className="w-full md:w-3/5">
+              <div className="mb-6">
+                <div className="flex justify-between items-center mb-3">
+                  <h2 className="text-xl font-medium text-purple-200">
+                    Question {currentQuestionIndex + 1} of {assessmentQuestions.length}
+                  </h2>
+                  <span className="text-purple-400">{Math.round(progressPercentage)}% Complete</span>
+                </div>
+                <Progress value={progressPercentage} className="h-2 bg-purple-900/30" />
+                
+                <div className="mt-4 text-2xl font-semibold text-white mb-4">
+                  {assessmentQuestions[currentQuestionIndex].question}
+                </div>
+                {assessmentQuestions[currentQuestionIndex].description && (
+                  <p className="mb-6 text-purple-200/80">{assessmentQuestions[currentQuestionIndex].description}</p>
+                )}
+              </div>
+              
+              <QuestionCard 
+                question={assessmentQuestions[currentQuestionIndex]}
+                onAnswer={handleAnswer}
+                onPrevious={handlePrevious}
+                isFirst={currentQuestionIndex === 0}
+                isLast={currentQuestionIndex === assessmentQuestions.length - 1}
+              />
+            </div>
+          </div>
         ) : (
-          <div className="w-full max-w-lg">
+          <div className="w-full max-w-lg mx-auto">
             <div className="bg-space-cosmic-blue/40 backdrop-blur-md border border-purple-500/20 p-8 rounded-lg mb-6">
               <h2 className="text-2xl font-semibold text-white mb-6 text-center">
                 Creating Your Personalized Course
