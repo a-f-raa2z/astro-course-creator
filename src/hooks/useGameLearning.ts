@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { Course, CourseSection } from "@/types/course";
 
-export type ContentType = 'introduction' | 'video' | 'keyPoints' | 'shortVideo' | 'image' | 'quiz';
+export type ContentType = 'introduction' | 'video' | 'keyPoints' | 'shortVideo' | 'image' | 'quiz' | 'bonus';
 
 export const useGameLearning = (course: Course) => {
   const { toast } = useToast();
@@ -26,7 +26,7 @@ export const useGameLearning = (course: Course) => {
   }, [xpPoints, completedContents, course.id]);
   
   // Content types to display in order
-  const contentTypes: ContentType[] = ['introduction', 'video', 'keyPoints', 'shortVideo', 'image', 'quiz'];
+  const contentTypes: ContentType[] = ['introduction', 'video', 'keyPoints', 'shortVideo', 'image', 'bonus', 'quiz'];
   
   // Filter out content types that don't exist for the current section
   const getAvailableContentTypes = (sectionIndex: number) => {
