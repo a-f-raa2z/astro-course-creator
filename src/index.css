@@ -85,6 +85,14 @@
   }
 }
 
+/* Card flip animation classes */
+.backface-hidden {
+  backface-visibility: hidden;
+}
+.rotate-y-180 {
+  transform: rotateY(180deg);
+}
+
 /* Custom cosmic styles */
 .cosmic-card {
   @apply bg-gradient-to-br from-space-cosmic-blue/30 to-space-deep-blue border-purple-500/20 backdrop-blur-sm;
@@ -129,3 +137,4 @@
   width: 3px;
   background: linear-gradient(to bottom, #9b87f5, #5A3687);
 }
+

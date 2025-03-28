@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { CourseSection } from "@/types/course";
 import { ContentType } from "@/hooks/useGameLearning";
@@ -69,7 +68,6 @@ export const GameContentRenderer = ({
   }
 };
 
-// Title wrapper with rectangle styling
 const TitleWrapper = ({ icon, title, color }: { icon: React.ReactNode; title: string; color: string }) => (
   <div className="mb-4">
     <div className={`inline-block px-3 py-2 rounded-md ${color} border border-purple-400/30`}>
@@ -81,7 +79,6 @@ const TitleWrapper = ({ icon, title, color }: { icon: React.ReactNode; title: st
   </div>
 );
 
-// Card flip animation for Introduction
 const IntroductionContent = ({ section, onComplete }: { section: CourseSection; onComplete: () => void }) => {
   const [flipped, setFlipped] = useState(false);
   const { toast } = useToast();
@@ -153,25 +150,25 @@ const IntroductionContent = ({ section, onComplete }: { section: CourseSection; 
         </div>
       </div>
       
-      <style jsx>{`
+      <style dangerouslySetInnerHTML={{
+        __html: `
         .backface-hidden {
           backface-visibility: hidden;
         }
         .rotate-y-180 {
           transform: rotateY(180deg);
         }
-      `}</style>
+        `
+      }} />
     </div>
   );
 };
 
-// Video with progress tracking
 const VideoContent = ({ section, onComplete }: { section: CourseSection; onComplete: () => void }) => {
   const [videoProgress, setVideoProgress] = useState(0);
   const [showContinue, setShowContinue] = useState(false);
   const { toast } = useToast();
   
-  // Simulate video progress
   const handleVideoProgress = (e: React.MouseEvent<HTMLDivElement>) => {
     const progressBar = e.currentTarget;
     const rect = progressBar.getBoundingClientRect();
@@ -241,7 +238,6 @@ const VideoContent = ({ section, onComplete }: { section: CourseSection; onCompl
   );
 };
 
-// Key points with checkboxes
 const KeyPointsContent = ({ section, onComplete }: { section: CourseSection; onComplete: () => void }) => {
   const [checkedPoints, setCheckedPoints] = useState<number[]>([]);
   const { toast } = useToast();
@@ -319,7 +315,6 @@ const KeyPointsContent = ({ section, onComplete }: { section: CourseSection; onC
   );
 };
 
-// Short video with same interaction as main video
 const ShortVideoContent = ({ section, onComplete }: { section: CourseSection; onComplete: () => void }) => {
   const [videoProgress, setVideoProgress] = useState(0);
   const [showContinue, setShowContinue] = useState(false);
@@ -394,13 +389,11 @@ const ShortVideoContent = ({ section, onComplete }: { section: CourseSection; on
   );
 };
 
-// Image carousel
 const ImageContent = ({ section, onComplete }: { section: CourseSection; onComplete: () => void }) => {
   const [slideIndex, setSlideIndex] = useState(0);
   const [showContinue, setShowContinue] = useState(false);
   const { toast } = useToast();
   
-  // Sample images - in a real app, these would come from the section data
   const images = [
     { url: section.image.url, description: section.image.description },
     { url: section.image.url, description: "Additional perspective on the concept" },
@@ -485,7 +478,6 @@ const ImageContent = ({ section, onComplete }: { section: CourseSection; onCompl
   );
 };
 
-// Quiz with correct answer required
 const QuizContent = ({ 
   section,
   quizSubmitted,
