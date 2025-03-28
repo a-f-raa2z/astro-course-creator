@@ -53,7 +53,7 @@ const CourseStartPage = () => {
                 variant="ghost" 
                 size="sm" 
                 className="mr-2 text-purple-300 hover:text-purple-100 hover:bg-purple-900/30"
-                onClick={() => navigate("/course")}
+                onClick={() => navigate("/course", { state: { course } })}
               >
                 <ChevronLeft className="h-5 w-5 mr-1" />
                 Back
