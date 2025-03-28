@@ -85,7 +85,7 @@ const CourseStartPage = () => {
           levelProgress={levelProgress}
         />
         
-        {/* Content tabs - Updated to allow clicking any tab */}
+        {/* Content tabs */}
         <GameContentTabs 
           contentTypes={availableContentTypes}
           currentContentIndex={currentContentIndex}
@@ -108,26 +108,20 @@ const CourseStartPage = () => {
               setSelectedAnswer={setSelectedAnswer}
               handleQuizSubmit={handleQuizSubmit}
             />
+
+            {/* Next button inside the card content */}
+            <div className="flex justify-center mt-6">
+              <Button 
+                onClick={handleNextContent}
+                className="bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white py-2 px-6 rounded-lg shadow-md transition-all duration-300 active:scale-95"
+              >
+                Next <ArrowRight className="ml-1 h-4 w-4" />
+              </Button>
+            </div>
           </CardContent>
         </Card>
         
-        {/* Navigation buttons */}
-        <div className="flex justify-between mt-6 mb-12">
-          <Button 
-            onClick={handlePreviousContent} 
-            disabled={currentContentIndex === 0 && currentSectionIndex === 0}
-            variant="outline"
-            className="border-purple-400/30 text-purple-200 hover:bg-purple-900/20"
-          >
-            <ChevronLeft className="mr-1" /> Previous
-          </Button>
-          <Button 
-            onClick={handleNextContent}
-            className="bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white py-2 px-6 rounded-lg shadow-md transition-all duration-300 active:scale-95"
-          >
-            Next <ArrowRight className="ml-1 h-4 w-4" />
-          </Button>
-        </div>
+        {/* Remove original navigation buttons that were outside the card */}
       </div>
     </div>
   );
