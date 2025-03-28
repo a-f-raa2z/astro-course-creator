@@ -23,22 +23,20 @@ const SectionCard = ({ section, index }: { section: CourseSection; index: number
     <Card className="cosmic-card mb-6 overflow-visible">
       <CardHeader className="flex flex-row items-start justify-between space-y-0 pb-2">
         <CardTitle className="text-xl text-purple-100">
-          <span className="inline-block w-8 h-8 mr-3 rounded-full bg-nebula-purple text-white text-center leading-8">
+          <span className="inline-block w-8 h-8 mr-3 rounded-full bg-purple-600 text-white text-center leading-8">
             {index + 1}
           </span>
           {section.title}
         </CardTitle>
-        <CollapsibleTrigger 
-          className="p-2 hover:bg-purple-700/20 rounded-lg transition-all"
-          onClick={() => setIsOpen(!isOpen)}
-        >
+        <div className="p-2 hover:bg-purple-700/20 rounded-lg transition-all">
           {isOpen ? 
             <ChevronUp className="h-5 w-5 text-purple-300" /> : 
             <ChevronDown className="h-5 w-5 text-purple-300" />
           }
-        </CollapsibleTrigger>
+        </div>
       </CardHeader>
-      <Collapsible open={isOpen}>
+      <Collapsible open={isOpen} onOpenChange={setIsOpen}>
+        <CollapsibleTrigger className="sr-only">Toggle content</CollapsibleTrigger>
         <CollapsibleContent>
           <CardContent className="pt-4">
             <div className="prose prose-invert max-w-none">
@@ -78,8 +76,8 @@ const SectionCard = ({ section, index }: { section: CourseSection; index: number
                 </div>
               </div>
               
-              <div className="mt-8 bg-nebula-purple/20 rounded-lg p-5 border border-purple-500/30">
-                <h3 className="text-lg font-semibold text-star-yellow mb-4">Challenge Yourself</h3>
+              <div className="mt-8 bg-purple-900/20 rounded-lg p-5 border border-purple-500/30">
+                <h3 className="text-lg font-semibold text-yellow-300 mb-4">Challenge Yourself</h3>
                 <p className="mb-4 text-white">{section.quiz.question}</p>
                 
                 <div className="space-y-2 mb-4">
@@ -95,7 +93,7 @@ const SectionCard = ({ section, index }: { section: CourseSection; index: number
                               ? "bg-green-600/30 border border-green-500"
                               : "bg-red-600/30 border border-red-500"
                             : "bg-purple-700/50 border border-purple-500"
-                          : "bg-space-cosmic-blue/50 hover:bg-space-cosmic-blue/70 border border-purple-400/20"
+                          : "bg-blue-900/50 hover:bg-blue-800/70 border border-purple-400/20"
                       }`}
                     >
                       {option}
@@ -107,14 +105,14 @@ const SectionCard = ({ section, index }: { section: CourseSection; index: number
                   <Button 
                     onClick={handleQuizSubmit}
                     disabled={selectedAnswer === null}
-                    className="cosmic-button"
+                    className="bg-purple-600 hover:bg-purple-700"
                   >
                     Submit Answer
                   </Button>
                 )}
                 
                 {quizSubmitted && (
-                  <div className="mt-4 p-3 rounded-md bg-space-cosmic-blue/30 border border-purple-400/20">
+                  <div className="mt-4 p-3 rounded-md bg-blue-900/30 border border-purple-400/20">
                     <p className="text-white">
                       {selectedAnswer === section.quiz.correctAnswer
                         ? "✓ Correct! Well done."
