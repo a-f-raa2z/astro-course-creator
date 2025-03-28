@@ -107,13 +107,7 @@ const QuestionCard = ({
 
   return (
     <Card className="cosmic-card w-full max-w-2xl animate-fade-in">
-      <CardHeader>
-        <CardTitle className="text-2xl text-purple-100">{question.question}</CardTitle>
-        {question.description && (
-          <CardDescription className="text-purple-200/80">{question.description}</CardDescription>
-        )}
-      </CardHeader>
-      <CardContent>
+      <CardContent className="pt-6">
         {question.template && (
           <>
             {renderTemplate()}

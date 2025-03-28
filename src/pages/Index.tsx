@@ -1,10 +1,10 @@
-
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import QuestionCard from "@/components/QuestionCard";
 import { assessmentQuestions, generateMockCourse } from "@/utils/courseData";
 import { Assessment, Course } from "@/types/course";
 import { Loader2 } from "lucide-react";
+import { Progress } from "@/components/ui/progress";
 
 const Index = () => {
   const navigate = useNavigate();
@@ -17,6 +17,24 @@ const Index = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [loadingProgress, setLoadingProgress] = useState(0);
   const [loadingText, setLoadingText] = useState("");
+  const [stars, setStars] = useState<{ id: number; x: number; y: number; size: number; opacity: number }[]>([]);
+
+  useEffect(() => {
+    const newStars = [];
+    const starCount = 50;
+    
+    for (let i = 0; i < starCount; i++) {
+      newStars.push({
+        id: i,
+        x: Math.random() * 100,
+        y: Math.random() * 100,
+        size: Math.random() * 3 + 1,
+        opacity: Math.random() * 0.8 + 0.2
+      });
+    }
+    
+    setStars(newStars);
+  }, []);
 
   const handleAnswer = (questionId: string, answer: string) => {
     setAssessment(prev => ({
@@ -49,7 +67,6 @@ const Index = () => {
       "Finalizing your personalized journey..."
     ];
     
-    // Simulate loading process with progress updates
     let progress = 0;
     const interval = setInterval(() => {
       progress += 5;
@@ -71,21 +88,35 @@ const Index = () => {
   };
   
   const finishCourseGeneration = () => {
-    // Generate mock course based on assessment answers
     const course = generateMockCourse(
       assessment.interest, 
       assessment.level, 
       assessment.learningStyle
     );
     
-    // Navigate to the course page with the generated course data
     setTimeout(() => {
       navigate("/course", { state: { course } });
     }, 500);
   };
 
+  const progressPercentage = ((currentQuestionIndex) / assessmentQuestions.length) * 100;
+
   return (
     <div className="bg-space min-h-screen">
+      {stars.map(star => (
+        <div
+          key={star.id}
+          className="star animate-star-pulse"
+          style={{
+            left: `${star.x}%`,
+            top: `${star.y}%`,
+            width: `${star.size}px`,
+            height: `${star.size}px`,
+            opacity: star.opacity
+          }}
+        />
+      ))}
+      
       <div className="container mx-auto px-4 py-16 flex flex-col items-center">
         <h1 className="text-4xl font-bold text-white mb-2">Astronomy Journey</h1>
         <p className="text-xl text-purple-300 mb-10 text-center max-w-2xl">
@@ -95,6 +126,23 @@ const Index = () => {
         
         {!isLoading ? (
           <>
+            <div className="w-full max-w-2xl mb-6">
+              <div className="flex justify-between items-center mb-3">
+                <h2 className="text-xl font-medium text-purple-200">
+                  Question {currentQuestionIndex + 1} of {assessmentQuestions.length}
+                </h2>
+                <span className="text-purple-400">{Math.round(progressPercentage)}% Complete</span>
+              </div>
+              <Progress value={progressPercentage} className="h-2 bg-purple-900/30" />
+              
+              <div className="mt-4 text-2xl font-semibold text-white mb-4">
+                {assessmentQuestions[currentQuestionIndex].question}
+              </div>
+              {assessmentQuestions[currentQuestionIndex].description && (
+                <p className="mb-6 text-purple-200/80">{assessmentQuestions[currentQuestionIndex].description}</p>
+              )}
+            </div>
+            
             <QuestionCard 
               question={assessmentQuestions[currentQuestionIndex]}
               onAnswer={handleAnswer}
@@ -102,12 +150,6 @@ const Index = () => {
               isFirst={currentQuestionIndex === 0}
               isLast={currentQuestionIndex === assessmentQuestions.length - 1}
             />
-            <div className="mt-8 text-purple-400">
-              <span className="text-xl font-medium">Question {currentQuestionIndex + 1} of {assessmentQuestions.length}</span>
-              <div className="mt-2 bg-purple-500/30 border border-purple-400/20 rounded-lg p-3 text-white text-lg font-medium">
-                Discover your cosmic journey
-              </div>
-            </div>
           </>
         ) : (
           <div className="w-full max-w-lg">

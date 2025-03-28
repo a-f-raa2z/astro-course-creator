@@ -59,6 +59,13 @@
   .star {
     @apply absolute bg-white rounded-full pointer-events-none;
     box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.4);
+    animation: twinkle 3s infinite ease-in-out;
+    animation-delay: calc(var(--delay, 0) * 1s);
+  }
+
+  @keyframes twinkle {
+    0%, 100% { opacity: var(--min-opacity, 0.2); }
+    50% { opacity: var(--max-opacity, 1); }
   }
 
   .bg-space {
@@ -108,5 +115,21 @@
 
   .space-glass {
     @apply bg-space-cosmic-blue/40 backdrop-blur-md border border-white/10 rounded-xl;
+  }
+
+  .animate-star-pulse {
+    animation: star-pulse 3s ease-in-out infinite;
+    animation-delay: calc(var(--delay, 0) * 1s);
+  }
+
+  @keyframes star-pulse {
+    0%, 100% { 
+      opacity: var(--min-opacity, 0.4); 
+      transform: scale(1);
+    }
+    50% { 
+      opacity: var(--max-opacity, 1); 
+      transform: scale(1.1);
+    }
   }
 }
