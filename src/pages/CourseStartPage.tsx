@@ -82,18 +82,18 @@ const CourseStartPage = () => {
             </div>
           </div>
           
-          <div className="flex items-center text-purple-200 mb-4">
+          {/* Game progress display - Moved above the section title */}
+          <GameProgress
+            overallProgress={overallProgress}
+            currentSectionIndex={currentSectionIndex}
+            totalSections={totalSections}
+          />
+          
+          <div className="flex items-center text-purple-200 mt-4 mb-4">
             <Flag className="h-4 w-4 mr-1 text-purple-400" />
             <span>Section {currentSectionIndex + 1}: {currentSection.title}</span>
           </div>
         </header>
-
-        {/* Game progress display */}
-        <GameProgress
-          overallProgress={overallProgress}
-          currentSectionIndex={currentSectionIndex}
-          totalSections={totalSections}
-        />
         
         {/* Content tabs showing linear progress */}
         <GameContentTabs 

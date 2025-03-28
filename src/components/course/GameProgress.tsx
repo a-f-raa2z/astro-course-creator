@@ -13,9 +13,9 @@ export const GameProgress = ({
   totalSections,
 }: GameProgressProps) => {
   return (
-    <div className="space-y-4">
+    <div className="space-y-2 my-3">
       {/* Course progress */}
-      <div className="mb-4">
+      <div>
         <div className="flex items-center justify-between mb-1">
           <div className="text-sm text-purple-300">Course Progress</div>
           <div className="text-sm text-purple-300">
