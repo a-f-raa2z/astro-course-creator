@@ -11,6 +11,7 @@ import AstronomyCourseStartPage from "./pages/AstronomyCourseStartPage";
 import AICoursePage from "./pages/AICoursePage";
 import AICourseStartPage from "./pages/AICourseStartPage";
 import NotFound from "./pages/NotFound";
+import Index from "./pages/Index";
 
 // Create a client outside of the component
 const queryClient = new QueryClient({
@@ -35,6 +36,7 @@ const App = () => (
             <Route path="/astronomy-course-start" element={<AstronomyCourseStartPage />} />
             <Route path="/ai-course" element={<AICoursePage />} />
             <Route path="/ai-course-start" element={<AICourseStartPage />} />
+            <Route path="/assessment" element={<Index />} />
             {/* Backward compatibility routes */}
             <Route path="/course" element={<AstronomyCoursePage />} />
             <Route path="/course-start" element={<AstronomyCourseStartPage />} />

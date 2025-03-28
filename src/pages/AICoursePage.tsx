@@ -4,7 +4,7 @@ import CourseView from "@/components/CourseView";
 import { Course } from "@/types/course";
 import { generateMockCourse } from "@/utils/courseData";
 import { Button } from "@/components/ui/button";
-import { BookOpen, Brain, MapPin, Clock, Calendar, Star } from "lucide-react";
+import { BookOpen, Brain, Clock, Calendar, Star, Home } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { useState } from "react";
@@ -65,15 +65,16 @@ const AICoursePage = () => {
           <div className="flex justify-between items-center mb-3">
             <div className="flex items-center">
               <Brain className="h-8 w-8 text-blue-400 mr-3" />
-              <h1 className="text-4xl font-bold text-white">{course.title || "Artificial Intelligence"}</h1>
+              <h1 className="text-4xl font-bold text-white">Personalized Journey to Master AI</h1>
             </div>
-            <div className="flex items-center space-x-2 bg-space-cosmic-blue/40 backdrop-blur-sm px-3 py-1.5 rounded-lg border border-blue-500/20">
-              <Star className="h-5 w-5 text-yellow-400" />
-              <span className="text-yellow-200 font-semibold">{userScore} XP</span>
-            </div>
+            <Link to="/">
+              <Button variant="outline" className="border-blue-500 text-blue-300 hover:bg-blue-900/20 hover:text-blue-200">
+                <Home className="mr-2 h-4 w-4" /> Home
+              </Button>
+            </Link>
           </div>
           
-          <p className="text-blue-300 text-lg">{course.description || "Discover the fascinating world of artificial intelligence, from basic concepts to cutting-edge applications."}</p>
+          <p className="text-blue-300 text-lg">A comprehensive journey through the wonders of AI, tailored to your specific interests and learning preferences.</p>
           
           <div className="mt-6 flex flex-wrap gap-4 items-center">
             <Link to="/ai-course-start" state={{ course }}>
@@ -82,11 +83,6 @@ const AICoursePage = () => {
                 Start Course
               </Button>
             </Link>
-            
-            <div className="flex items-center text-blue-300 bg-space-cosmic-blue/30 px-4 py-2 rounded-lg border border-blue-500/20">
-              <MapPin className="h-5 w-5 mr-2 text-blue-400" />
-              <span>AI Learning Journey</span>
-            </div>
           </div>
         </header>
         

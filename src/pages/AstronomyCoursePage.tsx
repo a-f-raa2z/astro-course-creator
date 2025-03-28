@@ -4,7 +4,7 @@ import CourseView from "@/components/CourseView";
 import { Course } from "@/types/course";
 import { generateMockCourse } from "@/utils/courseData";
 import { Button } from "@/components/ui/button";
-import { BookOpen, Rocket, MapPin, Clock, Calendar, Star } from "lucide-react";
+import { BookOpen, Rocket, Clock, Calendar, Star, Home } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { useState } from "react";
@@ -67,10 +67,11 @@ const AstronomyCoursePage = () => {
               <Rocket className="h-8 w-8 text-purple-400 mr-3" />
               <h1 className="text-4xl font-bold text-white">{course.title}</h1>
             </div>
-            <div className="flex items-center space-x-2 bg-space-cosmic-blue/40 backdrop-blur-sm px-3 py-1.5 rounded-lg border border-purple-500/20">
-              <Star className="h-5 w-5 text-yellow-400" />
-              <span className="text-yellow-200 font-semibold">{userScore} XP</span>
-            </div>
+            <Link to="/">
+              <Button variant="outline" className="border-purple-500 text-purple-300 hover:bg-purple-900/20 hover:text-purple-200">
+                <Home className="mr-2 h-4 w-4" /> Home
+              </Button>
+            </Link>
           </div>
           
           <p className="text-purple-300 text-lg">{course.description}</p>
@@ -82,11 +83,6 @@ const AstronomyCoursePage = () => {
                 Start Course
               </Button>
             </Link>
-            
-            <div className="flex items-center text-purple-300 bg-space-cosmic-blue/30 px-4 py-2 rounded-lg border border-purple-500/20">
-              <MapPin className="h-5 w-5 mr-2 text-purple-400" />
-              <span>Space Learning Journey</span>
-            </div>
           </div>
         </header>
         
