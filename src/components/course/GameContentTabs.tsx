@@ -20,12 +20,12 @@ export const GameContentTabs = ({
   
   const getContentIcon = (type: ContentType) => {
     switch (type) {
-      case 'introduction': return <FileText className="h-4 w-4" />;
-      case 'video': return <Youtube className="h-4 w-4" />;
-      case 'keyPoints': return <CheckCircle className="h-4 w-4" />;
-      case 'shortVideo': return <Video className="h-4 w-4" />;
-      case 'image': return <Image className="h-4 w-4" />;
-      case 'quiz': return <HelpCircle className="h-4 w-4" />;
+      case 'introduction': return <FileText className="h-5 w-5" />;
+      case 'video': return <Youtube className="h-5 w-5" />;
+      case 'keyPoints': return <CheckCircle className="h-5 w-5" />;
+      case 'shortVideo': return <Video className="h-5 w-5" />;
+      case 'image': return <Image className="h-5 w-5" />;
+      case 'quiz': return <HelpCircle className="h-5 w-5" />;
     }
   };
 
@@ -73,7 +73,7 @@ export const GameContentTabs = ({
               <button
                 onClick={() => onTabClick(index)}
                 className={`
-                  w-8 h-8 rounded-full flex items-center justify-center transition-all 
+                  w-10 h-10 rounded-full flex items-center justify-center transition-all 
                   ${isActive 
                     ? "bg-purple-600 text-white shadow-lg shadow-purple-500/30" 
                     : isDone
@@ -84,17 +84,17 @@ export const GameContentTabs = ({
                 aria-label={`Step ${stepNumber}: ${getContentTitle(type)}`}
               >
                 {isDone ? (
-                  <Star className="h-3 w-3 text-yellow-400" />
+                  <Star className="h-4 w-4 text-yellow-400" />
                 ) : (
-                  <span className="text-xs font-semibold">{stepNumber}</span>
+                  <span className="text-sm font-semibold">{stepNumber}</span>
                 )}
               </button>
               
-              <div className={`mt-2 flex items-center gap-1 text-xs font-medium ${isActive ? "text-purple-300" : "text-gray-400"}`}>
+              <div className={`mt-2 text-xs font-medium ${isActive ? "text-purple-300" : "text-gray-400"}`}>
                 <span className={getContentColor(type)}>
                   {getContentIcon(type)}
                 </span>
-                <span>{getContentTitle(type)}</span>
+                <span className="block text-center mt-1">{getContentTitle(type)}</span>
               </div>
             </div>
           );
@@ -123,7 +123,7 @@ export const GameContentTabs = ({
               `}
             >
               <div className={`
-                w-4 h-4 rounded-full flex items-center justify-center
+                w-5 h-5 rounded-full flex items-center justify-center
                 ${isActive 
                   ? "bg-purple-600" 
                   : isDone
@@ -132,7 +132,7 @@ export const GameContentTabs = ({
                 }
               `}>
                 {isDone ? (
-                  <Star className="h-2 w-2 text-yellow-400" />
+                  <Star className="h-3 w-3 text-yellow-400" />
                 ) : (
                   <span className="text-xs">{stepNumber}</span>
                 )}
