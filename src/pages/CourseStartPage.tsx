@@ -1,9 +1,10 @@
+
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Course } from "@/types/course";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, Check } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { Progress } from "@/components/ui/progress";
 import { ContentNavigation } from "@/components/course/ContentNavigation";
@@ -91,9 +92,9 @@ const CourseStartPage = () => {
           </Button>
           <Button 
             onClick={handleNextContent}
-            className="bg-purple-600 hover:bg-purple-700"
+            className="bg-purple-600 hover:bg-purple-700 text-white py-2 px-6 rounded-lg shadow-md transition-all duration-300 active:scale-95"
           >
-            Next <ChevronRight className="ml-1" />
+            <Check className="mr-2" /> I Got It
           </Button>
         </div>
       </div>
