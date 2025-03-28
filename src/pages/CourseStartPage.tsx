@@ -107,37 +107,29 @@ const CourseStartPage = () => {
           sectionIndex={currentSectionIndex}
         />
         
-        {/* Main content card */}
-        <Card className="cosmic-card overflow-visible mb-8 animate-fade-in">
-          <CardContent className="p-6">
-            <GameContentRenderer 
-              contentType={currentContentType}
-              currentSection={currentSection}
-              quizSubmitted={quizSubmitted}
-              selectedAnswer={selectedAnswer}
-              setSelectedAnswer={setSelectedAnswer}
-              handleQuizSubmit={handleQuizSubmit}
-            />
+        {/* Main content card with fixed size and interactive elements */}
+        <div className="animate-fade-in">
+          <GameContentRenderer 
+            contentType={currentContentType}
+            currentSection={currentSection}
+            quizSubmitted={quizSubmitted}
+            selectedAnswer={selectedAnswer}
+            setSelectedAnswer={setSelectedAnswer}
+            handleQuizSubmit={handleQuizSubmit}
+            handleNextContent={handleNextContent}
+          />
 
-            {/* Navigation buttons */}
-            <div className="flex justify-between mt-6">
-              <Button 
-                onClick={handlePreviousContent}
-                variant="outline"
-                className={`border-purple-500/30 text-purple-300 hover:bg-purple-900/30 ${isFirstContent ? 'invisible' : ''}`}
-              >
-                <ArrowLeft className="mr-1 h-4 w-4" /> Previous
-              </Button>
-              
-              <Button 
-                onClick={handleNextContent}
-                className="bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white py-2 px-6 rounded-lg shadow-md transition-all duration-300 active:scale-95"
-              >
-                {isLastContent ? 'Complete' : 'Next'} <ArrowRight className="ml-1 h-4 w-4" />
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
+          {/* Navigation buttons */}
+          <div className="flex justify-between mt-6">
+            <Button 
+              onClick={handlePreviousContent}
+              variant="outline"
+              className={`border-purple-500/30 text-purple-300 hover:bg-purple-900/30 ${isFirstContent ? 'invisible' : ''}`}
+            >
+              <ArrowLeft className="mr-1 h-4 w-4" /> Previous
+            </Button>
+          </div>
+        </div>
       </div>
     </div>
   );
