@@ -6,6 +6,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight, CheckCircle, Youtube, Video, FileText, Image, HelpCircle } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { Progress } from "@/components/ui/progress";
 
 // Define the content types for each card
 type ContentType = 'introduction' | 'video' | 'keyPoints' | 'shortVideo' | 'image' | 'quiz';
@@ -45,6 +46,12 @@ const CourseStartPage = () => {
   const currentContentType = availableContentTypes[currentContentIndex];
   
   const handleNextContent = () => {
+    if (currentContentType === 'quiz' && !quizSubmitted && selectedAnswer !== null) {
+      // If it's a quiz and not submitted but has a selected answer, submit it first
+      setQuizSubmitted(true);
+      return;
+    }
+    
     if (currentContentType === 'quiz' && !quizSubmitted) {
       toast({
         title: "Quiz not submitted",
@@ -65,6 +72,12 @@ const CourseStartPage = () => {
       toast({
         title: "Section Complete!",
         description: `Moving to ${course.sections[currentSectionIndex + 1].title}`,
+      });
+    } else {
+      // Course completed
+      toast({
+        title: "Course Complete!",
+        description: "You've completed all sections of this course.",
       });
     }
   };
@@ -264,12 +277,7 @@ const CourseStartPage = () => {
 
         <div className="mb-4 flex items-center">
           <div className="flex-1">
-            <div className="w-full bg-gray-700 rounded-full h-2">
-              <div 
-                className="bg-purple-600 h-2 rounded-full"
-                style={{ width: `${overallProgress}%` }}
-              ></div>
-            </div>
+            <Progress value={overallProgress} className="h-2 bg-gray-700" />
           </div>
           <div className="ml-4 text-sm text-purple-300">
             Section {currentSectionIndex + 1}/{totalSections}
@@ -309,8 +317,7 @@ const CourseStartPage = () => {
             <ChevronLeft className="mr-1" /> Previous
           </Button>
           <Button 
-            onClick={handleNextContent} 
-            disabled={currentContentType === 'quiz' && !quizSubmitted && selectedAnswer === null}
+            onClick={handleNextContent}
             className="bg-purple-600 hover:bg-purple-700"
           >
             Next <ChevronRight className="ml-1" />
