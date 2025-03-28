@@ -30,25 +30,33 @@ export const useContentNavigation = (course: Course) => {
   const currentContentType = availableContentTypes[currentContentIndex];
   
   const handleNextContent = () => {
+    // If it's a quiz and not submitted but has a selected answer, submit it first
     if (currentContentType === 'quiz' && !quizSubmitted && selectedAnswer !== null) {
-      // If it's a quiz and not submitted but has a selected answer, submit it first
       setQuizSubmitted(true);
       return;
     }
     
-    if (currentContentType === 'quiz' && !quizSubmitted) {
+    // If it's a quiz and no answer is selected, show toast
+    if (currentContentType === 'quiz' && !quizSubmitted && selectedAnswer === null) {
       toast({
         title: "Quiz not submitted",
-        description: "Please submit your answer before moving on.",
+        description: "Please select and submit your answer before moving on.",
         variant: "destructive"
       });
       return;
     }
     
+    // Move to next content or section
     if (currentContentIndex < availableContentTypes.length - 1) {
-      setCurrentContentIndex(currentContentIndex + 1);
+      // Move to next content card within the same section
+      setCurrentContentIndex(prevIndex => prevIndex + 1);
+      if (currentContentType === 'quiz') {
+        setQuizSubmitted(false);
+        setSelectedAnswer(null);
+      }
     } else if (currentSectionIndex < course.sections.length - 1) {
-      setCurrentSectionIndex(currentSectionIndex + 1);
+      // Move to the first content card of the next section
+      setCurrentSectionIndex(prevIndex => prevIndex + 1);
       setCurrentContentIndex(0);
       setQuizSubmitted(false);
       setSelectedAnswer(null);
@@ -68,10 +76,15 @@ export const useContentNavigation = (course: Course) => {
 
   const handlePreviousContent = () => {
     if (currentContentIndex > 0) {
-      setCurrentContentIndex(currentContentIndex - 1);
+      // Move to previous content card within the same section
+      setCurrentContentIndex(prevIndex => prevIndex - 1);
+      setQuizSubmitted(false);
+      setSelectedAnswer(null);
     } else if (currentSectionIndex > 0) {
-      setCurrentSectionIndex(currentSectionIndex - 1);
-      const prevAvailableContentTypes = getAvailableContentTypes(currentSectionIndex - 1);
+      // Move to the last content card of the previous section
+      const prevSectionIndex = currentSectionIndex - 1;
+      setCurrentSectionIndex(prevSectionIndex);
+      const prevAvailableContentTypes = getAvailableContentTypes(prevSectionIndex);
       setCurrentContentIndex(prevAvailableContentTypes.length - 1);
       setQuizSubmitted(false);
       setSelectedAnswer(null);
@@ -79,7 +92,15 @@ export const useContentNavigation = (course: Course) => {
   };
 
   const handleQuizSubmit = () => {
-    setQuizSubmitted(true);
+    if (selectedAnswer !== null) {
+      setQuizSubmitted(true);
+    } else {
+      toast({
+        title: "No answer selected",
+        description: "Please select an answer before submitting.",
+        variant: "destructive"
+      });
+    }
   };
 
   const totalContentCount = availableContentTypes.length;
