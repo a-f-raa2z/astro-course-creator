@@ -202,6 +202,10 @@ const AstronomyCoursePage = () => {
                 title={section.title}
                 description={section.description}
                 index={index}
+                videoUrl={section.videoUrl}
+                shortVideoUrls={section.shortVideoUrls}
+                visualUrl={section.visualUrl}
+                bonusUrls={section.bonusUrls}
               />
             ))}
           </div>

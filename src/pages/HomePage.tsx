@@ -28,9 +28,9 @@ const HomePage = () => {
 
   const handleCourseSelect = (course: string) => {
     if (course === "astronomy") {
-      navigate("/assessment", { state: { courseType: "astronomy" } });
+      navigate("/astronomy-course");
     } else if (course === "ai") {
-      navigate("/assessment", { state: { courseType: "ai" } });
+      navigate("/ai-course");
     }
   };
 

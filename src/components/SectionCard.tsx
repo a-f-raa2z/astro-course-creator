@@ -4,26 +4,64 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { ChevronRight, Rocket } from "lucide-react";
+import { generateMockCourse } from "@/utils/courseData";
 
 interface SectionCardProps {
   title: string;
   description: string;
   index: number;
+  videoUrl?: string;
+  shortVideoUrls?: string[];
+  visualUrl?: string | null;
+  bonusUrls?: string[];
 }
 
-const SectionCard = ({ title, description, index }: SectionCardProps) => {
+const SectionCard = ({ 
+  title, 
+  description, 
+  index,
+  videoUrl,
+  shortVideoUrls,
+  visualUrl,
+  bonusUrls
+}: SectionCardProps) => {
   const navigate = useNavigate();
   
   const handleStartSection = () => {
-    // Mock course for demonstration purposes
-    const mockCourse = {
-      id: `section-${index}`,
-      title: title,
-      description: description,
-      sections: [],
-    };
+    // Generate a course object with this section's data
+    const mockCourse = generateMockCourse("planets", "intermediate", "visual");
     
-    navigate("/course-start", { state: { course: mockCourse } });
+    // Update the specific section with our data
+    if (index < mockCourse.sections.length) {
+      // Add video URLs to the appropriate section
+      if (videoUrl) {
+        mockCourse.sections[index].videoUrl = videoUrl;
+      }
+      
+      if (shortVideoUrls && shortVideoUrls.length > 0) {
+        mockCourse.sections[index].shortVideo = shortVideoUrls[0];
+        
+        if (shortVideoUrls.length > 1) {
+          mockCourse.sections[index].additionalShortVideos = shortVideoUrls.slice(1);
+        }
+      }
+      
+      if (visualUrl) {
+        mockCourse.sections[index].visualUrl = visualUrl;
+      }
+      
+      if (bonusUrls && bonusUrls.length > 0) {
+        mockCourse.sections[index].bonusVideos = bonusUrls;
+      }
+    }
+    
+    // Navigate to the astronomy course start page with the course and initial section
+    navigate("/astronomy-course-start", { 
+      state: { 
+        course: mockCourse,
+        initialSectionIndex: index
+      } 
+    });
   };
   
   return (
