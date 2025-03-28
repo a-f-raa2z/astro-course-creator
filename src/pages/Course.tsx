@@ -4,7 +4,7 @@ import CourseView from "@/components/CourseView";
 import { Course } from "@/types/course";
 import { generateMockCourse } from "@/utils/courseData";
 import { Button } from "@/components/ui/button";
-import { BookOpen } from "lucide-react";
+import { BookOpen, Rocket, MapPin } from "lucide-react";
 
 const CoursePage = () => {
   const location = useLocation();
@@ -13,18 +13,27 @@ const CoursePage = () => {
 
   return (
     <div className="bg-space min-h-screen py-12">
-      <div className="course-container">
+      <div className="course-container max-w-5xl mx-auto px-4">
         <header className="mb-10">
-          <h1 className="text-4xl font-bold text-white mb-3">{course.title}</h1>
+          <div className="flex items-center mb-3">
+            <Rocket className="h-8 w-8 text-purple-400 mr-3" />
+            <h1 className="text-4xl font-bold text-white">{course.title}</h1>
+          </div>
+          
           <p className="text-purple-300 text-lg">{course.description}</p>
           
-          <div className="mt-6">
+          <div className="mt-6 flex space-x-4">
             <Link to="/course-start" state={{ course }}>
               <Button className="bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-8 rounded-lg text-lg">
                 <BookOpen className="mr-2" />
                 Start Course
               </Button>
             </Link>
+            
+            <div className="flex items-center text-purple-300 bg-space-cosmic-blue/30 px-4 py-2 rounded-lg border border-purple-500/20">
+              <MapPin className="h-5 w-5 mr-2 text-purple-400" />
+              <span>Space Learning Journey</span>
+            </div>
           </div>
         </header>
         

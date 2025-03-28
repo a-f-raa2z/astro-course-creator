@@ -4,7 +4,19 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Course, CourseSection } from "@/types/course";
 import { Button } from "@/components/ui/button";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
-import { ChevronDown, ChevronUp, CheckCircle, Youtube, Video, Star, Lock } from "lucide-react";
+import { 
+  ChevronDown, 
+  ChevronUp, 
+  CheckCircle, 
+  Youtube, 
+  Video, 
+  Star, 
+  Lock,
+  MapPin,
+  FileText,
+  Image as ImageIcon,
+  HelpCircle 
+} from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 interface CourseViewProps {
@@ -28,11 +40,24 @@ const SectionCard = ({
 }) => {
   const [isOpen, setIsOpen] = useState(false);
 
+  // Content icons map for each section
+  const contentIcons = [
+    { icon: <FileText className="h-4 w-4 text-purple-300" />, label: "Introduction" },
+    { icon: <Youtube className="h-4 w-4 text-red-500" />, label: "Video Lesson" },
+    { icon: <CheckCircle className="h-4 w-4 text-green-500" />, label: "Key Points" },
+    ...(section.shortVideo ? [{ icon: <Video className="h-4 w-4 text-blue-400" />, label: "Bonus Video" }] : []),
+    { icon: <ImageIcon className="h-4 w-4 text-yellow-400" />, label: "Visual Example" },
+    { icon: <HelpCircle className="h-4 w-4 text-orange-400" />, label: "Quiz" }
+  ];
+
   return (
-    <div className={`relative ${index !== 0 ? 'mt-4' : ''}`}>
-      {/* Timeline connector */}
+    <div className={`relative ${index !== 0 ? 'mt-8' : ''}`}>
+      {/* Map style connection line */}
       {index !== 0 && (
-        <div className={`absolute left-6 -top-4 w-0.5 h-4 ${isLocked ? 'bg-gray-400' : isCompleted ? 'bg-green-500' : 'bg-purple-500'}`}></div>
+        <div className={`absolute left-6 -top-8 w-0.5 h-8 ${
+          isLocked ? 'bg-gray-400 dashed-line' : 
+          isCompleted ? 'bg-green-500' : 'bg-purple-500'
+        }`}></div>
       )}
       
       <Card 
@@ -44,7 +69,7 @@ const SectionCard = ({
         <Collapsible open={isOpen && !isLocked} onOpenChange={setIsOpen} disabled={isLocked}>
           <div className="flex flex-row items-center justify-between p-4">
             <div className="flex items-center">
-              {/* Timeline node */}
+              {/* Map pin node */}
               <div 
                 className={`flex items-center justify-center w-12 h-12 rounded-full mr-3 
                   ${isLocked ? 'bg-gray-700' : isCompleted ? 'bg-green-600' : 'bg-purple-600'}`}
@@ -54,7 +79,7 @@ const SectionCard = ({
                 ) : isLocked ? (
                   <Lock className="h-5 w-5 text-gray-400" />
                 ) : (
-                  <span className="text-white text-lg font-bold">{index + 1}</span>
+                  <MapPin className="h-6 w-6 text-white" />
                 )}
               </div>
               
@@ -72,6 +97,19 @@ const SectionCard = ({
             </div>
             
             <div className="flex items-center">
+              {/* Content type indicators */}
+              <div className="hidden sm:flex mr-3 space-x-1">
+                {contentIcons.map((item, idx) => (
+                  <div 
+                    key={idx} 
+                    className="p-1 bg-space-cosmic-blue/30 rounded-md" 
+                    title={item.label}
+                  >
+                    {item.icon}
+                  </div>
+                ))}
+              </div>
+              
               {isActive && !isLocked && (
                 <Button 
                   variant="secondary" 
@@ -120,23 +158,14 @@ const SectionCard = ({
                     </ul>
                   </div>
                   
-                  <div className="grid grid-cols-2 gap-4 mt-4">
-                    <div className="flex items-center space-x-2 text-sm text-gray-300">
-                      <Youtube className="h-4 w-4 text-red-500" />
-                      <span>Main video lesson</span>
-                    </div>
-                    
-                    {section.shortVideo && (
-                      <div className="flex items-center space-x-2 text-sm text-gray-300">
-                        <Video className="h-4 w-4 text-blue-400" />
-                        <span>Bonus video</span>
+                  {/* Content type details */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                    {contentIcons.map((item, idx) => (
+                      <div key={idx} className="flex items-center space-x-2 text-sm text-gray-300 bg-space-cosmic-blue/20 p-2 rounded-lg">
+                        {item.icon}
+                        <span>{item.label}</span>
                       </div>
-                    )}
-                    
-                    <div className="flex items-center space-x-2 text-sm text-gray-300">
-                      <Star className="h-4 w-4 text-yellow-400" />
-                      <span>Interactive quiz</span>
-                    </div>
+                    ))}
                   </div>
                 </div>
               </div>
@@ -168,11 +197,17 @@ const CourseView = ({ course }: CourseViewProps) => {
   return (
     <div className="space-y-0 px-4 max-w-3xl mx-auto">
       <div className="mb-6">
-        <h2 className="text-xl text-purple-100 font-bold mb-2">Course Timeline</h2>
-        <p className="text-gray-300">Follow your learning path through {course.title}</p>
+        <h2 className="text-xl text-purple-100 font-bold mb-2">Learning Map</h2>
+        <p className="text-gray-300">Navigate through {course.title} space journey</p>
       </div>
       
+      {/* Course map with glow effect */}
       <div className="relative pl-6 pb-10">
+        {/* Decorative star elements */}
+        <div className="absolute w-4 h-4 rounded-full bg-yellow-400/30 blur-sm left-20 top-10 animate-star-pulse"></div>
+        <div className="absolute w-3 h-3 rounded-full bg-blue-400/30 blur-sm left-40 top-40 animate-star-pulse" style={{ animationDelay: '1s' }}></div>
+        <div className="absolute w-2 h-2 rounded-full bg-purple-400/30 blur-sm right-20 top-20 animate-star-pulse" style={{ animationDelay: '2s' }}></div>
+        
         {course.sections.map((section, index) => {
           const isCompleted = index <= lastCompletedIndex;
           const isActive = index === currentActiveIndex;
