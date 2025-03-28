@@ -46,20 +46,20 @@ export const useContentNavigation = (course: Course) => {
       return;
     }
     
+    // Reset quiz state if we're moving from a quiz
+    if (currentContentType === 'quiz') {
+      setQuizSubmitted(false);
+      setSelectedAnswer(null);
+    }
+    
     // Move to next content or section
     if (currentContentIndex < availableContentTypes.length - 1) {
       // Move to next content card within the same section
       setCurrentContentIndex(prevIndex => prevIndex + 1);
-      if (currentContentType === 'quiz') {
-        setQuizSubmitted(false);
-        setSelectedAnswer(null);
-      }
     } else if (currentSectionIndex < course.sections.length - 1) {
       // Move to the first content card of the next section
       setCurrentSectionIndex(prevIndex => prevIndex + 1);
       setCurrentContentIndex(0);
-      setQuizSubmitted(false);
-      setSelectedAnswer(null);
       
       toast({
         title: "Section Complete!",
