@@ -10,6 +10,7 @@ import { Course } from "@/types/course";
 import LoadingAnimation from "@/components/LoadingAnimation";
 import { generateMockCourse, aiCourseData } from "@/utils/courseData";
 import AISectionCard from "@/components/AISectionCard";
+import { Separator } from "@/components/ui/separator";
 
 const AICoursePage = () => {
   const navigate = useNavigate();
@@ -66,7 +67,7 @@ const AICoursePage = () => {
 
   return (
     <div className="bg-space min-h-screen py-8 px-4">
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-6xl mx-auto">
         <div className="flex items-center mb-8">
           <Button 
             variant="ghost" 
@@ -83,18 +84,35 @@ const AICoursePage = () => {
           </h1>
         </div>
         
-        <p className="text-gray-300 mb-8 max-w-3xl">{course.description}</p>
+        <p className="text-gray-300 mb-4 max-w-3xl leading-relaxed">
+          {course.description}
+        </p>
         
-        <div className="mb-8">
+        <div className="mb-8 flex flex-wrap gap-4 items-center">
           <Button 
             onClick={handleStartCourse}
             className="bg-blue-600 hover:bg-blue-700 text-white"
           >
             Start Course <Brain className="ml-2 h-4 w-4" />
           </Button>
+          
+          <div className="text-gray-400 text-sm">
+            <span className="inline-flex items-center bg-blue-900/30 px-3 py-1 rounded-full">
+              <span className="h-2 w-2 bg-blue-400 rounded-full mr-2"></span>
+              {course.forLevel || "Intermediate"} Level
+            </span>
+            <span className="inline-flex items-center bg-purple-900/30 px-3 py-1 rounded-full ml-2">
+              <span className="h-2 w-2 bg-purple-400 rounded-full mr-2"></span>
+              {course.sections.length} Sections
+            </span>
+          </div>
         </div>
+        
+        <Separator className="my-6 bg-blue-500/20" />
+        
+        <h2 className="text-xl font-semibold text-white mb-6">Course Content</h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {course.sections.map((section, index) => (
             <AISectionCard 
               key={section.id} 

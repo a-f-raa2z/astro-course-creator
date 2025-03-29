@@ -77,8 +77,42 @@ const AISectionCard = ({
     }
   };
   
+  const getSectionImage = () => {
+    switch (title) {
+      case "Intro of Artificial Intelligence":
+        return "/lovable-uploads/d3507279-5142-4833-b3ff-7603ecd9be87.png"; // Brain with digital elements
+      case "Machine Learning":
+        return "/lovable-uploads/46e4fa94-5626-45ca-b547-dd52d6d65789.png"; // Object detection in traffic
+      case "Deep Learning":
+        return "/lovable-uploads/3d8b75cf-5e69-49ac-9444-9c3f6c33fb4c.png"; // Neural network visualization
+      case "Generative AI":
+        return "/lovable-uploads/930c9c02-d768-4457-9ff9-0304dc9579c7.png"; // Person using AI art generation
+      case "Chatbots":
+        return "/lovable-uploads/3215a500-d237-40e1-aecb-2a9e2b64ee10.png"; // Chat AI interface
+      case "Robots and Automation":
+        return "/lovable-uploads/a8856a2f-8eb5-4bfc-91c3-b4baf426b804.png"; // Cute robot
+      case "AI for Music":
+        return "/lovable-uploads/dac0c33f-58a2-44f3-81eb-5f00fda40b1b.png"; // Robotic hand playing piano
+      case "AI for Arts":
+        return "/lovable-uploads/930c9c02-d768-4457-9ff9-0304dc9579c7.png"; // Reusing the generative AI image
+      default:
+        return null;
+    }
+  };
+  
+  const sectionImage = getSectionImage();
+  
   return (
     <Card className="cosmic-card mb-6 overflow-hidden hover:shadow-lg hover:shadow-blue-500/10 transition-all border-blue-500/20">
+      {sectionImage && (
+        <div className="w-full h-40 overflow-hidden">
+          <img 
+            src={sectionImage}
+            alt={`${title} illustration`}
+            className="w-full h-full object-cover object-center transition-transform hover:scale-105"
+          />
+        </div>
+      )}
       <CardHeader className="pb-2">
         <div className="flex justify-between items-center">
           <CardTitle className="text-xl text-blue-100 flex items-center">
