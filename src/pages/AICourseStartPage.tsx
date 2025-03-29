@@ -1,12 +1,14 @@
+
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Course, CourseSection } from "@/types/course";
 import { ContentType } from "@/types/ContentType";
-import GameContentRenderer from "@/components/course/GameContentRenderer";
+import { GameContentRenderer } from "@/components/course/GameContentRenderer";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import GameProgress from "@/components/course/GameProgress";
-import XPPopup from "@/components/course/XPPopup";
+import { GameProgress } from "@/components/course/GameProgress";
+import { XPPopup } from "@/components/course/XPPopup";
+import { useToast } from "@/components/ui/use-toast";
 
 const AICourseStartPage = () => {
   const location = useLocation();
@@ -19,6 +21,7 @@ const AICourseStartPage = () => {
   const [currentContentIndex, setCurrentContentIndex] = useState(0);
   const [showXPPopup, setShowXPPopup] = useState(false);
   const [xpEarned, setXpEarned] = useState(0);
+  const { toast } = useToast();
 
   useEffect(() => {
     if (course && course.sections && course.sections.length > 0) {
@@ -36,7 +39,7 @@ const AICourseStartPage = () => {
         ...(currentSection.additionalShortVideos && currentSection.additionalShortVideos.length > 0
           ? currentSection.additionalShortVideos.map((_, index) => ({
             id: `short-video-${index + 2}`,
-            type: 'short-video',
+            type: 'short-video' as const,
             title: `Short Video ${index + 2}`,
             completed: false,
           }))
@@ -46,7 +49,7 @@ const AICourseStartPage = () => {
         ...(currentSection.bonusVideos && currentSection.bonusVideos.length > 0
           ? currentSection.bonusVideos.map((_, index) => ({
             id: `bonus-${index + 1}`,
-            type: 'bonus',
+            type: 'bonus' as const,
             title: `Bonus Content ${index + 1}`,
             completed: false,
           }))
@@ -96,7 +99,7 @@ const AICourseStartPage = () => {
     return <div className="min-h-screen bg-space text-white flex items-center justify-center">Loading...</div>;
   }
 
-  const currentContentType = contentList[currentContentIndex];
+  const currentContentType = contentList[currentContentIndex]?.type || 'introduction';
 
   return (
     <div className="min-h-screen bg-space text-white">
@@ -110,13 +113,23 @@ const AICourseStartPage = () => {
         <h1 className="text-2xl font-bold mb-4">{course.title}</h1>
         <h2 className="text-xl text-gray-300 mb-4">{currentSection.title}</h2>
 
-        <GameProgress contentList={contentList} currentContentIndex={currentContentIndex} />
+        <GameProgress 
+          overallProgress={(currentSectionIndex / (course.sections.length || 1)) * 100}
+          currentSectionIndex={currentSectionIndex}
+          totalSections={course.sections.length}
+        />
 
         <div className="mb-4">
           <GameContentRenderer
             contentType={currentContentType}
-            section={currentSection}
-            course={course}
+            currentSection={currentSection}
+            quizSubmitted={false}
+            selectedAnswer={null}
+            setSelectedAnswer={() => {}}
+            handleQuizSubmit={() => {}}
+            handleNextContent={() => {}}
+            handlePreviousContent={() => {}}
+            isFirstContent={currentContentIndex === 0 && currentSectionIndex === 0}
           />
         </div>
 
@@ -138,7 +151,7 @@ const AICourseStartPage = () => {
           </Button>
         </div>
       </div>
-      {showXPPopup && <XPPopup xp={xpEarned} />}
+      {showXPPopup && <XPPopup xpPoints={xpEarned} level={1} levelProgress={0} />}
     </div>
   );
 };

@@ -1,6 +1,6 @@
 
 import { CourseSection } from "@/types/course";
-import { ContentType } from "@/hooks/useGameLearning";
+import { ContentType } from "@/types/ContentType";
 import { IntroductionContent } from "./content/IntroductionContent";
 import { VideoContent } from "./content/VideoContent";
 import { KeyPointsContent } from "./content/KeyPointsContent";
@@ -12,11 +12,11 @@ import { PlaygroundContent } from "./content/PlaygroundContent";
 import { SectionTransition } from "./content/SectionTransition";
 
 interface GameContentRendererProps {
-  contentType: ContentType;
+  contentType: ContentType | string;
   currentSection: CourseSection | null;
   quizSubmitted: boolean;
   selectedAnswer: number | null;
-  setSelectedAnswer: (answer: number) => void;
+  setSelectedAnswer: (answer: number | null) => void;
   handleQuizSubmit: () => void;
   handleNextContent: () => void;
   handlePreviousContent: () => void;
@@ -70,6 +70,7 @@ export const GameContentRenderer = ({
                onPrevious={handlePreviousContent}
                isFirstContent={isFirstContent}
              />;
+    case 'key-points':
     case 'keyPoints':
       return <KeyPointsContent 
                section={currentSection} 
@@ -77,6 +78,7 @@ export const GameContentRenderer = ({
                onPrevious={handlePreviousContent}
                isFirstContent={isFirstContent}
              />;
+    case 'short-video':
     case 'shortVideo':
       if (!currentSection.shortVideo) return null;
       return <ShortVideoContent 

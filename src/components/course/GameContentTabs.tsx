@@ -1,9 +1,9 @@
 
-import { ContentType } from "@/hooks/useGameLearning";
+import { ContentType } from "@/types/ContentType";
 import { FileText, Youtube, CheckCircle, Video, Image, HelpCircle, Star, Gamepad2 } from "lucide-react";
 
 interface GameContentTabsProps {
-  contentTypes: ContentType[];
+  contentTypes: string[];
   currentContentIndex: number;
   onTabClick: (index: number) => void;
   completedContents: string[];
@@ -18,42 +18,51 @@ export const GameContentTabs = ({
   sectionIndex
 }: GameContentTabsProps) => {
   
-  const getContentIcon = (type: ContentType) => {
+  const getContentIcon = (type: string) => {
     switch (type) {
       case 'introduction': return <FileText className="h-4 w-4" />;
       case 'video': return <Youtube className="h-4 w-4" />;
-      case 'keyPoints': return <CheckCircle className="h-4 w-4" />;
-      case 'shortVideo': return <Video className="h-4 w-4" />;
+      case 'keyPoints': 
+      case 'key-points': return <CheckCircle className="h-4 w-4" />;
+      case 'shortVideo': 
+      case 'short-video': return <Video className="h-4 w-4" />;
       case 'image': return <Image className="h-4 w-4" />;
       case 'quiz': return <HelpCircle className="h-4 w-4" />;
       case 'bonus': return <Star className="h-4 w-4" />;
       case 'playground': return <Gamepad2 className="h-4 w-4" />;
+      default: return <FileText className="h-4 w-4" />;
     }
   };
 
-  const getContentTitle = (type: ContentType) => {
+  const getContentTitle = (type: string) => {
     switch (type) {
       case 'introduction': return 'Introduction';
       case 'video': return 'Main Lesson';
-      case 'keyPoints': return 'Key Points';
-      case 'shortVideo': return 'Fun Facts';
+      case 'keyPoints': 
+      case 'key-points': return 'Key Points';
+      case 'shortVideo': 
+      case 'short-video': return 'Fun Facts';
       case 'image': return 'Visual Guide';
       case 'quiz': return 'Knowledge Check';
       case 'bonus': return 'Bonus Content';
       case 'playground': return 'Interactive';
+      default: return type;
     }
   };
   
-  const getContentColor = (type: ContentType) => {
+  const getContentColor = (type: string) => {
     switch (type) {
       case 'introduction': return 'text-purple-400';
       case 'video': return 'text-red-500';
-      case 'keyPoints': return 'text-green-500';
-      case 'shortVideo': return 'text-blue-400';
+      case 'keyPoints': 
+      case 'key-points': return 'text-green-500';
+      case 'shortVideo': 
+      case 'short-video': return 'text-blue-400';
       case 'image': return 'text-yellow-400';
       case 'quiz': return 'text-orange-400';
       case 'bonus': return 'text-yellow-400';
       case 'playground': return 'text-green-400';
+      default: return 'text-gray-400';
     }
   };
 
@@ -62,8 +71,8 @@ export const GameContentTabs = ({
     return completedContents.includes(contentKey);
   };
 
-  const isQuizTab = (type: ContentType) => type === 'quiz';
-  const isPlaygroundTab = (type: ContentType) => type === 'playground';
+  const isQuizTab = (type: string) => type === 'quiz';
+  const isPlaygroundTab = (type: string) => type === 'playground';
 
   return (
     <div className="relative mb-8">

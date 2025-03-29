@@ -1,12 +1,17 @@
+
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Course, CourseSection } from "@/types/course";
 import { ContentType } from "@/types/ContentType";
-import GameContentRenderer from "@/components/course/GameContentRenderer";
+import { GameContentRenderer } from "@/components/course/GameContentRenderer";
 import { Button } from "@/components/ui/button";
-import { ChevronLeft, ChevronRight } from "lucide-react";
-import GameProgress from "@/components/course/GameProgress";
-import XPPopup from "@/components/course/XPPopup";
+import { ChevronLeft, ChevronRight, Rocket, Flag } from "lucide-react";
+import { GameProgress } from "@/components/course/GameProgress";
+import { XPPopup } from "@/components/course/XPPopup";
+import { Separator } from "@/components/ui/separator";
+import { useToast } from "@/components/ui/use-toast";
+import { useGameLearning } from "@/hooks/useGameLearning";
+import { GameContentTabs } from "@/components/course/GameContentTabs";
 
 const CourseStartPage = () => {
   const location = useLocation();
