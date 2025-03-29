@@ -44,21 +44,12 @@ export const VideoContent = ({ section, onComplete, onPrevious, isFirstContent }
   const handleVideoComplete = () => {
     setVideoWatched(true);
     
-    if (isAICourse) {
-      // For AI course, skip directly to completion view
-      setShowCompletionView(true);
-      toast({
-        title: "Video Completed!",
-        description: "Great job! You've completed this video lesson."
-      });
-    } else {
-      // For astronomy course, show key points first as before
-      toast({
-        title: "Video Completed!",
-        description: "Great job! Here are the key points to remember from this lesson."
-      });
-      setShowKeyPoints(true);
-    }
+    // Show key points for both courses after video completion
+    toast({
+      title: "Video Completed!",
+      description: "Great job! Here are the key points to remember from this lesson."
+    });
+    setShowKeyPoints(true);
   };
 
   const handleAllPointsChecked = () => {
@@ -168,18 +159,16 @@ export const VideoContent = ({ section, onComplete, onPrevious, isFirstContent }
               Lesson Completed!
             </h3>
             <p className="text-purple-200 max-w-md mb-8">
-              Great job! You've completed the video lesson {!isAICourse && "and mastered the key concepts"} for {section.title}.
+              Great job! You've completed the video lesson and mastered the key concepts for {section.title}.
             </p>
             <div className="flex items-center justify-center gap-2 flex-wrap">
-              {!isAICourse && (
-                <Button
-                  onClick={() => setShowKeyPoints(true)}
-                  variant="outline"
-                  className="border-purple-500/30 text-purple-300 hover:bg-purple-900/30 mb-2 sm:mb-0"
-                >
-                  <ListChecks className="h-4 w-4 mr-2" /> Review Key Points
-                </Button>
-              )}
+              <Button
+                onClick={() => setShowKeyPoints(true)}
+                variant="outline"
+                className="border-purple-500/30 text-purple-300 hover:bg-purple-900/30 mb-2 sm:mb-0"
+              >
+                <ListChecks className="h-4 w-4 mr-2" /> Review Key Points
+              </Button>
               <Button 
                 onClick={() => {
                   setShowKeyPoints(false);
@@ -246,3 +235,4 @@ export const VideoContent = ({ section, onComplete, onPrevious, isFirstContent }
     </div>
   );
 };
+
