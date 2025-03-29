@@ -1,31 +1,22 @@
+
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { 
   ChevronLeft, 
-  Rocket, 
-  ArrowRight, 
-  Globe, 
-  Moon, 
-  Stars, 
-  Sun, 
-  Satellite, 
-  FileText, 
-  Youtube, 
-  CheckCircle, 
-  HelpCircle,
-  Telescope
+  Rocket 
 } from "lucide-react";
 import { Course } from "@/types/course";
 import LoadingAnimation from "@/components/LoadingAnimation";
 import { generateMockCourse } from "@/utils/courseData";
+import SectionCard from "@/components/SectionCard";
 
 const AstronomyCoursePage = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [course, setCourse] = useState<Course | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [sectionProgress, setSectionProgress] = useState<number[]>([]);
   
   useEffect(() => {
     if (location.state?.course) {
@@ -33,7 +24,19 @@ const AstronomyCoursePage = () => {
     } else {
       setCourse(generateMockCourse("planets", "intermediate", "visual"));
     }
-  }, [location.state]);
+    
+    // Mock progress data - in a real app, this would come from user data
+    // Here we're just generating random progress for demo purposes
+    if (course && course.sections.length > 0) {
+      const mockProgress = course.sections.map(() => 
+        Math.floor(Math.random() * 100)
+      );
+      setSectionProgress(mockProgress);
+    } else {
+      // Default mock progress values if course isn't loaded yet
+      setSectionProgress([75, 40, 20, 5, 0, 0, 0]);
+    }
+  }, [location.state, course?.sections.length]);
 
   const handleStartCourse = () => {
     setIsLoading(true);
@@ -41,34 +44,6 @@ const AstronomyCoursePage = () => {
       setIsLoading(false);
       navigate("/astronomy-course-start", { state: { course } });
     }, 1500);
-  };
-
-  const handleExploreSection = (sectionIndex: number) => {
-    navigate("/astronomy-course-start", { state: { course, initialSectionIndex: sectionIndex } });
-  };
-
-  const getSectionIcon = (sectionTitle: string) => {
-    switch (sectionTitle) {
-      case "The Solar System":
-        return <Sun className="h-6 w-6 text-yellow-400" />;
-      case "Earth":
-        return <Globe className="h-6 w-6 text-blue-400" />;
-      case "The Moon":
-        return <Moon className="h-6 w-6 text-gray-300" />;
-      case "Stars":
-        return <Stars className="h-6 w-6 text-yellow-300" />;
-      case "Planets":
-      case "The Inner Planets":
-        return <Rocket className="h-6 w-6 text-orange-400" />;
-      case "Telescopes":
-        return <Telescope className="h-6 w-6 text-purple-400" />;
-      case "Space Exploration":
-        return <Rocket className="h-6 w-6 text-red-400" />;
-      case "Satellites":
-        return <Satellite className="h-6 w-6 text-blue-300" />;
-      default:
-        return <Rocket className="h-6 w-6 text-purple-400" />;
-    }
   };
 
   if (isLoading) {
@@ -113,48 +88,23 @@ const AstronomyCoursePage = () => {
             onClick={handleStartCourse}
             className="bg-purple-600 hover:bg-purple-700 text-white"
           >
-            Start Course <ArrowRight className="ml-1 h-4 w-4" />
+            Start Course <Rocket className="ml-2 h-4 w-4" />
           </Button>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {course.sections.map((section, index) => (
-            <Card key={section.id} className="cosmic-card hover:shadow-purple-500/10 hover:shadow-md transition-all border-purple-500/20">
-              <CardHeader className="pb-2">
-                <CardTitle className="text-xl text-purple-100 flex items-center">
-                  {getSectionIcon(section.title)}
-                  <span className="ml-2">{section.title}</span>
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-gray-300 mb-4 line-clamp-3">{section.introduction}</p>
-                
-                <div className="grid grid-cols-4 gap-2 mb-4">
-                  <div className="bg-purple-900/30 p-2 rounded flex items-center justify-center" title="Introduction">
-                    <FileText className="h-4 w-4 text-purple-300" />
-                  </div>
-                  <div className="bg-red-900/30 p-2 rounded flex items-center justify-center" title="Video Lesson">
-                    <Youtube className="h-4 w-4 text-red-400" />
-                  </div>
-                  <div className="bg-green-900/30 p-2 rounded flex items-center justify-center" title="Key Points">
-                    <CheckCircle className="h-4 w-4 text-green-400" />
-                  </div>
-                  <div className="bg-orange-900/30 p-2 rounded flex items-center justify-center" title="Quiz">
-                    <HelpCircle className="h-4 w-4 text-orange-400" />
-                  </div>
-                </div>
-                
-                <div className="flex justify-end">
-                  <Button 
-                    variant="outline" 
-                    className="border-purple-500/30 text-purple-300 hover:bg-purple-900/30"
-                    onClick={() => handleExploreSection(index)}
-                  >
-                    Explore <ArrowRight className="ml-1 h-4 w-4" />
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
+            <SectionCard 
+              key={section.id} 
+              title={section.title} 
+              description={section.introduction}
+              index={index}
+              videoUrl={section.videoUrl}
+              shortVideoUrls={section.shortVideo ? [section.shortVideo, ...(section.additionalShortVideos || [])] : undefined}
+              visualUrl={section.visualUrl}
+              bonusUrls={section.bonusVideos}
+              progress={sectionProgress[index] || 0}
+            />
           ))}
         </div>
       </div>

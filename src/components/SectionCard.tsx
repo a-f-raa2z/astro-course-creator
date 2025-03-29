@@ -3,8 +3,10 @@ import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
-import { ChevronRight, Rocket, FileText, Youtube, CheckCircle, HelpCircle, Video, Image, Gamepad2, Star } from "lucide-react";
+import { ChevronRight, Rocket, FileText, Youtube, CheckCircle, HelpCircle, Video, 
+  Image, Gamepad2, Star, Sun, Globe, Moon, Stars, Telescope, Satellite } from "lucide-react";
 import { generateMockCourse } from "@/utils/courseData";
+import { Progress } from "@/components/ui/progress";
 
 interface SectionCardProps {
   title: string;
@@ -14,6 +16,7 @@ interface SectionCardProps {
   shortVideoUrls?: string[];
   visualUrl?: string | null;
   bonusUrls?: string[];
+  progress?: number;
 }
 
 const SectionCard = ({ 
@@ -23,7 +26,8 @@ const SectionCard = ({
   videoUrl,
   shortVideoUrls,
   visualUrl,
-  bonusUrls
+  bonusUrls,
+  progress = 0
 }: SectionCardProps) => {
   const navigate = useNavigate();
   
@@ -64,12 +68,36 @@ const SectionCard = ({
     });
   };
   
+  // Get appropriate icon based on section title
+  const getSectionIcon = () => {
+    switch (title) {
+      case "The Solar System":
+        return <Sun className="h-5 w-5 text-yellow-400 mr-2" />;
+      case "Earth":
+        return <Globe className="h-5 w-5 text-blue-400 mr-2" />;
+      case "The Moon":
+        return <Moon className="h-5 w-5 text-gray-300 mr-2" />;
+      case "Stars":
+        return <Stars className="h-5 w-5 text-yellow-300 mr-2" />;
+      case "The Inner Planets":
+        return <Rocket className="h-5 w-5 text-orange-400 mr-2" />;
+      case "Telescopes":
+        return <Telescope className="h-5 w-5 text-purple-400 mr-2" />;
+      case "Space Exploration":
+        return <Rocket className="h-5 w-5 text-red-400 mr-2" />;
+      case "Satellites":
+        return <Satellite className="h-5 w-5 text-blue-300 mr-2" />;
+      default:
+        return <Rocket className="h-5 w-5 text-purple-400 mr-2" />;
+    }
+  };
+  
   return (
     <Card className="cosmic-card mb-6 overflow-hidden hover:shadow-lg hover:shadow-purple-500/10 transition-all border-purple-500/20">
       <CardHeader className="pb-2">
         <div className="flex justify-between items-center">
           <CardTitle className="text-xl text-purple-100 flex items-center">
-            <Rocket className="h-5 w-5 text-purple-400 mr-2" />
+            {getSectionIcon()}
             {title}
           </CardTitle>
           <span className="text-xs px-2 py-1 bg-purple-900/50 rounded-full text-purple-300 border border-purple-500/20">
@@ -79,6 +107,15 @@ const SectionCard = ({
       </CardHeader>
       <CardContent>
         <p className="text-gray-300 mb-4">{description}</p>
+        
+        {/* Progress indicator */}
+        <div className="mb-3">
+          <div className="flex justify-between text-xs text-purple-300 mb-1">
+            <span>Progress</span>
+            <span>{progress}%</span>
+          </div>
+          <Progress value={progress} className="h-2 bg-purple-900/30" />
+        </div>
         
         <div className="grid grid-cols-5 gap-2 mb-4">
           <div className="bg-purple-900/30 p-2 rounded flex items-center justify-center" title="Introduction">

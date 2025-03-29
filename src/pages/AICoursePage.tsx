@@ -4,38 +4,19 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { 
   ChevronLeft, 
-  Cpu, 
-  ArrowRight, 
-  FileText, 
-  Youtube, 
-  CheckCircle, 
-  HelpCircle,
-  Brain,
-  Database,
-  Network,
-  Lightbulb,
-  Bot,
-  Factory,
-  Music,
-  Paintbrush,
-  Leaf
+  Brain 
 } from "lucide-react";
 import { Course } from "@/types/course";
 import LoadingAnimation from "@/components/LoadingAnimation";
 import { generateMockCourse } from "@/utils/courseData";
 import AISectionCard from "@/components/AISectionCard";
-import { 
-  Card, 
-  CardHeader, 
-  CardTitle, 
-  CardContent 
-} from "@/components/ui/card";
 
 const AICoursePage = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [course, setCourse] = useState<Course | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [sectionProgress, setSectionProgress] = useState<number[]>([]);
   
   useEffect(() => {
     // If we already have course data passed from state, use that
@@ -45,7 +26,19 @@ const AICoursePage = () => {
       // Use the mock course data with AI topic
       setCourse(generateMockCourse("ai", "intermediate", "visual"));
     }
-  }, [location.state]);
+    
+    // Mock progress data - in a real app, this would come from user data
+    // Here we're just generating random progress for demo purposes
+    if (course && course.sections.length > 0) {
+      const mockProgress = course.sections.map(() => 
+        Math.floor(Math.random() * 100)
+      );
+      setSectionProgress(mockProgress);
+    } else {
+      // Default mock progress values if course isn't loaded yet
+      setSectionProgress([85, 60, 30, 15, 0, 0, 0]);
+    }
+  }, [location.state, course?.sections.length]);
 
   const handleStartCourse = () => {
     setIsLoading(true);
@@ -53,36 +46,6 @@ const AICoursePage = () => {
       setIsLoading(false);
       navigate("/ai-course-start", { state: { course } });
     }, 1500);
-  };
-
-  const handleExploreSection = (sectionIndex: number) => {
-    navigate("/ai-course-start", { state: { course, initialSectionIndex: sectionIndex } });
-  };
-
-  // Helper function to get the appropriate icon for each section
-  const getSectionIcon = (sectionTitle: string) => {
-    switch (sectionTitle) {
-      case "Intro of Artificial Intelligence":
-        return <Brain className="h-6 w-6 text-blue-400" />;
-      case "Machine Learning":
-        return <Database className="h-6 w-6 text-green-400" />;
-      case "Deep Learning":
-        return <Network className="h-6 w-6 text-yellow-400" />;
-      case "Generative AI":
-        return <Lightbulb className="h-6 w-6 text-purple-400" />;
-      case "Chatbots":
-        return <Bot className="h-6 w-6 text-pink-400" />;
-      case "Robots and Automation":
-        return <Factory className="h-6 w-6 text-orange-400" />;
-      case "AI for Music":
-        return <Music className="h-6 w-6 text-indigo-400" />;
-      case "AI for Arts":
-        return <Paintbrush className="h-6 w-6 text-rose-400" />;
-      case "AI for Environment":
-        return <Leaf className="h-6 w-6 text-emerald-400" />;
-      default:
-        return <Cpu className="h-6 w-6 text-blue-400" />;
-    }
   };
 
   if (isLoading) {
@@ -127,48 +90,19 @@ const AICoursePage = () => {
             onClick={handleStartCourse}
             className="bg-blue-600 hover:bg-blue-700 text-white"
           >
-            Start Course <ArrowRight className="ml-1 h-4 w-4" />
+            Start Course <Brain className="ml-2 h-4 w-4" />
           </Button>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {course.sections.map((section, index) => (
-            <Card key={section.id} className="cosmic-card hover:shadow-blue-500/10 hover:shadow-md transition-all border-blue-500/20">
-              <CardHeader className="pb-2">
-                <CardTitle className="text-xl text-blue-100 flex items-center">
-                  {getSectionIcon(section.title)}
-                  <span className="ml-2">{section.title}</span>
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-gray-300 mb-4 line-clamp-3">{section.introduction}</p>
-                
-                <div className="grid grid-cols-4 gap-2 mb-4">
-                  <div className="bg-blue-900/30 p-2 rounded flex items-center justify-center" title="Introduction">
-                    <FileText className="h-4 w-4 text-blue-300" />
-                  </div>
-                  <div className="bg-red-900/30 p-2 rounded flex items-center justify-center" title="Video Lesson">
-                    <Youtube className="h-4 w-4 text-red-400" />
-                  </div>
-                  <div className="bg-green-900/30 p-2 rounded flex items-center justify-center" title="Key Points">
-                    <CheckCircle className="h-4 w-4 text-green-400" />
-                  </div>
-                  <div className="bg-orange-900/30 p-2 rounded flex items-center justify-center" title="Quiz">
-                    <HelpCircle className="h-4 w-4 text-orange-400" />
-                  </div>
-                </div>
-                
-                <div className="flex justify-end">
-                  <Button 
-                    variant="outline" 
-                    className="border-blue-500/30 text-blue-300 hover:bg-blue-900/30"
-                    onClick={() => handleExploreSection(index)}
-                  >
-                    Explore <ArrowRight className="ml-1 h-4 w-4" />
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
+            <AISectionCard 
+              key={section.id} 
+              title={section.title} 
+              description={section.introduction}
+              index={index}
+              progress={sectionProgress[index] || 0}
+            />
           ))}
         </div>
       </div>
