@@ -1,3 +1,4 @@
+
 import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -19,6 +20,7 @@ import {
   Gamepad2
 } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
+import { aiCourseData } from "@/utils/courseData";
 
 interface AISectionCardProps {
   title: string;
@@ -46,6 +48,7 @@ const AISectionCard = ({
   const handleStartSection = () => {
     navigate("/ai-course-start", { 
       state: { 
+        course: aiCourseData,
         initialSectionIndex: index 
       } 
     });
