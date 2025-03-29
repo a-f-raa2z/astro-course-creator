@@ -1,4 +1,3 @@
-
 import { AssessmentQuestion, Course } from "@/types/course";
 
 export const assessmentQuestions: AssessmentQuestion[] = [
@@ -765,13 +764,4 @@ function generateAICourse(level: string, learningStyle: string): Course {
             options: [
               "Sheet music notation",
               "Audio recordings",
-              "MIDI files",
-              "Instrument recordings"
-            ],
-            correctAnswer: 2
-          }
-        ]
-      }
-    ]
-  };
-}
+              "
