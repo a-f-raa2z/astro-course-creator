@@ -97,6 +97,15 @@ const HomePage = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
           {/* Astronomy Course Card */}
           <Card className="cosmic-card overflow-hidden hover:shadow-lg hover:shadow-purple-500/10 transition-all border-purple-500/20">
+            <div className="relative h-48 overflow-hidden">
+              <img 
+                src="/lovable-uploads/444d4246-3b56-42bd-8f43-4c561d66cd37.png" 
+                alt="Astronomy Course" 
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+              <h3 className="absolute bottom-4 left-6 text-2xl font-semibold text-white">Astronomy</h3>
+            </div>
             <CardHeader className="pb-2">
               <CardTitle className="text-2xl text-purple-100 flex items-center">
                 <Rocket className="h-6 w-6 text-purple-400 mr-3" />
@@ -121,6 +130,15 @@ const HomePage = () => {
           
           {/* AI Course Card */}
           <Card className="cosmic-card overflow-hidden hover:shadow-lg hover:shadow-blue-500/10 transition-all border-blue-500/20">
+            <div className="relative h-48 overflow-hidden">
+              <img 
+                src="/lovable-uploads/fb49e844-5050-4fb0-9560-fd65c5e4dad5.png" 
+                alt="AI Course" 
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+              <h3 className="absolute bottom-4 left-6 text-2xl font-semibold text-white">Artificial Intelligence</h3>
+            </div>
             <CardHeader className="pb-2">
               <CardTitle className="text-2xl text-blue-100 flex items-center">
                 <Brain className="h-6 w-6 text-blue-400 mr-3" />
