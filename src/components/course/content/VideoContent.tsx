@@ -8,6 +8,7 @@ import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { TitleWrapper } from "./TitleWrapper";
 import { useToast } from "@/hooks/use-toast";
 import { Checkbox } from "@/components/ui/checkbox";
+import { useLocation } from "react-router-dom";
 
 interface VideoContentProps {
   section: CourseSection;
@@ -22,6 +23,10 @@ export const VideoContent = ({ section, onComplete, onPrevious, isFirstContent }
   const [checkedPoints, setCheckedPoints] = useState<number[]>([]);
   const [showCompletionView, setShowCompletionView] = useState(false);
   const { toast } = useToast();
+  const location = useLocation();
+  
+  // Check if we're in the AI course
+  const isAICourse = location.pathname.includes('ai-course');
   
   // Get video description based on section title
   const getVideoDescription = (sectionTitle: string) => {
@@ -38,11 +43,22 @@ export const VideoContent = ({ section, onComplete, onPrevious, isFirstContent }
 
   const handleVideoComplete = () => {
     setVideoWatched(true);
-    toast({
-      title: "Video Completed!",
-      description: "Great job! Here are the key points to remember from this lesson."
-    });
-    setShowKeyPoints(true);
+    
+    if (isAICourse) {
+      // For AI course, skip directly to completion view
+      setShowCompletionView(true);
+      toast({
+        title: "Video Completed!",
+        description: "Great job! You've completed this video lesson."
+      });
+    } else {
+      // For astronomy course, show key points first as before
+      toast({
+        title: "Video Completed!",
+        description: "Great job! Here are the key points to remember from this lesson."
+      });
+      setShowKeyPoints(true);
+    }
   };
 
   const handleAllPointsChecked = () => {
@@ -152,16 +168,18 @@ export const VideoContent = ({ section, onComplete, onPrevious, isFirstContent }
               Lesson Completed!
             </h3>
             <p className="text-purple-200 max-w-md mb-8">
-              Great job! You've completed the video lesson and mastered the key concepts for {section.title}.
+              Great job! You've completed the video lesson {!isAICourse && "and mastered the key concepts"} for {section.title}.
             </p>
             <div className="flex items-center justify-center gap-2 flex-wrap">
-              <Button
-                onClick={() => setShowKeyPoints(true)}
-                variant="outline"
-                className="border-purple-500/30 text-purple-300 hover:bg-purple-900/30 mb-2 sm:mb-0"
-              >
-                <ListChecks className="h-4 w-4 mr-2" /> Review Key Points
-              </Button>
+              {!isAICourse && (
+                <Button
+                  onClick={() => setShowKeyPoints(true)}
+                  variant="outline"
+                  className="border-purple-500/30 text-purple-300 hover:bg-purple-900/30 mb-2 sm:mb-0"
+                >
+                  <ListChecks className="h-4 w-4 mr-2" /> Review Key Points
+                </Button>
+              )}
               <Button 
                 onClick={() => {
                   setShowKeyPoints(false);
