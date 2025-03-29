@@ -14,7 +14,7 @@ interface QuizContentProps {
   section: CourseSection;
   quizSubmitted: boolean;
   selectedAnswer: number | null;
-  setSelectedAnswer: (answer: number) => void;
+  setSelectedAnswer: (answer: number | null) => void;
   handleQuizSubmit: () => void;
   onComplete: () => void;
   onPrevious: () => void;
@@ -34,24 +34,43 @@ export const QuizContent = ({
   const [currentQuizIndex, setCurrentQuizIndex] = useState(0);
   const [quizResults, setQuizResults] = useState<boolean[]>([]);
   const [showIntro, setShowIntro] = useState(true);
+  const [localQuizSubmitted, setLocalQuizSubmitted] = useState(false);
+  const [localSelectedAnswer, setLocalSelectedAnswer] = useState<number | null>(null);
   
-  const currentQuiz = section.quizzes ? section.quizzes[currentQuizIndex] : section.quiz;
-  const totalQuizzes = section.quizzes ? section.quizzes.length : 1;
-  const isLastQuiz = section.quizzes ? currentQuizIndex === totalQuizzes - 1 : true;
+  // Use the appropriate quiz based on whether we have multiple quizzes or just one
+  const quizzes = section.quizzes || [section.quiz];
+  const currentQuiz = quizzes[currentQuizIndex];
+  const totalQuizzes = quizzes.length;
+  const isLastQuiz = currentQuizIndex === totalQuizzes - 1;
+  
+  const handleSelectAnswer = (index: number) => {
+    setLocalSelectedAnswer(index);
+  };
+  
+  const handleSubmitQuiz = () => {
+    if (localSelectedAnswer !== null) {
+      setLocalQuizSubmitted(true);
+    }
+  };
   
   const handleNextQuiz = () => {
-    const isCorrect = selectedAnswer === currentQuiz.correctAnswer;
+    const isCorrect = localSelectedAnswer === currentQuiz.correctAnswer;
     setQuizResults([...quizResults, isCorrect]);
     
     if (currentQuizIndex < totalQuizzes - 1) {
       setCurrentQuizIndex(currentQuizIndex + 1);
-      setSelectedAnswer(null);
-      handleQuizSubmit(); // Reset quiz submission state
+      setLocalSelectedAnswer(null);
+      setLocalQuizSubmitted(false);
     }
   };
   
   const getCorrectAnswersCount = () => {
-    return quizResults.filter(result => result).length;
+    const completedResults = [...quizResults];
+    if (localQuizSubmitted) {
+      const isCurrentCorrect = localSelectedAnswer === currentQuiz.correctAnswer;
+      completedResults.push(isCurrentCorrect);
+    }
+    return completedResults.filter(result => result).length;
   };
   
   if (showIntro) {
@@ -75,34 +94,34 @@ export const QuizContent = ({
         />
         
         <p className="text-lg text-transparent bg-gradient-to-r from-orange-300 to-orange-100 bg-clip-text font-medium mb-4 px-1">
-          {!quizSubmitted ? "Select the correct answer to proceed." : "Review your answer below."}
+          {!localQuizSubmitted ? "Select the correct answer to proceed." : "Review your answer below."}
         </p>
         
         <QuizQuestion
           quiz={currentQuiz}
-          selectedAnswer={selectedAnswer}
-          quizSubmitted={quizSubmitted}
-          onSelectAnswer={setSelectedAnswer}
-          onSubmit={handleQuizSubmit}
+          selectedAnswer={localSelectedAnswer}
+          quizSubmitted={localQuizSubmitted}
+          onSelectAnswer={handleSelectAnswer}
+          onSubmit={handleSubmitQuiz}
         />
         
-        {quizSubmitted && (
+        {localQuizSubmitted && (
           <QuizFeedback
-            isCorrect={selectedAnswer === currentQuiz.correctAnswer}
+            isCorrect={localSelectedAnswer === currentQuiz.correctAnswer}
             correctAnswerText={currentQuiz.options[currentQuiz.correctAnswer]}
           />
         )}
         
         {/* Results summary when all quizzes are completed */}
-        {quizSubmitted && isLastQuiz && quizResults.length === totalQuizzes - 1 && (
+        {localQuizSubmitted && isLastQuiz && quizResults.length === totalQuizzes - 1 && (
           <QuizResults
-            correctCount={getCorrectAnswersCount() + (selectedAnswer === currentQuiz.correctAnswer ? 1 : 0)}
+            correctCount={getCorrectAnswersCount()}
             totalQuizzes={totalQuizzes}
           />
         )}
         
         <div className="mt-4 flex justify-between">
-          {!isFirstContent && (
+          {!isFirstContent && currentQuizIndex === 0 && !localQuizSubmitted && (
             <Button 
               onClick={onPrevious}
               variant="outline"
@@ -111,8 +130,24 @@ export const QuizContent = ({
               <ArrowLeft className="h-4 w-4 mr-2" /> Previous
             </Button>
           )}
-          {quizSubmitted && (
-            <div className={!isFirstContent ? "" : "ml-auto"}>
+          
+          {currentQuizIndex > 0 && !localQuizSubmitted && (
+            <Button 
+              onClick={() => {
+                setCurrentQuizIndex(currentQuizIndex - 1);
+                setLocalSelectedAnswer(null);
+                // Remove the last result since we're going back
+                setQuizResults(prevResults => prevResults.slice(0, -1));
+              }}
+              variant="outline"
+              className="border-purple-500/30 text-purple-300 hover:bg-purple-900/30"
+            >
+              <ArrowLeft className="h-4 w-4 mr-2" /> Previous Question
+            </Button>
+          )}
+          
+          {localQuizSubmitted && (
+            <div className={!(isFirstContent && currentQuizIndex === 0) ? "ml-auto" : "w-full flex justify-end"}>
               {!isLastQuiz ? (
                 <Button
                   onClick={handleNextQuiz}
@@ -124,7 +159,6 @@ export const QuizContent = ({
                 <Button
                   onClick={onComplete}
                   className="bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800"
-                  disabled={quizResults.length < totalQuizzes - 1}
                 >
                   Complete Section <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>

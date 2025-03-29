@@ -75,7 +75,7 @@ export const GameContentRenderer = ({
     shortVideoIntro: currentSection.shortVideoIntro || defaultIntros.shortVideo,
     image: {
       ...currentSection.image,
-      intro: currentSection.image.intro || defaultIntros.image
+      intro: currentSection.image?.intro || defaultIntros.image
     },
     quizIntro: currentSection.quizIntro || defaultIntros.quiz,
     visualIntro: currentSection.visualIntro || defaultIntros.playground,

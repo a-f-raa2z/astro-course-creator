@@ -1,4 +1,3 @@
-
 import { AssessmentQuestion, Course } from "@/types/course";
 
 export const assessmentQuestions: AssessmentQuestion[] = [
@@ -128,6 +127,26 @@ export const generateMockCourse = (interest: string, level: string, learningStyl
               "X-ray telescope"
             ],
             correctAnswer: 2
+          },
+          {
+            question: "What is the name of the theory that describes the beginning of our universe?",
+            options: [
+              "Steady State Theory",
+              "Big Bang Theory",
+              "Inflation Theory",
+              "String Theory"
+            ],
+            correctAnswer: 1
+          },
+          {
+            question: "What makes up most of the mass in our solar system?",
+            options: [
+              "All the planets combined",
+              "Jupiter",
+              "The Sun",
+              "Asteroid belt"
+            ],
+            correctAnswer: 2
           }
         ]
       },
@@ -189,6 +208,26 @@ export const generateMockCourse = (interest: string, level: string, learningStyl
               "Mars"
             ],
             correctAnswer: 3
+          },
+          {
+            question: "Which inner planet has the thinnest atmosphere?",
+            options: [
+              "Mercury",
+              "Venus",
+              "Earth",
+              "Mars"
+            ],
+            correctAnswer: 0
+          },
+          {
+            question: "Which planet has the highest surface gravity among the inner planets?",
+            options: [
+              "Mercury",
+              "Venus",
+              "Earth",
+              "Mars"
+            ],
+            correctAnswer: 2
           }
         ]
       },
@@ -255,6 +294,26 @@ export const generateMockCourse = (interest: string, level: string, learningStyl
               "Ocean current patterns"
             ],
             correctAnswer: 2
+          },
+          {
+            question: "How old is Earth estimated to be?",
+            options: [
+              "2.5 billion years",
+              "4.5 billion years",
+              "6.5 billion years",
+              "10 billion years"
+            ],
+            correctAnswer: 1
+          },
+          {
+            question: "What is the name of the supercontinent that existed about 250 million years ago?",
+            options: [
+              "Atlantis",
+              "Gondwana",
+              "Pangaea",
+              "Laurasia"
+            ],
+            correctAnswer: 2
           }
         ]
       },
@@ -315,6 +374,26 @@ export const generateMockCourse = (interest: string, level: string, learningStyl
               "7 days",
               "27.3 days",
               "365 days"
+            ],
+            correctAnswer: 2
+          },
+          {
+            question: "When was the first human landing on the Moon?",
+            options: [
+              "1961",
+              "1969",
+              "1975",
+              "1986"
+            ],
+            correctAnswer: 1
+          },
+          {
+            question: "What is the approximate surface temperature range on the Moon?",
+            options: [
+              "-30°C to +30°C",
+              "-73°C to +127°C",
+              "-173°C to +127°C",
+              "-273°C to +227°C"
             ],
             correctAnswer: 2
           }
@@ -398,6 +477,26 @@ function generateAICourse(level: string, learningStyle: string): Course {
               "A system that can solve any intellectual task a human can"
             ],
             correctAnswer: 1
+          },
+          {
+            question: "Which field focuses on making computers understand and generate human language?",
+            options: [
+              "Computer Vision",
+              "Natural Language Processing",
+              "Robotics",
+              "Evolutionary Computing"
+            ],
+            correctAnswer: 1
+          },
+          {
+            question: "What was the name of the IBM computer system that defeated chess champion Garry Kasparov in 1997?",
+            options: [
+              "Watson",
+              "AlphaGo",
+              "Deep Blue",
+              "ENIAC"
+            ],
+            correctAnswer: 2
           }
         ]
       },
@@ -463,6 +562,26 @@ function generateAICourse(level: string, learningStyle: string): Course {
               "To identify hidden patterns without labeled data"
             ],
             correctAnswer: 2
+          },
+          {
+            question: "Which of the following is an example of unsupervised learning?",
+            options: [
+              "Email spam detection",
+              "Image classification",
+              "Customer segmentation based on purchasing behavior",
+              "Predicting house prices"
+            ],
+            correctAnswer: 2
+          },
+          {
+            question: "What technique is used to avoid overfitting in machine learning models?",
+            options: [
+              "Increasing model complexity",
+              "Using more parameters",
+              "Regularization",
+              "Using all available features"
+            ],
+            correctAnswer: 2
           }
         ]
       },
@@ -525,6 +644,26 @@ function generateAICourse(level: string, learningStyle: string): Course {
               "More than 10 layers"
             ],
             correctAnswer: 2
+          },
+          {
+            question: "What is backpropagation in neural networks?",
+            options: [
+              "A method to initialize weights",
+              "An algorithm to update weights based on error gradients",
+              "A technique to reduce dimensionality",
+              "A way to normalize input data"
+            ],
+            correctAnswer: 1
+          },
+          {
+            question: "Which of these is NOT a common activation function in deep learning?",
+            options: [
+              "ReLU (Rectified Linear Unit)",
+              "Sigmoid",
+              "Hyperbolic Tangent (tanh)",
+              "Polynomial"
+            ],
+            correctAnswer: 3
           }
         ]
       },
@@ -552,8 +691,7 @@ function generateAICourse(level: string, learningStyle: string): Course {
           options: [
             "Discriminative models classify inputs, while generative models create new outputs",
             "Generative models require less data than discriminative models",
-            "Generative models require less data than discriminative models",
-            "Generative models use neural networks, while generative models use decision trees",
+            "Discriminative models use neural networks, while generative models use decision trees",
             "Generative models are supervised, while discriminative models are unsupervised"
           ],
           correctAnswer: 0
@@ -564,7 +702,7 @@ function generateAICourse(level: string, learningStyle: string): Course {
             options: [
               "Discriminative models classify inputs, while generative models create new outputs",
               "Generative models require less data than discriminative models",
-              "Generative models use neural networks, while generative models use decision trees",
+              "Discriminative models use neural networks, while generative models use decision trees",
               "Generative models are supervised, while discriminative models are unsupervised"
             ],
             correctAnswer: 0
@@ -588,6 +726,26 @@ function generateAICourse(level: string, learningStyle: string): Course {
               "Setting up the hardware for AI training"
             ],
             correctAnswer: 1
+          },
+          {
+            question: "Which generative AI model type was used to create DALL-E and Midjourney?",
+            options: [
+              "Recurrent Neural Networks",
+              "Transformers",
+              "Diffusion Models",
+              "Long Short-Term Memory networks"
+            ],
+            correctAnswer: 2
+          },
+          {
+            question: "What ethical concern is most specific to generative AI?",
+            options: [
+              "Data privacy",
+              "Algorithmic bias",
+              "Deepfakes and synthetic content",
+              "Energy consumption"
+            ],
+            correctAnswer: 2
           }
         ]
       },
@@ -651,127 +809,20 @@ function generateAICourse(level: string, learningStyle: string): Course {
               "Insufficient memory allocation"
             ],
             correctAnswer: 1
-          }
-        ]
-      },
-      {
-        id: "section-ai-6",
-        title: "Robots and Automation",
-        introduction: "Robotics combines AI with physical systems to interact with the real world. This section explores how AI enables robots and automation systems to perform various tasks.",
-        whyLearn: "Robots and automation are transforming industries from manufacturing to healthcare. Understanding these technologies helps you appreciate their capabilities and future potential.",
-        videoUrl: "https://www.youtube.com/embed/eLl2d2cmHHQ",
-        keyPoints: [
-          "Robots use sensors to perceive their environment and actuators to interact with it",
-          "AI enables robots to make decisions based on environmental data",
-          "Automation can range from simple rule-based systems to complex AI-driven processes",
-          "Robots are increasingly being used in healthcare, manufacturing, agriculture, and more"
-        ],
-        shortVideo: "https://www.youtube.com/embed/uWObkOV71ZI",
-        additionalShortVideos: [
-          "https://www.youtube.com/embed/vQhqYXGExWY",
-          "https://www.youtube.com/embed/jD5y1eQ3Y_o"
-        ],
-        bonusVideos: ["https://www.youtube.com/embed/f2aocKWrPG8"],
-        image: {
-          url: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e",
-          description: "Robots combine physical capabilities with AI systems to perform tasks in the real world."
-        },
-        quiz: {
-          question: "Which of the following is NOT a common type of industrial robot?",
-          options: [
-            "Articulated robots",
-            "Cartesian robots",
-            "Collaborative robots (cobots)",
-            "Cognitive robots"
-          ],
-          correctAnswer: 3
-        },
-        quizzes: [
-          {
-            question: "Which of the following is NOT a common type of industrial robot?",
-            options: [
-              "Articulated robots",
-              "Cartesian robots",
-              "Collaborative robots (cobots)",
-              "Cognitive robots"
-            ],
-            correctAnswer: 3
           },
           {
-            question: "What is a key difference between automation and robotics?",
+            question: "Which type of chatbot would be most suitable for highly regulated industries like healthcare?",
             options: [
-              "Automation always involves physical movement while robotics doesn't",
-              "Robotics requires AI while automation doesn't",
-              "Automation focuses on replacing repetitive processes while robotics involves machines that can interact with the environment",
-              "Robotics is only used in manufacturing while automation is used across industries"
+              "Open-domain generative chatbots",
+              "Retrieval-based chatbots with verified knowledge bases",
+              "Social media chatbots",
+              "Entertainment chatbots"
             ],
-            correctAnswer: 2
+            correctAnswer: 1
           },
           {
-            question: "What is the primary challenge for robots operating in unstructured environments?",
+            question: "What is 'context window' in relation to chatbots?",
             options: [
-              "Battery life",
-              "Network connectivity",
-              "Perception and adaptation to changing conditions",
-              "User interface design"
-            ],
-            correctAnswer: 2
-          }
-        ]
-      },
-      {
-        id: "section-ai-7",
-        title: "AI for Music",
-        introduction: "AI is transforming music creation, production, and distribution. This section explores how AI helps compose, mix, master, and even perform music.",
-        whyLearn: "AI music technologies are creating new possibilities for creators and listeners alike. Understanding these tools helps you appreciate their creative potential.",
-        videoUrl: "https://www.youtube.com/embed/Ey75Xw_ikqs",
-        keyPoints: [
-          "AI can compose original music by learning patterns from existing compositions",
-          "Neural networks can generate melodies, harmonies, and rhythmic structures",
-          "AI tools assist human musicians rather than replacing them",
-          "Ethical considerations include copyright, attribution, and artistic authenticity"
-        ],
-        shortVideo: "https://www.youtube.com/embed/_uLBlSKckos",
-        additionalShortVideos: ["https://www.youtube.com/embed/csAMFh7vsqw"],
-        bonusVideos: ["https://www.youtube.com/embed/1oj0Usyy_ds"],
-        visualUrl: "https://labs.google/fx/tools/music-fx",
-        image: {
-          url: "https://images.unsplash.com/photo-1511379938547-c1f69419868d",
-          description: "AI music generation tools can create original compositions by learning patterns from existing music."
-        },
-        quiz: {
-          question: "Which of these is NOT typically a feature of AI music generation systems?",
-          options: [
-            "Melody generation",
-            "Harmony creation",
-            "Live instrumentation",
-            "Style transfer"
-          ],
-          correctAnswer: 2
-        },
-        quizzes: [
-          {
-            question: "Which of these is NOT typically a feature of AI music generation systems?",
-            options: [
-              "Melody generation",
-              "Harmony creation",
-              "Live instrumentation",
-              "Style transfer"
-            ],
-            correctAnswer: 2
-          },
-          {
-            question: "What is the primary data source for training AI music generation systems?",
-            options: [
-              "Sheet music notation",
-              "Audio recordings",
-              "MIDI files",
-              "Instrument recordings"
-            ],
-            correctAnswer: 2
-          }
-        ]
-      }
-    ]
-  };
-}
+              "The user interface that displays the conversation",
+              "The amount of previous conversation the chatbot can access for understanding context",
+              "The

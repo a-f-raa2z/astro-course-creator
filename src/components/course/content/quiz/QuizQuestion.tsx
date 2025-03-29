@@ -3,6 +3,7 @@ import React from "react";
 import { Check, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { QuizQuestion as QuizQuestionType } from "@/types/course";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
 interface QuizQuestionProps {
   quiz: QuizQuestionType;

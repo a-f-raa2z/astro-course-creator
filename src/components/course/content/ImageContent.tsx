@@ -41,6 +41,62 @@ export const ImageContent = ({ section, onComplete, onPrevious, isFirstContent }
       };
     }
     
+    if (sectionTitle === "The Solar System") {
+      return {
+        url: "https://science.nasa.gov/wp-content/uploads/2023/09/solar-system-illustration-new-horizons-trajectory.width-1320.jpg", 
+        description: "The Solar System consists of the Sun and the objects that orbit it, including planets, dwarf planets, moons, asteroids, and comets." 
+      };
+    }
+    
+    if (sectionTitle === "Intro of Artificial Intelligence") {
+      return {
+        url: "https://images.unsplash.com/photo-1677442135073-8edf721c002b", 
+        description: "AI systems analyze and process data to make predictions and decisions based on patterns they've learned." 
+      };
+    }
+    
+    if (sectionTitle === "Machine Learning") {
+      return {
+        url: "https://images.unsplash.com/photo-1591453089816-0fbb971b454c", 
+        description: "Machine learning models continuously improve by analyzing patterns in data to make better predictions." 
+      };
+    }
+    
+    if (sectionTitle === "Deep Learning") {
+      return {
+        url: "https://images.unsplash.com/photo-1544383835-bda2bc66a55d", 
+        description: "Neural networks mimic human brain structure to process complex relationships between inputs and outputs." 
+      };
+    }
+    
+    if (sectionTitle === "Generative AI") {
+      return {
+        url: "https://images.unsplash.com/photo-1586374579358-9d19d632b6df", 
+        description: "Generative AI can create realistic images, text, and other content that never existed before." 
+      };
+    }
+    
+    if (sectionTitle === "Chatbots") {
+      return {
+        url: "https://images.unsplash.com/photo-1531746790731-6c087fecd65a", 
+        description: "Chatbots enable natural conversations between humans and machines through text or voice interfaces." 
+      };
+    }
+    
+    if (sectionTitle === "Robots and Automation") {
+      return {
+        url: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e", 
+        description: "Robots combine physical capabilities with AI systems to perform tasks in the real world." 
+      };
+    }
+    
+    if (sectionTitle === "AI for Music") {
+      return {
+        url: "https://images.unsplash.com/photo-1511379938547-c1f69419868d", 
+        description: "AI music generation tools can create original compositions by learning patterns from existing music." 
+      };
+    }
+    
     // Default image for any section without a specific image
     return {
       url: "https://science.nasa.gov/wp-content/uploads/2023/09/solar-system-illustration-new-horizons-trajectory.width-1320.jpg", 
@@ -48,7 +104,9 @@ export const ImageContent = ({ section, onComplete, onPrevious, isFirstContent }
     };
   };
   
-  const sectionImage = getSectionImage(section.title);
+  const sectionImage = section.image?.url && section.image?.description
+    ? { url: section.image.url, description: section.image.description }
+    : getSectionImage(section.title);
 
   const handleCapture = () => {
     setImageCaptured(true);
@@ -111,7 +169,7 @@ export const ImageContent = ({ section, onComplete, onPrevious, isFirstContent }
             </Button>
           )}
           
-          <div className={!isFirstContent ? "" : "ml-auto"}>
+          <div className={!isFirstContent ? "ml-auto" : "ml-auto"}>
             <Button 
               onClick={onComplete}
               className="bg-gradient-to-r from-yellow-600 to-yellow-700 hover:from-yellow-700 hover:to-yellow-800 animate-fade-in text-white"
