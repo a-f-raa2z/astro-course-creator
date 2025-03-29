@@ -1,3 +1,4 @@
+
 import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -34,7 +35,7 @@ const AISectionCard = ({ title, description, index, progress = 0 }: AISectionCar
       sections: [],
     };
     
-    navigate("/ai-course-start", { state: { course: mockCourse } });
+    navigate("/ai-course-start", { state: { course: mockCourse, initialSectionIndex: index } });
   };
   
   // Get appropriate icon based on section title
