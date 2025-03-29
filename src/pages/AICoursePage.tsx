@@ -67,7 +67,7 @@ const AICoursePage = () => {
 
   return (
     <div className="bg-space min-h-screen py-8 px-4">
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-4xl mx-auto">
         <div className="flex items-center mb-8">
           <Button 
             variant="ghost" 
@@ -112,21 +112,44 @@ const AICoursePage = () => {
         
         <h2 className="text-xl font-semibold text-white mb-6">Course Content</h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        {/* Timeline journey container */}
+        <div className="relative journey-path">
           {course.sections.map((section, index) => (
-            <AISectionCard 
-              key={section.id} 
-              title={section.title} 
-              description={section.introduction}
-              index={index}
-              progress={sectionProgress[index] || 0}
-              videoUrl={section.videoUrl}
-              shortVideoUrls={section.shortVideo ? 
-                [section.shortVideo, ...(section.additionalShortVideos || [])] : 
-                []}
-              visualUrl={section.visualUrl}
-              bonusUrls={section.bonusVideos}
-            />
+            <div key={section.id} className="flex mb-8 relative">
+              {/* Timeline circle with number */}
+              <div className="relative z-10">
+                <div className={`flex items-center justify-center w-12 h-12 rounded-full mr-4 border-2 ${
+                  sectionProgress[index] === 100 
+                    ? 'bg-green-600 border-green-400' 
+                    : sectionProgress[index] > 0 
+                    ? 'bg-blue-600 border-blue-400' 
+                    : 'bg-space-cosmic-blue border-blue-500/40'
+                }`}>
+                  <span className="text-white font-bold">{index + 1}</span>
+                </div>
+                {/* Connector line to next item */}
+                {index < course.sections.length - 1 && (
+                  <div className="absolute top-12 left-1/2 transform -translate-x-1/2 w-1 h-8 bg-gradient-to-b from-blue-500 to-purple-500"></div>
+                )}
+              </div>
+              
+              {/* Section card */}
+              <div className="flex-1">
+                <AISectionCard 
+                  key={section.id} 
+                  title={section.title} 
+                  description={section.introduction}
+                  index={index}
+                  progress={sectionProgress[index] || 0}
+                  videoUrl={section.videoUrl}
+                  shortVideoUrls={section.shortVideo ? 
+                    [section.shortVideo, ...(section.additionalShortVideos || [])] : 
+                    []}
+                  visualUrl={section.visualUrl}
+                  bonusUrls={section.bonusVideos}
+                />
+              </div>
+            </div>
           ))}
         </div>
       </div>
