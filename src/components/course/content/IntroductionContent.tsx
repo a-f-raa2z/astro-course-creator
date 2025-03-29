@@ -23,6 +23,12 @@ export const IntroductionContent = ({ section, onComplete, onPrevious, isFirstCo
   
   const handleFlip = () => {
     setFlipped(!flipped);
+    if (!flipped) {
+      toast({
+        title: "Card Flipped!",
+        description: "Now you can continue to the next content."
+      });
+    }
   };
   
   // Custom introductions based on section title
@@ -54,84 +60,65 @@ export const IntroductionContent = ({ section, onComplete, onPrevious, isFirstCo
           color="bg-purple-800/50"
         />
         
-        {/* 4:3 Aspect ratio flashcard container */}
-        <div className="flex-1 p-4 flex items-center justify-center">
-          <div className="w-full max-w-3xl">
-            <AspectRatio ratio={4/3}>
-              <div className="w-full h-full relative">
-                <div className="absolute inset-0 perspective-1000 transform-style-preserve-3d transition-all duration-700" 
-                     style={{ 
-                       transformStyle: 'preserve-3d', 
-                       perspective: '1000px',
-                       transform: flipped ? 'rotateY(180deg)' : 'rotateY(0deg)'
-                     }}>
+        {/* 4:3 Flashcard container */}
+        <div className="flex-1 flex items-center justify-center p-2">
+          <div className="w-full h-full relative">
+            <div className={`w-full h-full perspective-1000 transition-all duration-700 transform-style-preserve-3d ${flipped ? 'rotate-y-180' : ''}`}>
+              {/* Front of flashcard */}
+              <div className={`absolute inset-0 backface-hidden rounded-xl bg-purple-900/30 p-4 border border-purple-500/30 shadow-lg ${flipped ? 'opacity-0' : 'opacity-100'}`}>
+                <div className="h-full overflow-auto prose prose-invert max-w-none">
+                  <p className="text-gray-200">{getCustomIntroduction(section.title)}</p>
                   
-                  {/* Front of flashcard */}
-                  <div className="absolute inset-0 bg-purple-900/30 p-4 border border-purple-500/30 rounded-xl shadow-lg overflow-auto"
-                       style={{ 
-                         backfaceVisibility: 'hidden',
-                         transform: flipped ? 'rotateY(180deg)' : 'rotateY(0deg)'
-                       }}>
-                    <div className="h-full overflow-auto prose prose-invert max-w-none">
-                      <p className="text-gray-200">{getCustomIntroduction(section.title)}</p>
-                      
-                      {/* Solar System Diagram - Only show for Solar System section */}
-                      {shouldShowSolarSystemDiagram && (
-                        <>
-                          <div className="mt-4 relative h-24 md:h-32 flex items-center justify-center">
-                            {/* Sun */}
-                            <div className="absolute w-12 h-12 bg-yellow-500 rounded-full flex items-center justify-center animate-pulse z-30">
-                              <Sun className="h-8 w-8 text-yellow-300" />
-                            </div>
-                            
-                            {/* Mercury */}
-                            <div className="absolute w-28 h-28 rounded-full border border-gray-400/30 flex items-center justify-center">
-                              <div className="absolute w-2 h-2 bg-gray-300 rounded-full" style={{ transform: 'translateX(14px)' }}></div>
-                            </div>
-                            
-                            {/* Venus */}
-                            <div className="absolute w-36 h-36 rounded-full border border-gray-400/30 flex items-center justify-center">
-                              <div className="absolute w-3 h-3 bg-orange-300 rounded-full" style={{ transform: 'translateX(-18px)' }}></div>
-                            </div>
-                            
-                            {/* Earth */}
-                            <div className="absolute w-44 h-44 rounded-full border border-gray-400/30 flex items-center justify-center">
-                              <div className="absolute w-4 h-4 bg-blue-400 rounded-full flex items-center justify-center" style={{ transform: 'translateX(22px)' }}>
-                                <div className="absolute w-1.5 h-1.5 bg-gray-200 rounded-full" style={{ transform: 'translateX(5px)' }}></div>
-                              </div>
-                            </div>
-                            
-                            {/* Mars */}
-                            <div className="absolute w-52 h-52 rounded-full border border-gray-400/30 flex items-center justify-center">
-                              <div className="absolute w-3 h-3 bg-red-500 rounded-full" style={{ transform: 'translateX(-26px)' }}></div>
-                            </div>
+                  {/* Solar System Diagram - Only show for Solar System section */}
+                  {shouldShowSolarSystemDiagram && (
+                    <>
+                      <div className="mt-4 relative h-24 md:h-32 flex items-center justify-center">
+                        {/* Sun */}
+                        <div className="absolute w-12 h-12 bg-yellow-500 rounded-full flex items-center justify-center animate-pulse z-30">
+                          <Sun className="h-8 w-8 text-yellow-300" />
+                        </div>
+                        
+                        {/* Mercury */}
+                        <div className="absolute w-28 h-28 rounded-full border border-gray-400/30 flex items-center justify-center">
+                          <div className="absolute w-2 h-2 bg-gray-300 rounded-full" style={{ transform: 'translateX(14px)' }}></div>
+                        </div>
+                        
+                        {/* Venus */}
+                        <div className="absolute w-36 h-36 rounded-full border border-gray-400/30 flex items-center justify-center">
+                          <div className="absolute w-3 h-3 bg-orange-300 rounded-full" style={{ transform: 'translateX(-18px)' }}></div>
+                        </div>
+                        
+                        {/* Earth */}
+                        <div className="absolute w-44 h-44 rounded-full border border-gray-400/30 flex items-center justify-center">
+                          <div className="absolute w-4 h-4 bg-blue-400 rounded-full flex items-center justify-center" style={{ transform: 'translateX(22px)' }}>
+                            <div className="absolute w-1.5 h-1.5 bg-gray-200 rounded-full" style={{ transform: 'translateX(5px)' }}></div>
                           </div>
-                          
-                          <h4 className="text-purple-300 mt-2">Our Solar System</h4>
-                          <p className="text-sm text-gray-300">The solar system consists of the Sun and everything that orbits around it, including planets, moons, asteroids, comets, and other celestial objects.</p>
-                        </>
-                      )}
-                    </div>
-                  </div>
-                  
-                  {/* Back of flashcard */}
-                  <div className="absolute inset-0 bg-yellow-900/20 p-4 border border-yellow-500/20 rounded-xl shadow-lg overflow-auto"
-                       style={{ 
-                         backfaceVisibility: 'hidden',
-                         transform: 'rotateY(180deg)',
-                         zIndex: flipped ? 1 : -1
-                       }}>
-                    <div className="h-full overflow-auto">
-                      <div className="flex items-center mb-2">
-                        <Lightbulb className="h-5 w-5 text-yellow-400 mr-2" />
-                        <h3 className="text-lg font-medium text-yellow-300">Why Learn This?</h3>
+                        </div>
+                        
+                        {/* Mars */}
+                        <div className="absolute w-52 h-52 rounded-full border border-gray-400/30 flex items-center justify-center">
+                          <div className="absolute w-3 h-3 bg-red-500 rounded-full" style={{ transform: 'translateX(-26px)' }}></div>
+                        </div>
                       </div>
-                      <p className="text-gray-300 italic">{section.whyLearn}</p>
-                    </div>
-                  </div>
+                      
+                      <h4 className="text-purple-300 mt-2">Our Solar System</h4>
+                      <p className="text-sm text-gray-300">The solar system consists of the Sun and everything that orbits around it, including planets, moons, asteroids, comets, and other celestial objects.</p>
+                    </>
+                  )}
                 </div>
               </div>
-            </AspectRatio>
+              
+              {/* Back of flashcard */}
+              <div className={`absolute inset-0 backface-hidden rounded-xl bg-yellow-900/20 p-4 border border-yellow-500/20 shadow-lg rotate-y-180 ${flipped ? 'opacity-100' : 'opacity-0'}`}>
+                <div className="h-full overflow-auto">
+                  <div className="flex items-center mb-2">
+                    <Lightbulb className="h-5 w-5 text-yellow-400 mr-2" />
+                    <h3 className="text-lg font-medium text-yellow-300">Why Learn This?</h3>
+                  </div>
+                  <p className="text-gray-300 italic">{section.whyLearn}</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         
@@ -160,7 +147,8 @@ export const IntroductionContent = ({ section, onComplete, onPrevious, isFirstCo
           <div className={!isFirstContent ? "" : "ml-auto"}>
             <Button 
               onClick={onComplete}
-              className="bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 transition-all"
+              className={`bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 transition-all ${flipped ? 'opacity-100 animate-pulse' : 'opacity-50'}`}
+              disabled={!flipped}
             >
               Continue <ArrowRight className="h-4 w-4 ml-2" />
             </Button>
