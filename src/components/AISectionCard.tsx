@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -45,18 +44,13 @@ const AISectionCard = ({
   const navigate = useNavigate();
   
   const handleStartSection = () => {
-    // Mock course for demonstration purposes
-    const mockCourse = {
-      id: `ai-section-${index}`,
-      title: title,
-      description: description,
-      sections: [],
-    };
-    
-    navigate("/ai-course-start", { state: { course: mockCourse, initialSectionIndex: index } });
+    navigate("/ai-course-start", { 
+      state: { 
+        initialSectionIndex: index 
+      } 
+    });
   };
   
-  // Get appropriate icon based on section title
   const getSectionIcon = () => {
     switch (title) {
       case "Intro of Artificial Intelligence":
@@ -96,7 +90,6 @@ const AISectionCard = ({
       <CardContent>
         <p className="text-gray-300 mb-4">{description}</p>
         
-        {/* Progress indicator */}
         <div className="mb-3">
           <div className="flex justify-between text-xs text-blue-300 mb-1">
             <span>Progress</span>
@@ -105,7 +98,6 @@ const AISectionCard = ({
           <Progress value={progress} className="h-2 bg-blue-900/30" />
         </div>
         
-        {/* Content type icons - similar to astronomy course */}
         <div className="grid grid-cols-5 gap-2 mb-4">
           <div className="bg-blue-900/30 p-2 rounded flex items-center justify-center" title="Introduction">
             <FileText className="h-4 w-4 text-blue-300" />
