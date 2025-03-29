@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { CourseSection } from "@/types/course";
 import { Button } from "@/components/ui/button";
@@ -22,8 +21,8 @@ export const ImageContent = ({ section, onComplete, onPrevious, isFirstContent }
   const getSectionImage = (sectionTitle: string) => {
     if (sectionTitle === "The Inner Planets") {
       return {
-        url: "https://science.nasa.gov/wp-content/uploads/2023/11/pia25016.width-1320.jpg",
-        description: "The four inner planets (Mercury, Venus, Earth, and Mars) are terrestrial (rocky) worlds." 
+        url: "/lovable-uploads/4feca2b6-a656-4abf-b674-e00f9467fb87.png",
+        description: "The four inner planets (Venus, Earth, Moon, and Mars) as photographed by various space missions."
       };
     }
     

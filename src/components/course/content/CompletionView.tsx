@@ -1,7 +1,7 @@
 
 import React from "react";
 import { Button } from "@/components/ui/button";
-import { CheckCircle, Youtube, ArrowRight, ListChecks } from "lucide-react";
+import { CheckCircle, Youtube, ListChecks } from "lucide-react";
 
 interface CompletionViewProps {
   sectionTitle: string;
