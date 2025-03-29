@@ -90,51 +90,51 @@ export const GameContentTabs = ({
           
           return (
             <div key={index} className="flex flex-col items-center">
-              <div className="flex items-center gap-1.5">
-                <button
-                  onClick={() => onTabClick(index)}
-                  className={`
-                    w-6 h-6 rounded-full flex items-center justify-center transition-all 
-                    ${isActive 
-                      ? isQuiz 
-                        ? "bg-orange-600 text-white shadow-md shadow-orange-500/30" 
+              {/* Number button - now standalone at the top */}
+              <button
+                onClick={() => onTabClick(index)}
+                className={`
+                  w-6 h-6 rounded-full flex items-center justify-center transition-all mb-2
+                  ${isActive 
+                    ? isQuiz 
+                      ? "bg-orange-600 text-white shadow-md shadow-orange-500/30" 
+                      : isPlayground
+                        ? "bg-green-600 text-white shadow-md shadow-green-500/30"
+                        : "bg-purple-600 text-white shadow-md shadow-purple-500/30"
+                    : isDone
+                      ? "bg-purple-800/80 text-purple-300 border border-purple-500/50"
+                      : isQuiz
+                        ? "bg-orange-900/80 text-orange-300 border border-orange-500/50 hover:bg-orange-800"
                         : isPlayground
-                          ? "bg-green-600 text-white shadow-md shadow-green-500/30"
-                          : "bg-purple-600 text-white shadow-md shadow-purple-500/30"
-                      : isDone
-                        ? "bg-purple-800/80 text-purple-300 border border-purple-500/50"
-                        : isQuiz
-                          ? "bg-orange-900/80 text-orange-300 border border-orange-500/50 hover:bg-orange-800"
-                          : isPlayground
-                            ? "bg-green-900/80 text-green-300 border border-green-500/50 hover:bg-green-800"
-                            : "bg-gray-800/80 text-gray-400 border border-purple-500/20 hover:bg-gray-700"
-                    }
-                    ${(isQuiz || isPlayground) && !isActive && !isDone ? "animate-pulse" : ""}
-                  `}
-                  aria-label={`Step ${stepNumber}: ${getContentTitle(type)}`}
-                >
-                  {isDone ? (
-                    <Star className="h-3 w-3 text-yellow-400" />
-                  ) : (
-                    <span className="text-xs font-semibold">{stepNumber}</span>
+                          ? "bg-green-900/80 text-green-300 border border-green-500/50 hover:bg-green-800"
+                          : "bg-gray-800/80 text-gray-400 border border-purple-500/20 hover:bg-gray-700"
+                  }
+                  ${(isQuiz || isPlayground) && !isActive && !isDone ? "animate-pulse" : ""}
+                `}
+                aria-label={`Step ${stepNumber}: ${getContentTitle(type)}`}
+              >
+                {isDone ? (
+                  <Star className="h-3 w-3 text-yellow-400" />
+                ) : (
+                  <span className="text-xs font-semibold">{stepNumber}</span>
+                )}
+              </button>
+              
+              {/* Icon and title below the number */}
+              <div className={`flex flex-col items-center gap-1 text-xs font-medium ${
+                isActive 
+                  ? isQuiz ? "text-orange-300" : isPlayground ? "text-green-300" : "text-purple-300" 
+                  : "text-gray-400"
+              }`}>
+                <span className={getContentColor(type)}>
+                  {getContentIcon(type)}
+                </span>
+                <span className="hidden sm:inline text-center">
+                  {getContentTitle(type)}
+                  {(isQuiz || isPlayground) && !isDone && (
+                    <span className="ml-1 text-orange-400 font-bold">★</span>
                   )}
-                </button>
-                
-                <div className={`flex items-center gap-1 text-xs font-medium ${
-                  isActive 
-                    ? isQuiz ? "text-orange-300" : isPlayground ? "text-green-300" : "text-purple-300" 
-                    : "text-gray-400"
-                }`}>
-                  <span className={getContentColor(type)}>
-                    {getContentIcon(type)}
-                  </span>
-                  <span className="hidden sm:inline">
-                    {getContentTitle(type)}
-                    {(isQuiz || isPlayground) && !isDone && (
-                      <span className="ml-1 text-orange-400 font-bold">★</span>
-                    )}
-                  </span>
-                </div>
+                </span>
               </div>
             </div>
           );
