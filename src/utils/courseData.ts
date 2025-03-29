@@ -1,3 +1,4 @@
+
 import { AssessmentQuestion, Course } from "@/types/course";
 
 export const assessmentQuestions: AssessmentQuestion[] = [
@@ -825,4 +826,13 @@ function generateAICourse(level: string, learningStyle: string): Course {
             options: [
               "The user interface that displays the conversation",
               "The amount of previous conversation the chatbot can access for understanding context",
-              "The
+              "The physical dimensions of the chatbot's avatar",
+              "The timeframe in which a chatbot responds to queries"
+            ],
+            correctAnswer: 1
+          }
+        ]
+      }
+    ]
+  };
+}
