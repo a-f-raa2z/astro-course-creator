@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -59,6 +58,7 @@ const AstronomyCoursePage = () => {
       case "Stars":
         return <Stars className="h-6 w-6 text-yellow-300" />;
       case "Planets":
+      case "The Inner Planets":
         return <Rocket className="h-6 w-6 text-orange-400" />;
       case "Telescopes":
         return <Telescope className="h-6 w-6 text-purple-400" />;

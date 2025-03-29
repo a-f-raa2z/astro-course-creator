@@ -31,6 +31,23 @@ export const IntroductionContent = ({ section, onComplete, onPrevious, isFirstCo
     }
   };
   
+  // Custom introductions based on section title
+  const getCustomIntroduction = (sectionTitle: string) => {
+    switch (sectionTitle) {
+      case "The Solar System":
+        return "Get ready to blast off on a journey through our cosmic neighborhood! The Solar System is more than just the Sun and a few planets—it's a dynamic, swirling collection of celestial bodies, from asteroids to comets and distant dwarf planets. Turn to page 50 as we uncover the wonders of this vast space family and learn how everything orbits the mighty Sun at the center.";
+      case "The Inner Planets":
+      case "Planets":
+        return "Let's zoom in a little closer to the Sun and meet the rocky worlds that make up the inner planets: Mercury, Venus, Earth, and Mars. These terrestrial planets are full of extremes—from scorching heat to red dust storms—and they each tell a different story about what it means to be part of our solar system's front row. Dive into the main video and bonus shorts to explore these fascinating worlds.";
+      case "Earth":
+        return "Our home planet is a rare gem in the Solar System—alive with oceans, air, and ecosystems teeming with life. But how well do you really know Earth? Through stunning visuals and science-packed videos, explore the planet's layers, landforms, and its place in the larger cosmic dance. Then, test your Earth knowledge with the interactive visual guide linked below.";
+      case "The Moon":
+        return "Our closest neighbor in space, the Moon has captured human imagination for centuries. From its mysterious dark side to its role in tides and eclipses, the Moon is more than just a pretty face in the night sky. These videos offer a closer look at its phases, surface features, and why it continues to be a key part of Earth's story. Take it further with NASA's interactive moon explorer tool.";
+      default:
+        return section.introduction;
+    }
+  };
+  
   return (
     <div className="w-full h-full flex items-center justify-center">
       <Card className="w-full h-full flex flex-col p-4 bg-space-cosmic-blue/20 backdrop-blur-sm border border-purple-500/20">
@@ -51,7 +68,7 @@ export const IntroductionContent = ({ section, onComplete, onPrevious, isFirstCo
               {/* Front of flashcard */}
               <div className={`absolute inset-0 backface-hidden rounded-xl bg-purple-900/30 p-4 border border-purple-500/30 shadow-lg ${flipped ? 'opacity-0' : 'opacity-100'}`}>
                 <div className="h-full overflow-auto prose prose-invert max-w-none">
-                  <p className="text-gray-200">{section.introduction}</p>
+                  <p className="text-gray-200">{getCustomIntroduction(section.title)}</p>
                   
                   {/* Solar System Diagram */}
                   <div className="mt-4 relative h-24 md:h-32 flex items-center justify-center">
