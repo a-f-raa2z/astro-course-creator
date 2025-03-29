@@ -4,12 +4,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { 
   ChevronLeft, 
-  Brain,
-  FileText,
-  Youtube,
-  Video,
-  Star,
-  Gamepad2
+  Brain
 } from "lucide-react";
 import { Course } from "@/types/course";
 import LoadingAnimation from "@/components/LoadingAnimation";
@@ -107,6 +102,12 @@ const AICoursePage = () => {
               description={section.introduction}
               index={index}
               progress={sectionProgress[index] || 0}
+              videoUrl={section.videoUrl}
+              shortVideoUrls={section.shortVideo ? 
+                [section.shortVideo, ...(section.additionalShortVideos || [])] : 
+                []}
+              visualUrl={section.visualUrl}
+              bonusUrls={section.bonusVideos}
             />
           ))}
         </div>

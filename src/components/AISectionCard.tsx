@@ -12,18 +12,36 @@ import {
   Bot, 
   Factory, 
   Music, 
-  Paintbrush
+  Paintbrush,
+  FileText,
+  Youtube,
+  Video,
+  Star,
+  Gamepad2
 } from "lucide-react";
-import { Progress as ProgressBar } from "@/components/ui/progress";
+import { Progress } from "@/components/ui/progress";
 
 interface AISectionCardProps {
   title: string;
   description: string;
   index: number;
   progress?: number;
+  videoUrl?: string;
+  shortVideoUrls?: string[];
+  visualUrl?: string | null;
+  bonusUrls?: string[];
 }
 
-const AISectionCard = ({ title, description, index, progress = 0 }: AISectionCardProps) => {
+const AISectionCard = ({ 
+  title, 
+  description, 
+  index, 
+  progress = 0,
+  videoUrl,
+  shortVideoUrls,
+  visualUrl,
+  bonusUrls
+}: AISectionCardProps) => {
   const navigate = useNavigate();
   
   const handleStartSection = () => {
@@ -84,7 +102,30 @@ const AISectionCard = ({ title, description, index, progress = 0 }: AISectionCar
             <span>Progress</span>
             <span>{progress}%</span>
           </div>
-          <ProgressBar value={progress} className="h-2 bg-blue-900/30" />
+          <Progress value={progress} className="h-2 bg-blue-900/30" />
+        </div>
+        
+        {/* Content type icons - similar to astronomy course */}
+        <div className="grid grid-cols-5 gap-2 mb-4">
+          <div className="bg-blue-900/30 p-2 rounded flex items-center justify-center" title="Introduction">
+            <FileText className="h-4 w-4 text-blue-300" />
+          </div>
+          <div className="bg-red-900/30 p-2 rounded flex items-center justify-center" title="Video Lesson">
+            <Youtube className="h-4 w-4 text-red-400" />
+          </div>
+          <div className="bg-blue-900/30 p-2 rounded flex items-center justify-center" title="Short Videos">
+            <Video className="h-4 w-4 text-blue-400" />
+          </div>
+          {bonusUrls && bonusUrls.length > 0 && (
+            <div className="bg-yellow-900/30 p-2 rounded flex items-center justify-center" title="Bonus Content">
+              <Star className="h-4 w-4 text-yellow-400" />
+            </div>
+          )}
+          {visualUrl && (
+            <div className="bg-green-900/30 p-2 rounded flex items-center justify-center" title="Interactive Playground">
+              <Gamepad2 className="h-4 w-4 text-green-400" />
+            </div>
+          )}
         </div>
         
         <div className="flex justify-end">
