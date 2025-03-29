@@ -147,7 +147,7 @@ const CourseStartPage = () => {
           <div className="relative w-full h-full max-h-full">
             <div className="absolute inset-0">
               <GameContentRenderer 
-                contentType={currentContentType}
+                contentType={currentContentType as ContentType['type']}
                 currentSection={currentSection}
                 quizSubmitted={quizSubmitted}
                 selectedAnswer={selectedAnswer}
