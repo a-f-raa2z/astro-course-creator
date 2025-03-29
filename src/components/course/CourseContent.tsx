@@ -1,8 +1,6 @@
 
 import React from "react";
-import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { ChevronLeft, ChevronRight } from "lucide-react";
 import { CourseSection } from "@/types/course";
 import { ContentType } from "@/types/ContentType";
 import { GameContentRenderer } from "@/components/course/GameContentRenderer";
@@ -67,26 +65,6 @@ export const CourseContent: React.FC<CourseContentProps> = ({
           onStartNextSection={onStartNextSection}
         />
       </Card>
-
-      {!showSectionTransition && (
-        <div className="flex justify-between">
-          <Button
-            onClick={handlePreviousContent}
-            disabled={currentContentIndex === 0}
-            className="bg-space-cosmic-blue hover:bg-space-deep-blue text-white"
-          >
-            <ChevronLeft className="mr-2 h-4 w-4" />
-            Previous
-          </Button>
-          <Button
-            onClick={handleNextContent}
-            className="bg-space-cosmic-blue hover:bg-space-deep-blue text-white"
-          >
-            Next
-            <ChevronRight className="ml-2 h-4 w-4" />
-          </Button>
-        </div>
-      )}
     </>
   );
 };
