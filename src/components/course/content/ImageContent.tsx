@@ -21,8 +21,8 @@ export const ImageContent = ({ section, onComplete, onPrevious, isFirstContent }
   const getSectionImage = (sectionTitle: string) => {
     if (sectionTitle === "The Inner Planets") {
       return {
-        url: "/lovable-uploads/4feca2b6-a656-4abf-b674-e00f9467fb87.png",
-        description: "The four inner planets (Venus, Earth, Moon, and Mars) as photographed by various space missions."
+        url: "/lovable-uploads/7a35184a-10f3-440e-92ac-90fd4cd6cf61.png",
+        description: "The four inner planets of our solar system: Venus, Earth, Moon, and Mars shown to scale."
       };
     }
     
