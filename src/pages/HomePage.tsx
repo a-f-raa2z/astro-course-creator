@@ -104,7 +104,6 @@ const HomePage = () => {
                 className="w-full h-full object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
-              <h3 className="absolute bottom-4 left-6 text-2xl font-semibold text-white">Astronomy</h3>
             </div>
             <CardHeader className="pb-2">
               <CardTitle className="text-2xl text-purple-100 flex items-center">
@@ -137,7 +136,6 @@ const HomePage = () => {
                 className="w-full h-full object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
-              <h3 className="absolute bottom-4 left-6 text-2xl font-semibold text-white">Artificial Intelligence</h3>
             </div>
             <CardHeader className="pb-2">
               <CardTitle className="text-2xl text-blue-100 flex items-center">

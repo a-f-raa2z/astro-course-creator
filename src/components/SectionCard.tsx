@@ -92,17 +92,43 @@ const SectionCard = ({
     }
   };
   
+  // Get section background image based on section title
+  const getSectionImage = () => {
+    switch (title) {
+      case "The Solar System":
+        return "/lovable-uploads/ad48c8d7-8aae-41a6-95ac-22af96b8a45a.png";
+      case "The Inner Planets":
+        return "/lovable-uploads/e0d0af9e-9849-4955-ac58-29cf798cb880.png";
+      case "Earth":
+        return "/lovable-uploads/6e29dd9e-5707-44ae-81af-d52de51f84e6.png";
+      case "The Moon":
+        return "/lovable-uploads/0228ba3e-a126-45c3-a728-10da3a418e4e.png";
+      default:
+        return "/lovable-uploads/ad48c8d7-8aae-41a6-95ac-22af96b8a45a.png";
+    }
+  };
+  
   return (
     <Card className="cosmic-card mb-6 overflow-hidden hover:shadow-lg hover:shadow-purple-500/10 transition-all border-purple-500/20">
+      <div className="relative h-40 overflow-hidden">
+        <img 
+          src={getSectionImage()}
+          alt={title}
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+        <div className="absolute bottom-3 left-4 flex items-center">
+          <span className="mr-2 bg-purple-900/70 text-xs px-2 py-1 rounded-full text-purple-200 border border-purple-500/30">
+            Section {index + 1}
+          </span>
+        </div>
+      </div>
       <CardHeader className="pb-2">
         <div className="flex justify-between items-center">
           <CardTitle className="text-xl text-purple-100 flex items-center">
             {getSectionIcon()}
             {title}
           </CardTitle>
-          <span className="text-xs px-2 py-1 bg-purple-900/50 rounded-full text-purple-300 border border-purple-500/20">
-            Section {index + 1}
-          </span>
         </div>
       </CardHeader>
       <CardContent>

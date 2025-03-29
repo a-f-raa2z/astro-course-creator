@@ -1,182 +1,144 @@
-
+import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { Card, CardContent } from "@/components/ui/card";
+import { Course, CourseSection } from "@/types/course";
+import { ContentType } from "@/types/ContentType";
+import GameContentRenderer from "@/components/course/GameContentRenderer";
 import { Button } from "@/components/ui/button";
-import { ChevronLeft, Star, Brain, Flag, ArrowRight, ArrowLeft } from "lucide-react";
-import { useToast } from "@/hooks/use-toast";
-import { useGameLearning, ContentType } from "@/hooks/useGameLearning";
-import { GameProgress } from "@/components/course/GameProgress";
-import { GameContentRenderer } from "@/components/course/GameContentRenderer";
-import { GameContentTabs } from "@/components/course/GameContentTabs";
-import { XPPopup } from "@/components/course/XPPopup";
-import { useEffect, useState } from "react";
-import { Separator } from "@/components/ui/separator";
-import { aiCourseData } from "@/utils/courseData";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import GameProgress from "@/components/course/GameProgress";
+import XPPopup from "@/components/course/XPPopup";
 
 const AICourseStartPage = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const course = location.state?.course || aiCourseData; // Fallback to aiCourseData if no course is provided
-  const initialSectionIndex = location.state?.initialSectionIndex ?? 0;
-  const { toast } = useToast();
-  const [showSectionTransition, setShowSectionTransition] = useState(false);
-  
-  // Redirect to the course page if no course data is available
-  useEffect(() => {
-    if (!course) {
-      navigate("/ai-course");
-      return;
-    }
-  }, [course, navigate]);
+  const course = location.state?.course as Course | null;
+  const initialSectionIndex = location.state?.initialSectionIndex || 0;
+  const [currentSectionIndex, setCurrentSectionIndex] = useState(initialSectionIndex);
+  const [currentSection, setCurrentSection] = useState<CourseSection | null>(null);
+  const [contentList, setContentList] = useState<ContentType[]>([]);
+  const [currentContentIndex, setCurrentContentIndex] = useState(0);
+  const [showXPPopup, setShowXPPopup] = useState(false);
+  const [xpEarned, setXpEarned] = useState(0);
 
-  // Early return if no course data to prevent errors
-  if (!course) {
-    return <div className="bg-space min-h-screen flex items-center justify-center">
-      <div className="text-white text-xl">Loading course data...</div>
-    </div>;
+  useEffect(() => {
+    if (course && course.sections && course.sections.length > 0) {
+      setCurrentSection(course.sections[currentSectionIndex]);
+    }
+  }, [course, currentSectionIndex]);
+
+  useEffect(() => {
+    if (currentSection) {
+      const newContentList: ContentType[] = [
+        { id: 'introduction', type: 'introduction', title: 'Introduction', completed: false },
+        { id: 'key-points', type: 'key-points', title: 'Key Points', completed: false },
+        { id: 'video', type: 'video', title: 'Video Lesson', completed: false },
+        ...(currentSection.shortVideo ? [{ id: 'short-video-1', type: 'short-video', title: 'Short Video 1', completed: false }] : []),
+        ...(currentSection.additionalShortVideos && currentSection.additionalShortVideos.length > 0
+          ? currentSection.additionalShortVideos.map((_, index) => ({
+            id: `short-video-${index + 2}`,
+            type: 'short-video',
+            title: `Short Video ${index + 2}`,
+            completed: false,
+          }))
+          : []),
+        ...(currentSection.visualUrl ? [{ id: 'playground', type: 'playground', title: 'Interactive Playground', completed: false }] : []),
+        { id: 'quiz', type: 'quiz', title: 'Quiz', completed: false },
+        ...(currentSection.bonusVideos && currentSection.bonusVideos.length > 0
+          ? currentSection.bonusVideos.map((_, index) => ({
+            id: `bonus-${index + 1}`,
+            type: 'bonus',
+            title: `Bonus Content ${index + 1}`,
+            completed: false,
+          }))
+          : []),
+        { id: 'image', type: 'image', title: 'Image', completed: false },
+      ];
+      setContentList(newContentList);
+    }
+  }, [currentSection]);
+
+  const handleNextContent = () => {
+    const updatedContentList = [...contentList];
+    updatedContentList[currentContentIndex] = { ...updatedContentList[currentContentIndex], completed: true };
+    setContentList(updatedContentList);
+
+    if (currentContentIndex < contentList.length - 1) {
+      setCurrentContentIndex(currentContentIndex + 1);
+    } else {
+      // Move to the next section or complete the course
+      if (currentSectionIndex < (course?.sections?.length || 0) - 1) {
+        setCurrentSectionIndex(currentSectionIndex + 1);
+        setCurrentContentIndex(0); // Reset content index to the beginning
+        showXP(50);
+      } else {
+        // Course completed
+        alert("Congratulations! You've completed the course.");
+        navigate("/");
+      }
+    }
+  };
+
+  const handlePreviousContent = () => {
+    if (currentContentIndex > 0) {
+      setCurrentContentIndex(currentContentIndex - 1);
+    }
+  };
+
+  const showXP = (xp: number) => {
+    setXpEarned(xp);
+    setShowXPPopup(true);
+    setTimeout(() => {
+      setShowXPPopup(false);
+    }, 2000);
+  };
+
+  if (!course || !currentSection) {
+    return <div className="min-h-screen bg-space text-white flex items-center justify-center">Loading...</div>;
   }
 
-  const {
-    currentSectionIndex,
-    setCurrentSectionIndex,
-    currentContentIndex,
-    currentSection,
-    currentContentType,
-    availableContentTypes,
-    totalContentCount,
-    totalSections,
-    overallProgress,
-    quizSubmitted,
-    selectedAnswer,
-    handleNextContent: originalHandleNextContent,
-    handlePreviousContent,
-    setSelectedAnswer,
-    handleQuizSubmit,
-    xpPoints,
-    level,
-    levelProgress,
-    completedContents,
-    setCurrentContentIndex
-  } = useGameLearning(course);
-
-  // Handle next content with section transition logic
-  const handleNextContent = () => {
-    // Check if this is the last content of the current section but not the last section overall
-    const isLastContentInSection = currentContentIndex === availableContentTypes.length - 1;
-    const isNotLastSection = currentSectionIndex < course.sections.length - 1;
-    
-    if (isLastContentInSection && isNotLastSection) {
-      setShowSectionTransition(true);
-    } else {
-      originalHandleNextContent();
-    }
-  };
-  
-  // Handle starting the next section
-  const handleStartNextSection = () => {
-    setShowSectionTransition(false);
-    originalHandleNextContent(); // This will move to the next section
-  };
-
-  // Set initial section index from route state
-  useEffect(() => {
-    if (initialSectionIndex !== undefined && initialSectionIndex !== currentSectionIndex) {
-      setCurrentSectionIndex(initialSectionIndex);
-      setCurrentContentIndex(0); // Reset to first content of the section
-    }
-  }, [initialSectionIndex, currentSectionIndex, setCurrentSectionIndex, setCurrentContentIndex]);
-
-  const isFirstContent = currentContentIndex === 0 && currentSectionIndex === 0;
-  const isLastContent = currentContentIndex === availableContentTypes.length - 1 && 
-                        currentSectionIndex === totalSections - 1;
-  
-  // Get the next section title for transition screen
-  const getNextSectionTitle = () => {
-    if (currentSectionIndex < course.sections.length - 1) {
-      return course.sections[currentSectionIndex + 1].title;
-    }
-    return "";
-  };
+  const currentContentType = contentList[currentContentIndex];
 
   return (
-    <div className="bg-space min-h-screen py-8 px-4">
-      {/* XPPopup - Positioned at the top corner */}
-      <XPPopup xpPoints={xpPoints} level={level} levelProgress={levelProgress} />
-      
-      <div className="max-w-4xl mx-auto">
-        <header className="mb-6">
-          {/* Course title and back button row with progress bar */}
-          <div className="flex items-center space-x-4 mb-4">
-            <div className="flex items-center">
-              <Button 
-                variant="ghost" 
-                size="sm" 
-                className="mr-2 text-blue-300 hover:text-blue-100 hover:bg-blue-900/30"
-                onClick={() => navigate("/ai-course", { state: { course } })}
-              >
-                <ChevronLeft className="h-5 w-5 mr-1" />
-                Back
-              </Button>
-              <h1 className="text-xl font-bold text-white flex items-center">
-                <Brain className="mr-2 h-5 w-5 text-blue-400" />
-                {course.title}
-              </h1>
-            </div>
-            <div className="flex-grow">
-              <GameProgress
-                overallProgress={overallProgress}
-                currentSectionIndex={currentSectionIndex}
-                totalSections={totalSections}
-              />
-            </div>
-          </div>
-          
-          {/* Separator between course title and section title */}
-          <Separator className="my-4 bg-blue-500/30" />
-          
-          {/* Section title with larger size */}
-          <div className="flex items-center text-blue-200 mt-4 mb-4">
-            <Flag className="h-5 w-5 mr-2 text-blue-400" />
-            <span className="text-lg font-medium">
-              Section {currentSectionIndex + 1}: {currentSection?.title || 'Loading...'}
-            </span>
-          </div>
-        </header>
-        
-        {/* Content tabs showing linear progress */}
-        <GameContentTabs 
-          contentTypes={availableContentTypes}
-          currentContentIndex={currentContentIndex}
-          onTabClick={(index) => {
-            setSelectedAnswer(null);
-            setCurrentContentIndex(index);
-          }}
-          completedContents={completedContents}
-          sectionIndex={currentSectionIndex}
-        />
-        
-        {/* Main content card with adjusted size - 70% of viewport height */}
-        <div className="animate-fade-in h-[70vh] max-w-full mx-auto">
-          <div className="relative w-full h-full max-h-full">
-            <div className="absolute inset-0">
-              <GameContentRenderer 
-                contentType={currentContentType}
-                currentSection={currentSection}
-                quizSubmitted={quizSubmitted}
-                selectedAnswer={selectedAnswer}
-                setSelectedAnswer={setSelectedAnswer}
-                handleQuizSubmit={handleQuizSubmit}
-                handleNextContent={handleNextContent}
-                handlePreviousContent={handlePreviousContent}
-                isFirstContent={isFirstContent}
-                showSectionTransition={showSectionTransition}
-                nextSectionTitle={getNextSectionTitle()}
-                onStartNextSection={handleStartNextSection}
-              />
-            </div>
-          </div>
+    <div className="min-h-screen bg-space text-white">
+      <div className="container mx-auto px-4 py-8">
+        <div className="mb-4">
+          <Button variant="ghost" onClick={() => navigate("/ai-course", { state: { course } })} className="text-white hover:bg-space-cosmic-blue/40">
+            <ChevronLeft className="mr-2 h-4 w-4" /> Back to Course
+          </Button>
+        </div>
+
+        <h1 className="text-2xl font-bold mb-4">{course.title}</h1>
+        <h2 className="text-xl text-gray-300 mb-4">{currentSection.title}</h2>
+
+        <GameProgress contentList={contentList} currentContentIndex={currentContentIndex} />
+
+        <div className="mb-4">
+          <GameContentRenderer
+            contentType={currentContentType}
+            section={currentSection}
+            course={course}
+          />
+        </div>
+
+        <div className="flex justify-between">
+          <Button
+            onClick={handlePreviousContent}
+            disabled={currentContentIndex === 0}
+            className="bg-space-cosmic-blue hover:bg-space-deep-blue text-white"
+          >
+            <ChevronLeft className="mr-2 h-4 w-4" />
+            Previous
+          </Button>
+          <Button
+            onClick={handleNextContent}
+            className="bg-space-cosmic-blue hover:bg-space-deep-blue text-white"
+          >
+            Next
+            <ChevronRight className="ml-2 h-4 w-4" />
+          </Button>
         </div>
       </div>
+      {showXPPopup && <XPPopup xp={xpEarned} />}
     </div>
   );
 };
