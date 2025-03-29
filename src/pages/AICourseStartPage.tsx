@@ -9,6 +9,9 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { GameProgress } from "@/components/course/GameProgress";
 import { XPPopup } from "@/components/course/XPPopup";
 import { useToast } from "@/components/ui/use-toast";
+import { GameContentTabs } from "@/components/course/GameContentTabs";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Card } from "@/components/ui/card";
 
 const AICourseStartPage = () => {
   const location = useLocation();
@@ -21,6 +24,9 @@ const AICourseStartPage = () => {
   const [currentContentIndex, setCurrentContentIndex] = useState(0);
   const [showXPPopup, setShowXPPopup] = useState(false);
   const [xpEarned, setXpEarned] = useState(0);
+  const [completedContents, setCompletedContents] = useState<string[]>([]);
+  const [showSectionTransition, setShowSectionTransition] = useState(false);
+  const [nextSectionTitle, setNextSectionTitle] = useState("");
   const { toast } = useToast();
 
   useEffect(() => {
@@ -65,13 +71,20 @@ const AICourseStartPage = () => {
     updatedContentList[currentContentIndex] = { ...updatedContentList[currentContentIndex], completed: true };
     setContentList(updatedContentList);
 
+    // Mark as completed in our tracking array
+    const contentKey = `${currentSectionIndex}-${currentContentIndex}`;
+    if (!completedContents.includes(contentKey)) {
+      setCompletedContents([...completedContents, contentKey]);
+    }
+
     if (currentContentIndex < contentList.length - 1) {
       setCurrentContentIndex(currentContentIndex + 1);
     } else {
-      // Move to the next section or complete the course
+      // Check if there's a next section
       if (currentSectionIndex < (course?.sections?.length || 0) - 1) {
-        setCurrentSectionIndex(currentSectionIndex + 1);
-        setCurrentContentIndex(0); // Reset content index to the beginning
+        // Show transition screen
+        setShowSectionTransition(true);
+        setNextSectionTitle(course?.sections[currentSectionIndex + 1]?.title || "Next Section");
         showXP(50);
       } else {
         // Course completed
@@ -85,10 +98,20 @@ const AICourseStartPage = () => {
     }
   };
 
+  const handleStartNextSection = () => {
+    setCurrentSectionIndex(currentSectionIndex + 1);
+    setCurrentContentIndex(0);
+    setShowSectionTransition(false);
+  };
+
   const handlePreviousContent = () => {
     if (currentContentIndex > 0) {
       setCurrentContentIndex(currentContentIndex - 1);
     }
+  };
+
+  const handleTabChange = (index: number) => {
+    setCurrentContentIndex(index);
   };
 
   const showXP = (xp: number) => {
@@ -153,7 +176,18 @@ const AICourseStartPage = () => {
           totalSections={course.sections.length}
         />
 
-        <div className="mb-4">
+        {/* Content Tabs Navigation */}
+        <div className="mt-6 mb-4">
+          <GameContentTabs
+            contentTypes={contentList.map(content => content.type)}
+            currentContentIndex={currentContentIndex}
+            onTabClick={handleTabChange}
+            completedContents={completedContents}
+            sectionIndex={currentSectionIndex}
+          />
+        </div>
+
+        <Card className="w-full mb-4 p-4 bg-space-cosmic-blue/20 backdrop-blur-sm border border-purple-500/20">
           <GameContentRenderer
             contentType={currentContentType as ContentType['type']}
             currentSection={currentSection}
@@ -164,26 +198,31 @@ const AICourseStartPage = () => {
             handleNextContent={handleNextContent}
             handlePreviousContent={handlePreviousContent}
             isFirstContent={currentContentIndex === 0 && currentSectionIndex === 0}
+            showSectionTransition={showSectionTransition}
+            nextSectionTitle={nextSectionTitle}
+            onStartNextSection={handleStartNextSection}
           />
-        </div>
+        </Card>
 
-        <div className="flex justify-between">
-          <Button
-            onClick={handlePreviousContent}
-            disabled={currentContentIndex === 0}
-            className="bg-space-cosmic-blue hover:bg-space-deep-blue text-white"
-          >
-            <ChevronLeft className="mr-2 h-4 w-4" />
-            Previous
-          </Button>
-          <Button
-            onClick={handleNextContent}
-            className="bg-space-cosmic-blue hover:bg-space-deep-blue text-white"
-          >
-            Next
-            <ChevronRight className="ml-2 h-4 w-4" />
-          </Button>
-        </div>
+        {!showSectionTransition && (
+          <div className="flex justify-between">
+            <Button
+              onClick={handlePreviousContent}
+              disabled={currentContentIndex === 0}
+              className="bg-space-cosmic-blue hover:bg-space-deep-blue text-white"
+            >
+              <ChevronLeft className="mr-2 h-4 w-4" />
+              Previous
+            </Button>
+            <Button
+              onClick={handleNextContent}
+              className="bg-space-cosmic-blue hover:bg-space-deep-blue text-white"
+            >
+              Next
+              <ChevronRight className="ml-2 h-4 w-4" />
+            </Button>
+          </div>
+        )}
       </div>
       {showXPPopup && <XPPopup xpPoints={xpEarned} level={1} levelProgress={0} />}
     </div>
