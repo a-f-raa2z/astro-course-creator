@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { CourseSection } from "@/types/course";
 import { Button } from "@/components/ui/button";
-import { Image as ImageIcon, ArrowRight, ArrowLeft, SlidersHorizontal } from "lucide-react";
+import { Image as ImageIcon, ArrowRight, ArrowLeft, SlidersHorizontal, Camera } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
 import { TitleWrapper } from "./TitleWrapper";
@@ -17,6 +17,7 @@ interface ImageContentProps {
 export const ImageContent = ({ section, onComplete, onPrevious, isFirstContent }: ImageContentProps) => {
   const [slideIndex, setSlideIndex] = useState(0);
   const [showContinue, setShowContinue] = useState(false);
+  const [imageCaptured, setImageCaptured] = useState(false);
   const { toast } = useToast();
   
   // Define images based on section title
@@ -104,6 +105,15 @@ export const ImageContent = ({ section, onComplete, onPrevious, isFirstContent }
     }
   };
 
+  const handleCapture = () => {
+    setImageCaptured(true);
+    setShowContinue(true);
+    toast({
+      title: "Image Captured!",
+      description: "Great job! You've captured this visual example."
+    });
+  };
+
   return (
     <div className="w-full h-full">
       <Card className="w-full h-full overflow-hidden flex flex-col bg-space-cosmic-blue/20 backdrop-blur-sm border border-purple-500/20">
@@ -125,6 +135,20 @@ export const ImageContent = ({ section, onComplete, onPrevious, isFirstContent }
               alt={images[slideIndex].description} 
               className="w-full h-full object-contain"
             />
+          </div>
+          
+          {/* Capture button positioned in the top-right corner */}
+          <div className="absolute top-4 right-4 z-10">
+            <Button 
+              variant="outline" 
+              size="sm" 
+              onClick={handleCapture}
+              className="bg-yellow-600/80 hover:bg-yellow-700/90 border-yellow-500 text-white"
+              disabled={imageCaptured}
+            >
+              <Camera className="h-4 w-4 mr-2" />
+              {imageCaptured ? "Captured" : "Capture Image"}
+            </Button>
           </div>
           
           <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
