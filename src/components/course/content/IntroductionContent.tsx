@@ -48,6 +48,9 @@ export const IntroductionContent = ({ section, onComplete, onPrevious, isFirstCo
     }
   };
   
+  // Determine if section should show solar system diagram
+  const shouldShowSolarSystemDiagram = section.title === "The Solar System";
+  
   return (
     <div className="w-full h-full flex items-center justify-center">
       <Card className="w-full h-full flex flex-col p-4 bg-space-cosmic-blue/20 backdrop-blur-sm border border-purple-500/20">
@@ -66,38 +69,42 @@ export const IntroductionContent = ({ section, onComplete, onPrevious, isFirstCo
                 <div className="h-full overflow-auto prose prose-invert max-w-none">
                   <p className="text-gray-200">{getCustomIntroduction(section.title)}</p>
                   
-                  {/* Solar System Diagram */}
-                  <div className="mt-4 relative h-24 md:h-32 flex items-center justify-center">
-                    {/* Sun */}
-                    <div className="absolute w-12 h-12 bg-yellow-500 rounded-full flex items-center justify-center animate-pulse z-30">
-                      <Sun className="h-8 w-8 text-yellow-300" />
-                    </div>
-                    
-                    {/* Mercury */}
-                    <div className="absolute w-28 h-28 rounded-full border border-gray-400/30 flex items-center justify-center">
-                      <div className="absolute w-2 h-2 bg-gray-300 rounded-full" style={{ transform: 'translateX(14px)' }}></div>
-                    </div>
-                    
-                    {/* Venus */}
-                    <div className="absolute w-36 h-36 rounded-full border border-gray-400/30 flex items-center justify-center">
-                      <div className="absolute w-3 h-3 bg-orange-300 rounded-full" style={{ transform: 'translateX(-18px)' }}></div>
-                    </div>
-                    
-                    {/* Earth */}
-                    <div className="absolute w-44 h-44 rounded-full border border-gray-400/30 flex items-center justify-center">
-                      <div className="absolute w-4 h-4 bg-blue-400 rounded-full flex items-center justify-center" style={{ transform: 'translateX(22px)' }}>
-                        <div className="absolute w-1.5 h-1.5 bg-gray-200 rounded-full" style={{ transform: 'translateX(5px)' }}></div>
+                  {/* Solar System Diagram - Only show for Solar System section */}
+                  {shouldShowSolarSystemDiagram && (
+                    <>
+                      <div className="mt-4 relative h-24 md:h-32 flex items-center justify-center">
+                        {/* Sun */}
+                        <div className="absolute w-12 h-12 bg-yellow-500 rounded-full flex items-center justify-center animate-pulse z-30">
+                          <Sun className="h-8 w-8 text-yellow-300" />
+                        </div>
+                        
+                        {/* Mercury */}
+                        <div className="absolute w-28 h-28 rounded-full border border-gray-400/30 flex items-center justify-center">
+                          <div className="absolute w-2 h-2 bg-gray-300 rounded-full" style={{ transform: 'translateX(14px)' }}></div>
+                        </div>
+                        
+                        {/* Venus */}
+                        <div className="absolute w-36 h-36 rounded-full border border-gray-400/30 flex items-center justify-center">
+                          <div className="absolute w-3 h-3 bg-orange-300 rounded-full" style={{ transform: 'translateX(-18px)' }}></div>
+                        </div>
+                        
+                        {/* Earth */}
+                        <div className="absolute w-44 h-44 rounded-full border border-gray-400/30 flex items-center justify-center">
+                          <div className="absolute w-4 h-4 bg-blue-400 rounded-full flex items-center justify-center" style={{ transform: 'translateX(22px)' }}>
+                            <div className="absolute w-1.5 h-1.5 bg-gray-200 rounded-full" style={{ transform: 'translateX(5px)' }}></div>
+                          </div>
+                        </div>
+                        
+                        {/* Mars */}
+                        <div className="absolute w-52 h-52 rounded-full border border-gray-400/30 flex items-center justify-center">
+                          <div className="absolute w-3 h-3 bg-red-500 rounded-full" style={{ transform: 'translateX(-26px)' }}></div>
+                        </div>
                       </div>
-                    </div>
-                    
-                    {/* Mars */}
-                    <div className="absolute w-52 h-52 rounded-full border border-gray-400/30 flex items-center justify-center">
-                      <div className="absolute w-3 h-3 bg-red-500 rounded-full" style={{ transform: 'translateX(-26px)' }}></div>
-                    </div>
-                  </div>
-                  
-                  <h4 className="text-purple-300 mt-2">Our Solar System</h4>
-                  <p className="text-sm text-gray-300">The solar system consists of the Sun and everything that orbits around it, including planets, moons, asteroids, comets, and other celestial objects.</p>
+                      
+                      <h4 className="text-purple-300 mt-2">Our Solar System</h4>
+                      <p className="text-sm text-gray-300">The solar system consists of the Sun and everything that orbits around it, including planets, moons, asteroids, comets, and other celestial objects.</p>
+                    </>
+                  )}
                 </div>
               </div>
               
