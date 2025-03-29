@@ -1,4 +1,3 @@
-
 import { ContentType } from "@/types/ContentType";
 import { FileText, Youtube, CheckCircle, Video, Image, HelpCircle, Star, Gamepad2 } from "lucide-react";
 
@@ -76,9 +75,6 @@ export const GameContentTabs = ({
 
   return (
     <div className="relative mb-8">
-      {/* Progress line connecting the steps */}
-      <div className="hidden md:block absolute top-1/2 left-0 right-0 h-0.5 bg-purple-500/30 -translate-y-1/2 z-0"></div>
-      
       {/* Steps container */}
       <div className="flex justify-between relative z-10">
         {contentTypes.map((type, index) => {
@@ -90,7 +86,7 @@ export const GameContentTabs = ({
           
           return (
             <div key={index} className="flex flex-col items-center">
-              {/* Number button - now standalone at the top */}
+              {/* Number button - standalone at the top */}
               <button
                 onClick={() => onTabClick(index)}
                 className={`
@@ -120,8 +116,8 @@ export const GameContentTabs = ({
                 )}
               </button>
               
-              {/* Icon and title below the number */}
-              <div className={`flex flex-col items-center gap-1 text-xs font-medium ${
+              {/* Icon and title on the same row below the number */}
+              <div className={`flex flex-row items-center gap-1.5 text-xs font-medium ${
                 isActive 
                   ? isQuiz ? "text-orange-300" : isPlayground ? "text-green-300" : "text-purple-300" 
                   : "text-gray-400"

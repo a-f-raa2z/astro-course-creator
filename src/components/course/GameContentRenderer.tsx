@@ -58,17 +58,41 @@ export const GameContentRenderer = ({
   // Get the actual content type string 
   const type = typeof contentType === 'string' ? contentType : contentType.type;
   
+  // Set default intro texts if not provided
+  const defaultIntros = {
+    keyPoints: "Here are the key points from this section that you should remember:",
+    shortVideo: "Let's check out some fun and interesting facts related to this topic:",
+    image: "Visual representation can help cement your understanding. Take a moment to study this image:",
+    quiz: "Test your knowledge with this quick quiz about what you've learned:",
+    playground: "Try out this interactive playground to explore the concepts hands-on:",
+    bonus: "Here's some bonus content to deepen your understanding:"
+  };
+  
+  // Process section to ensure it has intro texts
+  const processedSection = {
+    ...currentSection,
+    keyPointsIntro: currentSection.keyPointsIntro || defaultIntros.keyPoints,
+    shortVideoIntro: currentSection.shortVideoIntro || defaultIntros.shortVideo,
+    image: {
+      ...currentSection.image,
+      intro: currentSection.image.intro || defaultIntros.image
+    },
+    quizIntro: currentSection.quizIntro || defaultIntros.quiz,
+    visualIntro: currentSection.visualIntro || defaultIntros.playground,
+    bonusIntro: currentSection.bonusIntro || defaultIntros.bonus
+  };
+  
   switch (type) {
     case 'introduction':
       return <IntroductionContent 
-               section={currentSection} 
+               section={processedSection} 
                onComplete={handleNextContent} 
                onPrevious={handlePreviousContent}
                isFirstContent={isFirstContent}
              />;
     case 'video':
       return <VideoContent 
-               section={currentSection} 
+               section={processedSection} 
                onComplete={handleNextContent}
                onPrevious={handlePreviousContent}
                isFirstContent={isFirstContent}
@@ -76,7 +100,7 @@ export const GameContentRenderer = ({
     case 'key-points':
     case 'keyPoints':
       return <KeyPointsContent 
-               section={currentSection} 
+               section={processedSection} 
                onComplete={handleNextContent}
                onPrevious={handlePreviousContent}
                isFirstContent={isFirstContent}
@@ -84,28 +108,28 @@ export const GameContentRenderer = ({
     case 'short-video':
     case 'shortVideo':
       return <ShortVideoContent 
-               section={currentSection} 
+               section={processedSection} 
                onComplete={handleNextContent}
                onPrevious={handlePreviousContent}
                isFirstContent={isFirstContent}
              />;
     case 'image':
       return <ImageContent 
-               section={currentSection} 
+               section={processedSection} 
                onComplete={handleNextContent}
                onPrevious={handlePreviousContent} 
                isFirstContent={isFirstContent}
              />;
     case 'playground':
       return <PlaygroundContent
-               section={currentSection}
+               section={processedSection}
                onComplete={handleNextContent}
                onPrevious={handlePreviousContent}
                isFirstContent={isFirstContent}
              />;
     case 'bonus':
       return <BonusVideoContent
-               section={currentSection}
+               section={processedSection}
                onComplete={handleNextContent}
                onPrevious={handlePreviousContent}
                isFirstContent={isFirstContent}
@@ -113,7 +137,7 @@ export const GameContentRenderer = ({
     case 'quiz':
       return (
         <QuizContent
-          section={currentSection}
+          section={processedSection}
           quizSubmitted={quizSubmitted}
           selectedAnswer={selectedAnswer}
           setSelectedAnswer={setSelectedAnswer}
