@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -12,12 +11,11 @@ import {
   Stars, 
   Sun, 
   Satellite, 
-  Planet, 
-  Telescope, 
   FileText, 
   Youtube, 
   CheckCircle, 
-  HelpCircle 
+  HelpCircle,
+  Telescope
 } from "lucide-react";
 import { Course } from "@/types/course";
 import LoadingAnimation from "@/components/LoadingAnimation";
@@ -30,11 +28,9 @@ const AstronomyCoursePage = () => {
   const [isLoading, setIsLoading] = useState(false);
   
   useEffect(() => {
-    // If we already have course data passed from state, use that
     if (location.state?.course) {
       setCourse(location.state.course);
     } else {
-      // Otherwise, use the mock course data
       setCourse(generateMockCourse("planets", "intermediate", "visual"));
     }
   }, [location.state]);
@@ -51,7 +47,6 @@ const AstronomyCoursePage = () => {
     navigate("/astronomy-course-start", { state: { course, initialSectionIndex: sectionIndex } });
   };
 
-  // Helper function to get the appropriate icon for each section
   const getSectionIcon = (sectionTitle: string) => {
     switch (sectionTitle) {
       case "The Solar System":
@@ -63,7 +58,7 @@ const AstronomyCoursePage = () => {
       case "Stars":
         return <Stars className="h-6 w-6 text-yellow-300" />;
       case "Planets":
-        return <Planet className="h-6 w-6 text-orange-400" />;
+        return <Rocket className="h-6 w-6 text-orange-400" />;
       case "Telescopes":
         return <Telescope className="h-6 w-6 text-purple-400" />;
       case "Space Exploration":
