@@ -1,4 +1,3 @@
-
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Course } from "@/types/course";
@@ -35,7 +34,6 @@ const AICourseStartPage = () => {
     return <div className="min-h-screen bg-space text-white flex items-center justify-center">Loading...</div>;
   }
 
-  // Update the section's introduction with a custom one for the introduction content type
   if (contentList[currentContentIndex]?.type === 'introduction' && currentSection) {
     currentSection.introduction = getCustomIntroduction(currentSection.title);
   }
@@ -46,7 +44,7 @@ const AICourseStartPage = () => {
 
   return (
     <div className="min-h-screen bg-space text-white">
-      <div className="container mx-auto px-6 md:px-8 lg:px-12 py-8">
+      <div className="max-w-4xl mx-auto px-4 md:px-8 py-8">
         <CourseHeader course={course} onBackClick={handleBackClick} />
         
         <h2 className="text-xl text-gray-300 mb-4">{currentSection.title}</h2>
