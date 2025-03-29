@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { GameProgress } from "@/components/course/GameProgress";
 import { XPPopup } from "@/components/course/XPPopup";
-import { useToast } from "@/components/ui/use-toast";
+import { useToast } from "@/hooks/use-toast";
 import { GameContentTabs } from "@/components/course/GameContentTabs";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card } from "@/components/ui/card";
@@ -37,32 +37,63 @@ const AICourseStartPage = () => {
 
   useEffect(() => {
     if (currentSection) {
-      const newContentList: ContentType[] = [
+      // Create base content list with standard items
+      const baseContentList: ContentType[] = [
         { id: 'introduction', type: 'introduction' as const, title: 'Introduction', completed: false },
-        { id: 'key-points', type: 'key-points' as const, title: 'Key Points', completed: false },
         { id: 'video', type: 'video' as const, title: 'Video Lesson', completed: false },
-        ...(currentSection.shortVideo ? [{ id: 'short-video-1', type: 'short-video' as const, title: 'Short Video 1', completed: false }] : []),
-        ...(currentSection.additionalShortVideos && currentSection.additionalShortVideos.length > 0
-          ? currentSection.additionalShortVideos.map((_, index) => ({
-            id: `short-video-${index + 2}`,
-            type: 'short-video' as const,
-            title: `Short Video ${index + 2}`,
-            completed: false,
-          }))
-          : []),
-        ...(currentSection.visualUrl ? [{ id: 'playground', type: 'playground' as const, title: 'Interactive Playground', completed: false }] : []),
-        { id: 'quiz', type: 'quiz' as const, title: 'Quiz', completed: false },
-        ...(currentSection.bonusVideos && currentSection.bonusVideos.length > 0
-          ? currentSection.bonusVideos.map((_, index) => ({
-            id: `bonus-${index + 1}`,
-            type: 'bonus' as const,
-            title: `Bonus Content ${index + 1}`,
-            completed: false,
-          }))
-          : []),
-        { id: 'image', type: 'image' as const, title: 'Image', completed: false },
+        { id: 'key-points', type: 'key-points' as const, title: 'Key Points', completed: false },
       ];
-      setContentList(newContentList);
+      
+      // Add Fun Facts tab only if there are any short videos
+      const hasFunFacts = currentSection.shortVideo || 
+        (currentSection.additionalShortVideos && currentSection.additionalShortVideos.length > 0);
+        
+      if (hasFunFacts) {
+        baseContentList.push({ 
+          id: 'short-video', 
+          type: 'short-video' as const, 
+          title: 'Fun Facts', 
+          completed: false 
+        });
+      }
+      
+      // Add Image
+      baseContentList.push({ 
+        id: 'image', 
+        type: 'image' as const, 
+        title: 'Image', 
+        completed: false 
+      });
+      
+      // Add playground if available
+      if (currentSection.visualUrl) {
+        baseContentList.push({ 
+          id: 'playground', 
+          type: 'playground' as const, 
+          title: 'Interactive Playground', 
+          completed: false 
+        });
+      }
+      
+      // Add bonus content if available
+      if (currentSection.bonusVideos && currentSection.bonusVideos.length > 0) {
+        baseContentList.push({ 
+          id: 'bonus', 
+          type: 'bonus' as const, 
+          title: 'Bonus Content', 
+          completed: false 
+        });
+      }
+      
+      // Always add Quiz last
+      baseContentList.push({ 
+        id: 'quiz', 
+        type: 'quiz' as const, 
+        title: 'Knowledge Check', 
+        completed: false 
+      });
+      
+      setContentList(baseContentList);
     }
   }, [currentSection]);
 

@@ -83,7 +83,6 @@ export const GameContentRenderer = ({
              />;
     case 'short-video':
     case 'shortVideo':
-      if (!currentSection.shortVideo) return null;
       return <ShortVideoContent 
                section={currentSection} 
                onComplete={handleNextContent}
