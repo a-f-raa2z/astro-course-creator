@@ -1,4 +1,3 @@
-
 import { CourseSection } from "@/types/course";
 import { ContentType } from "@/hooks/useGameLearning";
 import { IntroductionContent } from "./content/IntroductionContent";
@@ -13,7 +12,7 @@ import { SectionTransition } from "./content/SectionTransition";
 
 interface GameContentRendererProps {
   contentType: ContentType;
-  currentSection: CourseSection;
+  currentSection: CourseSection | null;
   quizSubmitted: boolean;
   selectedAnswer: number | null;
   setSelectedAnswer: (answer: number) => void;
@@ -40,6 +39,10 @@ export const GameContentRenderer = ({
   nextSectionTitle,
   onStartNextSection
 }: GameContentRendererProps) => {
+  
+  if (!currentSection) {
+    return <div className="w-full h-full flex items-center justify-center text-white">Loading course content...</div>;
+  }
   
   if (showSectionTransition && nextSectionTitle) {
     return (

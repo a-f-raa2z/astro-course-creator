@@ -11,11 +11,12 @@ import { GameContentTabs } from "@/components/course/GameContentTabs";
 import { XPPopup } from "@/components/course/XPPopup";
 import { useEffect, useState } from "react";
 import { Separator } from "@/components/ui/separator";
+import { aiCourseData } from "@/utils/courseData";
 
 const AICourseStartPage = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const course = location.state?.course;
+  const course = location.state?.course || aiCourseData; // Fallback to aiCourseData if no course is provided
   const initialSectionIndex = location.state?.initialSectionIndex ?? 0;
   const { toast } = useToast();
   const [showSectionTransition, setShowSectionTransition] = useState(false);
@@ -30,7 +31,9 @@ const AICourseStartPage = () => {
 
   // Early return if no course data to prevent errors
   if (!course) {
-    return null;
+    return <div className="bg-space min-h-screen flex items-center justify-center">
+      <div className="text-white text-xl">Loading course data...</div>
+    </div>;
   }
 
   const {
@@ -95,11 +98,6 @@ const AICourseStartPage = () => {
     return "";
   };
 
-  // Additional check to ensure currentSection exists
-  if (!currentSection) {
-    return null;
-  }
-
   return (
     <div className="bg-space min-h-screen py-8 px-4">
       {/* XPPopup - Positioned at the top corner */}
@@ -139,7 +137,9 @@ const AICourseStartPage = () => {
           {/* Section title with larger size */}
           <div className="flex items-center text-blue-200 mt-4 mb-4">
             <Flag className="h-5 w-5 mr-2 text-blue-400" />
-            <span className="text-lg font-medium">Section {currentSectionIndex + 1}: {currentSection.title}</span>
+            <span className="text-lg font-medium">
+              Section {currentSectionIndex + 1}: {currentSection?.title || 'Loading...'}
+            </span>
           </div>
         </header>
         

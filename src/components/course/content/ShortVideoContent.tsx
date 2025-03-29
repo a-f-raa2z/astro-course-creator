@@ -17,17 +17,25 @@ interface ShortVideoContentProps {
 export const ShortVideoContent = ({ section, onComplete, onPrevious, isFirstContent }: ShortVideoContentProps) => {
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
   
-  // Get all short videos for this section
+  // Get all short videos for this section with safety checks
   const getAllVideos = () => {
     const videos = [];
     
-    if (section.shortVideo) {
+    if (section?.shortVideo) {
       videos.push({ url: section.shortVideo, title: "Fun Facts" });
     }
     
-    if (section.additionalShortVideos && section.additionalShortVideos.length > 0) {
+    if (section?.additionalShortVideos && section.additionalShortVideos.length > 0) {
       section.additionalShortVideos.forEach((url, idx) => {
         videos.push({ url, title: `More Fun Facts ${idx + 1}` });
+      });
+    }
+    
+    // If no videos were found, add a fallback
+    if (videos.length === 0) {
+      videos.push({ 
+        url: "https://www.youtube.com/embed/FCvK8Bbc0HU", 
+        title: "Fun Facts (Default)"
       });
     }
     

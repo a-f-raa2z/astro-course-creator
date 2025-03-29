@@ -25,6 +25,10 @@ export const useGameLearning = (course: Course) => {
   }, [xpPoints, completedContents, course.id]);
   
   const getAvailableContentTypes = (section: CourseSection): ContentType[] => {
+    if (!section) {
+      return ['introduction'];
+    }
+    
     const contentTypes: ContentType[] = ['introduction', 'video', 'keyPoints'];
     
     if (section.shortVideo) {
@@ -46,9 +50,9 @@ export const useGameLearning = (course: Course) => {
     return contentTypes;
   };
 
-  const currentSection = course.sections[currentSectionIndex];
-  const availableContentTypes = getAvailableContentTypes(currentSection);
-  const currentContentType = availableContentTypes[currentContentIndex];
+  const currentSection = course?.sections[currentSectionIndex] || null;
+  const availableContentTypes = currentSection ? getAvailableContentTypes(currentSection) : ['introduction'];
+  const currentContentType = availableContentTypes[currentContentIndex] || 'introduction';
 
   const markContentAsCompleted = () => {
     const contentKey = `${currentSectionIndex}-${currentContentIndex}`;
@@ -95,6 +99,8 @@ export const useGameLearning = (course: Course) => {
   };
 
   const handleNextContent = () => {
+    if (!currentSection) return;
+    
     if (currentContentType === 'quiz' && !quizSubmitted && selectedAnswer !== null) {
       handleQuizSubmit();
       return;
@@ -136,6 +142,8 @@ export const useGameLearning = (course: Course) => {
   };
 
   const handlePreviousContent = () => {
+    if (!currentSection) return;
+    
     if (currentContentIndex > 0) {
       setCurrentContentIndex(prevIndex => prevIndex - 1);
       setQuizSubmitted(false);
@@ -143,14 +151,19 @@ export const useGameLearning = (course: Course) => {
     } else if (currentSectionIndex > 0) {
       const prevSectionIndex = currentSectionIndex - 1;
       setCurrentSectionIndex(prevSectionIndex);
-      const prevAvailableContentTypes = getAvailableContentTypes(course.sections[prevSectionIndex]);
-      setCurrentContentIndex(prevAvailableContentTypes.length - 1);
+      const prevSection = course.sections[prevSectionIndex];
+      if (prevSection) {
+        const prevAvailableContentTypes = getAvailableContentTypes(prevSection);
+        setCurrentContentIndex(prevAvailableContentTypes.length - 1);
+      }
       setQuizSubmitted(false);
       setSelectedAnswer(null);
     }
   };
 
   const handleQuizSubmit = () => {
+    if (!currentSection) return;
+    
     if (selectedAnswer !== null) {
       setQuizSubmitted(true);
       
