@@ -72,7 +72,7 @@ export const generateMockCourse = (interest: string, level: string, learningStyl
     sections: [
       {
         id: "section-1",
-        title: "Foundations and Core Principles",
+        title: "The Solar System",
         introduction: "This section introduces the fundamental concepts of astronomy that serve as building blocks for understanding the universe. We'll explore the basic principles that astronomers use to study celestial objects and phenomena.",
         whyLearn: "Understanding these core principles is essential as they form the foundation for all astronomical knowledge. These concepts will help you grasp how we measure the vast distances in space and understand the nature of light as our primary source of cosmic information.",
         videoUrl: "https://www.youtube.com/embed/0rHUDWjR5gg",
@@ -318,66 +318,6 @@ export const generateMockCourse = (interest: string, level: string, learningStyl
             correctAnswer: 2
           }
         ]
-      },
-      {
-        id: "section-5",
-        title: "Practical Applications",
-        introduction: "Astronomy isn't just theoretical—it has practical applications that impact our daily lives and potential future as a spacefaring civilization.",
-        whyLearn: "Understanding the practical applications of astronomy reveals how cosmic knowledge directly benefits society, technology development, and our species' long-term survival.",
-        videoUrl: "https://www.youtube.com/embed/HSJJxYu9ong",
-        keyPoints: [
-          "Spin-off technologies from astronomical research",
-          "Space weather and its impact on Earth's technology",
-          "Asteroid detection and planetary defense",
-          "Future of human space exploration and potential colonization"
-        ],
-        shortVideo: "https://www.youtube.com/embed/r_qwxV7JEhM",
-        image: {
-          url: "https://images.unsplash.com/photo-1446776811953-b23d57bd21aa",
-          description: "Satellite technologies developed for astronomy now provide critical services for communication, navigation, and Earth observation."
-        },
-        quiz: {
-          question: "How does astronomical research on solar activity benefit life on Earth?",
-          options: [
-            "It helps predict climate change over millennia",
-            "It enables more accurate weather forecasting",
-            "It provides early warnings for solar storms that could damage power grids and satellites",
-            "It determines optimal growing seasons for agriculture"
-          ],
-          correctAnswer: 2
-        },
-        quizzes: [
-          {
-            question: "How does astronomical research on solar activity benefit life on Earth?",
-            options: [
-              "It helps predict climate change over millennia",
-              "It enables more accurate weather forecasting",
-              "It provides early warnings for solar storms that could damage power grids and satellites",
-              "It determines optimal growing seasons for agriculture"
-            ],
-            correctAnswer: 2
-          },
-          {
-            question: "Which NASA program is focused on returning humans to the Moon as a stepping stone to Mars?",
-            options: [
-              "Apollo",
-              "Gemini",
-              "Artemis",
-              "Mercury"
-            ],
-            correctAnswer: 2
-          },
-          {
-            question: "Which of these technologies was NOT initially developed for space exploration but later adapted for everyday use?",
-            options: [
-              "Smartphone cameras",
-              "Memory foam",
-              "Water purification systems",
-              "Social media platforms"
-            ],
-            correctAnswer: 3
-          }
-        ]
       }
     ]
   };
@@ -611,7 +551,8 @@ function generateAICourse(level: string, learningStyle: string): Course {
           options: [
             "Discriminative models classify inputs, while generative models create new outputs",
             "Generative models require less data than discriminative models",
-            "Discriminative models use neural networks, while generative models use decision trees",
+            "Generative models require less data than discriminative models",
+            "Generative models use neural networks, while generative models use decision trees",
             "Generative models are supervised, while discriminative models are unsupervised"
           ],
           correctAnswer: 0
@@ -622,7 +563,7 @@ function generateAICourse(level: string, learningStyle: string): Course {
             options: [
               "Discriminative models classify inputs, while generative models create new outputs",
               "Generative models require less data than discriminative models",
-              "Discriminative models use neural networks, while generative models use decision trees",
+              "Generative models use neural networks, while generative models use decision trees",
               "Generative models are supervised, while discriminative models are unsupervised"
             ],
             correctAnswer: 0
@@ -824,150 +765,3 @@ function generateAICourse(level: string, learningStyle: string): Course {
               "Sheet music notation",
               "Audio recordings",
               "MIDI files",
-              "All of the above"
-            ],
-            correctAnswer: 3
-          },
-          {
-            question: "What is 'style transfer' in the context of AI music?",
-            options: [
-              "Changing the tempo of a piece",
-              "Applying the stylistic elements of one genre to a composition in another genre",
-              "Transferring music between different digital audio workstations",
-              "Converting audio to sheet music"
-            ],
-            correctAnswer: 1
-          }
-        ]
-      },
-      {
-        id: "section-ai-8",
-        title: "AI for Arts",
-        introduction: "AI is creating new possibilities in visual arts, from generating original images to enhancing existing artwork. This section explores how AI is transforming artistic creation.",
-        whyLearn: "AI art tools are democratizing creation and opening new aesthetic possibilities. Understanding these technologies helps you appreciate and potentially utilize these creative tools.",
-        videoUrl: "https://www.youtube.com/embed/SVcsDDABEkM",
-        keyPoints: [
-          "Generative models like GANs and diffusion models can create realistic and stylized images",
-          "Text-to-image systems convert natural language descriptions into visual content",
-          "Style transfer techniques can apply one image's aesthetic to another image's content",
-          "AI art raises questions about creativity, authorship, and artistic value"
-        ],
-        shortVideo: "https://www.youtube.com/embed/I-EIVlHvHRM",
-        bonusVideos: ["https://www.youtube.com/embed/uA70ZGCC1f4"],
-        visualUrl: "https://labs.google/fx/tools/image-fx",
-        image: {
-          url: "https://images.unsplash.com/photo-1580927752452-89d86da3fa0a",
-          description: "AI art tools can generate stunning visual content from text prompts or by learning from existing artwork."
-        },
-        quiz: {
-          question: "What is 'latent space' in the context of AI art generation?",
-          options: [
-            "The physical location where AI art is displayed",
-            "A compressed representation where similar concepts are located near each other",
-            "The time delay between entering a prompt and receiving an image",
-            "The storage area for AI art templates"
-          ],
-          correctAnswer: 1
-        },
-        quizzes: [
-          {
-            question: "What is 'latent space' in the context of AI art generation?",
-            options: [
-              "The physical location where AI art is displayed",
-              "A compressed representation where similar concepts are located near each other",
-              "The time delay between entering a prompt and receiving an image",
-              "The storage area for AI art templates"
-            ],
-            correctAnswer: 1
-          },
-          {
-            question: "Which of these AI art models uses diffusion techniques?",
-            options: [
-              "DALL-E",
-              "Midjourney",
-              "Stable Diffusion",
-              "All of the above"
-            ],
-            correctAnswer: 3
-          },
-          {
-            question: "What ethical concern is NOT typically associated with AI art?",
-            options: [
-              "Copyright infringement",
-              "Bias in generated images",
-              "Environmental impact of computation",
-              "Physical safety risks"
-            ],
-            correctAnswer: 3
-          }
-        ]
-      },
-      {
-        id: "section-ai-9",
-        title: "AI for Environment",
-        introduction: "AI is being applied to address environmental challenges from climate change to conservation. This section explores how AI helps monitor, model, and protect our planet.",
-        whyLearn: "Environmental applications of AI demonstrate technology's potential for positive global impact. Understanding these applications shows how AI can address urgent planetary challenges.",
-        videoUrl: "https://www.youtube.com/embed/9v3Vqz2VQ-w",
-        keyPoints: [
-          "AI analyzes climate data to improve forecasting and adaptation strategies",
-          "Computer vision monitors ecosystems, wildlife populations, and environmental changes",
-          "Machine learning optimizes energy systems for efficiency and renewable integration",
-          "AI-powered tools help reduce waste, pollution, and resource consumption"
-        ],
-        shortVideo: "https://www.youtube.com/embed/DBbkkLVAEJQ",
-        additionalShortVideos: [
-          "https://www.youtube.com/embed/-KFO0pES-zQ",
-          "https://www.youtube.com/embed/sV0cR_Nhac0",
-          "https://www.youtube.com/embed/7PgSanU_VpQ"
-        ],
-        visualUrl: "https://ozone.unep.org/apollo-edition-impact-simulator",
-        image: {
-          url: "https://images.unsplash.com/photo-1572297350242-e588f2149a59",
-          description: "AI environmental applications help monitor ecosystems, optimize resource use, and develop solutions to climate challenges."
-        },
-        quiz: {
-          question: "How does AI typically contribute to renewable energy systems?",
-          options: [
-            "By physically installing solar panels",
-            "By manufacturing wind turbines more efficiently",
-            "By predicting output and optimizing grid integration",
-            "By extracting raw materials for battery production"
-          ],
-          correctAnswer: 2
-        },
-        quizzes: [
-          {
-            question: "How does AI typically contribute to renewable energy systems?",
-            options: [
-              "By physically installing solar panels",
-              "By manufacturing wind turbines more efficiently",
-              "By predicting output and optimizing grid integration",
-              "By extracting raw materials for battery production"
-            ],
-            correctAnswer: 2
-          },
-          {
-            question: "Which environmental application of AI relies primarily on satellite imagery?",
-            options: [
-              "Smart home energy optimization",
-              "Deforestation monitoring",
-              "Urban traffic management",
-              "Waste sorting"
-            ],
-            correctAnswer: 1
-          },
-          {
-            question: "What is a potential negative environmental impact of AI itself?",
-            options: [
-              "Energy consumption from training large models",
-              "Noise pollution from data centers",
-              "Water contamination from AI hardware",
-              "Ozone depletion from network transmissions"
-            ],
-            correctAnswer: 0
-          }
-        ]
-      }
-    ]
-  };
-}
