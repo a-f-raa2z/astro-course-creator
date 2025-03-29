@@ -74,16 +74,24 @@ const AICoursePage = () => {
   // Helper function to get the appropriate icon for each section
   const getSectionIcon = (sectionTitle: string) => {
     switch (sectionTitle) {
-      case "Introduction to AI":
+      case "Intro of Artificial Intelligence":
         return <Brain />;
       case "Machine Learning":
         return <Database />;
-      case "Neural Networks":
-        return <Network />;
       case "Deep Learning":
+        return <Network />;
+      case "Generative AI":
         return <BrainCircuit />;
-      case "AI Applications":
+      case "Chatbots":
         return <Bot />;
+      case "Robots and Automation":
+        return <Cpu className="h-6 w-6 text-orange-400" />;
+      case "AI for Music":
+        return <Cpu className="h-6 w-6 text-indigo-400" />;
+      case "AI for Arts":
+        return <Cpu className="h-6 w-6 text-rose-400" />;
+      case "AI for Environment":
+        return <Cpu className="h-6 w-6 text-emerald-400" />;
       default:
         return <Cpu className="h-6 w-6 text-blue-400" />;
     }
@@ -120,7 +128,7 @@ const AICoursePage = () => {
           </Button>
           <h1 className="text-2xl font-bold text-white flex items-center">
             <Brain />
-            {course.title}
+            <span className="ml-2">{course.title}</span>
           </h1>
         </div>
         

@@ -1,4 +1,3 @@
-
 import { AssessmentQuestion, Course } from "@/types/course";
 
 export const assessmentQuestions: AssessmentQuestion[] = [
@@ -400,17 +399,20 @@ function generateAICourse(level: string, learningStyle: string): Course {
     sections: [
       {
         id: "section-ai-1",
-        title: "Introduction to AI",
-        introduction: "This section introduces the fundamental concepts of artificial intelligence and machine learning. We'll explore the history, key terminology, and core principles.",
-        whyLearn: "Understanding these fundamentals is essential as they form the foundation for all AI knowledge. These concepts will help you grasp the big picture of AI development and application.",
-        videoUrl: "https://www.youtube.com/embed/mJeNghZXtMo",
+        title: "Intro of Artificial Intelligence",
+        introduction: "This section introduces the fundamental concepts of artificial intelligence. We'll explore what AI is, its history, and its impact on our world today.",
+        whyLearn: "Understanding AI fundamentals is essential as they form the foundation for all AI knowledge. These concepts will help you grasp the big picture of AI development and application.",
+        videoUrl: "https://www.youtube.com/embed/ad79nYk2keg",
         keyPoints: [
           "AI refers to systems or machines that mimic human intelligence",
           "Machine Learning is a subset of AI focused on data learning",
           "Neural networks are computing systems inspired by biological brains",
-          "Deep Learning uses multiple layers of neural networks for complex tasks"
+          "AI can be narrow (specialized) or general (broad capabilities)"
         ],
-        shortVideo: "https://www.youtube.com/embed/ad79nYk2keg",
+        shortVideo: "https://www.youtube.com/embed/FCvK8Bbc0HU",
+        additionalShortVideos: ["https://www.youtube.com/embed/bs7DxD9XGwA"],
+        bonusVideos: ["https://www.youtube.com/embed/RzkD_rTEBYs"],
+        visualUrl: "https://sightengine.com/ai-or-not?version=2024Q3",
         image: {
           url: "https://images.unsplash.com/photo-1677442135073-8edf721c002b",
           description: "AI systems analyze and process data to make predictions and decisions based on patterns they've learned."
@@ -460,17 +462,22 @@ function generateAICourse(level: string, learningStyle: string): Course {
       },
       {
         id: "section-ai-2",
-        title: "Machine Learning Fundamentals",
-        introduction: "Machine learning is at the core of modern AI applications. This section covers how machines learn from data and make predictions.",
+        title: "Machine Learning",
+        introduction: "Machine learning is at the core of modern AI applications. This section explores how machines can learn from data and make predictions without being explicitly programmed.",
         whyLearn: "Machine learning drives most practical AI applications today. Understanding these concepts will help you recognize how AI systems learn and improve over time.",
-        videoUrl: "https://www.youtube.com/embed/Gv9_4yMHFhI",
+        videoUrl: "https://www.youtube.com/embed/ukzFI9rgwfU",
         keyPoints: [
-          "Data preparation is critical for effective machine learning",
-          "Feature selection impacts model performance significantly",
-          "Algorithms learn patterns from training data to make predictions",
-          "Model evaluation helps measure performance and prevent overfitting"
+          "Machine learning algorithms learn patterns from training data",
+          "Supervised learning requires labeled data for training",
+          "Unsupervised learning identifies patterns without labeled data",
+          "Reinforcement learning uses rewards to guide learning"
         ],
-        shortVideo: "https://www.youtube.com/embed/YFxVHBcGi7k",
+        shortVideo: "https://www.youtube.com/embed/PeMlggyqz0Y",
+        additionalShortVideos: [
+          "https://www.youtube.com/embed/59bMh59JQDo",
+          "https://www.youtube.com/embed/MYWpaNYAo0o"
+        ],
+        bonusVideos: ["https://www.youtube.com/embed/T2qQGqZxkD0"],
         image: {
           url: "https://images.unsplash.com/photo-1591453089816-0fbb971b454c",
           description: "Machine learning models continuously improve by analyzing patterns in data to make better predictions."
@@ -520,17 +527,19 @@ function generateAICourse(level: string, learningStyle: string): Course {
       },
       {
         id: "section-ai-3",
-        title: "Neural Networks & Deep Learning",
-        introduction: "Neural networks form the basis of deep learning, enabling AI to perform complex tasks like image and speech recognition.",
+        title: "Deep Learning",
+        introduction: "Deep learning is a specialized form of machine learning that uses multi-layered neural networks to model complex patterns. This section explores how deep learning powers many modern AI applications.",
         whyLearn: "Deep learning powers the most advanced AI applications today. Understanding neural networks is essential for working with cutting-edge AI technologies.",
-        videoUrl: "https://www.youtube.com/embed/aircAruvnKk",
+        videoUrl: "https://www.youtube.com/embed/bfmFfD2RIcg",
         keyPoints: [
-          "Artificial neurons (perceptrons) are the building blocks of neural networks",
-          "Deep networks contain multiple hidden layers between input and output",
-          "Backpropagation adjusts weights to minimize prediction error",
-          "Activation functions introduce non-linearity essential for complex learning"
+          "Deep learning uses neural networks with multiple hidden layers",
+          "Each layer in a neural network extracts different features",
+          "Deep learning excels at processing unstructured data like images and text",
+          "Training deep neural networks requires significant data and computational resources"
         ],
-        shortVideo: "https://www.youtube.com/embed/B1xF0ETssYE",
+        shortVideo: "https://www.youtube.com/embed/kQl45ophSVQ",
+        additionalShortVideos: ["https://www.youtube.com/embed/xZ0Bdg5yOuk"],
+        bonusVideos: ["https://www.youtube.com/embed/WXuK6gekU1Y"],
         image: {
           url: "https://images.unsplash.com/photo-1544383835-bda2bc66a55d",
           description: "Neural networks mimic human brain structure to process complex relationships between inputs and outputs."
@@ -567,72 +576,74 @@ function generateAICourse(level: string, learningStyle: string): Course {
             correctAnswer: 1
           },
           {
-            question: "Which of these is NOT a common activation function?",
+            question: "How many layers must a neural network have to be considered 'deep'?",
             options: [
-              "ReLU",
-              "Sigmoid",
-              "Tanh",
-              "MaxPool"
+              "At least 2 layers",
+              "At least 3 layers including input and output",
+              "More than 3 hidden layers",
+              "More than 10 layers"
             ],
-            correctAnswer: 3
+            correctAnswer: 2
           }
         ]
       },
       {
         id: "section-ai-4",
-        title: "Natural Language Processing",
-        introduction: "Natural Language Processing (NLP) enables computers to understand, interpret, and generate human language.",
-        whyLearn: "NLP applications are transforming how we interact with technology. Understanding these concepts helps you make sense of chatbots, translation services, and text analysis tools.",
-        videoUrl: "https://www.youtube.com/embed/CMrHM8a3hqw",
+        title: "Generative AI",
+        introduction: "Generative AI creates new content including text, images, music, and more. This section explores how generative models work and their applications across different domains.",
+        whyLearn: "Generative AI is transforming creative work and content creation. Understanding these technologies helps you appreciate their capabilities and limitations.",
+        videoUrl: "https://www.youtube.com/embed/NRmAXDWJVnU",
         keyPoints: [
-          "Text preprocessing cleans and standardizes language data",
-          "Word embeddings convert text into numerical representations",
-          "Recurrent neural networks process sequential data like sentences",
-          "Transformer models like BERT and GPT have revolutionized NLP tasks"
+          "Generative AI creates new content based on patterns in training data",
+          "GANs (Generative Adversarial Networks) use competing neural networks",
+          "Transformer models like GPT underpin large language models",
+          "Ethical considerations include copyright, bias, and misinformation"
         ],
-        shortVideo: "https://www.youtube.com/embed/9OkrPdDKc3c",
+        shortVideo: "https://www.youtube.com/embed/5O-_1zR04Yc",
+        additionalShortVideos: ["https://www.youtube.com/embed/JUFdC-Jcuvo"],
+        visualUrl: "https://rosebud.ai/p/abc075c1-8054-426c-a68b-942da1ec77d7",
         image: {
-          url: "https://images.unsplash.com/photo-1555952494-efd681c7e3f9",
-          description: "Natural Language Processing enables computers to understand and generate human language, powering chatbots and translation services."
+          url: "https://images.unsplash.com/photo-1586374579358-9d19d632b6df",
+          description: "Generative AI can create realistic images, text, and other content that never existed before."
         },
         quiz: {
-          question: "What NLP model architecture introduced the concept of 'attention' mechanisms?",
+          question: "What is the primary difference between discriminative and generative models?",
           options: [
-            "Recurrent Neural Networks",
-            "Convolutional Neural Networks",
-            "Transformer Models",
-            "Generative Adversarial Networks"
+            "Discriminative models classify inputs, while generative models create new outputs",
+            "Generative models require less data than discriminative models",
+            "Discriminative models use neural networks, while generative models use decision trees",
+            "Generative models are supervised, while discriminative models are unsupervised"
           ],
-          correctAnswer: 2
+          correctAnswer: 0
         },
         quizzes: [
           {
-            question: "What NLP model architecture introduced the concept of 'attention' mechanisms?",
+            question: "What is the primary difference between discriminative and generative models?",
             options: [
-              "Recurrent Neural Networks",
-              "Convolutional Neural Networks",
-              "Transformer Models",
-              "Generative Adversarial Networks"
+              "Discriminative models classify inputs, while generative models create new outputs",
+              "Generative models require less data than discriminative models",
+              "Discriminative models use neural networks, while generative models use decision trees",
+              "Generative models are supervised, while discriminative models are unsupervised"
             ],
-            correctAnswer: 2
+            correctAnswer: 0
           },
           {
-            question: "Which of these is NOT a common step in text preprocessing?",
+            question: "Which of these is NOT a common type of generative AI?",
             options: [
-              "Tokenization",
-              "Lemmatization",
-              "Stop word removal",
-              "Quantization"
+              "Generative Adversarial Networks (GANs)",
+              "Variational Autoencoders (VAEs)",
+              "Diffusion Models",
+              "Supervised Vector Machines (SVMs)"
             ],
             correctAnswer: 3
           },
           {
-            question: "What is the primary purpose of word embeddings like Word2Vec?",
+            question: "What is 'prompt engineering' in the context of generative AI?",
             options: [
-              "To compress text data",
-              "To represent words as numerical vectors that capture semantic meaning",
-              "To translate between languages",
-              "To count word frequencies"
+              "Designing the neural network architecture",
+              "Creating effective instructions for AI to generate desired outputs",
+              "Fixing bugs in AI code",
+              "Setting up the hardware for AI training"
             ],
             correctAnswer: 1
           }
@@ -640,61 +651,320 @@ function generateAICourse(level: string, learningStyle: string): Course {
       },
       {
         id: "section-ai-5",
-        title: "AI Ethics & Future Trends",
-        introduction: "As AI grows more powerful, we must consider its ethical implications and the future direction of the field.",
-        whyLearn: "Understanding AI ethics is essential for responsible development and deployment of AI systems. This knowledge helps you navigate the societal impacts of AI technologies.",
-        videoUrl: "https://www.youtube.com/embed/HSJJxYu9ong",
+        title: "Chatbots",
+        introduction: "Chatbots are AI systems designed to converse with humans through text or speech. This section explores how modern conversational AI works and its applications.",
+        whyLearn: "Conversational AI is becoming ubiquitous in customer service, personal assistants, and many other domains. Understanding chatbots helps you interact with and potentially develop these systems.",
+        videoUrl: "https://www.youtube.com/embed/o9-ObGgfpEk",
         keyPoints: [
-          "AI bias can reflect and amplify existing social inequalities",
-          "Transparency and explainability are crucial for trustworthy AI",
-          "Privacy concerns arise from AI's data requirements",
-          "Future AI development may lead to artificial general intelligence (AGI)"
+          "Modern chatbots use large language models trained on vast text data",
+          "Chatbots can be rule-based or use machine learning approaches",
+          "Contextual understanding is key to natural-sounding conversations",
+          "Challenges include maintaining coherence, factuality, and appropriate responses"
         ],
-        shortVideo: "https://www.youtube.com/embed/mjR5Sxj26DY",
+        shortVideo: "https://www.youtube.com/embed/56AOfobY6do",
+        additionalShortVideos: ["https://www.youtube.com/embed/gmUHEvrpYoU"],
+        bonusVideos: ["https://www.youtube.com/embed/X-AWdfSFCHQ"],
+        visualUrl: "https://play.aidungeon.com/scenario/BspAiw_VrLtr/how-it-ends",
         image: {
-          url: "https://images.unsplash.com/photo-1507146153580-69a1fe6d8aa1",
-          description: "AI ethics considers how artificial intelligence impacts society, addressing issues like bias, privacy, and transparency."
+          url: "https://images.unsplash.com/photo-1531746790731-6c087fecd65a",
+          description: "Chatbots enable natural conversations between humans and machines through text or voice interfaces."
         },
         quiz: {
-          question: "Which of the following is NOT one of the common ethical challenges in AI development?",
+          question: "What is the Turing Test designed to evaluate?",
           options: [
-            "Algorithmic bias",
-            "Privacy concerns",
-            "Accessibility for all users",
-            "Job displacement"
+            "The computational power of an AI system",
+            "The ability of an AI to mimic human conversation convincingly",
+            "The factual accuracy of an AI's responses",
+            "The speed at which an AI can process information"
+          ],
+          correctAnswer: 1
+        },
+        quizzes: [
+          {
+            question: "What is the Turing Test designed to evaluate?",
+            options: [
+              "The computational power of an AI system",
+              "The ability of an AI to mimic human conversation convincingly",
+              "The factual accuracy of an AI's responses",
+              "The speed at which an AI can process information"
+            ],
+            correctAnswer: 1
+          },
+          {
+            question: "Which of these is NOT typically a component of a chatbot system?",
+            options: [
+              "Natural Language Understanding (NLU)",
+              "Dialogue Management",
+              "Physical Robotics Interface",
+              "Response Generation"
+            ],
+            correctAnswer: 2
+          },
+          {
+            question: "What causes chatbot 'hallucinations'?",
+            options: [
+              "Electrical interference in the server",
+              "Generating content that seems plausible but is factually incorrect",
+              "Users asking deliberately confusing questions",
+              "Insufficient memory allocation"
+            ],
+            correctAnswer: 1
+          }
+        ]
+      },
+      {
+        id: "section-ai-6",
+        title: "Robots and Automation",
+        introduction: "Robotics combines AI with physical systems to interact with the real world. This section explores how AI enables robots and automation systems to perform various tasks.",
+        whyLearn: "Robots and automation are transforming industries from manufacturing to healthcare. Understanding these technologies helps you appreciate their capabilities and future potential.",
+        videoUrl: "https://www.youtube.com/embed/eLl2d2cmHHQ",
+        keyPoints: [
+          "Robots use sensors to perceive their environment and actuators to interact with it",
+          "AI enables robots to make decisions based on environmental data",
+          "Automation can range from simple rule-based systems to complex AI-driven processes",
+          "Robots are increasingly being used in healthcare, manufacturing, agriculture, and more"
+        ],
+        shortVideo: "https://www.youtube.com/embed/uWObkOV71ZI",
+        additionalShortVideos: [
+          "https://www.youtube.com/embed/vQhqYXGExWY",
+          "https://www.youtube.com/embed/jD5y1eQ3Y_o"
+        ],
+        bonusVideos: ["https://www.youtube.com/embed/f2aocKWrPG8"],
+        image: {
+          url: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e",
+          description: "Robots combine physical capabilities with AI systems to perform tasks in the real world."
+        },
+        quiz: {
+          question: "Which of the following is NOT a common type of industrial robot?",
+          options: [
+            "Articulated robots",
+            "Cartesian robots",
+            "Collaborative robots (cobots)",
+            "Cognitive robots"
+          ],
+          correctAnswer: 3
+        },
+        quizzes: [
+          {
+            question: "Which of the following is NOT a common type of industrial robot?",
+            options: [
+              "Articulated robots",
+              "Cartesian robots",
+              "Collaborative robots (cobots)",
+              "Cognitive robots"
+            ],
+            correctAnswer: 3
+          },
+          {
+            question: "What is a key difference between automation and robotics?",
+            options: [
+              "Automation always involves physical movement while robotics doesn't",
+              "Robotics requires AI while automation doesn't",
+              "Automation focuses on replacing repetitive processes while robotics involves machines that can interact with the environment",
+              "Robotics is only used in manufacturing while automation is used across industries"
+            ],
+            correctAnswer: 2
+          },
+          {
+            question: "What is the primary challenge for robots operating in unstructured environments?",
+            options: [
+              "Battery life",
+              "Network connectivity",
+              "Perception and adaptation to changing conditions",
+              "User interface design"
+            ],
+            correctAnswer: 2
+          }
+        ]
+      },
+      {
+        id: "section-ai-7",
+        title: "AI for Music",
+        introduction: "AI is transforming music creation, production, and distribution. This section explores how AI helps compose, mix, master, and even perform music.",
+        whyLearn: "AI music technologies are creating new possibilities for creators and listeners alike. Understanding these tools helps you appreciate their creative potential.",
+        videoUrl: "https://www.youtube.com/embed/Ey75Xw_ikqs",
+        keyPoints: [
+          "AI can compose original music by learning patterns from existing compositions",
+          "Neural networks can generate melodies, harmonies, and rhythmic structures",
+          "AI tools assist human musicians rather than replacing them",
+          "Ethical considerations include copyright, attribution, and artistic authenticity"
+        ],
+        shortVideo: "https://www.youtube.com/embed/_uLBlSKckos",
+        additionalShortVideos: ["https://www.youtube.com/embed/csAMFh7vsqw"],
+        bonusVideos: ["https://www.youtube.com/embed/1oj0Usyy_ds"],
+        visualUrl: "https://labs.google/fx/tools/music-fx",
+        image: {
+          url: "https://images.unsplash.com/photo-1511379938547-c1f69419868d",
+          description: "AI music generation tools can create original compositions by learning patterns from existing music."
+        },
+        quiz: {
+          question: "Which of these is NOT typically a feature of AI music generation systems?",
+          options: [
+            "Melody generation",
+            "Harmony creation",
+            "Live instrumentation",
+            "Style transfer"
           ],
           correctAnswer: 2
         },
         quizzes: [
           {
-            question: "Which of the following is NOT one of the common ethical challenges in AI development?",
+            question: "Which of these is NOT typically a feature of AI music generation systems?",
             options: [
-              "Algorithmic bias",
-              "Privacy concerns",
-              "Accessibility for all users",
-              "Job displacement"
+              "Melody generation",
+              "Harmony creation",
+              "Live instrumentation",
+              "Style transfer"
             ],
             correctAnswer: 2
           },
           {
-            question: "What is algorithmic bias?",
+            question: "What is the primary data source for training AI music generation systems?",
             options: [
-              "When an AI system favors certain mathematical operations",
-              "When an AI produces unfair outcomes for certain groups",
-              "When an AI runs more slowly over time",
-              "When an AI uses too much computing power"
+              "Sheet music notation",
+              "Audio recordings",
+              "MIDI files",
+              "All of the above"
+            ],
+            correctAnswer: 3
+          },
+          {
+            question: "What is 'style transfer' in the context of AI music?",
+            options: [
+              "Changing the tempo of a piece",
+              "Applying the stylistic elements of one genre to a composition in another genre",
+              "Transferring music between different digital audio workstations",
+              "Converting audio to sheet music"
+            ],
+            correctAnswer: 1
+          }
+        ]
+      },
+      {
+        id: "section-ai-8",
+        title: "AI for Arts",
+        introduction: "AI is creating new possibilities in visual arts, from generating original images to enhancing existing artwork. This section explores how AI is transforming artistic creation.",
+        whyLearn: "AI art tools are democratizing creation and opening new aesthetic possibilities. Understanding these technologies helps you appreciate and potentially utilize these creative tools.",
+        videoUrl: "https://www.youtube.com/embed/SVcsDDABEkM",
+        keyPoints: [
+          "Generative models like GANs and diffusion models can create realistic and stylized images",
+          "Text-to-image systems convert natural language descriptions into visual content",
+          "Style transfer techniques can apply one image's aesthetic to another image's content",
+          "AI art raises questions about creativity, authorship, and artistic value"
+        ],
+        shortVideo: "https://www.youtube.com/embed/I-EIVlHvHRM",
+        bonusVideos: ["https://www.youtube.com/embed/uA70ZGCC1f4"],
+        visualUrl: "https://labs.google/fx/tools/image-fx",
+        image: {
+          url: "https://images.unsplash.com/photo-1580927752452-89d86da3fa0a",
+          description: "AI art tools can generate stunning visual content from text prompts or by learning from existing artwork."
+        },
+        quiz: {
+          question: "What is 'latent space' in the context of AI art generation?",
+          options: [
+            "The physical location where AI art is displayed",
+            "A compressed representation where similar concepts are located near each other",
+            "The time delay between entering a prompt and receiving an image",
+            "The storage area for AI art templates"
+          ],
+          correctAnswer: 1
+        },
+        quizzes: [
+          {
+            question: "What is 'latent space' in the context of AI art generation?",
+            options: [
+              "The physical location where AI art is displayed",
+              "A compressed representation where similar concepts are located near each other",
+              "The time delay between entering a prompt and receiving an image",
+              "The storage area for AI art templates"
             ],
             correctAnswer: 1
           },
           {
-            question: "Which term describes AI systems that can perform any intellectual task that a human can?",
+            question: "Which of these AI art models uses diffusion techniques?",
             options: [
-              "Narrow AI",
-              "Artificial General Intelligence (AGI)",
-              "Machine Learning",
-              "Expert Systems"
+              "DALL-E",
+              "Midjourney",
+              "Stable Diffusion",
+              "All of the above"
+            ],
+            correctAnswer: 3
+          },
+          {
+            question: "What ethical concern is NOT typically associated with AI art?",
+            options: [
+              "Copyright infringement",
+              "Bias in generated images",
+              "Environmental impact of computation",
+              "Physical safety risks"
+            ],
+            correctAnswer: 3
+          }
+        ]
+      },
+      {
+        id: "section-ai-9",
+        title: "AI for Environment",
+        introduction: "AI is being applied to address environmental challenges from climate change to conservation. This section explores how AI helps monitor, model, and protect our planet.",
+        whyLearn: "Environmental applications of AI demonstrate technology's potential for positive global impact. Understanding these applications shows how AI can address urgent planetary challenges.",
+        videoUrl: "https://www.youtube.com/embed/9v3Vqz2VQ-w",
+        keyPoints: [
+          "AI analyzes climate data to improve forecasting and adaptation strategies",
+          "Computer vision monitors ecosystems, wildlife populations, and environmental changes",
+          "Machine learning optimizes energy systems for efficiency and renewable integration",
+          "AI-powered tools help reduce waste, pollution, and resource consumption"
+        ],
+        shortVideo: "https://www.youtube.com/embed/DBbkkLVAEJQ",
+        additionalShortVideos: [
+          "https://www.youtube.com/embed/-KFO0pES-zQ",
+          "https://www.youtube.com/embed/sV0cR_Nhac0",
+          "https://www.youtube.com/embed/7PgSanU_VpQ"
+        ],
+        visualUrl: "https://ozone.unep.org/apollo-edition-impact-simulator",
+        image: {
+          url: "https://images.unsplash.com/photo-1572297350242-e588f2149a59",
+          description: "AI environmental applications help monitor ecosystems, optimize resource use, and develop solutions to climate challenges."
+        },
+        quiz: {
+          question: "How does AI typically contribute to renewable energy systems?",
+          options: [
+            "By physically installing solar panels",
+            "By manufacturing wind turbines more efficiently",
+            "By predicting output and optimizing grid integration",
+            "By extracting raw materials for battery production"
+          ],
+          correctAnswer: 2
+        },
+        quizzes: [
+          {
+            question: "How does AI typically contribute to renewable energy systems?",
+            options: [
+              "By physically installing solar panels",
+              "By manufacturing wind turbines more efficiently",
+              "By predicting output and optimizing grid integration",
+              "By extracting raw materials for battery production"
+            ],
+            correctAnswer: 2
+          },
+          {
+            question: "Which environmental application of AI relies primarily on satellite imagery?",
+            options: [
+              "Smart home energy optimization",
+              "Deforestation monitoring",
+              "Urban traffic management",
+              "Waste sorting"
             ],
             correctAnswer: 1
+          },
+          {
+            question: "What is a potential negative environmental impact of AI itself?",
+            options: [
+              "Energy consumption from training large models",
+              "Noise pollution from data centers",
+              "Water contamination from AI hardware",
+              "Ozone depletion from network transmissions"
+            ],
+            correctAnswer: 0
           }
         ]
       }
