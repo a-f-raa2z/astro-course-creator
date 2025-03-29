@@ -20,6 +20,7 @@ export const VideoContent = ({ section, onComplete, onPrevious, isFirstContent }
   const [videoWatched, setVideoWatched] = useState(false);
   const [showKeyPoints, setShowKeyPoints] = useState(false);
   const [checkedPoints, setCheckedPoints] = useState<number[]>([]);
+  const [showCompletionView, setShowCompletionView] = useState(false);
   const { toast } = useToast();
   
   // Get video description based on section title
@@ -44,6 +45,14 @@ export const VideoContent = ({ section, onComplete, onPrevious, isFirstContent }
     setShowKeyPoints(true);
   };
 
+  const handleAllPointsChecked = () => {
+    setShowCompletionView(true);
+    toast({
+      title: "All Points Checked!",
+      description: "You've mastered the key concepts of this lesson."
+    });
+  };
+
   const handleContinue = () => {
     onComplete();
   };
@@ -56,10 +65,7 @@ export const VideoContent = ({ section, onComplete, onPrevious, isFirstContent }
       setCheckedPoints(newCheckedPoints);
       
       if (newCheckedPoints.length === section.keyPoints.length) {
-        toast({
-          title: "All Points Checked!",
-          description: "You've successfully remembered all the key points. Great job!"
-        });
+        handleAllPointsChecked();
       }
     }
   };
@@ -80,7 +86,7 @@ export const VideoContent = ({ section, onComplete, onPrevious, isFirstContent }
           </p>
         </div>
         
-        {!showKeyPoints ? (
+        {!showKeyPoints && !showCompletionView ? (
           <div className="flex-grow relative">
             <AspectRatio ratio={16/9} className="h-full">
               <iframe 
@@ -92,7 +98,7 @@ export const VideoContent = ({ section, onComplete, onPrevious, isFirstContent }
               ></iframe>
             </AspectRatio>
           </div>
-        ) : (
+        ) : showKeyPoints && !showCompletionView ? (
           <div className="flex-grow p-4 overflow-y-auto">
             <div className="bg-purple-900/30 rounded-lg p-4 mb-4 border border-purple-500/30">
               <h3 className="text-xl font-semibold text-purple-100 flex items-center mb-4">
@@ -100,7 +106,7 @@ export const VideoContent = ({ section, onComplete, onPrevious, isFirstContent }
                 Key Points to Remember
               </h3>
               
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="grid grid-cols-2 gap-4">
                 {section.keyPoints.map((point, idx) => (
                   <div 
                     key={idx} 
@@ -137,6 +143,43 @@ export const VideoContent = ({ section, onComplete, onPrevious, isFirstContent }
               </div>
             </div>
           </div>
+        ) : (
+          <div className="flex-grow flex flex-col items-center justify-center p-8 text-center">
+            <div className="animate-bounce mb-6">
+              <CheckCircle className="h-20 w-20 text-green-500" />
+            </div>
+            <h3 className="text-2xl font-bold text-green-300 mb-4">
+              Lesson Completed!
+            </h3>
+            <p className="text-purple-200 max-w-md mb-8">
+              Great job! You've completed the video lesson and mastered the key concepts for {section.title}.
+            </p>
+            <div className="flex items-center justify-center gap-2 flex-wrap">
+              <Button
+                onClick={() => setShowKeyPoints(true)}
+                variant="outline"
+                className="border-purple-500/30 text-purple-300 hover:bg-purple-900/30 mb-2 sm:mb-0"
+              >
+                <ListChecks className="h-4 w-4 mr-2" /> Review Key Points
+              </Button>
+              <Button 
+                onClick={() => {
+                  setShowKeyPoints(false);
+                  setShowCompletionView(false);
+                }}
+                variant="outline"
+                className="border-red-500/30 text-red-300 hover:bg-red-900/30 mb-2 sm:mb-0"
+              >
+                <Youtube className="h-4 w-4 mr-2" /> Rewatch Video
+              </Button>
+              <Button 
+                onClick={handleContinue}
+                className="bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800"
+              >
+                Continue <ArrowRight className="h-4 w-4 ml-2" />
+              </Button>
+            </div>
+          </div>
         )}
         
         <div className="p-4 flex justify-between">
@@ -150,16 +193,16 @@ export const VideoContent = ({ section, onComplete, onPrevious, isFirstContent }
             </Button>
           )}
           <div className={!isFirstContent ? "" : "ml-auto"}>
-            {!showKeyPoints ? (
+            {!showKeyPoints && !showCompletionView ? (
               <Button 
                 onClick={handleVideoComplete}
                 className="bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800"
               >
                 Complete Video <CheckCircle className="h-4 w-4 ml-2" />
               </Button>
-            ) : (
+            ) : showKeyPoints && !showCompletionView ? (
               <Button 
-                onClick={handleContinue}
+                onClick={allChecked ? handleAllPointsChecked : undefined}
                 className={`
                   transition-all ${allChecked 
                     ? "bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800" 
@@ -170,6 +213,13 @@ export const VideoContent = ({ section, onComplete, onPrevious, isFirstContent }
               >
                 {allChecked ? "Continue" : `Check all points (${checkedPoints.length}/${section.keyPoints.length})`}
                 <ArrowRight className="h-4 w-4 ml-2" />
+              </Button>
+            ) : (
+              <Button 
+                onClick={handleContinue}
+                className="bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800"
+              >
+                Continue <ArrowRight className="h-4 w-4 ml-2" />
               </Button>
             )}
           </div>
