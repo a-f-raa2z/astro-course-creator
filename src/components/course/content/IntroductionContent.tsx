@@ -34,6 +34,7 @@ export const IntroductionContent = ({ section, onComplete, onPrevious, isFirstCo
   // Custom introductions based on section title
   const getCustomIntroduction = (sectionTitle: string) => {
     switch (sectionTitle) {
+      // Astronomy course introductions
       case "The Solar System":
         return "Get ready to blast off on a journey through our cosmic neighborhood! The Solar System is more than just the Sun and a few planets—it's a dynamic, swirling collection of celestial bodies, from asteroids to comets and distant dwarf planets. Turn to page 50 as we uncover the wonders of this vast space family and learn how everything orbits the mighty Sun at the center.";
       case "The Inner Planets":
@@ -43,6 +44,24 @@ export const IntroductionContent = ({ section, onComplete, onPrevious, isFirstCo
         return "Our home planet is a rare gem in the Solar System—alive with oceans, air, and ecosystems teeming with life. But how well do you really know Earth? Through stunning visuals and science-packed videos, explore the planet's layers, landforms, and its place in the larger cosmic dance. Then, test your Earth knowledge with the interactive visual guide linked below.";
       case "The Moon":
         return "Our closest neighbor in space, the Moon has captured human imagination for centuries. From its mysterious dark side to its role in tides and eclipses, the Moon is more than just a pretty face in the night sky. These videos offer a closer look at its phases, surface features, and why it continues to be a key part of Earth's story. Take it further with NASA's interactive moon explorer tool.";
+      
+      // AI course introductions
+      case "Intro of Artificial Intelligence":
+        return "Welcome to the fascinating world of Artificial Intelligence! This introductory section will demystify what AI actually is, beyond the hype and science fiction. We'll explore the core concepts, historical milestones, and the fundamental principles that power AI systems today. By the end of this section, you'll understand the difference between narrow AI and general AI, and how machines are programmed to simulate human-like intelligence.";
+      case "Machine Learning":
+        return "Machine Learning is the engine that drives modern AI. In this section, we'll dive into how computers can learn patterns from data without being explicitly programmed. You'll discover the three main types of machine learning: supervised, unsupervised, and reinforcement learning. We'll explore real-world applications, from recommendation systems to fraud detection, and understand how algorithms improve over time with more data.";
+      case "Deep Learning":
+        return "Deep Learning represents a revolutionary approach to AI that mimics the neural networks of the human brain. This section will take you through the building blocks of neural networks, from neurons and layers to activation functions. You'll learn how deep learning has transformed computer vision, natural language processing, and speech recognition. We'll demystify concepts like backpropagation and gradient descent that make these powerful systems work.";
+      case "Generative AI":
+        return "Generative AI is reshaping how we create content and solve problems. In this section, we'll explore how AI systems can generate new images, text, music, and more that never existed before. You'll learn about the architecture of models like GANs, VAEs, and transformers that power tools such as DALL-E, Midjourney, and ChatGPT. By the end of this section, you'll understand both the creative potential and ethical considerations of these powerful generative systems.";
+      case "Chatbots":
+        return "Conversational AI has transformed how we interact with technology. This section explores the evolution of chatbots from simple rule-based systems to sophisticated conversational agents. You'll learn about the natural language processing techniques that enable machines to understand and generate human language. We'll examine the architecture of modern chatbots, including intent recognition, entity extraction, dialogue management, and response generation, along with best practices for designing effective conversational experiences.";
+      case "Robots and Automation":
+        return "Robotics represents AI embodied in the physical world. In this section, we'll explore how AI enables robots to perceive their environment, make decisions, and take actions. You'll learn about the sensor technologies that serve as a robot's 'senses,' control systems that enable movement, and the AI algorithms that power a robot's 'brain.' We'll examine applications across industries, from manufacturing and healthcare to agriculture and space exploration, and discuss how automation is reshaping our economy and society.";
+      case "AI for Music":
+        return "AI is revolutionizing how music is created, produced, and experienced. This section explores how artificial intelligence is being used to compose original melodies, generate harmonies, and even mimic the styles of famous musicians. You'll learn about the neural networks behind music generation, auto-tuning, and mastering algorithms powered by AI. We'll also examine how streaming platforms use recommendation systems to personalize music discovery, and discuss the creative partnership between human musicians and artificial intelligence.";
+      case "AI for Arts":
+        return "Visual arts are undergoing a renaissance through AI technologies. This section explores how algorithms can generate stunning images, assist in creative processes, and even develop new artistic styles. You'll learn about the technical foundations of image generation models like DALL-E, Midjourney, and Stable Diffusion, as well as style transfer algorithms. We'll examine how artists are incorporating AI as a collaborative tool in their workflows, and discuss questions about creativity, authorship, and the future relationship between human and machine artistry.";
       default:
         return section.introduction;
     }

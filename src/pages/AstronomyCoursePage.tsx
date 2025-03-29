@@ -10,6 +10,7 @@ import { Course } from "@/types/course";
 import LoadingAnimation from "@/components/LoadingAnimation";
 import { generateMockCourse } from "@/utils/courseData";
 import SectionCard from "@/components/SectionCard";
+import { Separator } from "@/components/ui/separator";
 
 const AstronomyCoursePage = () => {
   const navigate = useNavigate();
@@ -81,30 +82,70 @@ const AstronomyCoursePage = () => {
           </h1>
         </div>
         
-        <p className="text-gray-300 mb-8 max-w-3xl">{course.description}</p>
+        <p className="text-gray-300 mb-4 max-w-3xl leading-relaxed">{course.description}</p>
         
-        <div className="mb-8">
+        <div className="mb-8 flex flex-wrap gap-4 items-center">
           <Button 
             onClick={handleStartCourse}
             className="bg-purple-600 hover:bg-purple-700 text-white"
           >
             Start Course <Rocket className="ml-2 h-4 w-4" />
           </Button>
+          
+          <div className="text-gray-400 text-sm">
+            <span className="inline-flex items-center bg-purple-900/30 px-3 py-1 rounded-full">
+              <span className="h-2 w-2 bg-purple-400 rounded-full mr-2"></span>
+              {course.forLevel || "Intermediate"} Level
+            </span>
+            <span className="inline-flex items-center bg-blue-900/30 px-3 py-1 rounded-full ml-2">
+              <span className="h-2 w-2 bg-blue-400 rounded-full mr-2"></span>
+              {course.sections.length} Sections
+            </span>
+          </div>
         </div>
+        
+        <Separator className="my-6 bg-purple-500/20" />
+        
+        <h2 className="text-xl font-semibold text-white mb-6">Course Content</h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {/* Timeline journey container */}
+        <div className="relative journey-path">
           {course.sections.map((section, index) => (
-            <SectionCard 
-              key={section.id} 
-              title={section.title} 
-              description={section.introduction}
-              index={index}
-              videoUrl={section.videoUrl}
-              shortVideoUrls={section.shortVideo ? [section.shortVideo, ...(section.additionalShortVideos || [])] : undefined}
-              visualUrl={section.visualUrl}
-              bonusUrls={section.bonusVideos}
-              progress={sectionProgress[index] || 0}
-            />
+            <div key={section.id} className="flex mb-8 relative">
+              {/* Timeline circle with number */}
+              <div className="relative z-10">
+                <div className={`flex items-center justify-center w-12 h-12 rounded-full mr-4 border-2 ${
+                  sectionProgress[index] === 100 
+                    ? 'bg-green-600 border-green-400' 
+                    : sectionProgress[index] > 0 
+                    ? 'bg-purple-600 border-purple-400' 
+                    : 'bg-space-cosmic-blue border-purple-500/40'
+                }`}>
+                  <span className="text-white font-bold">{index + 1}</span>
+                </div>
+                {/* Connector line to next item */}
+                {index < course.sections.length - 1 && (
+                  <div className="absolute top-12 left-1/2 transform -translate-x-1/2 w-1 h-8 bg-gradient-to-b from-purple-500 to-blue-500"></div>
+                )}
+              </div>
+              
+              {/* Section card */}
+              <div className="flex-1">
+                <SectionCard 
+                  key={section.id} 
+                  title={section.title} 
+                  description={section.introduction}
+                  index={index}
+                  progress={sectionProgress[index] || 0}
+                  videoUrl={section.videoUrl}
+                  shortVideoUrls={section.shortVideo ? 
+                    [section.shortVideo, ...(section.additionalShortVideos || [])] : 
+                    []}
+                  visualUrl={section.visualUrl}
+                  bonusUrls={section.bonusVideos}
+                />
+              </div>
+            </div>
           ))}
         </div>
       </div>
