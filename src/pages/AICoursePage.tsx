@@ -4,11 +4,16 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { 
   ChevronLeft, 
-  Brain 
+  Brain,
+  FileText,
+  Youtube,
+  Video,
+  Star,
+  Gamepad2
 } from "lucide-react";
 import { Course } from "@/types/course";
 import LoadingAnimation from "@/components/LoadingAnimation";
-import { generateMockCourse } from "@/utils/courseData";
+import { generateMockCourse, aiCourseData } from "@/utils/courseData";
 import AISectionCard from "@/components/AISectionCard";
 
 const AICoursePage = () => {
@@ -24,7 +29,7 @@ const AICoursePage = () => {
       setCourse(location.state.course);
     } else {
       // Use the mock course data with AI topic
-      setCourse(generateMockCourse("ai", "intermediate", "visual"));
+      setCourse(aiCourseData);
     }
     
     // Mock progress data - in a real app, this would come from user data
@@ -36,7 +41,7 @@ const AICoursePage = () => {
       setSectionProgress(mockProgress);
     } else {
       // Default mock progress values if course isn't loaded yet
-      setSectionProgress([85, 60, 30, 15, 0, 0, 0]);
+      setSectionProgress([85, 60, 30, 15, 0, 0, 0, 0]);
     }
   }, [location.state, course?.sections.length]);
 

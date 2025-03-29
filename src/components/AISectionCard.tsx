@@ -3,8 +3,19 @@ import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
-import { ChevronRight, Brain, Database, Network, Lightbulb, Bot, Factory, Music, Paintbrush } from "lucide-react";
-import { Progress } from "@/components/ui/progress";
+import { 
+  ChevronRight, 
+  Brain, 
+  Database, 
+  Network, 
+  Lightbulb, 
+  Bot, 
+  Factory, 
+  Music, 
+  Paintbrush,
+  Progress
+} from "lucide-react";
+import { Progress as ProgressBar } from "@/components/ui/progress";
 
 interface AISectionCardProps {
   title: string;
@@ -74,7 +85,7 @@ const AISectionCard = ({ title, description, index, progress = 0 }: AISectionCar
             <span>Progress</span>
             <span>{progress}%</span>
           </div>
-          <Progress value={progress} className="h-2 bg-blue-900/30" />
+          <ProgressBar value={progress} className="h-2 bg-blue-900/30" />
         </div>
         
         <div className="flex justify-end">
