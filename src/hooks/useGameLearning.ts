@@ -29,7 +29,7 @@ export const useGameLearning = (course: Course) => {
       return ['introduction'];
     }
     
-    const contentTypes: ContentType['type'][] = ['introduction', 'video', 'key-points'];
+    const contentTypes: ContentType['type'][] = ['introduction', 'video'];
     
     if (section.shortVideo) {
       contentTypes.push('short-video');

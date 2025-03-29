@@ -22,8 +22,6 @@ export const GameContentTabs = ({
     switch (type) {
       case 'introduction': return <BookOpen className="h-4 w-4" />;
       case 'video': return <Youtube className="h-4 w-4" />;
-      case 'keyPoints': 
-      case 'key-points': return <CheckCircle className="h-4 w-4" />;
       case 'shortVideo': 
       case 'short-video': return <Video className="h-4 w-4" />;
       case 'image': return <Image className="h-4 w-4" />;
@@ -38,8 +36,6 @@ export const GameContentTabs = ({
     switch (type) {
       case 'introduction': return 'Overview';
       case 'video': return 'Main Lesson';
-      case 'keyPoints': 
-      case 'key-points': return 'Key Points';
       case 'shortVideo': 
       case 'short-video': return 'Fun Facts';
       case 'image': return 'Visual Guide';
@@ -54,8 +50,6 @@ export const GameContentTabs = ({
     switch (type) {
       case 'introduction': return 'text-purple-400';
       case 'video': return 'text-red-500';
-      case 'keyPoints': 
-      case 'key-points': return 'text-green-500';
       case 'shortVideo': 
       case 'short-video': return 'text-blue-400';
       case 'image': return 'text-yellow-400';
@@ -79,6 +73,11 @@ export const GameContentTabs = ({
       {/* Steps container */}
       <div className="flex justify-between relative z-10">
         {contentTypes.map((type, index) => {
+          // Skip key-points tab
+          if (type === 'key-points' || type === 'keyPoints') {
+            return null;
+          }
+          
           const isActive = currentContentIndex === index;
           const isDone = isCompleted(index);
           const stepNumber = index + 1;
