@@ -9,7 +9,16 @@ import {
   FileText, 
   Youtube, 
   CheckCircle, 
-  HelpCircle 
+  HelpCircle,
+  Brain,
+  Database,
+  Network,
+  Lightbulb,
+  Bot,
+  Factory,
+  Music,
+  Paintbrush,
+  Leaf
 } from "lucide-react";
 import { Course } from "@/types/course";
 import LoadingAnimation from "@/components/LoadingAnimation";
@@ -21,27 +30,6 @@ import {
   CardTitle, 
   CardContent 
 } from "@/components/ui/card";
-
-// Custom icon components for AI topics
-const Brain = () => (
-  <Cpu className="h-6 w-6 text-blue-400" />
-);
-
-const Database = () => (
-  <Cpu className="h-6 w-6 text-green-400" />
-);
-
-const Network = () => (
-  <Cpu className="h-6 w-6 text-yellow-400" />
-);
-
-const BrainCircuit = () => (
-  <Cpu className="h-6 w-6 text-purple-400" />
-);
-
-const Bot = () => (
-  <Cpu className="h-6 w-6 text-pink-400" />
-);
 
 const AICoursePage = () => {
   const navigate = useNavigate();
@@ -75,23 +63,23 @@ const AICoursePage = () => {
   const getSectionIcon = (sectionTitle: string) => {
     switch (sectionTitle) {
       case "Intro of Artificial Intelligence":
-        return <Brain />;
+        return <Brain className="h-6 w-6 text-blue-400" />;
       case "Machine Learning":
-        return <Database />;
+        return <Database className="h-6 w-6 text-green-400" />;
       case "Deep Learning":
-        return <Network />;
+        return <Network className="h-6 w-6 text-yellow-400" />;
       case "Generative AI":
-        return <BrainCircuit />;
+        return <Lightbulb className="h-6 w-6 text-purple-400" />;
       case "Chatbots":
-        return <Bot />;
+        return <Bot className="h-6 w-6 text-pink-400" />;
       case "Robots and Automation":
-        return <Cpu className="h-6 w-6 text-orange-400" />;
+        return <Factory className="h-6 w-6 text-orange-400" />;
       case "AI for Music":
-        return <Cpu className="h-6 w-6 text-indigo-400" />;
+        return <Music className="h-6 w-6 text-indigo-400" />;
       case "AI for Arts":
-        return <Cpu className="h-6 w-6 text-rose-400" />;
+        return <Paintbrush className="h-6 w-6 text-rose-400" />;
       case "AI for Environment":
-        return <Cpu className="h-6 w-6 text-emerald-400" />;
+        return <Leaf className="h-6 w-6 text-emerald-400" />;
       default:
         return <Cpu className="h-6 w-6 text-blue-400" />;
     }
@@ -127,8 +115,8 @@ const AICoursePage = () => {
             Back
           </Button>
           <h1 className="text-2xl font-bold text-white flex items-center">
-            <Brain />
-            <span className="ml-2">{course.title}</span>
+            <Brain className="h-6 w-6 text-blue-400 mr-2" />
+            <span>{course.title}</span>
           </h1>
         </div>
         

@@ -1,8 +1,24 @@
+
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import { ChevronLeft, Rocket, ArrowRight, Globe, Moon, Stars, Sun, Satellite, FileText, Youtube, CheckCircle, HelpCircle } from "lucide-react";
+import { 
+  ChevronLeft, 
+  Rocket, 
+  ArrowRight, 
+  Globe, 
+  Moon, 
+  Stars, 
+  Sun, 
+  Satellite, 
+  Planet, 
+  Telescope, 
+  FileText, 
+  Youtube, 
+  CheckCircle, 
+  HelpCircle 
+} from "lucide-react";
 import { Course } from "@/types/course";
 import LoadingAnimation from "@/components/LoadingAnimation";
 import { generateMockCourse } from "@/utils/courseData";
@@ -47,7 +63,13 @@ const AstronomyCoursePage = () => {
       case "Stars":
         return <Stars className="h-6 w-6 text-yellow-300" />;
       case "Planets":
-        return <Satellite className="h-6 w-6 text-orange-400" />;
+        return <Planet className="h-6 w-6 text-orange-400" />;
+      case "Telescopes":
+        return <Telescope className="h-6 w-6 text-purple-400" />;
+      case "Space Exploration":
+        return <Rocket className="h-6 w-6 text-red-400" />;
+      case "Satellites":
+        return <Satellite className="h-6 w-6 text-blue-300" />;
       default:
         return <Rocket className="h-6 w-6 text-purple-400" />;
     }
