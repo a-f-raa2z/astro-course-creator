@@ -1,8 +1,8 @@
+
 import { useState, useEffect } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { Course, CourseSection } from "@/types/course";
-
-export type ContentType = 'introduction' | 'video' | 'keyPoints' | 'shortVideo' | 'image' | 'playground' | 'bonus' | 'quiz';
+import { ContentType } from "@/types/ContentType";
 
 export const useGameLearning = (course: Course) => {
   const { toast } = useToast();
@@ -24,15 +24,15 @@ export const useGameLearning = (course: Course) => {
     localStorage.setItem(`${course.id}-completed`, JSON.stringify(completedContents));
   }, [xpPoints, completedContents, course.id]);
   
-  const getAvailableContentTypes = (section: CourseSection): ContentType[] => {
+  const getAvailableContentTypes = (section: CourseSection): ContentType['type'][] => {
     if (!section) {
       return ['introduction'];
     }
     
-    const contentTypes: ContentType[] = ['introduction', 'video', 'keyPoints'];
+    const contentTypes: ContentType['type'][] = ['introduction', 'video', 'key-points'];
     
     if (section.shortVideo) {
-      contentTypes.push('shortVideo');
+      contentTypes.push('short-video');
     }
     
     contentTypes.push('image');

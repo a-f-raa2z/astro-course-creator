@@ -32,10 +32,10 @@ const AICourseStartPage = () => {
   useEffect(() => {
     if (currentSection) {
       const newContentList: ContentType[] = [
-        { id: 'introduction', type: 'introduction', title: 'Introduction', completed: false },
-        { id: 'key-points', type: 'key-points', title: 'Key Points', completed: false },
-        { id: 'video', type: 'video', title: 'Video Lesson', completed: false },
-        ...(currentSection.shortVideo ? [{ id: 'short-video-1', type: 'short-video', title: 'Short Video 1', completed: false }] : []),
+        { id: 'introduction', type: 'introduction' as const, title: 'Introduction', completed: false },
+        { id: 'key-points', type: 'key-points' as const, title: 'Key Points', completed: false },
+        { id: 'video', type: 'video' as const, title: 'Video Lesson', completed: false },
+        ...(currentSection.shortVideo ? [{ id: 'short-video-1', type: 'short-video' as const, title: 'Short Video 1', completed: false }] : []),
         ...(currentSection.additionalShortVideos && currentSection.additionalShortVideos.length > 0
           ? currentSection.additionalShortVideos.map((_, index) => ({
             id: `short-video-${index + 2}`,
@@ -44,8 +44,8 @@ const AICourseStartPage = () => {
             completed: false,
           }))
           : []),
-        ...(currentSection.visualUrl ? [{ id: 'playground', type: 'playground', title: 'Interactive Playground', completed: false }] : []),
-        { id: 'quiz', type: 'quiz', title: 'Quiz', completed: false },
+        ...(currentSection.visualUrl ? [{ id: 'playground', type: 'playground' as const, title: 'Interactive Playground', completed: false }] : []),
+        { id: 'quiz', type: 'quiz' as const, title: 'Quiz', completed: false },
         ...(currentSection.bonusVideos && currentSection.bonusVideos.length > 0
           ? currentSection.bonusVideos.map((_, index) => ({
             id: `bonus-${index + 1}`,
@@ -54,7 +54,7 @@ const AICourseStartPage = () => {
             completed: false,
           }))
           : []),
-        { id: 'image', type: 'image', title: 'Image', completed: false },
+        { id: 'image', type: 'image' as const, title: 'Image', completed: false },
       ];
       setContentList(newContentList);
     }
@@ -99,7 +99,7 @@ const AICourseStartPage = () => {
     return <div className="min-h-screen bg-space text-white flex items-center justify-center">Loading...</div>;
   }
 
-  const currentContentType = contentList[currentContentIndex]?.type || 'introduction';
+  const currentContentType = contentList[currentContentIndex]?.type || ('introduction' as const);
 
   return (
     <div className="min-h-screen bg-space text-white">
