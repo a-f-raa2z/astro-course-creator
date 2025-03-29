@@ -1,5 +1,6 @@
+
 import { ContentType } from "@/types/ContentType";
-import { FileText, Youtube, CheckCircle, Video, Image, HelpCircle, Star, Gamepad2 } from "lucide-react";
+import { FileText, Youtube, CheckCircle, Video, Image, HelpCircle, Star, Gamepad2, BookOpen } from "lucide-react";
 
 interface GameContentTabsProps {
   contentTypes: string[];
@@ -19,7 +20,7 @@ export const GameContentTabs = ({
   
   const getContentIcon = (type: string) => {
     switch (type) {
-      case 'introduction': return <FileText className="h-4 w-4" />;
+      case 'introduction': return <BookOpen className="h-4 w-4" />;
       case 'video': return <Youtube className="h-4 w-4" />;
       case 'keyPoints': 
       case 'key-points': return <CheckCircle className="h-4 w-4" />;
@@ -35,7 +36,7 @@ export const GameContentTabs = ({
 
   const getContentTitle = (type: string) => {
     switch (type) {
-      case 'introduction': return 'Introduction';
+      case 'introduction': return 'Overview';
       case 'video': return 'Main Lesson';
       case 'keyPoints': 
       case 'key-points': return 'Key Points';

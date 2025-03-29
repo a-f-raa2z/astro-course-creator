@@ -1,8 +1,7 @@
-
 import React, { useState } from "react";
 import { CourseSection } from "@/types/course";
 import { Button } from "@/components/ui/button";
-import { RotateCw, ArrowRight, ArrowLeft, Lightbulb, FileText, Sun, Circle } from "lucide-react";
+import { RotateCw, ArrowRight, ArrowLeft, Lightbulb, BookOpen, Sun, Circle } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
 import { TitleWrapper } from "./TitleWrapper";
@@ -32,6 +31,8 @@ export const IntroductionContent = ({ section, onComplete, onPrevious, isFirstCo
   };
   
   const getCustomIntroduction = (sectionTitle: string) => {
+    const defaultPlaceholder = "Welcome to this section of the course! Here you'll learn the fundamental concepts, key principles, and practical applications of this topic. This overview will help you understand why this knowledge is valuable and how it connects to the broader field of study. Flip the card to learn more about why this topic matters and how it can benefit your understanding.";
+    
     switch (sectionTitle) {
       case "The Solar System":
         return "Get ready to blast off on a journey through our cosmic neighborhood! The Solar System is more than just the Sun and a few planets—it's a dynamic, swirling collection of celestial bodies, from asteroids to comets and distant dwarf planets. Turn to page 50 as we uncover the wonders of this vast space family and learn how everything orbits the mighty Sun at the center.";
@@ -61,11 +62,13 @@ export const IntroductionContent = ({ section, onComplete, onPrevious, isFirstCo
       case "AI for Arts":
         return "Visual arts are experiencing a renaissance through AI technologies. This section explores how algorithms can generate stunning images, assist in creative processes, and develop entirely new artistic styles. You'll learn about the technical foundations of image generation models like DALL-E, Midjourney, and Stable Diffusion that can create visual art from text descriptions. We'll cover the mathematics behind diffusion models that gradually transform random noise into coherent images, and how Generative Adversarial Networks (GANs) create photorealistic imagery through competitive training. The section examines neural style transfer algorithms that can reimagine photographs in the style of famous painters, and AI systems that can generate novel 3D models and animations. You'll discover how artists are incorporating these tools into their creative workflows—using AI for initial concept generation, style exploration, or as creative collaborators in the artistic process. We'll address how galleries and museums are using AI for art curation, restoration, and analysis of historical works. The section explores fundamental questions about creativity, authorship, and the evolving relationship between human and machine artistry. We'll discuss how AI is not replacing human creativity but rather expanding the artistic palette with new tools and possibilities. By the end, you'll be equipped to think critically about AI's role in visual arts while appreciating its potential to augment human expression and open new frontiers in artistic exploration.";
       default:
-        return section.whyLearn;
+        return section.introduction || defaultPlaceholder;
     }
   };
   
   const getCustomDetailedDescription = (sectionTitle: string) => {
+    const defaultWhyLearnPlaceholder = "Understanding this topic is essential because it provides you with knowledge and skills that are highly valuable in today's world. This section will build your foundational understanding, help you connect concepts across different domains, and prepare you for more advanced learning. The principles covered here have practical applications in various fields and will enhance your problem-solving abilities.";
+    
     switch (sectionTitle) {
       case "Intro of Artificial Intelligence":
       case "Introduction to AI":
@@ -85,7 +88,7 @@ export const IntroductionContent = ({ section, onComplete, onPrevious, isFirstCo
       case "AI for Arts":
         return "Visual arts are experiencing a renaissance through AI technologies. This section explores how algorithms can generate stunning images, assist in creative processes, and develop entirely new artistic styles. You'll learn about the technical foundations of image generation models like DALL-E, Midjourney, and Stable Diffusion that can create visual art from text descriptions, transforming words into cohesive, detailed images. The course examines the mathematics behind diffusion models that gradually transform random noise into coherent images, and how Generative Adversarial Networks (GANs) create photorealistic imagery through their competitive training approach. You'll explore neural style transfer algorithms that can reimagine photographs in the style of famous painters like Van Gogh or Picasso, and AI systems that can generate novel 3D models, animations, and video content. The section covers how artists are incorporating these tools into their creative workflows—using AI for initial concept generation, style exploration, background creation, or as creative collaborators that suggest unexpected directions in the artistic process. You'll discover how galleries and museums are using AI for art curation, restoration of damaged historical works, and analysis of artistic styles across time periods. The course addresses fundamental questions about creativity, authorship, and the evolving relationship between human and machine artistry. Throughout, you'll consider how AI is not replacing human creativity but rather expanding the artistic palette with new tools and possibilities, much as the camera did in the 19th century and digital tools did in the 20th century. By the end, you'll be equipped to think critically about AI's role in visual arts while appreciating its potential to augment human expression and open new frontiers in artistic exploration.";
       default:
-        return section.whyLearn || "Understanding this topic will help you build a solid foundation in this field and prepare you for more advanced concepts.";
+        return section.whyLearn || defaultWhyLearnPlaceholder;
     }
   };
   
@@ -95,8 +98,8 @@ export const IntroductionContent = ({ section, onComplete, onPrevious, isFirstCo
     <div className="w-full h-full flex items-center justify-center">
       <Card className="w-full h-full flex flex-col p-4 bg-space-cosmic-blue/20 backdrop-blur-sm border border-purple-500/20">
         <TitleWrapper 
-          icon={<FileText className="h-5 w-5 text-purple-400 mr-2" />}
-          title="Introduction" 
+          icon={<BookOpen className="h-5 w-5 text-purple-400 mr-2" />}
+          title="Overview" 
           color="bg-purple-800/50"
         />
         
