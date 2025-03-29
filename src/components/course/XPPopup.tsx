@@ -27,7 +27,7 @@ export const XPPopup = ({ xpPoints, level, levelProgress }: XPPopupProps) => {
   }, [xpPoints, previousXp]);
 
   return (
-    <div className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50">
+    <div className="fixed top-4 right-4 z-50">
       <Popover>
         <PopoverTrigger asChild>
           <div className="relative cursor-pointer">

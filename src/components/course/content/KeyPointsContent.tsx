@@ -37,6 +37,12 @@ export const KeyPointsContent = ({ section, onComplete, onPrevious, isFirstConte
   
   const allChecked = checkedPoints.length === section.keyPoints.length;
   
+  // Function to get grid columns based on number of key points
+  const getGridCols = () => {
+    if (section.keyPoints.length <= 2) return "grid-cols-1";
+    return "grid-cols-1 md:grid-cols-2";
+  };
+  
   return (
     <div className="w-full h-full">
       <Card className="w-full h-full overflow-auto p-4 bg-space-cosmic-blue/20 backdrop-blur-sm border border-purple-500/20">
@@ -50,7 +56,7 @@ export const KeyPointsContent = ({ section, onComplete, onPrevious, isFirstConte
           After watching Solar System 101, check off the key facts you remember about our cosmic neighborhood.
         </p>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+        <div className={`grid ${getGridCols()} gap-3 mb-4`}>
           {section.keyPoints.map((point, idx) => (
             <div 
               key={idx} 
@@ -68,7 +74,7 @@ export const KeyPointsContent = ({ section, onComplete, onPrevious, isFirstConte
                 </div>
               )}
               
-              <div className="flex items-start h-full">
+              <div className="flex items-start">
                 <Checkbox 
                   id={`point-${idx}`} 
                   checked={checkedPoints.includes(idx)}

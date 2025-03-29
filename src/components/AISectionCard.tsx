@@ -3,17 +3,15 @@ import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
-import { ChevronRight, Brain, Database, Network, Lightbulb, Bot, Factory, Music, Paintbrush } from "lucide-react";
-import { Progress } from "@/components/ui/progress";
+import { ChevronRight, Brain } from "lucide-react";
 
 interface AISectionCardProps {
   title: string;
   description: string;
   index: number;
-  progress?: number;
 }
 
-const AISectionCard = ({ title, description, index, progress = 0 }: AISectionCardProps) => {
+const AISectionCard = ({ title, description, index }: AISectionCardProps) => {
   const navigate = useNavigate();
   
   const handleStartSection = () => {
@@ -28,36 +26,12 @@ const AISectionCard = ({ title, description, index, progress = 0 }: AISectionCar
     navigate("/ai-course-start", { state: { course: mockCourse } });
   };
   
-  // Get appropriate icon based on section title
-  const getSectionIcon = () => {
-    switch (title) {
-      case "Intro of Artificial Intelligence":
-        return <Brain className="h-5 w-5 text-blue-400 mr-2" />;
-      case "Machine Learning":
-        return <Database className="h-5 w-5 text-green-400 mr-2" />;
-      case "Deep Learning":
-        return <Network className="h-5 w-5 text-yellow-400 mr-2" />;
-      case "Generative AI":
-        return <Lightbulb className="h-5 w-5 text-purple-400 mr-2" />;
-      case "Chatbots":
-        return <Bot className="h-5 w-5 text-pink-400 mr-2" />;
-      case "Robots and Automation":
-        return <Factory className="h-5 w-5 text-orange-400 mr-2" />;
-      case "AI for Music":
-        return <Music className="h-5 w-5 text-indigo-400 mr-2" />;
-      case "AI for Arts":
-        return <Paintbrush className="h-5 w-5 text-rose-400 mr-2" />;
-      default:
-        return <Brain className="h-5 w-5 text-blue-400 mr-2" />;
-    }
-  };
-  
   return (
     <Card className="cosmic-card mb-6 overflow-hidden hover:shadow-lg hover:shadow-blue-500/10 transition-all border-blue-500/20">
       <CardHeader className="pb-2">
         <div className="flex justify-between items-center">
           <CardTitle className="text-xl text-blue-100 flex items-center">
-            {getSectionIcon()}
+            <Brain className="h-5 w-5 text-blue-400 mr-2" />
             {title}
           </CardTitle>
           <span className="text-xs px-2 py-1 bg-blue-900/50 rounded-full text-blue-300 border border-blue-500/20">
@@ -67,16 +41,6 @@ const AISectionCard = ({ title, description, index, progress = 0 }: AISectionCar
       </CardHeader>
       <CardContent>
         <p className="text-gray-300 mb-4">{description}</p>
-        
-        {/* Progress indicator */}
-        <div className="mb-3">
-          <div className="flex justify-between text-xs text-blue-300 mb-1">
-            <span>Progress</span>
-            <span>{progress}%</span>
-          </div>
-          <Progress value={progress} className="h-2 bg-blue-900/30" />
-        </div>
-        
         <div className="flex justify-end">
           <Button 
             onClick={handleStartSection}
