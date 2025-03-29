@@ -108,73 +108,97 @@ const SectionCard = ({
     }
   };
   
+  const sectionImage = getSectionImage();
+  
   return (
-    <Card className="cosmic-card mb-6 overflow-hidden hover:shadow-lg hover:shadow-purple-500/10 transition-all border-purple-500/20">
-      <div className="relative h-40 overflow-hidden">
-        <img 
-          src={getSectionImage()}
-          alt={title}
-          className="w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
-        <div className="absolute bottom-3 left-4 flex items-center">
-          <span className="mr-2 bg-purple-900/70 text-xs px-2 py-1 rounded-full text-purple-200 border border-purple-500/30">
-            Section {index + 1}
-          </span>
+    <Card className="cosmic-card overflow-hidden hover:shadow-lg hover:shadow-purple-500/10 transition-all border-purple-500/20 w-full">
+      <div className="md:flex">
+        {sectionImage && (
+          <div className="md:w-1/3 h-48 md:h-auto overflow-hidden">
+            <img 
+              src={sectionImage}
+              alt={`${title} illustration`}
+              className="w-full h-full object-cover object-center transition-transform hover:scale-105"
+            />
+          </div>
+        )}
+        <div className="md:w-2/3">
+          <CardHeader className="pb-2">
+            <div className="flex justify-between items-center">
+              <CardTitle className="text-xl text-purple-100 flex items-center">
+                {getSectionIcon()}
+                {title}
+              </CardTitle>
+              <span className={`text-xs px-2 py-1 rounded-full text-white border 
+                ${progress === 100 
+                  ? 'bg-green-900/50 border-green-500/50' 
+                  : progress > 0 
+                  ? 'bg-purple-900/50 border-purple-500/50' 
+                  : 'bg-blue-900/50 border-blue-500/50'}`}>
+                {progress === 100 ? 'Completed' : progress > 0 ? 'In Progress' : 'Not Started'}
+              </span>
+            </div>
+          </CardHeader>
+          
+          <CardContent>
+            <p className="text-gray-300 mb-4">{description}</p>
+            
+            <div className="mb-3">
+              <div className="flex justify-between text-xs text-purple-300 mb-1">
+                <span>Progress</span>
+                <span>{progress}%</span>
+              </div>
+              <Progress 
+                value={progress} 
+                className="h-2 bg-purple-900/30" 
+                {...(progress === 100 ? { 
+                  className: "h-2 bg-purple-900/30 [&>div]:bg-green-500" 
+                } : {})}
+              />
+            </div>
+            
+            <div className="grid grid-cols-5 gap-2 mb-4">
+              <div className="bg-purple-900/30 p-2 rounded flex items-center justify-center" title="Introduction">
+                <FileText className="h-4 w-4 text-purple-300" />
+              </div>
+              <div className="bg-red-900/30 p-2 rounded flex items-center justify-center" title="Video Lesson">
+                <Youtube className="h-4 w-4 text-red-400" />
+              </div>
+              <div className="bg-blue-900/30 p-2 rounded flex items-center justify-center" title="Short Videos">
+                <Video className="h-4 w-4 text-blue-400" />
+              </div>
+              {bonusUrls && bonusUrls.length > 0 && (
+                <div className="bg-yellow-900/30 p-2 rounded flex items-center justify-center" title="Bonus Content">
+                  <Star className="h-4 w-4 text-yellow-400" />
+                </div>
+              )}
+              {visualUrl && (
+                <div className="bg-green-900/30 p-2 rounded flex items-center justify-center" title="Interactive Playground">
+                  <Gamepad2 className="h-4 w-4 text-green-400" />
+                </div>
+              )}
+            </div>
+            
+            <div className="flex justify-end">
+              <Button 
+                onClick={handleStartSection}
+                className={`
+                  ${progress === 100 
+                    ? 'bg-green-600 hover:bg-green-700' 
+                    : progress > 0 
+                    ? 'bg-purple-600 hover:bg-purple-700' 
+                    : 'bg-purple-600 hover:bg-purple-700'} 
+                  text-white
+                `}
+                size="sm"
+              >
+                {progress === 100 ? 'Review' : progress > 0 ? 'Continue' : 'Explore'} 
+                <ChevronRight className="ml-1 h-4 w-4" />
+              </Button>
+            </div>
+          </CardContent>
         </div>
       </div>
-      <CardHeader className="pb-2">
-        <div className="flex justify-between items-center">
-          <CardTitle className="text-xl text-purple-100 flex items-center">
-            {getSectionIcon()}
-            {title}
-          </CardTitle>
-        </div>
-      </CardHeader>
-      <CardContent>
-        <p className="text-gray-300 mb-4">{description}</p>
-        
-        {/* Progress indicator */}
-        <div className="mb-3">
-          <div className="flex justify-between text-xs text-purple-300 mb-1">
-            <span>Progress</span>
-            <span>{progress}%</span>
-          </div>
-          <Progress value={progress} className="h-2 bg-purple-900/30" />
-        </div>
-        
-        <div className="grid grid-cols-5 gap-2 mb-4">
-          <div className="bg-purple-900/30 p-2 rounded flex items-center justify-center" title="Introduction">
-            <FileText className="h-4 w-4 text-purple-300" />
-          </div>
-          <div className="bg-red-900/30 p-2 rounded flex items-center justify-center" title="Video Lesson">
-            <Youtube className="h-4 w-4 text-red-400" />
-          </div>
-          <div className="bg-blue-900/30 p-2 rounded flex items-center justify-center" title="Short Videos">
-            <Video className="h-4 w-4 text-blue-400" />
-          </div>
-          {bonusUrls && bonusUrls.length > 0 && (
-            <div className="bg-yellow-900/30 p-2 rounded flex items-center justify-center" title="Bonus Content">
-              <Star className="h-4 w-4 text-yellow-400" />
-            </div>
-          )}
-          {visualUrl && (
-            <div className="bg-green-900/30 p-2 rounded flex items-center justify-center" title="Interactive Playground">
-              <Gamepad2 className="h-4 w-4 text-green-400" />
-            </div>
-          )}
-        </div>
-        
-        <div className="flex justify-end">
-          <Button 
-            onClick={handleStartSection}
-            className="bg-purple-600 hover:bg-purple-700 text-white"
-            size="sm"
-          >
-            Explore <ChevronRight className="ml-1 h-4 w-4" />
-          </Button>
-        </div>
-      </CardContent>
     </Card>
   );
 };
