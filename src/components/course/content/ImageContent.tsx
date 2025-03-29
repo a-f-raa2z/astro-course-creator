@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { CourseSection } from "@/types/course";
 import { Button } from "@/components/ui/button";
@@ -21,7 +22,7 @@ export const ImageContent = ({ section, onComplete, onPrevious, isFirstContent }
   const getSectionImage = (sectionTitle: string) => {
     if (sectionTitle === "The Inner Planets") {
       return {
-        url: "/lovable-uploads/7a35184a-10f3-440e-92ac-90fd4cd6cf61.png",
+        url: "/lovable-uploads/f93fad87-6e1c-4755-aaca-5118c9b978f9.png",
         description: "The four inner planets of our solar system: Venus, Earth, Moon, and Mars shown to scale."
       };
     }
