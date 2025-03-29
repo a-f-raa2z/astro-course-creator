@@ -67,8 +67,18 @@ const AstronomyCourseStartPage = () => {
   };
 
   const handleStartNextSection = () => {
+    // First make sure we update the section index directly
+    const nextSectionIndex = currentSectionIndex + 1;
+    
+    // Ensure we're within bounds
+    if (nextSectionIndex < course.sections.length) {
+      setCurrentSectionIndex(nextSectionIndex);
+      // Reset to the first content of the new section
+      setCurrentContentIndex(0);
+    }
+    
+    // Hide the transition screen
     setShowSectionTransition(false);
-    originalHandleNextContent();
   };
 
   useEffect(() => {
