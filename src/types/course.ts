@@ -35,7 +35,7 @@ export interface QuizQuestion {
 export interface CourseSection {
   id: string;
   title: string;
-  introduction: string;
+  introduction: string = "This section introduces the fundamental concepts of artificial intelligence. We'll explore what AI is, its history, and its impact on our world today.";
   whyLearn: string; // Added this for why we learn this section
   videoUrl: string;
   keyPoints: string[];
