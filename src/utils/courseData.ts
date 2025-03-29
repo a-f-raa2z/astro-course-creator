@@ -764,4 +764,4 @@ function generateAICourse(level: string, learningStyle: string): Course {
             options: [
               "Sheet music notation",
               "Audio recordings",
-              "
+              "MIDI files",
