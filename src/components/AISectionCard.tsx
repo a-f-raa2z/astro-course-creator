@@ -17,8 +17,7 @@ import {
   Youtube,
   Video,
   Star,
-  Gamepad2,
-  Leaf
+  Gamepad2
 } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
 
@@ -76,8 +75,6 @@ const AISectionCard = ({
         return <Music className="h-5 w-5 text-indigo-400 mr-2" />;
       case "AI for Arts":
         return <Paintbrush className="h-5 w-5 text-rose-400 mr-2" />;
-      case "AI for Environment":
-        return <Leaf className="h-5 w-5 text-green-500 mr-2" />;
       default:
         return <Brain className="h-5 w-5 text-blue-400 mr-2" />;
     }

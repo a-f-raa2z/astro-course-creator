@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -35,7 +36,7 @@ const AICoursePage = () => {
       setSectionProgress(mockProgress);
     } else {
       // Default mock progress values if course isn't loaded yet
-      setSectionProgress([85, 60, 30, 15, 0, 0, 0, 0, 0, 0]);
+      setSectionProgress([85, 60, 30, 15, 0, 0, 0, 0]);
     }
   }, [location.state, course?.sections.length]);
 
@@ -78,11 +79,11 @@ const AICoursePage = () => {
           </Button>
           <h1 className="text-2xl font-bold text-white flex items-center">
             <Brain className="h-6 w-6 text-blue-400 mr-2" />
-            <span>{course?.title}</span>
+            <span>{course.title}</span>
           </h1>
         </div>
         
-        <p className="text-gray-300 mb-8 max-w-3xl">{course?.description}</p>
+        <p className="text-gray-300 mb-8 max-w-3xl">{course.description}</p>
         
         <div className="mb-8">
           <Button 
@@ -94,7 +95,7 @@ const AICoursePage = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {course?.sections.map((section, index) => (
+          {course.sections.map((section, index) => (
             <AISectionCard 
               key={section.id} 
               title={section.title} 
