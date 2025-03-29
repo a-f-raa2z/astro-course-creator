@@ -1,3 +1,4 @@
+
 import { AssessmentQuestion, Course } from "@/types/course";
 
 export const assessmentQuestions: AssessmentQuestion[] = [
@@ -132,179 +133,188 @@ export const generateMockCourse = (interest: string, level: string, learningStyl
       },
       {
         id: "section-2",
-        title: "Celestial Observations",
-        introduction: "Learning to observe the night sky is both a practical skill and a gateway to deeper astronomical understanding. This section covers techniques for successful stargazing.",
-        whyLearn: "Developing observational skills enables you to connect theoretical knowledge with real celestial objects and phenomena you can see with your own eyes.",
-        videoUrl: "https://www.youtube.com/embed/1sZ15SUeS9w",
+        title: "The Inner Planets",
+        introduction: "In this section, we'll explore Mercury, Venus, Earth, and Mars - the four terrestrial planets closest to the Sun that make up the inner solar system.",
+        whyLearn: "The inner planets offer valuable insights into the formation of rocky worlds and provide important comparisons to understand what makes Earth uniquely habitable.",
+        videoUrl: "https://www.youtube.com/embed/05E1uMh15QQ",
         keyPoints: [
-          "Identifying major constellations and celestial landmarks",
-          "Understanding celestial coordinates and star charts",
-          "Techniques for naked-eye, binocular, and telescope observations",
-          "Planning optimal observation sessions based on location and timing"
+          "The inner planets (Mercury, Venus, Earth, Mars) are mostly composed of rock and metal",
+          "Each inner planet has unique characteristics that influence its environment",
+          "Earth is the only inner planet confirmed to currently support life",
+          "The inner planets formed from similar materials but evolved very differently"
         ],
-        shortVideo: "https://www.youtube.com/embed/AwT8_KeZ7HA",
+        shortVideo: "https://www.youtube.com/embed/_rzAbPtUamA",
+        additionalShortVideos: ["https://www.youtube.com/embed/4qCczin1Muo"],
         image: {
-          url: "https://images.unsplash.com/photo-1469474968028-56623f02e42e",
-          description: "Mountain observatories provide ideal conditions for astronomical observations away from light pollution."
+          url: "https://science.nasa.gov/wp-content/uploads/2023/11/pia25016.width-1320.jpg",
+          description: "The four inner planets (Mercury, Venus, Earth, and Mars) are terrestrial (rocky) worlds."
         },
         quiz: {
-          question: "Why do astronomers often prefer observing the night sky during a new moon?",
+          question: "Which inner planet has the longest day, lasting approximately 116 Earth days?",
           options: [
-            "The moon's gravity affects telescope accuracy",
-            "Stars are brighter during the new moon phase",
-            "Less light pollution from moonlight allows better visibility of dim objects",
-            "The new moon phase causes more meteors to enter Earth's atmosphere"
+            "Mercury",
+            "Venus",
+            "Earth",
+            "Mars"
           ],
-          correctAnswer: 2
+          correctAnswer: 0
         },
         quizzes: [
           {
-            question: "Why do astronomers often prefer observing the night sky during a new moon?",
+            question: "Which inner planet has the longest day, lasting approximately 116 Earth days?",
             options: [
-              "The moon's gravity affects telescope accuracy",
-              "Stars are brighter during the new moon phase",
-              "Less light pollution from moonlight allows better visibility of dim objects",
-              "The new moon phase causes more meteors to enter Earth's atmosphere"
-            ],
-            correctAnswer: 2
-          },
-          {
-            question: "Which of these is NOT a type of telescope?",
-            options: [
-              "Refractor",
-              "Reflector",
-              "Catadioptric",
-              "Spectroscopic"
-            ],
-            correctAnswer: 3
-          },
-          {
-            question: "What celestial object appears to move about 1° westward against the background stars each day?",
-            options: [
-              "The Sun",
-              "The Moon",
-              "Mars",
-              "Jupiter"
+              "Mercury",
+              "Venus",
+              "Earth",
+              "Mars"
             ],
             correctAnswer: 0
+          },
+          {
+            question: "Which inner planet has a surface temperature hot enough to melt lead?",
+            options: [
+              "Mercury",
+              "Venus",
+              "Earth",
+              "Mars"
+            ],
+            correctAnswer: 1
+          },
+          {
+            question: "Which inner planet has the largest volcano in the solar system?",
+            options: [
+              "Mercury",
+              "Venus",
+              "Earth",
+              "Mars"
+            ],
+            correctAnswer: 3
           }
         ]
       },
       {
         id: "section-3",
-        title: "Cosmic Phenomena",
-        introduction: "The universe is filled with spectacular phenomena that challenge our understanding of physics. In this section, we explore some of the most fascinating cosmic events.",
-        whyLearn: "Understanding extreme cosmic events helps us comprehend the lifecycle of stars and galaxies, and provides insights into the fundamental forces that shape our universe.",
-        videoUrl: "https://www.youtube.com/embed/G0V3j-itfBU",
+        title: "Earth",
+        introduction: "Our home planet - Earth is the blue marble of the Solar System and the only known world with abundant liquid water and thriving ecosystems.",
+        whyLearn: "Understanding Earth as a planet helps us appreciate both its uniqueness and its place in the cosmic context, while providing insights into planetary science and climate systems.",
+        videoUrl: "https://www.youtube.com/embed/HCDVN7DCzYE",
         keyPoints: [
-          "The life cycle of stars from formation to various end states",
-          "Black holes, neutron stars, and other extreme objects",
-          "Galaxy formation and evolution throughout cosmic history",
-          "Transient phenomena like supernovae and gamma-ray bursts"
+          "Earth is the only planet known to support life, with a unique atmosphere and hydrosphere",
+          "Our planet has a protective magnetic field generated by its molten iron core",
+          "Earth's surface is dynamic, with active plate tectonics shaping continents and oceans",
+          "The climate system involves complex interactions between land, oceans, atmosphere, and life"
         ],
-        shortVideo: "https://www.youtube.com/embed/e-P5IFTqB98",
+        shortVideo: "https://www.youtube.com/embed/HRwNdMoNUq4",
+        additionalShortVideos: ["https://www.youtube.com/embed/eCj5KgfRRGQ"],
+        bonusVideos: [
+          "https://www.youtube.com/embed/videoseries?list=PL50KW6aT4Ugw65Ex89Z2XrBxQVZLdyOZ9",
+          "https://www.youtube.com/embed/mrYjJ9Jl9dA?list=PL2gLpWRK0QlCXPhOqQD0wqPhLIvjq0BUj"
+        ],
+        visualUrl: "https://world-geography-games.com/en/world_earth.html",
         image: {
-          url: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05",
-          description: "Nebulae are stellar nurseries where new stars are born from cosmic gas and dust."
+          url: "https://science.nasa.gov/wp-content/uploads/2023/06/as17-148-22727-earth-full-disk-apollo-17-1972.width-1320.jpg",
+          description: "Earth, our home planet, is the only place we know of so far that's inhabited by living things."
         },
         quiz: {
-          question: "What cosmic event results from the complete gravitational collapse of a massive star?",
+          question: "What percentage of Earth's surface is covered by water?",
           options: [
-            "Planetary nebula",
-            "Supernova explosion",
-            "Solar flare",
-            "Aurora borealis"
+            "50%",
+            "60%",
+            "71%",
+            "85%"
           ],
-          correctAnswer: 1
+          correctAnswer: 2
         },
         quizzes: [
           {
-            question: "What cosmic event results from the complete gravitational collapse of a massive star?",
+            question: "What percentage of Earth's surface is covered by water?",
             options: [
-              "Planetary nebula",
-              "Supernova explosion",
-              "Solar flare",
-              "Aurora borealis"
+              "50%",
+              "60%",
+              "71%",
+              "85%"
             ],
-            correctAnswer: 1
+            correctAnswer: 2
           },
           {
-            question: "Which of these is NOT a type of galaxy?",
+            question: "What is the primary gas in Earth's atmosphere?",
             options: [
-              "Spiral",
-              "Elliptical",
-              "Irregular",
-              "Circular"
+              "Oxygen",
+              "Carbon dioxide",
+              "Nitrogen",
+              "Argon"
             ],
-            correctAnswer: 3
+            correctAnswer: 2
           },
           {
-            question: "What is the event horizon of a black hole?",
+            question: "What causes Earth's seasons?",
             options: [
-              "The center point where matter is crushed to infinite density",
-              "The boundary beyond which nothing can escape, not even light",
-              "The outer edge of the accretion disk",
-              "The point where time stops completely"
+              "Variations in distance from the Sun",
+              "Changes in the Sun's energy output",
+              "Earth's axial tilt relative to its orbital plane",
+              "Ocean current patterns"
             ],
-            correctAnswer: 1
+            correctAnswer: 2
           }
         ]
       },
       {
         id: "section-4",
-        title: "Current Research and Discoveries",
-        introduction: "Astronomy is a rapidly evolving field with new discoveries announced regularly. This section highlights recent breakthroughs and active areas of research.",
-        whyLearn: "Staying informed about current astronomical research connects you with the cutting edge of human knowledge and the ongoing quest to understand our universe.",
-        videoUrl: "https://www.youtube.com/embed/bUIU1kWk6HU",
+        title: "The Moon",
+        introduction: "Earth's natural satellite and our closest celestial neighbor, the Moon has fascinated humanity throughout history and continues to be a focus of scientific study and exploration.",
+        whyLearn: "The Moon provides insights into Earth's history, the evolution of rocky bodies, and serves as a potential stepping stone for future human exploration of the solar system.",
+        videoUrl: "https://www.youtube.com/embed/6AviDjR9mmo",
         keyPoints: [
-          "Latest findings from space telescopes and observatories",
-          "Exoplanet discoveries and the search for habitable worlds",
-          "Advances in understanding dark matter and dark energy",
-          "Gravitational wave astronomy and multi-messenger observations"
+          "The Moon is Earth's only natural satellite and the fifth largest moon in the solar system",
+          "Its formation likely resulted from a massive collision between Earth and a Mars-sized body",
+          "The Moon has no atmosphere and experiences extreme temperature variations",
+          "Lunar exploration has provided valuable scientific data and technological advancements"
         ],
-        shortVideo: "https://www.youtube.com/embed/AyFMPdHU1n0",
+        shortVideo: "https://www.youtube.com/embed/rVMvzH1FxfE",
+        additionalShortVideos: ["https://www.youtube.com/embed/fTok7usLXb4"],
+        visualUrl: "https://eyes.nasa.gov/apps/solar-system/#/earth/moons/moon",
         image: {
-          url: "https://images.unsplash.com/photo-1462331940025-496dfbfc7564",
-          description: "Space telescopes like James Webb allow us to peer deeper into the universe than ever before."
+          url: "https://science.nasa.gov/wp-content/uploads/2023/09/moon.width-1320.jpg",
+          description: "The Moon is Earth's only natural satellite and the fifth largest moon in the solar system."
         },
         quiz: {
-          question: "Which recent technological advancement has allowed astronomers to directly detect gravitational waves?",
+          question: "What causes the Moon to always show the same face to Earth?",
           options: [
-            "The Hubble Space Telescope",
-            "LIGO (Laser Interferometer Gravitational-Wave Observatory)",
-            "The International Space Station",
-            "Radio telescope arrays"
+            "The Moon doesn't rotate at all",
+            "The Moon's rotation period equals its orbital period around Earth",
+            "Earth's gravity prevents the Moon from rotating",
+            "The Moon's axis is perfectly aligned with Earth's axis"
           ],
           correctAnswer: 1
         },
         quizzes: [
           {
-            question: "Which recent technological advancement has allowed astronomers to directly detect gravitational waves?",
+            question: "What causes the Moon to always show the same face to Earth?",
             options: [
-              "The Hubble Space Telescope",
-              "LIGO (Laser Interferometer Gravitational-Wave Observatory)",
-              "The International Space Station",
-              "Radio telescope arrays"
+              "The Moon doesn't rotate at all",
+              "The Moon's rotation period equals its orbital period around Earth",
+              "Earth's gravity prevents the Moon from rotating",
+              "The Moon's axis is perfectly aligned with Earth's axis"
             ],
             correctAnswer: 1
           },
           {
-            question: "What is the main constituent of the 'dark matter' that astronomers believe makes up about 27% of the universe?",
+            question: "What are the dark patches visible on the Moon's surface?",
             options: [
-              "Black holes",
-              "Neutrinos",
-              "Unknown - its nature remains one of the biggest mysteries in physics",
-              "Hydrogen gas that doesn't emit light"
+              "Large lakes",
+              "Ancient volcanic plains (maria)",
+              "Shadows from mountains",
+              "Forests"
             ],
-            correctAnswer: 2
+            correctAnswer: 1
           },
           {
-            question: "Which space telescope, launched in 2021, is designed to observe primarily in the infrared spectrum?",
+            question: "How long does it take for the Moon to complete one orbit around Earth?",
             options: [
-              "Hubble Space Telescope",
-              "Chandra X-ray Observatory",
-              "James Webb Space Telescope",
-              "Spitzer Space Telescope"
+              "1 day",
+              "7 days",
+              "27.3 days",
+              "365 days"
             ],
             correctAnswer: 2
           }

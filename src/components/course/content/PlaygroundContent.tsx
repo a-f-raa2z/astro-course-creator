@@ -14,21 +14,29 @@ interface PlaygroundContentProps {
 }
 
 export const PlaygroundContent = ({ section, onComplete, onPrevious, isFirstContent }: PlaygroundContentProps) => {
-  // Get the appropriate interactive content based on section title
-  const getInteractiveContent = (sectionTitle: string) => {
-    if (sectionTitle === "Earth") {
+  // Get the appropriate interactive content based on section title or URL
+  const getInteractiveContent = () => {
+    if (section.visualUrl) {
+      if (section.title === "Earth") {
+        return {
+          title: "Interactive Earth Map",
+          description: "Test your knowledge of Earth's geography with this interactive world map game.",
+          url: section.visualUrl
+        };
+      }
+      
+      if (section.title === "The Moon") {
+        return {
+          title: "NASA's Moon Viewer",
+          description: "Explore the Moon in 3D with NASA's interactive viewer.",
+          url: section.visualUrl
+        };
+      }
+      
       return {
-        title: "Interactive Earth Map",
-        description: "Test your knowledge of Earth's geography with this interactive world map game.",
-        url: "https://world-geography-games.com/en/world_earth.html"
-      };
-    }
-    
-    if (sectionTitle === "The Moon") {
-      return {
-        title: "NASA's Moon Viewer",
-        description: "Explore the Moon in 3D with NASA's interactive viewer.",
-        url: "https://eyes.nasa.gov/apps/solar-system/#/earth/moons/moon"
+        title: `Interactive ${section.title} Explorer`,
+        description: `Explore ${section.title} through this interactive content.`,
+        url: section.visualUrl
       };
     }
     
@@ -40,7 +48,7 @@ export const PlaygroundContent = ({ section, onComplete, onPrevious, isFirstCont
     };
   };
   
-  const content = getInteractiveContent(section.title);
+  const content = getInteractiveContent();
 
   return (
     <div className="w-full h-full flex flex-col">

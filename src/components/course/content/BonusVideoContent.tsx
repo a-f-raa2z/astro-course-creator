@@ -17,24 +17,34 @@ interface BonusVideoContentProps {
 export const BonusVideoContent = ({ section, onComplete, onPrevious, isFirstContent }: BonusVideoContentProps) => {
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
   
-  // Define bonus videos based on section title
-  const getBonusVideos = (sectionTitle: string) => {
-    if (sectionTitle === "Earth") {
-      return [
-        { 
-          url: "https://www.youtube.com/embed/videoseries?list=PL50KW6aT4Ugw65Ex89Z2XrBxQVZLdyOZ9", 
-          title: "Earth From Space Playlist",
-          description: "Amazing views of our planet from orbit, showing Earth's beauty and fragility."
-        },
-        { 
-          url: "https://www.youtube.com/embed/mrYjJ9Jl9dA?list=PL2gLpWRK0QlCXPhOqQD0wqPhLIvjq0BUj", 
-          title: "Earth's Systems",
-          description: "Explore how Earth's systems interact to create our unique living world."
-        }
-      ];
+  // Get all bonus videos for this section
+  const getBonusVideos = () => {
+    if (section.bonusVideos && section.bonusVideos.length > 0) {
+      // Earth's bonus content descriptions
+      if (section.title === "Earth") {
+        return [
+          { 
+            url: section.bonusVideos[0], 
+            title: "Earth From Space Playlist",
+            description: "Amazing views of our planet from orbit, showing Earth's beauty and fragility."
+          },
+          { 
+            url: section.bonusVideos[1] || section.bonusVideos[0], 
+            title: "Earth's Systems",
+            description: "Explore how Earth's systems interact to create our unique living world."
+          }
+        ];
+      }
+      
+      // Generic descriptions for other sections
+      return section.bonusVideos.map((url, idx) => ({
+        url,
+        title: `Bonus Content ${idx + 1}`,
+        description: `Additional learning material about ${section.title} to expand your knowledge.`
+      }));
     }
     
-    // Default videos for other sections
+    // Default fallback
     return [
       { 
         url: "https://www.youtube.com/embed/lcZTcfdZ3Ow", 
@@ -44,7 +54,7 @@ export const BonusVideoContent = ({ section, onComplete, onPrevious, isFirstCont
     ];
   };
   
-  const bonusVideos = getBonusVideos(section.title);
+  const bonusVideos = getBonusVideos();
   
   const nextVideo = () => {
     if (bonusVideos.length > 1) {

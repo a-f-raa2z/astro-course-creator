@@ -3,7 +3,7 @@ import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
-import { ChevronRight, Rocket } from "lucide-react";
+import { ChevronRight, Rocket, FileText, Youtube, CheckCircle, HelpCircle, Video, Image, Gamepad2, Star } from "lucide-react";
 import { generateMockCourse } from "@/utils/courseData";
 
 interface SectionCardProps {
@@ -79,6 +79,29 @@ const SectionCard = ({
       </CardHeader>
       <CardContent>
         <p className="text-gray-300 mb-4">{description}</p>
+        
+        <div className="grid grid-cols-5 gap-2 mb-4">
+          <div className="bg-purple-900/30 p-2 rounded flex items-center justify-center" title="Introduction">
+            <FileText className="h-4 w-4 text-purple-300" />
+          </div>
+          <div className="bg-red-900/30 p-2 rounded flex items-center justify-center" title="Video Lesson">
+            <Youtube className="h-4 w-4 text-red-400" />
+          </div>
+          <div className="bg-blue-900/30 p-2 rounded flex items-center justify-center" title="Short Videos">
+            <Video className="h-4 w-4 text-blue-400" />
+          </div>
+          {bonusUrls && bonusUrls.length > 0 && (
+            <div className="bg-yellow-900/30 p-2 rounded flex items-center justify-center" title="Bonus Content">
+              <Star className="h-4 w-4 text-yellow-400" />
+            </div>
+          )}
+          {visualUrl && (
+            <div className="bg-green-900/30 p-2 rounded flex items-center justify-center" title="Interactive Playground">
+              <Gamepad2 className="h-4 w-4 text-green-400" />
+            </div>
+          )}
+        </div>
+        
         <div className="flex justify-end">
           <Button 
             onClick={handleStartSection}

@@ -36,7 +36,7 @@ export const GameContentTabs = ({
       case 'introduction': return 'Introduction';
       case 'video': return 'Main Lesson';
       case 'keyPoints': return 'Key Points';
-      case 'shortVideo': return 'Bonus Video';
+      case 'shortVideo': return 'Fun Facts';
       case 'image': return 'Visual Guide';
       case 'quiz': return 'Knowledge Check';
       case 'bonus': return 'Bonus Content';

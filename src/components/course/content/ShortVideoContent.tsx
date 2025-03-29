@@ -17,30 +17,24 @@ interface ShortVideoContentProps {
 export const ShortVideoContent = ({ section, onComplete, onPrevious, isFirstContent }: ShortVideoContentProps) => {
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
   
-  // Define videos based on section title
-  const getSectionVideos = (sectionTitle: string) => {
-    const videoMap: Record<string, { url: string, title: string }[]> = {
-      "The Inner Planets": [
-        { url: "https://www.youtube.com/embed/shorts/_rzAbPtUamA", title: "Inner Planets Facts" },
-        { url: "https://www.youtube.com/embed/shorts/4qCczin1Muo", title: "More Inner Planets Facts" }
-      ],
-      "Earth": [
-        { url: "https://www.youtube.com/embed/shorts/HRwNdMoNUq4", title: "Earth Facts" },
-        { url: "https://www.youtube.com/embed/shorts/eCj5KgfRRGQ", title: "More Earth Facts" }
-      ],
-      "The Moon": [
-        { url: "https://www.youtube.com/embed/shorts/rVMvzH1FxfE", title: "Moon Facts" },
-        { url: "https://www.youtube.com/embed/shorts/fTok7usLXb4", title: "More Moon Facts" }
-      ]
-    };
+  // Get all short videos for this section
+  const getAllVideos = () => {
+    const videos = [];
     
-    return videoMap[sectionTitle] || [
-      { url: "https://www.youtube.com/embed/shorts/lzsf1-vMUdY", title: "Amazing Solar System Facts" },
-      { url: "https://www.youtube.com/embed/shorts/HDSKuln-5qU", title: "More Fascinating Space Facts" }
-    ];
+    if (section.shortVideo) {
+      videos.push({ url: section.shortVideo, title: "Fun Facts" });
+    }
+    
+    if (section.additionalShortVideos && section.additionalShortVideos.length > 0) {
+      section.additionalShortVideos.forEach((url, idx) => {
+        videos.push({ url, title: `More Fun Facts ${idx + 1}` });
+      });
+    }
+    
+    return videos;
   };
   
-  const videos = getSectionVideos(section.title);
+  const videos = getAllVideos();
 
   const nextVideo = () => {
     setCurrentVideoIndex((prev) => (prev + 1) % videos.length);

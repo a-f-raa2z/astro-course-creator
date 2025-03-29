@@ -17,17 +17,6 @@ interface VideoContentProps {
 export const VideoContent = ({ section, onComplete, onPrevious, isFirstContent }: VideoContentProps) => {
   const [videoCompleted, setVideoCompleted] = useState(false);
   
-  // Map section titles to specific video URLs
-  const getVideoUrl = (sectionTitle: string) => {
-    const videoMap: Record<string, string> = {
-      "The Inner Planets": "https://www.youtube.com/embed/05E1uMh15QQ",
-      "Earth": "https://www.youtube.com/embed/HCDVN7DCzYE",
-      "The Moon": "https://www.youtube.com/embed/6AviDjR9mmo"
-    };
-    
-    return videoMap[sectionTitle] || section.videoUrl;
-  };
-  
   // Get video description based on section title
   const getVideoDescription = (sectionTitle: string) => {
     const descriptionMap: Record<string, string> = {
@@ -39,7 +28,6 @@ export const VideoContent = ({ section, onComplete, onPrevious, isFirstContent }
     return descriptionMap[sectionTitle] || "A comprehensive overview of our cosmic neighborhood and the celestial bodies within it.";
   };
   
-  const videoUrl = getVideoUrl(section.title);
   const videoDescription = getVideoDescription(section.title);
 
   const handleVideoComplete = () => {
@@ -66,7 +54,7 @@ export const VideoContent = ({ section, onComplete, onPrevious, isFirstContent }
               <AspectRatio ratio={16/9} className="h-full">
                 <iframe 
                   className="w-full h-full"
-                  src={videoUrl}
+                  src={section.videoUrl}
                   title={`Video for ${section.title}`}
                   frameBorder="0"
                   allowFullScreen

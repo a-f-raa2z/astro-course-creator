@@ -24,8 +24,6 @@ export const useGameLearning = (course: Course) => {
     localStorage.setItem(`${course.id}-completed`, JSON.stringify(completedContents));
   }, [xpPoints, completedContents, course.id]);
   
-  const contentTypes: ContentType[] = ['introduction', 'video', 'keyPoints', 'shortVideo', 'image', 'playground', 'bonus', 'quiz'];
-  
   const getAvailableContentTypes = (section: CourseSection): ContentType[] => {
     const contentTypes: ContentType[] = ['introduction', 'video', 'keyPoints'];
     
@@ -35,7 +33,7 @@ export const useGameLearning = (course: Course) => {
     
     contentTypes.push('image');
     
-    if (section.title === "Earth" || section.title === "The Moon") {
+    if (section.visualUrl) {
       contentTypes.push('playground');
     }
     
@@ -78,6 +76,12 @@ export const useGameLearning = (course: Course) => {
         toast({
           title: `+${pointsToAdd} XP gained!`,
           description: "Video content completed!",
+        });
+      } else if (currentContentType === 'playground') {
+        pointsToAdd = 15;
+        toast({
+          title: `+${pointsToAdd} XP gained!`,
+          description: "Interactive playground completed! Great job!",
         });
       } else {
         toast({
