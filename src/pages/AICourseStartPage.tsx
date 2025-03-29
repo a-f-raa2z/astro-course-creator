@@ -127,8 +127,8 @@ const AICourseStartPage = () => {
             selectedAnswer={null}
             setSelectedAnswer={() => {}}
             handleQuizSubmit={() => {}}
-            handleNextContent={() => {}}
-            handlePreviousContent={() => {}}
+            handleNextContent={handleNextContent}
+            handlePreviousContent={handlePreviousContent}
             isFirstContent={currentContentIndex === 0 && currentSectionIndex === 0}
           />
         </div>

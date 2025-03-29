@@ -12,7 +12,7 @@ import { PlaygroundContent } from "./content/PlaygroundContent";
 import { SectionTransition } from "./content/SectionTransition";
 
 interface GameContentRendererProps {
-  contentType: ContentType | string;
+  contentType: ContentType | ContentType['type'];
   currentSection: CourseSection | null;
   quizSubmitted: boolean;
   selectedAnswer: number | null;
@@ -55,7 +55,10 @@ export const GameContentRenderer = ({
     );
   }
   
-  switch (contentType) {
+  // Get the actual content type string 
+  const type = typeof contentType === 'string' ? contentType : contentType.type;
+  
+  switch (type) {
     case 'introduction':
       return <IntroductionContent 
                section={currentSection} 
