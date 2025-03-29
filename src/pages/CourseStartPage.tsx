@@ -4,7 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, Star, Rocket, Flag, ArrowRight, ArrowLeft } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
-import { useGameLearning } from "@/hooks/useGameLearning";
+import { useGameLearning, ContentType } from "@/hooks/useGameLearning";
 import { GameProgress } from "@/components/course/GameProgress";
 import { GameContentRenderer } from "@/components/course/GameContentRenderer";
 import { GameContentTabs } from "@/components/course/GameContentTabs";
