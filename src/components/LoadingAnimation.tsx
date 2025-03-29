@@ -11,12 +11,12 @@ const LoadingAnimation = ({ onComplete }: LoadingAnimationProps) => {
   const [currentStage, setCurrentStage] = useState(0);
 
   const stages = [
-    "Analyzing your astronomy interests...",
+    "Analyzing your interests...",
     "Calibrating difficulty to your knowledge level...",
     "Adapting content to your learning style...",
     "Selecting optimal video resources...",
     "Crafting personalized quiz questions...",
-    "Building your custom astronomy course...",
+    "Building your custom course...",
     "Finalizing your personalized learning journey..."
   ];
 
@@ -61,7 +61,7 @@ const LoadingAnimation = ({ onComplete }: LoadingAnimationProps) => {
     <div className="space-glass p-8 rounded-xl animate-zoom-in max-w-2xl w-full">
       <div className="text-center mb-8">
         <h2 className="text-3xl font-bold text-white mb-2">Creating Your Course</h2>
-        <p className="text-purple-200">Please wait while we personalize your astronomy journey</p>
+        <p className="text-purple-200">Please wait while we personalize your learning journey</p>
       </div>
       
       <div className="mb-6">
