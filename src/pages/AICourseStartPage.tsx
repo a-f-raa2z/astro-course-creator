@@ -121,7 +121,7 @@ const AICourseStartPage = () => {
 
         <div className="mb-4">
           <GameContentRenderer
-            contentType={currentContentType}
+            contentType={currentContentType as ContentType['type']}
             currentSection={currentSection}
             quizSubmitted={false}
             selectedAnswer={null}
