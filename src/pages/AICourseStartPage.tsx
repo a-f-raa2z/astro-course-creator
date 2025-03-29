@@ -46,7 +46,7 @@ const AICourseStartPage = () => {
 
   return (
     <div className="min-h-screen bg-space text-white">
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-6 md:px-8 lg:px-12 py-8">
         <CourseHeader course={course} onBackClick={handleBackClick} />
         
         <h2 className="text-xl text-gray-300 mb-4">{currentSection.title}</h2>
