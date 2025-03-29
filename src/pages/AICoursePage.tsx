@@ -2,11 +2,46 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { ChevronLeft, Cpu, ArrowRight } from "lucide-react";
+import { 
+  ChevronLeft, 
+  Cpu, 
+  ArrowRight, 
+  FileText, 
+  Youtube, 
+  CheckCircle, 
+  HelpCircle 
+} from "lucide-react";
 import { Course } from "@/types/course";
 import LoadingAnimation from "@/components/LoadingAnimation";
 import { generateMockCourse } from "@/utils/courseData";
 import AISectionCard from "@/components/AISectionCard";
+import { 
+  Card, 
+  CardHeader, 
+  CardTitle, 
+  CardContent 
+} from "@/components/ui/card";
+
+// Custom icon components for AI topics
+const Brain = () => (
+  <Cpu className="h-6 w-6 text-blue-400" />
+);
+
+const Database = () => (
+  <Cpu className="h-6 w-6 text-green-400" />
+);
+
+const Network = () => (
+  <Cpu className="h-6 w-6 text-yellow-400" />
+);
+
+const BrainCircuit = () => (
+  <Cpu className="h-6 w-6 text-purple-400" />
+);
+
+const Bot = () => (
+  <Cpu className="h-6 w-6 text-pink-400" />
+);
 
 const AICoursePage = () => {
   const navigate = useNavigate();
@@ -40,15 +75,15 @@ const AICoursePage = () => {
   const getSectionIcon = (sectionTitle: string) => {
     switch (sectionTitle) {
       case "Introduction to AI":
-        return <Brain className="h-6 w-6 text-blue-400" />;
+        return <Brain />;
       case "Machine Learning":
-        return <Database className="h-6 w-6 text-green-400" />;
+        return <Database />;
       case "Neural Networks":
-        return <Network className="h-6 w-6 text-yellow-400" />;
+        return <Network />;
       case "Deep Learning":
-        return <BrainCircuit className="h-6 w-6 text-purple-400" />;
+        return <BrainCircuit />;
       case "AI Applications":
-        return <Bot className="h-6 w-6 text-pink-400" />;
+        return <Bot />;
       default:
         return <Cpu className="h-6 w-6 text-blue-400" />;
     }
@@ -84,7 +119,7 @@ const AICoursePage = () => {
             Back
           </Button>
           <h1 className="text-2xl font-bold text-white flex items-center">
-            <Brain className="mr-2 h-6 w-6 text-blue-400" />
+            <Brain />
             {course.title}
           </h1>
         </div>
