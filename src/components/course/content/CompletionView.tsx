@@ -46,12 +46,7 @@ export const CompletionView = ({
         >
           <Youtube className="h-4 w-4 mr-2" /> Rewatch Video
         </Button>
-        <Button 
-          onClick={onContinue}
-          className="bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800"
-        >
-          Continue <ArrowRight className="h-4 w-4 ml-2" />
-        </Button>
+        {/* Removed the Continue button here */}
       </div>
     </div>
   );

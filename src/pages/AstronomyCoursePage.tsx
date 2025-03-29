@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -26,15 +25,12 @@ const AstronomyCoursePage = () => {
       setCourse(generateMockCourse("planets", "intermediate", "visual"));
     }
     
-    // Mock progress data - in a real app, this would come from user data
-    // Here we're just generating random progress for demo purposes
     if (course && course.sections.length > 0) {
       const mockProgress = course.sections.map(() => 
         Math.floor(Math.random() * 100)
       );
       setSectionProgress(mockProgress);
     } else {
-      // Default mock progress values if course isn't loaded yet
       setSectionProgress([75, 40, 20, 5, 0, 0, 0]);
     }
   }, [location.state, course?.sections.length]);
@@ -108,11 +104,9 @@ const AstronomyCoursePage = () => {
         
         <h2 className="text-xl font-semibold text-white mb-6">Course Content</h2>
 
-        {/* Timeline journey container */}
         <div className="relative journey-path">
           {course.sections.map((section, index) => (
             <div key={section.id} className="flex mb-8 relative">
-              {/* Timeline circle with number */}
               <div className="relative z-10">
                 <div className={`flex items-center justify-center w-12 h-12 rounded-full mr-4 border-2 ${
                   sectionProgress[index] === 100 
@@ -123,13 +117,8 @@ const AstronomyCoursePage = () => {
                 }`}>
                   <span className="text-white font-bold">{index + 1}</span>
                 </div>
-                {/* Connector line to next item */}
-                {index < course.sections.length - 1 && (
-                  <div className="absolute top-12 left-1/2 transform -translate-x-1/2 w-1 h-8 bg-gradient-to-b from-purple-500 to-blue-500"></div>
-                )}
               </div>
               
-              {/* Section card */}
               <div className="flex-1">
                 <SectionCard 
                   key={section.id} 

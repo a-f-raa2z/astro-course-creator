@@ -98,11 +98,11 @@ const SectionCard = ({
       case "The Solar System":
         return "/lovable-uploads/ad48c8d7-8aae-41a6-95ac-22af96b8a45a.png";
       case "The Inner Planets":
-        return "/lovable-uploads/e0d0af9e-9849-4955-ac58-29cf798cb880.png";
+        return "/lovable-uploads/0228ba3e-a126-45c3-a728-10da3a418e4e.png"; // Swapped with Moon image
       case "Earth":
         return "/lovable-uploads/6e29dd9e-5707-44ae-81af-d52de51f84e6.png";
       case "The Moon":
-        return "/lovable-uploads/0228ba3e-a126-45c3-a728-10da3a418e4e.png";
+        return "/lovable-uploads/e0d0af9e-9849-4955-ac58-29cf798cb880.png"; // Swapped with Inner Planets image
       default:
         return "/lovable-uploads/ad48c8d7-8aae-41a6-95ac-22af96b8a45a.png";
     }

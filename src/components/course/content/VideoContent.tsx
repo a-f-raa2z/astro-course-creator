@@ -24,10 +24,8 @@ export const VideoContent = ({ section, onComplete, onPrevious, isFirstContent }
   const { toast } = useToast();
   const location = useLocation();
   
-  // Check if we're in the AI course
   const isAICourse = location.pathname.includes('ai-course');
   
-  // Get video description based on section title
   const getVideoDescription = (sectionTitle: string) => {
     const descriptionMap: Record<string, string> = {
       "The Inner Planets": "Explore Mercury, Venus, Earth, and Mars - the four terrestrial planets closest to the Sun.",
@@ -43,7 +41,6 @@ export const VideoContent = ({ section, onComplete, onPrevious, isFirstContent }
   const handleVideoComplete = () => {
     setVideoWatched(true);
     
-    // Show key points for both courses after video completion
     toast({
       title: "Video Completed!",
       description: "Great job! Here are the key points to remember from this lesson."
@@ -52,8 +49,6 @@ export const VideoContent = ({ section, onComplete, onPrevious, isFirstContent }
   };
 
   const handleAllPointsChecked = () => {
-    // AI course goes directly to completion view after key points
-    // Astronomy course keeps the ability to review key points after completion
     setShowKeyPoints(false);
     setShowCompletionView(true);
   };
@@ -62,7 +57,6 @@ export const VideoContent = ({ section, onComplete, onPrevious, isFirstContent }
     onComplete();
   };
   
-  // Function to handle going back to key points for astronomy course
   const handleReviewKeyPoints = () => {
     if (!isAICourse) {
       setShowKeyPoints(true);
@@ -111,7 +105,7 @@ export const VideoContent = ({ section, onComplete, onPrevious, isFirstContent }
               setShowCompletionView(false);
             }}
             onContinue={handleContinue}
-            showKeyPointsButton={!isAICourse} // Only show key points button for astronomy course
+            showKeyPointsButton={!isAICourse}
           />
         ) : null}
         
