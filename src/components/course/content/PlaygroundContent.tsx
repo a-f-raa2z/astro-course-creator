@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Gamepad2, ArrowRight, ArrowLeft, ExternalLink } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { TitleWrapper } from "./TitleWrapper";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
 
 interface PlaygroundContentProps {
   section: CourseSection;
@@ -64,15 +65,17 @@ export const PlaygroundContent = ({ section, onComplete, onPrevious, isFirstCont
           </p>
         </div>
         
-        <div className="flex-grow relative">
-          <iframe 
-            src={content.url}
-            title={content.title}
-            className="w-full h-full border-0"
-            allowFullScreen
-          />
+        <div className="flex-grow relative p-4">
+          <AspectRatio ratio={4/3} className="h-auto w-full overflow-hidden rounded-md border border-green-500/30">
+            <iframe 
+              src={content.url}
+              title={content.title}
+              className="w-full h-full border-0"
+              allowFullScreen
+            />
+          </AspectRatio>
           
-          <div className="absolute top-3 right-3">
+          <div className="absolute top-7 right-7">
             <Button 
               variant="outline" 
               size="sm" 
