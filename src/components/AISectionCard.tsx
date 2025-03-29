@@ -114,7 +114,7 @@ const AISectionCard = ({
             />
           </div>
         )}
-        <div className="md:w-2/3">
+        <div className={sectionImage ? "md:w-2/3" : "w-full"}>
           <CardHeader className="pb-2">
             <div className="flex justify-between items-center">
               <CardTitle className="text-xl text-blue-100 flex items-center">
