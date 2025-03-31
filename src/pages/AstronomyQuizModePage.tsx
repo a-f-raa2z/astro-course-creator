@@ -65,11 +65,11 @@ const AstronomyQuizModePage = () => {
                 section={section}
                 contentType="introduction"
                 question={`What is the main purpose of ${section.title}?`}
-                onStartQuiz={() => navigate(`/astronomy-course-start`, {
+                onStartQuiz={() => navigate(`/astronomy-quiz-detail`, {
                   state: { 
                     course, 
-                    initialSectionIndex: sectionIndex,
-                    quizMode: true
+                    sectionIndex,
+                    contentType: 'introduction'
                   }
                 })}
               />
@@ -78,11 +78,10 @@ const AstronomyQuizModePage = () => {
                 section={section}
                 contentType="video"
                 question={`What key concepts are covered in the ${section.title} video?`}
-                onStartQuiz={() => navigate(`/astronomy-course-start`, {
+                onStartQuiz={() => navigate(`/astronomy-quiz-detail`, {
                   state: { 
                     course, 
-                    initialSectionIndex: sectionIndex,
-                    quizMode: true,
+                    sectionIndex,
                     contentType: 'video'
                   }
                 })}
@@ -93,11 +92,10 @@ const AstronomyQuizModePage = () => {
                   section={section}
                   contentType="short-video"
                   question={`What are some interesting facts about ${section.title}?`}
-                  onStartQuiz={() => navigate(`/astronomy-course-start`, {
+                  onStartQuiz={() => navigate(`/astronomy-quiz-detail`, {
                     state: { 
                       course, 
-                      initialSectionIndex: sectionIndex,
-                      quizMode: true,
+                      sectionIndex,
                       contentType: 'short-video'
                     }
                   })}
@@ -108,11 +106,10 @@ const AstronomyQuizModePage = () => {
                 section={section}
                 contentType="image"
                 question={`What visual elements can you identify in the ${section.title} image?`}
-                onStartQuiz={() => navigate(`/astronomy-course-start`, {
+                onStartQuiz={() => navigate(`/astronomy-quiz-detail`, {
                   state: { 
                     course, 
-                    initialSectionIndex: sectionIndex,
-                    quizMode: true,
+                    sectionIndex,
                     contentType: 'image'
                   }
                 })}
@@ -123,11 +120,10 @@ const AstronomyQuizModePage = () => {
                   section={section}
                   contentType="playground"
                   question={`How can you interact with the ${section.title} model?`}
-                  onStartQuiz={() => navigate(`/astronomy-course-start`, {
+                  onStartQuiz={() => navigate(`/astronomy-quiz-detail`, {
                     state: { 
                       course, 
-                      initialSectionIndex: sectionIndex,
-                      quizMode: true,
+                      sectionIndex,
                       contentType: 'playground'
                     }
                   })}
@@ -139,11 +135,10 @@ const AstronomyQuizModePage = () => {
                   section={section}
                   contentType="bonus"
                   question={`What bonus information is provided about ${section.title}?`}
-                  onStartQuiz={() => navigate(`/astronomy-course-start`, {
+                  onStartQuiz={() => navigate(`/astronomy-quiz-detail`, {
                     state: { 
                       course, 
-                      initialSectionIndex: sectionIndex,
-                      quizMode: true,
+                      sectionIndex,
                       contentType: 'bonus'
                     }
                   })}
@@ -154,11 +149,10 @@ const AstronomyQuizModePage = () => {
                 section={section}
                 contentType="quiz"
                 question={`Test your ${section.title} knowledge with this quiz`}
-                onStartQuiz={() => navigate(`/astronomy-course-start`, {
+                onStartQuiz={() => navigate(`/astronomy-quiz-detail`, {
                   state: { 
                     course, 
-                    initialSectionIndex: sectionIndex,
-                    quizMode: true,
+                    sectionIndex,
                     contentType: 'quiz'
                   }
                 })}

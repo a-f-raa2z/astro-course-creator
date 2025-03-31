@@ -7,6 +7,7 @@ import AICourseStartPage from "./pages/AICourseStartPage";
 import AstronomyCoursePage from "./pages/AstronomyCoursePage";
 import AstronomyCourseStartPage from "./pages/AstronomyCourseStartPage";
 import AstronomyQuizModePage from "./pages/AstronomyQuizModePage";
+import AstronomyQuizDetailPage from "./pages/AstronomyQuizDetailPage";
 import CourseStartPage from "./pages/CourseStartPage";
 import CoursePage from "./pages/Course";
 import NotFound from "./pages/NotFound";
@@ -22,6 +23,7 @@ function App() {
         <Route path="/astronomy-course" element={<AstronomyCoursePage />} />
         <Route path="/astronomy-course-start" element={<AstronomyCourseStartPage />} />
         <Route path="/astronomy-quiz" element={<AstronomyQuizModePage />} />
+        <Route path="/astronomy-quiz-detail" element={<AstronomyQuizDetailPage />} />
         <Route path="/course/start" element={<CourseStartPage />} />
         <Route path="/course" element={<CoursePage />} />
         <Route path="*" element={<NotFound />} />

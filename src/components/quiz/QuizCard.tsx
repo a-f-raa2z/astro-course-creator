@@ -2,7 +2,7 @@
 import React from "react";
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Play } from "lucide-react";
+import { Play, Sun, Globe, Moon, Stars, Rocket, Telescope, Satellite } from "lucide-react";
 import { CourseSection } from "@/types/course";
 import { ContentType } from "@/types/ContentType";
 
@@ -19,6 +19,30 @@ export const QuizCard: React.FC<QuizCardProps> = ({
   question,
   onStartQuiz
 }) => {
+  // Get section-specific icon based on section title
+  const getSectionIcon = () => {
+    switch (section.title) {
+      case "The Solar System":
+        return <Sun className="h-4 w-4 text-yellow-400" />;
+      case "Earth":
+        return <Globe className="h-4 w-4 text-blue-400" />;
+      case "The Moon":
+        return <Moon className="h-4 w-4 text-gray-300" />;
+      case "Stars":
+        return <Stars className="h-4 w-4 text-yellow-300" />;
+      case "The Inner Planets":
+        return <Rocket className="h-4 w-4 text-orange-400" />;
+      case "Telescopes":
+        return <Telescope className="h-4 w-4 text-purple-400" />;
+      case "Space Exploration":
+        return <Rocket className="h-4 w-4 text-red-400" />;
+      case "Satellites":
+        return <Satellite className="h-4 w-4 text-blue-300" />;
+      default:
+        return <Rocket className="h-4 w-4 text-purple-400" />;
+    }
+  };
+  
   // Get icon and background color based on content type
   const getContentTypeStyles = () => {
     switch (contentType) {
@@ -67,7 +91,10 @@ export const QuizCard: React.FC<QuizCardProps> = ({
   return (
     <Card className={`overflow-hidden hover:shadow-purple-500/20 hover:shadow-md transition-all ${bgColor} border ${borderColor}`}>
       <CardHeader className="pb-2">
-        <CardTitle className="text-white text-lg font-medium">{question}</CardTitle>
+        <CardTitle className="text-white text-lg font-medium flex items-center">
+          {getSectionIcon()}
+          <span className="ml-2">{question}</span>
+        </CardTitle>
       </CardHeader>
       <CardContent>
         <div className="bg-black/20 rounded-md px-3 py-1 text-xs inline-block text-white mb-2">
