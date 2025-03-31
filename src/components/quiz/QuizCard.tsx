@@ -54,29 +54,29 @@ export const QuizCard: React.FC<QuizCardProps> = ({
     }
   };
   
-  // Get icon and background color based on content type
+  // Get solid background color and text color based on content type
   const getContentTypeStyles = () => {
     if (isCompleted) {
-      return { bgColor: 'bg-green-900/40', borderColor: 'border-green-500/30' };
+      return { bgColor: '#2f855a', textColor: 'text-white' }; // Solid green for completed
     }
     
     switch (contentType) {
       case 'introduction':
-        return { bgColor: 'bg-blue-900/40', borderColor: 'border-blue-500/30' };
+        return { bgColor: '#1e3a8a', textColor: 'text-white' }; // Solid blue
       case 'video':
-        return { bgColor: 'bg-red-900/40', borderColor: 'border-red-500/30' };
+        return { bgColor: '#991b1b', textColor: 'text-white' }; // Solid red
       case 'short-video':
-        return { bgColor: 'bg-orange-900/40', borderColor: 'border-orange-500/30' };
+        return { bgColor: '#9a3412', textColor: 'text-white' }; // Solid orange
       case 'image':
-        return { bgColor: 'bg-green-900/40', borderColor: 'border-green-500/30' };
+        return { bgColor: '#065f46', textColor: 'text-white' }; // Solid green
       case 'playground':
-        return { bgColor: 'bg-indigo-900/40', borderColor: 'border-indigo-500/30' };
+        return { bgColor: '#4338ca', textColor: 'text-white' }; // Solid indigo
       case 'bonus':
-        return { bgColor: 'bg-yellow-900/40', borderColor: 'border-yellow-500/30' };
+        return { bgColor: '#854d0e', textColor: 'text-white' }; // Solid yellow
       case 'quiz':
-        return { bgColor: 'bg-purple-900/40', borderColor: 'border-purple-500/30' };
+        return { bgColor: '#6b21a8', textColor: 'text-white' }; // Solid purple
       default:
-        return { bgColor: 'bg-gray-900/40', borderColor: 'border-gray-500/30' };
+        return { bgColor: '#1f2937', textColor: 'text-white' }; // Solid gray
     }
   };
 
@@ -105,36 +105,41 @@ export const QuizCard: React.FC<QuizCardProps> = ({
     }
   };
 
-  const { bgColor, borderColor } = getContentTypeStyles();
+  const { bgColor, textColor } = getContentTypeStyles();
 
   return (
-    <Card className={`overflow-hidden hover:shadow-purple-500/20 hover:shadow-md transition-all ${bgColor} border ${borderColor}`}>
+    <Card 
+      className={`overflow-hidden hover:shadow-purple-500/20 hover:shadow-md transition-all ${textColor} w-full`} 
+      style={{ backgroundColor: bgColor, border: 'none', maxWidth: contentType === 'quiz' ? '300px' : '100%' }}
+    >
       <CardHeader className="pb-2">
-        <CardTitle className="text-white text-lg font-medium flex items-center">
+        <CardTitle className="text-lg font-medium flex items-center">
           {getSectionIcon()}
           <span className="ml-2">{question}</span>
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <div className={`${isCompleted ? 'bg-green-800/30 text-green-300' : 'bg-black/20 text-white'} rounded-md px-3 py-1 text-xs inline-block mb-2`}>
+        <div className={`${isCompleted ? 'bg-green-800' : 'bg-black/30'} rounded-md px-3 py-1 text-xs inline-block mb-2`}>
           {isCompleted && <CheckCircle className="inline-block h-3 w-3 mr-1" />}
           {getContentTypeLabel()}
         </div>
         
-        <p className="text-gray-300 text-sm line-clamp-2">
-          {contentType === 'introduction' && section.introduction.substring(0, 100) + '...'}
-          {contentType === 'video' && 'Video content about ' + section.title}
-          {contentType === 'short-video' && 'Quick facts and interesting information'}
-          {contentType === 'image' && section.image.description.substring(0, 100) + '...'}
-          {contentType === 'playground' && 'Interactive exploration of concepts'}
-          {contentType === 'bonus' && 'Additional learning material'}
-          {contentType === 'quiz' && 'Test your knowledge with a quiz about ' + section.title}
-        </p>
+        {!isCompleted && (
+          <p className="text-sm line-clamp-2 opacity-90">
+            {contentType === 'introduction' && section.introduction.substring(0, 100) + '...'}
+            {contentType === 'video' && 'Video content about ' + section.title}
+            {contentType === 'short-video' && 'Quick facts and interesting information'}
+            {contentType === 'image' && section.image.description.substring(0, 100) + '...'}
+            {contentType === 'playground' && 'Interactive exploration of concepts'}
+            {contentType === 'bonus' && 'Additional learning material'}
+            {contentType === 'quiz' && 'Test your knowledge with a quiz about ' + section.title}
+          </p>
+        )}
       </CardContent>
       <CardFooter className="pt-0">
         <Button 
           onClick={onStartQuiz}
-          className={`w-full ${isCompleted ? 'bg-green-600 hover:bg-green-700' : 'bg-purple-600 hover:bg-purple-700'} text-white`}
+          className={`w-full ${isCompleted ? 'bg-green-700 hover:bg-green-800' : 'bg-white/20 hover:bg-white/30'} text-white`}
           size="sm"
         >
           <Play className="mr-2 h-4 w-4" /> {isCompleted ? 'Review' : 'Start Quiz'}

@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { ChevronLeft, Rocket, BrainCircuit } from "lucide-react";
+import { ChevronLeft, BrainCircuit } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { generateMockCourse } from "@/utils/courseData";
@@ -70,7 +70,24 @@ const AstronomyQuizModePage = () => {
               {section.title}
             </h2>
             
-            <div className="grid md:grid-cols-2 gap-4 mb-6">
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-6">
+              {/* Quiz card should have fixed width */}
+              <div style={{ maxWidth: '300px' }}>
+                <QuizCard 
+                  section={section}
+                  contentType="quiz"
+                  sectionIndex={sectionIndex}
+                  question={`Test your ${section.title} knowledge with this quiz`}
+                  onStartQuiz={() => navigate(`/astronomy-quiz-detail`, {
+                    state: { 
+                      course, 
+                      sectionIndex,
+                      contentType: 'quiz'
+                    }
+                  })}
+                />
+              </div>
+              
               <QuizCard 
                 section={section}
                 contentType="introduction"
@@ -160,20 +177,6 @@ const AstronomyQuizModePage = () => {
                   })}
                 />
               )}
-              
-              <QuizCard 
-                section={section}
-                contentType="quiz"
-                sectionIndex={sectionIndex}
-                question={`Test your ${section.title} knowledge with this quiz`}
-                onStartQuiz={() => navigate(`/astronomy-quiz-detail`, {
-                  state: { 
-                    course, 
-                    sectionIndex,
-                    contentType: 'quiz'
-                  }
-                })}
-              />
             </div>
           </div>
         ))}
