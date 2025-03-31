@@ -1,9 +1,11 @@
+
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { 
   ChevronLeft, 
-  Rocket 
+  Rocket,
+  BrainCircuit
 } from "lucide-react";
 import { Course } from "@/types/course";
 import LoadingAnimation from "@/components/LoadingAnimation";
@@ -86,6 +88,14 @@ const AstronomyCoursePage = () => {
             className="bg-purple-600 hover:bg-purple-700 text-white"
           >
             Start Course <Rocket className="ml-2 h-4 w-4" />
+          </Button>
+          
+          <Button 
+            onClick={() => navigate("/astronomy-quiz")}
+            variant="outline"
+            className="border-purple-500/30 text-purple-300 hover:bg-purple-900/30"
+          >
+            Quiz Mode <BrainCircuit className="ml-2 h-4 w-4" />
           </Button>
           
           <div className="text-gray-400 text-sm">
