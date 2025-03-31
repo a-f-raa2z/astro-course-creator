@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Play, Sun, Globe, Moon, Stars, Rocket, Telescope, Satellite, CheckCircle, Star } from "lucide-react";
 import { CourseSection } from "@/types/course";
 import { ContentType } from "@/types/ContentType";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
 
 interface QuizCardProps {
   section: CourseSection;
@@ -58,8 +59,8 @@ export const QuizCard: React.FC<QuizCardProps> = ({
   const getContentTypeStyles = () => {
     if (isCompleted) {
       return { 
-        bgColor: 'rgba(47, 133, 90, 0.7)', // Semi-transparent green for completed
-        textColor: 'text-white'
+        bgColor: 'rgba(47, 133, 90, 0.5)', // Semi-transparent green for completed
+        textColor: 'text-white opacity-70' 
       };
     }
     
@@ -111,53 +112,57 @@ export const QuizCard: React.FC<QuizCardProps> = ({
   const { bgColor, textColor } = getContentTypeStyles();
 
   return (
-    <Card 
-      className={`overflow-hidden hover:shadow-purple-500/20 hover:shadow-md transition-all ${textColor} w-full`} 
-      style={{ backgroundColor: bgColor, border: 'none', maxWidth: contentType === 'quiz' ? '300px' : '100%' }}
-    >
-      <CardHeader className="pb-2">
-        <CardTitle className="text-lg font-medium flex items-center">
-          {getSectionIcon()}
-          <span className="ml-2">{question}</span>
-        </CardTitle>
-      </CardHeader>
-      <CardContent>
-        <div className="flex justify-between items-center mb-2">
-          <div className={`${isCompleted ? 'bg-green-800' : 'bg-black/30'} rounded-md px-3 py-1 text-xs inline-block`}>
-            {isCompleted && <CheckCircle className="inline-block h-3 w-3 mr-1" />}
-            {getContentTypeLabel()}
-          </div>
-          
-          <div className="flex items-center">
-            {isCompleted ? (
-              <Star className="h-5 w-5 text-yellow-300 fill-yellow-300" />
-            ) : (
-              <Star className="h-5 w-5 text-gray-400" />
-            )}
-          </div>
-        </div>
-        
-        {!isCompleted && (
-          <p className="text-sm line-clamp-2 opacity-90">
-            {contentType === 'introduction' && section.introduction.substring(0, 100) + '...'}
-            {contentType === 'video' && 'Video content about ' + section.title}
-            {contentType === 'short-video' && 'Quick facts and interesting information'}
-            {contentType === 'image' && section.image.description.substring(0, 100) + '...'}
-            {contentType === 'playground' && 'Interactive exploration of concepts'}
-            {contentType === 'bonus' && 'Additional learning material'}
-            {contentType === 'quiz' && 'Test your knowledge with a quiz about ' + section.title}
-          </p>
-        )}
-      </CardContent>
-      <CardFooter className="pt-0">
-        <Button 
-          onClick={onStartQuiz}
-          className={`w-full ${isCompleted ? 'bg-green-700 hover:bg-green-800' : 'bg-white/20 hover:bg-white/30'} text-white`}
-          size="sm"
+    <div className="w-[250px]">
+      <AspectRatio ratio={1/1}>
+        <Card 
+          className={`overflow-hidden hover:shadow-purple-500/20 hover:shadow-md transition-all ${textColor} h-full`} 
+          style={{ backgroundColor: bgColor, border: 'none' }}
         >
-          <Play className="mr-2 h-4 w-4" /> {isCompleted ? 'Review' : 'Start Quiz'}
-        </Button>
-      </CardFooter>
-    </Card>
+          <CardHeader className="pb-2">
+            <CardTitle className="text-lg font-medium flex items-center">
+              {getSectionIcon()}
+              <span className="ml-2">{question}</span>
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="flex justify-between items-center mb-2">
+              <div className={`${isCompleted ? 'bg-green-800/50' : 'bg-black/30'} rounded-md px-3 py-1 text-xs inline-block`}>
+                {isCompleted && <CheckCircle className="inline-block h-3 w-3 mr-1" />}
+                {getContentTypeLabel()}
+              </div>
+              
+              <div className="flex items-center">
+                {isCompleted ? (
+                  <Star className="h-5 w-5 text-yellow-300 fill-yellow-300" />
+                ) : (
+                  <Star className="h-5 w-5 text-gray-400" />
+                )}
+              </div>
+            </div>
+            
+            {!isCompleted && (
+              <p className="text-sm line-clamp-2 opacity-90">
+                {contentType === 'introduction' && section.introduction.substring(0, 100) + '...'}
+                {contentType === 'video' && 'Video content about ' + section.title}
+                {contentType === 'short-video' && 'Quick facts and interesting information'}
+                {contentType === 'image' && section.image.description.substring(0, 100) + '...'}
+                {contentType === 'playground' && 'Interactive exploration of concepts'}
+                {contentType === 'bonus' && 'Additional learning material'}
+                {contentType === 'quiz' && 'Test your knowledge with a quiz about ' + section.title}
+              </p>
+            )}
+          </CardContent>
+          <CardFooter className="pt-0 mt-auto">
+            <Button 
+              onClick={onStartQuiz}
+              className={`w-full ${isCompleted ? 'bg-green-700/50 hover:bg-green-800/70' : 'bg-white/20 hover:bg-white/30'} ${isCompleted ? 'text-white/70' : 'text-white'}`}
+              size="sm"
+            >
+              <Play className="mr-2 h-4 w-4" /> {isCompleted ? 'Review' : 'Start Quiz'}
+            </Button>
+          </CardFooter>
+        </Card>
+      </AspectRatio>
+    </div>
   );
 };

@@ -1,9 +1,7 @@
-
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, BrainCircuit } from "lucide-react";
-import { Card } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { generateMockCourse } from "@/utils/courseData";
 import { Course, CourseSection } from "@/types/course";
@@ -27,16 +25,13 @@ const AstronomyQuizModePage = () => {
     const mockCourse = generateMockCourse("planets", "intermediate", "visual");
     setCourse(mockCourse);
     
-    // Check completion status and organize cards
     const completedQuizzes = JSON.parse(localStorage.getItem('completedQuizzes') || '{}');
     
-    // Prepare quiz cards for each section
     const newQuizCards: Record<number, QuizCardData[]> = {};
     
     mockCourse.sections.forEach((section, sectionIndex) => {
       const sectionCards: QuizCardData[] = [];
       
-      // Quiz card
       const quizCard: QuizCardData = {
         section,
         contentType: 'quiz',
@@ -46,7 +41,6 @@ const AstronomyQuizModePage = () => {
       };
       sectionCards.push(quizCard);
       
-      // Introduction card
       const introCard: QuizCardData = {
         section,
         contentType: 'introduction',
@@ -56,7 +50,6 @@ const AstronomyQuizModePage = () => {
       };
       sectionCards.push(introCard);
       
-      // Video card
       const videoCard: QuizCardData = {
         section,
         contentType: 'video',
@@ -66,7 +59,6 @@ const AstronomyQuizModePage = () => {
       };
       sectionCards.push(videoCard);
       
-      // Short video card (if applicable)
       if (section.shortVideo) {
         const shortVideoCard: QuizCardData = {
           section,
@@ -78,7 +70,6 @@ const AstronomyQuizModePage = () => {
         sectionCards.push(shortVideoCard);
       }
       
-      // Image card
       const imageCard: QuizCardData = {
         section,
         contentType: 'image',
@@ -88,7 +79,6 @@ const AstronomyQuizModePage = () => {
       };
       sectionCards.push(imageCard);
       
-      // Playground card (if applicable)
       if (section.visualUrl) {
         const playgroundCard: QuizCardData = {
           section,
@@ -100,7 +90,6 @@ const AstronomyQuizModePage = () => {
         sectionCards.push(playgroundCard);
       }
       
-      // Bonus card (if applicable)
       if (section.bonusVideos && section.bonusVideos.length > 0) {
         const bonusCard: QuizCardData = {
           section,
@@ -112,11 +101,10 @@ const AstronomyQuizModePage = () => {
         sectionCards.push(bonusCard);
       }
       
-      // Sort cards: incomplete first, then completed
       sectionCards.sort((a, b) => {
-        if (a.isCompleted && !b.isCompleted) return 1; // Completed cards go last
-        if (!a.isCompleted && b.isCompleted) return -1; // Incomplete cards go first
-        return 0; // Keep original order for cards with same completion status
+        if (a.isCompleted && !b.isCompleted) return 1;
+        if (!a.isCompleted && b.isCompleted) return -1;
+        return 0;
       });
       
       newQuizCards[sectionIndex] = sectionCards;
@@ -124,12 +112,10 @@ const AstronomyQuizModePage = () => {
     
     setQuizCards(newQuizCards);
     
-    // Force refresh when returning to this page to show updated completion status
     const handleVisibilityChange = () => {
       if (document.visibilityState === 'visible') {
         setCourse({...mockCourse});
         
-        // Re-check completion status
         const updatedCompletedQuizzes = JSON.parse(localStorage.getItem('completedQuizzes') || '{}');
         const updatedQuizCards = { ...newQuizCards };
         
@@ -140,7 +126,6 @@ const AstronomyQuizModePage = () => {
             updatedQuizCards[sectionIndex][idx].isCompleted = updatedCompletedQuizzes[key] === true;
           });
           
-          // Re-sort cards based on completion status
           updatedQuizCards[sectionIndex].sort((a, b) => {
             if (a.isCompleted && !b.isCompleted) return 1;
             if (!a.isCompleted && b.isCompleted) return -1;
@@ -166,7 +151,7 @@ const AstronomyQuizModePage = () => {
 
   return (
     <div className="bg-space min-h-screen py-8 px-4">
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-7xl mx-auto">
         <div className="flex items-center mb-8">
           <Button 
             variant="ghost" 
@@ -198,23 +183,22 @@ const AstronomyQuizModePage = () => {
               {section.title}
             </h2>
             
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-6">
-              {quizCards[sectionIndex]?.map((card, cardIndex) => (
-                <div key={`${card.sectionIndex}-${card.contentType}`} style={{ maxWidth: card.contentType === 'quiz' ? '300px' : '100%' }}>
-                  <QuizCard 
-                    section={card.section}
-                    contentType={card.contentType}
-                    sectionIndex={card.sectionIndex}
-                    question={card.question}
-                    onStartQuiz={() => navigate(`/astronomy-quiz-detail`, {
-                      state: { 
-                        course, 
-                        sectionIndex: card.sectionIndex,
-                        contentType: card.contentType
-                      }
-                    })}
-                  />
-                </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 mb-6">
+              {quizCards[sectionIndex]?.map((card) => (
+                <QuizCard 
+                  key={`${card.sectionIndex}-${card.contentType}`}
+                  section={card.section}
+                  contentType={card.contentType}
+                  sectionIndex={card.sectionIndex}
+                  question={card.question}
+                  onStartQuiz={() => navigate(`/astronomy-quiz-detail`, {
+                    state: { 
+                      course, 
+                      sectionIndex: card.sectionIndex,
+                      contentType: card.contentType
+                    }
+                  })}
+                />
               ))}
             </div>
           </div>
