@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Play, Sun, Globe, Moon, Stars, Rocket, Telescope, Satellite, CheckCircle } from "lucide-react";
+import { Play, Sun, Globe, Moon, Stars, Rocket, Telescope, Satellite, CheckCircle, Star } from "lucide-react";
 import { CourseSection } from "@/types/course";
 import { ContentType } from "@/types/ContentType";
 
@@ -57,7 +57,10 @@ export const QuizCard: React.FC<QuizCardProps> = ({
   // Get solid background color and text color based on content type
   const getContentTypeStyles = () => {
     if (isCompleted) {
-      return { bgColor: '#2f855a', textColor: 'text-white' }; // Solid green for completed
+      return { 
+        bgColor: 'rgba(47, 133, 90, 0.7)', // Semi-transparent green for completed
+        textColor: 'text-white'
+      };
     }
     
     switch (contentType) {
@@ -119,9 +122,19 @@ export const QuizCard: React.FC<QuizCardProps> = ({
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <div className={`${isCompleted ? 'bg-green-800' : 'bg-black/30'} rounded-md px-3 py-1 text-xs inline-block mb-2`}>
-          {isCompleted && <CheckCircle className="inline-block h-3 w-3 mr-1" />}
-          {getContentTypeLabel()}
+        <div className="flex justify-between items-center mb-2">
+          <div className={`${isCompleted ? 'bg-green-800' : 'bg-black/30'} rounded-md px-3 py-1 text-xs inline-block`}>
+            {isCompleted && <CheckCircle className="inline-block h-3 w-3 mr-1" />}
+            {getContentTypeLabel()}
+          </div>
+          
+          <div className="flex items-center">
+            {isCompleted ? (
+              <Star className="h-5 w-5 text-yellow-300 fill-yellow-300" />
+            ) : (
+              <Star className="h-5 w-5 text-gray-400" />
+            )}
+          </div>
         </div>
         
         {!isCompleted && (

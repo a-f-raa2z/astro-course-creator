@@ -8,19 +8,147 @@ import { Separator } from "@/components/ui/separator";
 import { generateMockCourse } from "@/utils/courseData";
 import { Course, CourseSection } from "@/types/course";
 import { QuizCard } from "@/components/quiz/QuizCard";
+import { ContentType } from "@/types/ContentType";
+
+interface QuizCardData {
+  section: CourseSection;
+  contentType: ContentType['type'];
+  sectionIndex: number;
+  question: string;
+  isCompleted?: boolean;
+}
 
 const AstronomyQuizModePage = () => {
   const navigate = useNavigate();
   const [course, setCourse] = useState<Course | null>(null);
+  const [quizCards, setQuizCards] = useState<Record<number, QuizCardData[]>>({});
   
   useEffect(() => {
     const mockCourse = generateMockCourse("planets", "intermediate", "visual");
     setCourse(mockCourse);
     
+    // Check completion status and organize cards
+    const completedQuizzes = JSON.parse(localStorage.getItem('completedQuizzes') || '{}');
+    
+    // Prepare quiz cards for each section
+    const newQuizCards: Record<number, QuizCardData[]> = {};
+    
+    mockCourse.sections.forEach((section, sectionIndex) => {
+      const sectionCards: QuizCardData[] = [];
+      
+      // Quiz card
+      const quizCard: QuizCardData = {
+        section,
+        contentType: 'quiz',
+        sectionIndex,
+        question: `Test your ${section.title} knowledge with this quiz`,
+        isCompleted: completedQuizzes[`${sectionIndex}-quiz`] === true
+      };
+      sectionCards.push(quizCard);
+      
+      // Introduction card
+      const introCard: QuizCardData = {
+        section,
+        contentType: 'introduction',
+        sectionIndex,
+        question: `What is the main purpose of ${section.title}?`,
+        isCompleted: completedQuizzes[`${sectionIndex}-introduction`] === true
+      };
+      sectionCards.push(introCard);
+      
+      // Video card
+      const videoCard: QuizCardData = {
+        section,
+        contentType: 'video',
+        sectionIndex,
+        question: `What key concepts are covered in the ${section.title} video?`,
+        isCompleted: completedQuizzes[`${sectionIndex}-video`] === true
+      };
+      sectionCards.push(videoCard);
+      
+      // Short video card (if applicable)
+      if (section.shortVideo) {
+        const shortVideoCard: QuizCardData = {
+          section,
+          contentType: 'short-video',
+          sectionIndex,
+          question: `What are some interesting facts about ${section.title}?`,
+          isCompleted: completedQuizzes[`${sectionIndex}-short-video`] === true
+        };
+        sectionCards.push(shortVideoCard);
+      }
+      
+      // Image card
+      const imageCard: QuizCardData = {
+        section,
+        contentType: 'image',
+        sectionIndex,
+        question: `What visual elements can you identify in the ${section.title} image?`,
+        isCompleted: completedQuizzes[`${sectionIndex}-image`] === true
+      };
+      sectionCards.push(imageCard);
+      
+      // Playground card (if applicable)
+      if (section.visualUrl) {
+        const playgroundCard: QuizCardData = {
+          section,
+          contentType: 'playground',
+          sectionIndex,
+          question: `How can you interact with the ${section.title} model?`,
+          isCompleted: completedQuizzes[`${sectionIndex}-playground`] === true
+        };
+        sectionCards.push(playgroundCard);
+      }
+      
+      // Bonus card (if applicable)
+      if (section.bonusVideos && section.bonusVideos.length > 0) {
+        const bonusCard: QuizCardData = {
+          section,
+          contentType: 'bonus',
+          sectionIndex,
+          question: `What bonus information is provided about ${section.title}?`,
+          isCompleted: completedQuizzes[`${sectionIndex}-bonus`] === true
+        };
+        sectionCards.push(bonusCard);
+      }
+      
+      // Sort cards: incomplete first, then completed
+      sectionCards.sort((a, b) => {
+        if (a.isCompleted && !b.isCompleted) return 1; // Completed cards go last
+        if (!a.isCompleted && b.isCompleted) return -1; // Incomplete cards go first
+        return 0; // Keep original order for cards with same completion status
+      });
+      
+      newQuizCards[sectionIndex] = sectionCards;
+    });
+    
+    setQuizCards(newQuizCards);
+    
     // Force refresh when returning to this page to show updated completion status
     const handleVisibilityChange = () => {
       if (document.visibilityState === 'visible') {
         setCourse({...mockCourse});
+        
+        // Re-check completion status
+        const updatedCompletedQuizzes = JSON.parse(localStorage.getItem('completedQuizzes') || '{}');
+        const updatedQuizCards = { ...newQuizCards };
+        
+        Object.keys(updatedQuizCards).forEach(sectionIndexStr => {
+          const sectionIndex = parseInt(sectionIndexStr);
+          updatedQuizCards[sectionIndex].forEach((card, idx) => {
+            const key = `${card.sectionIndex}-${card.contentType}`;
+            updatedQuizCards[sectionIndex][idx].isCompleted = updatedCompletedQuizzes[key] === true;
+          });
+          
+          // Re-sort cards based on completion status
+          updatedQuizCards[sectionIndex].sort((a, b) => {
+            if (a.isCompleted && !b.isCompleted) return 1;
+            if (!a.isCompleted && b.isCompleted) return -1;
+            return 0;
+          });
+        });
+        
+        setQuizCards(updatedQuizCards);
       }
     };
     
@@ -70,113 +198,24 @@ const AstronomyQuizModePage = () => {
               {section.title}
             </h2>
             
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-6">
-              {/* Quiz card should have fixed width */}
-              <div style={{ maxWidth: '300px' }}>
-                <QuizCard 
-                  section={section}
-                  contentType="quiz"
-                  sectionIndex={sectionIndex}
-                  question={`Test your ${section.title} knowledge with this quiz`}
-                  onStartQuiz={() => navigate(`/astronomy-quiz-detail`, {
-                    state: { 
-                      course, 
-                      sectionIndex,
-                      contentType: 'quiz'
-                    }
-                  })}
-                />
-              </div>
-              
-              <QuizCard 
-                section={section}
-                contentType="introduction"
-                sectionIndex={sectionIndex}
-                question={`What is the main purpose of ${section.title}?`}
-                onStartQuiz={() => navigate(`/astronomy-quiz-detail`, {
-                  state: { 
-                    course, 
-                    sectionIndex,
-                    contentType: 'introduction'
-                  }
-                })}
-              />
-              
-              <QuizCard 
-                section={section}
-                contentType="video"
-                sectionIndex={sectionIndex}
-                question={`What key concepts are covered in the ${section.title} video?`}
-                onStartQuiz={() => navigate(`/astronomy-quiz-detail`, {
-                  state: { 
-                    course, 
-                    sectionIndex,
-                    contentType: 'video'
-                  }
-                })}
-              />
-              
-              {section.shortVideo && (
-                <QuizCard 
-                  section={section}
-                  contentType="short-video"
-                  sectionIndex={sectionIndex}
-                  question={`What are some interesting facts about ${section.title}?`}
-                  onStartQuiz={() => navigate(`/astronomy-quiz-detail`, {
-                    state: { 
-                      course, 
-                      sectionIndex,
-                      contentType: 'short-video'
-                    }
-                  })}
-                />
-              )}
-              
-              <QuizCard 
-                section={section}
-                contentType="image"
-                sectionIndex={sectionIndex}
-                question={`What visual elements can you identify in the ${section.title} image?`}
-                onStartQuiz={() => navigate(`/astronomy-quiz-detail`, {
-                  state: { 
-                    course, 
-                    sectionIndex,
-                    contentType: 'image'
-                  }
-                })}
-              />
-              
-              {section.visualUrl && (
-                <QuizCard 
-                  section={section}
-                  contentType="playground"
-                  sectionIndex={sectionIndex}
-                  question={`How can you interact with the ${section.title} model?`}
-                  onStartQuiz={() => navigate(`/astronomy-quiz-detail`, {
-                    state: { 
-                      course, 
-                      sectionIndex,
-                      contentType: 'playground'
-                    }
-                  })}
-                />
-              )}
-              
-              {section.bonusVideos && section.bonusVideos.length > 0 && (
-                <QuizCard 
-                  section={section}
-                  contentType="bonus"
-                  sectionIndex={sectionIndex}
-                  question={`What bonus information is provided about ${section.title}?`}
-                  onStartQuiz={() => navigate(`/astronomy-quiz-detail`, {
-                    state: { 
-                      course, 
-                      sectionIndex,
-                      contentType: 'bonus'
-                    }
-                  })}
-                />
-              )}
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-6">
+              {quizCards[sectionIndex]?.map((card, cardIndex) => (
+                <div key={`${card.sectionIndex}-${card.contentType}`} style={{ maxWidth: card.contentType === 'quiz' ? '300px' : '100%' }}>
+                  <QuizCard 
+                    section={card.section}
+                    contentType={card.contentType}
+                    sectionIndex={card.sectionIndex}
+                    question={card.question}
+                    onStartQuiz={() => navigate(`/astronomy-quiz-detail`, {
+                      state: { 
+                        course, 
+                        sectionIndex: card.sectionIndex,
+                        contentType: card.contentType
+                      }
+                    })}
+                  />
+                </div>
+              ))}
             </div>
           </div>
         ))}
