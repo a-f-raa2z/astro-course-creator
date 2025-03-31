@@ -1,8 +1,8 @@
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Play, Sun, Globe, Moon, Stars, Rocket, Telescope, Satellite } from "lucide-react";
+import { Play, Sun, Globe, Moon, Stars, Rocket, Telescope, Satellite, CheckCircle } from "lucide-react";
 import { CourseSection } from "@/types/course";
 import { ContentType } from "@/types/ContentType";
 
@@ -11,14 +11,25 @@ interface QuizCardProps {
   contentType: ContentType['type'];
   question: string;
   onStartQuiz: () => void;
+  sectionIndex: number;
 }
 
 export const QuizCard: React.FC<QuizCardProps> = ({
   section,
   contentType,
   question,
-  onStartQuiz
+  onStartQuiz,
+  sectionIndex
 }) => {
+  const [isCompleted, setIsCompleted] = useState(false);
+  
+  useEffect(() => {
+    // Check if this quiz is completed
+    const completedQuizzes = JSON.parse(localStorage.getItem('completedQuizzes') || '{}');
+    const quizKey = `${sectionIndex}-${contentType}`;
+    setIsCompleted(completedQuizzes[quizKey] === true);
+  }, [sectionIndex, contentType]);
+
   // Get section-specific icon based on section title
   const getSectionIcon = () => {
     switch (section.title) {
@@ -45,6 +56,10 @@ export const QuizCard: React.FC<QuizCardProps> = ({
   
   // Get icon and background color based on content type
   const getContentTypeStyles = () => {
+    if (isCompleted) {
+      return { bgColor: 'bg-green-900/40', borderColor: 'border-green-500/30' };
+    }
+    
     switch (contentType) {
       case 'introduction':
         return { bgColor: 'bg-blue-900/40', borderColor: 'border-blue-500/30' };
@@ -66,6 +81,10 @@ export const QuizCard: React.FC<QuizCardProps> = ({
   };
 
   const getContentTypeLabel = () => {
+    if (isCompleted) {
+      return 'Completed';
+    }
+    
     switch (contentType) {
       case 'introduction':
         return 'Introduction';
@@ -97,7 +116,8 @@ export const QuizCard: React.FC<QuizCardProps> = ({
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <div className="bg-black/20 rounded-md px-3 py-1 text-xs inline-block text-white mb-2">
+        <div className={`${isCompleted ? 'bg-green-800/30 text-green-300' : 'bg-black/20 text-white'} rounded-md px-3 py-1 text-xs inline-block mb-2`}>
+          {isCompleted && <CheckCircle className="inline-block h-3 w-3 mr-1" />}
           {getContentTypeLabel()}
         </div>
         
@@ -114,10 +134,10 @@ export const QuizCard: React.FC<QuizCardProps> = ({
       <CardFooter className="pt-0">
         <Button 
           onClick={onStartQuiz}
-          className="w-full bg-purple-600 hover:bg-purple-700 text-white"
+          className={`w-full ${isCompleted ? 'bg-green-600 hover:bg-green-700' : 'bg-purple-600 hover:bg-purple-700'} text-white`}
           size="sm"
         >
-          <Play className="mr-2 h-4 w-4" /> Start Quiz
+          <Play className="mr-2 h-4 w-4" /> {isCompleted ? 'Review' : 'Start Quiz'}
         </Button>
       </CardFooter>
     </Card>

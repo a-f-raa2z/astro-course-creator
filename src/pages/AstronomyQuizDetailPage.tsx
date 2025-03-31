@@ -6,15 +6,18 @@ import { ChevronLeft, HelpCircle } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { CourseSection } from "@/types/course";
 import { GameContentRenderer } from "@/components/course/GameContentRenderer";
+import { useToast } from "@/hooks/use-toast";
 
 const AstronomyQuizDetailPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { course, sectionIndex } = location.state || {};
+  const { course, sectionIndex, contentType } = location.state || {};
+  const { toast } = useToast();
   
   const [currentSection, setCurrentSection] = useState<CourseSection | null>(null);
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
   const [quizSubmitted, setQuizSubmitted] = useState(false);
+  const [showContent, setShowContent] = useState(true);
   
   useEffect(() => {
     if (course && typeof sectionIndex === 'number' && course.sections[sectionIndex]) {
@@ -29,11 +32,30 @@ const AstronomyQuizDetailPage = () => {
   };
 
   const handleNextContent = () => {
-    navigate("/astronomy-quiz");
+    if (showContent) {
+      setShowContent(false);
+    } else {
+      // Save completion status to localStorage
+      const completedQuizzes = JSON.parse(localStorage.getItem('completedQuizzes') || '{}');
+      const quizKey = `${sectionIndex}-${contentType}`;
+      completedQuizzes[quizKey] = true;
+      localStorage.setItem('completedQuizzes', JSON.stringify(completedQuizzes));
+      
+      toast({
+        title: "Quiz completed!",
+        description: "Your progress has been saved.",
+      });
+      
+      navigate("/astronomy-quiz");
+    }
   };
 
   const handlePreviousContent = () => {
-    navigate("/astronomy-quiz");
+    if (!showContent) {
+      setShowContent(true);
+    } else {
+      navigate("/astronomy-quiz");
+    }
   };
 
   if (!currentSection) {
@@ -58,13 +80,16 @@ const AstronomyQuizDetailPage = () => {
             Back to Quizzes
           </Button>
           <h1 className="text-2xl font-bold text-white flex items-center">
-            <HelpCircle className="mr-2 h-6 w-6 text-orange-400" /> Quiz Challenge
+            {showContent 
+              ? `${currentSection.title} - Learning Content`
+              : <><HelpCircle className="mr-2 h-6 w-6 text-orange-400" /> Quiz Challenge</>
+            }
           </h1>
         </div>
         
         <Card className="w-full mb-4 p-4 bg-space-cosmic-blue/20 backdrop-blur-sm border border-purple-500/20">
           <GameContentRenderer
-            contentType="quiz"
+            contentType={showContent ? contentType : 'quiz'}
             currentSection={currentSection}
             quizSubmitted={quizSubmitted}
             selectedAnswer={selectedAnswer}

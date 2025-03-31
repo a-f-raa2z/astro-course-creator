@@ -16,6 +16,16 @@ const AstronomyQuizModePage = () => {
   useEffect(() => {
     const mockCourse = generateMockCourse("planets", "intermediate", "visual");
     setCourse(mockCourse);
+    
+    // Force refresh when returning to this page to show updated completion status
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === 'visible') {
+        setCourse({...mockCourse});
+      }
+    };
+    
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    return () => document.removeEventListener('visibilitychange', handleVisibilityChange);
   }, []);
 
   if (!course) {
@@ -46,7 +56,7 @@ const AstronomyQuizModePage = () => {
         </div>
         
         <p className="text-gray-300 mb-4 max-w-3xl leading-relaxed">
-          Test your knowledge with these interactive quizzes. Select any card to start a quiz related to that topic.
+          Test your knowledge with these interactive quizzes. Select any card to start learning and complete a quiz related to that topic.
         </p>
         
         <Separator className="my-6 bg-purple-500/20" />
@@ -64,6 +74,7 @@ const AstronomyQuizModePage = () => {
               <QuizCard 
                 section={section}
                 contentType="introduction"
+                sectionIndex={sectionIndex}
                 question={`What is the main purpose of ${section.title}?`}
                 onStartQuiz={() => navigate(`/astronomy-quiz-detail`, {
                   state: { 
@@ -77,6 +88,7 @@ const AstronomyQuizModePage = () => {
               <QuizCard 
                 section={section}
                 contentType="video"
+                sectionIndex={sectionIndex}
                 question={`What key concepts are covered in the ${section.title} video?`}
                 onStartQuiz={() => navigate(`/astronomy-quiz-detail`, {
                   state: { 
@@ -91,6 +103,7 @@ const AstronomyQuizModePage = () => {
                 <QuizCard 
                   section={section}
                   contentType="short-video"
+                  sectionIndex={sectionIndex}
                   question={`What are some interesting facts about ${section.title}?`}
                   onStartQuiz={() => navigate(`/astronomy-quiz-detail`, {
                     state: { 
@@ -105,6 +118,7 @@ const AstronomyQuizModePage = () => {
               <QuizCard 
                 section={section}
                 contentType="image"
+                sectionIndex={sectionIndex}
                 question={`What visual elements can you identify in the ${section.title} image?`}
                 onStartQuiz={() => navigate(`/astronomy-quiz-detail`, {
                   state: { 
@@ -119,6 +133,7 @@ const AstronomyQuizModePage = () => {
                 <QuizCard 
                   section={section}
                   contentType="playground"
+                  sectionIndex={sectionIndex}
                   question={`How can you interact with the ${section.title} model?`}
                   onStartQuiz={() => navigate(`/astronomy-quiz-detail`, {
                     state: { 
@@ -134,6 +149,7 @@ const AstronomyQuizModePage = () => {
                 <QuizCard 
                   section={section}
                   contentType="bonus"
+                  sectionIndex={sectionIndex}
                   question={`What bonus information is provided about ${section.title}?`}
                   onStartQuiz={() => navigate(`/astronomy-quiz-detail`, {
                     state: { 
@@ -148,6 +164,7 @@ const AstronomyQuizModePage = () => {
               <QuizCard 
                 section={section}
                 contentType="quiz"
+                sectionIndex={sectionIndex}
                 question={`Test your ${section.title} knowledge with this quiz`}
                 onStartQuiz={() => navigate(`/astronomy-quiz-detail`, {
                   state: { 
