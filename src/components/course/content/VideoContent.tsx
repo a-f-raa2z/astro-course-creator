@@ -28,6 +28,33 @@ export const VideoContent = ({ section, onComplete, onPrevious, isFirstContent }
   
   const isAICourse = location.pathname.includes('ai-course');
   
+  // Define getVideoDescription function first
+  const getVideoDescription = (sectionTitle: string, index: number) => {
+    const descriptionMap: Record<string, string[]> = {
+      "The Inner Planets": [
+        "Explore Mercury, Venus, Earth, and Mars - the four terrestrial planets closest to the Sun.",
+        "A deeper look at these rocky worlds and their unique characteristics."
+      ],
+      "Earth": [
+        "Our home planet - the blue marble of the Solar System and the only known world with abundant liquid water.",
+        "Earth's complex systems and how they interact to support life."
+      ],
+      "The Moon": [
+        "Earth's natural satellite and our closest celestial neighbor.",
+        "How the Moon's phases work and its influence on Earth."
+      ]
+    };
+    
+    const descriptions = descriptionMap[sectionTitle];
+    if (descriptions && index < descriptions.length) {
+      return descriptions[index];
+    }
+    
+    return index === 0
+      ? "A comprehensive overview of our cosmic neighborhood and the celestial bodies within it."
+      : "Additional insights into this fascinating cosmic subject.";
+  };
+  
   // Get all video sources
   const getVideoSources = () => {
     const sources = [];
@@ -59,32 +86,6 @@ export const VideoContent = ({ section, onComplete, onPrevious, isFirstContent }
     setShowKeyPoints(false);
     setShowCompletionView(false);
   }, [currentVideoIndex]);
-  
-  const getVideoDescription = (sectionTitle: string, index: number) => {
-    const descriptionMap: Record<string, string[]> = {
-      "The Inner Planets": [
-        "Explore Mercury, Venus, Earth, and Mars - the four terrestrial planets closest to the Sun.",
-        "A deeper look at these rocky worlds and their unique characteristics."
-      ],
-      "Earth": [
-        "Our home planet - the blue marble of the Solar System and the only known world with abundant liquid water.",
-        "Earth's complex systems and how they interact to support life."
-      ],
-      "The Moon": [
-        "Earth's natural satellite and our closest celestial neighbor.",
-        "How the Moon's phases work and its influence on Earth."
-      ]
-    };
-    
-    const descriptions = descriptionMap[sectionTitle];
-    if (descriptions && index < descriptions.length) {
-      return descriptions[index];
-    }
-    
-    return index === 0
-      ? "A comprehensive overview of our cosmic neighborhood and the celestial bodies within it."
-      : "Additional insights into this fascinating cosmic subject.";
-  };
 
   const handleVideoComplete = () => {
     setVideoWatched(true);
