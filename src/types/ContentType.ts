@@ -1,7 +1,20 @@
 
 export type ContentType = {
-  id: string;
-  type: 'introduction' | 'video' | 'short-video' | 'quiz' | 'key-points' | 'playground' | 'bonus' | 'image' | 'keyPoints' | 'shortVideo';
-  title: string;
-  completed: boolean;
-};
+  type: 
+    | 'video'
+    | 'image'
+    | 'keyPoints'
+    | 'introduction'
+    | 'short-video'
+    | 'quiz'
+    | 'key-points'
+    | 'shortVideo'
+    | 'playground'
+    | 'bonus'
+    | 'fun-facts'
+    | 'funFacts'
+    | 'visual-gallery'
+    | 'visualGallery';
+  label: string;
+  icon: string;
+}

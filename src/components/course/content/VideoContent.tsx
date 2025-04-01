@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { CourseSection } from "@/types/course";
 import { Button } from "@/components/ui/button";
@@ -21,24 +22,43 @@ export const VideoContent = ({ section, onComplete, onPrevious, isFirstContent }
   const [videoWatched, setVideoWatched] = useState(false);
   const [showKeyPoints, setShowKeyPoints] = useState(false);
   const [showCompletionView, setShowCompletionView] = useState(false);
-  const [currentVideoUrl, setCurrentVideoUrl] = useState("");
-  const [videoIndex, setVideoIndex] = useState(0);
+  const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
   const { toast } = useToast();
   const location = useLocation();
   
   const isAICourse = location.pathname.includes('ai-course');
   
-  useEffect(() => {
-    if (videoIndex === 0) {
-      setCurrentVideoUrl(section.videoUrl);
-    } else if (videoIndex === 1 && section.mainLesson2Url) {
-      setCurrentVideoUrl(section.mainLesson2Url);
+  // Get all video sources
+  const getVideoSources = () => {
+    const sources = [];
+    
+    if (section.videoUrl) {
+      sources.push({
+        url: section.videoUrl,
+        title: "Main Lesson",
+        description: getVideoDescription(section.title, 0)
+      });
     }
     
+    if (section.mainLesson2Url) {
+      sources.push({
+        url: section.mainLesson2Url,
+        title: "Main Lesson 2", 
+        description: getVideoDescription(section.title, 1)
+      });
+    }
+    
+    return sources;
+  };
+  
+  const videoSources = getVideoSources();
+  const currentVideoUrl = videoSources[currentVideoIndex]?.url || "";
+  
+  useEffect(() => {
     setVideoWatched(false);
     setShowKeyPoints(false);
     setShowCompletionView(false);
-  }, [videoIndex, section.videoUrl, section.mainLesson2Url]);
+  }, [currentVideoIndex]);
   
   const getVideoDescription = (sectionTitle: string, index: number) => {
     const descriptionMap: Record<string, string[]> = {
@@ -65,8 +85,6 @@ export const VideoContent = ({ section, onComplete, onPrevious, isFirstContent }
       ? "A comprehensive overview of our cosmic neighborhood and the celestial bodies within it."
       : "Additional insights into this fascinating cosmic subject.";
   };
-  
-  const videoDescription = getVideoDescription(section.title, videoIndex);
 
   const handleVideoComplete = () => {
     setVideoWatched(true);
@@ -84,10 +102,16 @@ export const VideoContent = ({ section, onComplete, onPrevious, isFirstContent }
   };
 
   const handleContinue = () => {
-    if (section.mainLesson2Url && videoIndex === 0) {
-      setVideoIndex(1);
+    if (currentVideoIndex < videoSources.length - 1) {
+      setCurrentVideoIndex(currentVideoIndex + 1);
     } else {
       onComplete();
+    }
+  };
+  
+  const handlePreviousVideo = () => {
+    if (currentVideoIndex > 0) {
+      setCurrentVideoIndex(currentVideoIndex - 1);
     }
   };
   
@@ -98,7 +122,7 @@ export const VideoContent = ({ section, onComplete, onPrevious, isFirstContent }
     }
   };
 
-  const hasMultipleVideos = Boolean(section.mainLesson2Url);
+  const hasMultipleVideos = videoSources.length > 1;
 
   return (
     <div className="w-full h-full flex flex-col">
@@ -106,11 +130,11 @@ export const VideoContent = ({ section, onComplete, onPrevious, isFirstContent }
         <div className="p-4">
           <TitleWrapper 
             icon={<Youtube className="h-5 w-5 text-red-500 mr-2" />}
-            title={`Main Video Lesson ${hasMultipleVideos ? (videoIndex + 1) : ''}`}
+            title={videoSources[currentVideoIndex]?.title || "Main Video Lesson"}
             color="bg-red-900/30"
           />
           <p className="text-lg text-transparent bg-gradient-to-r from-red-300 to-red-100 bg-clip-text font-medium mb-4 px-1">
-            {videoDescription}
+            {videoSources[currentVideoIndex]?.description || "Learn about this fascinating topic."}
           </p>
         </div>
         
@@ -125,6 +149,49 @@ export const VideoContent = ({ section, onComplete, onPrevious, isFirstContent }
                 allowFullScreen
               ></iframe>
             </AspectRatio>
+            
+            {hasMultipleVideos && (
+              <div className="absolute top-1/2 left-0 right-0 flex justify-between px-4 transform -translate-y-1/2 pointer-events-none">
+                {currentVideoIndex > 0 && (
+                  <Button 
+                    onClick={handlePreviousVideo} 
+                    variant="outline" 
+                    size="icon" 
+                    className="rounded-full bg-black/30 border-white/20 hover:bg-black/50 pointer-events-auto"
+                    aria-label="Previous video"
+                  >
+                    <ChevronLeft className="h-6 w-6 text-white" />
+                  </Button>
+                )}
+                
+                {currentVideoIndex < videoSources.length - 1 && (
+                  <div className="ml-auto">
+                    <Button 
+                      onClick={() => setCurrentVideoIndex(currentVideoIndex + 1)} 
+                      variant="outline" 
+                      size="icon" 
+                      className="rounded-full bg-black/30 border-white/20 hover:bg-black/50 pointer-events-auto"
+                      aria-label="Next video"
+                    >
+                      <ChevronRight className="h-6 w-6 text-white" />
+                    </Button>
+                  </div>
+                )}
+              </div>
+            )}
+            
+            {hasMultipleVideos && (
+              <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-2">
+                {videoSources.map((_, idx) => (
+                  <div 
+                    key={idx} 
+                    className={`w-2 h-2 rounded-full transition-all ${
+                      idx === currentVideoIndex ? "bg-white scale-125" : "bg-white/50"
+                    }`}
+                  />
+                ))}
+              </div>
+            )}
           </div>
         ) : showKeyPoints ? (
           <KeyPointsView 
@@ -146,7 +213,7 @@ export const VideoContent = ({ section, onComplete, onPrevious, isFirstContent }
         ) : null}
         
         <div className="p-4 flex justify-between">
-          {!isFirstContent && videoIndex === 0 ? (
+          {!isFirstContent && (
             <Button 
               onClick={onPrevious}
               variant="outline"
@@ -154,18 +221,8 @@ export const VideoContent = ({ section, onComplete, onPrevious, isFirstContent }
             >
               <ArrowLeft className="h-4 w-4 mr-2" /> Previous
             </Button>
-          ) : videoIndex === 1 ? (
-            <Button 
-              onClick={() => setVideoIndex(0)}
-              variant="outline"
-              className="border-purple-500/30 text-purple-300 hover:bg-purple-900/30"
-            >
-              <ArrowLeft className="h-4 w-4 mr-2" /> Back to Video 1
-            </Button>
-          ) : (
-            <div></div>
           )}
-          <div className={!isFirstContent || videoIndex === 1 ? "" : "ml-auto"}>
+          <div className={!isFirstContent ? "" : "ml-auto"}>
             {!videoWatched && (
               <Button 
                 onClick={handleVideoComplete}
@@ -179,7 +236,7 @@ export const VideoContent = ({ section, onComplete, onPrevious, isFirstContent }
                 onClick={handleContinue}
                 className="bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800"
               >
-                {hasMultipleVideos && videoIndex === 0 ? 'Next Video' : 'Continue'} <ArrowRight className="h-4 w-4 ml-2" />
+                {currentVideoIndex < videoSources.length - 1 ? 'Next Video' : 'Continue'} <ArrowRight className="h-4 w-4 ml-2" />
               </Button>
             )}
           </div>

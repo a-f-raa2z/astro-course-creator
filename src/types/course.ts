@@ -47,7 +47,7 @@ export interface CourseSection {
   visualIntro?: string;
   bonusVideos?: string[];
   bonusIntro?: string;
-  image: {
+  image?: {
     url: string;
     description: string;
     intro?: string;

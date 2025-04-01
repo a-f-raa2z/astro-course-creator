@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { CourseSection } from "@/types/course";
 import { Button } from "@/components/ui/button";
@@ -15,26 +16,32 @@ interface PlaygroundContentProps {
 
 export const PlaygroundContent = ({ section, onComplete, onPrevious, isFirstContent }: PlaygroundContentProps) => {
   const [interactiveIndex, setInteractiveIndex] = useState(0);
-  const [currentInteractiveUrl, setCurrentInteractiveUrl] = useState("");
-
-  useEffect(() => {
-    if (interactiveIndex === 0) {
-      setCurrentInteractiveUrl(section.visualUrl || "");
-    } else if (interactiveIndex === 1 && section.interactiveUrl2) {
-      setCurrentInteractiveUrl(section.interactiveUrl2);
+  
+  const getInteractives = () => {
+    const interactives = [];
+    
+    if (section.visualUrl) {
+      interactives.push({
+        url: section.visualUrl,
+        title: "Interactive Playground",
+        description: getInteractiveDescription(section.title, 0)
+      });
     }
-  }, [interactiveIndex, section.visualUrl, section.interactiveUrl2]);
-
-  const hasMultipleInteractives = Boolean(section.interactiveUrl2);
-
-  const getInteractiveTitle = (index: number) => {
-    if (index === 0) {
-      return "Interactive Playground";
-    } else {
-      return "Interactive Playground 2";
+    
+    if (section.interactiveUrl2) {
+      interactives.push({
+        url: section.interactiveUrl2,
+        title: "Interactive Playground 2",
+        description: getInteractiveDescription(section.title, 1)
+      });
     }
+    
+    return interactives;
   };
-
+  
+  const interactives = getInteractives();
+  const currentInteractiveUrl = interactives[interactiveIndex]?.url || "";
+  
   const getInteractiveDescription = (sectionTitle: string, index: number) => {
     if (sectionTitle === "The Moon") {
       if (index === 0) {
@@ -44,35 +51,38 @@ export const PlaygroundContent = ({ section, onComplete, onPrevious, isFirstCont
       }
     }
 
-    if (index === 0) {
-      return `Interact with this ${sectionTitle} simulation to deepen your understanding.`;
-    } else {
-      return `Explore additional ${sectionTitle} concepts with this interactive resource.`;
-    }
+    return index === 0
+      ? `Interact with this ${sectionTitle} simulation to deepen your understanding.`
+      : `Explore additional ${sectionTitle} concepts with this interactive resource.`;
   };
 
   const handleContinue = () => {
-    if (hasMultipleInteractives && interactiveIndex === 0) {
-      setInteractiveIndex(1);
+    if (interactiveIndex < interactives.length - 1) {
+      setInteractiveIndex(interactiveIndex + 1);
     } else {
       onComplete();
     }
   };
+  
+  const handlePreviousInteractive = () => {
+    if (interactiveIndex > 0) {
+      setInteractiveIndex(interactiveIndex - 1);
+    }
+  };
 
-  const title = getInteractiveTitle(interactiveIndex);
-  const description = getInteractiveDescription(section.title, interactiveIndex);
-
+  const hasMultipleInteractives = interactives.length > 1;
+  
   return (
     <div className="w-full h-full">
       <Card className="w-full h-full overflow-hidden flex flex-col bg-space-cosmic-blue/20 backdrop-blur-sm border border-purple-500/20">
         <div className="p-4">
           <TitleWrapper 
             icon={<Gamepad2 className="h-5 w-5 text-green-400 mr-2" />}
-            title={title}
+            title={interactives[interactiveIndex]?.title || "Interactive Playground"}
             color="bg-green-900/30"
           />
           <p className="text-lg text-transparent bg-gradient-to-r from-green-300 to-green-100 bg-clip-text font-medium mb-4 px-1">
-            {description}
+            {interactives[interactiveIndex]?.description || "Interact with this simulation to deepen your understanding."}
           </p>
         </div>
         
@@ -86,35 +96,68 @@ export const PlaygroundContent = ({ section, onComplete, onPrevious, isFirstCont
               allowFullScreen
             ></iframe>
           </AspectRatio>
+          
+          {hasMultipleInteractives && (
+            <div className="absolute top-1/2 left-0 right-0 flex justify-between px-4 transform -translate-y-1/2 pointer-events-none">
+              {interactiveIndex > 0 && (
+                <Button 
+                  onClick={handlePreviousInteractive} 
+                  variant="outline" 
+                  size="icon" 
+                  className="rounded-full bg-black/30 border-white/20 hover:bg-black/50 pointer-events-auto"
+                  aria-label="Previous interactive"
+                >
+                  <ChevronLeft className="h-6 w-6 text-white" />
+                </Button>
+              )}
+              
+              {interactiveIndex < interactives.length - 1 && (
+                <div className="ml-auto">
+                  <Button 
+                    onClick={() => setInteractiveIndex(interactiveIndex + 1)} 
+                    variant="outline" 
+                    size="icon" 
+                    className="rounded-full bg-black/30 border-white/20 hover:bg-black/50 pointer-events-auto"
+                    aria-label="Next interactive"
+                  >
+                    <ChevronRight className="h-6 w-6 text-white" />
+                  </Button>
+                </div>
+              )}
+            </div>
+          )}
+          
+          {hasMultipleInteractives && (
+            <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-2">
+              {interactives.map((_, idx) => (
+                <div 
+                  key={idx} 
+                  className={`w-2 h-2 rounded-full transition-all ${
+                    idx === interactiveIndex ? "bg-white scale-125" : "bg-white/50"
+                  }`}
+                />
+              ))}
+            </div>
+          )}
         </div>
         
         <div className="p-4 flex justify-between">
-          {interactiveIndex === 0 ? (
-            !isFirstContent && (
-              <Button 
-                onClick={onPrevious}
-                variant="outline"
-                className="border-purple-500/30 text-purple-300 hover:bg-purple-900/30"
-              >
-                <ArrowLeft className="h-4 w-4 mr-2" /> Previous
-              </Button>
-            )
-          ) : (
+          {!isFirstContent && (
             <Button 
-              onClick={() => setInteractiveIndex(0)}
+              onClick={onPrevious}
               variant="outline"
               className="border-purple-500/30 text-purple-300 hover:bg-purple-900/30"
             >
-              <ArrowLeft className="h-4 w-4 mr-2" /> Back to Interactive 1
+              <ArrowLeft className="h-4 w-4 mr-2" /> Previous
             </Button>
           )}
           
-          <div className={(!isFirstContent || interactiveIndex > 0) ? "ml-auto" : "ml-auto"}>
+          <div className={!isFirstContent ? "ml-auto" : "ml-auto"}>
             <Button 
               onClick={handleContinue}
               className="bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800"
             >
-              {hasMultipleInteractives && interactiveIndex === 0 ? 'Next Interactive' : 'Continue'} <ArrowRight className="h-4 w-4 ml-2" />
+              {interactiveIndex < interactives.length - 1 ? 'Next Interactive' : 'Continue'} <ArrowRight className="h-4 w-4 ml-2" />
             </Button>
           </div>
         </div>
