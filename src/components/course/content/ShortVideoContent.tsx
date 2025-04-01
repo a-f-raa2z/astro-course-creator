@@ -54,11 +54,32 @@ export const ShortVideoContent = ({ section, onComplete, onPrevious, isFirstCont
 
   return (
     <div className="w-full h-full flex flex-col">
-      <TitleWrapper 
-        icon={<Video className="h-5 w-5 text-blue-400 mr-2" />}
-        title="Fun Facts" 
-        color="bg-blue-900/30"
-      />
+      <div className="flex items-center justify-between mb-4">
+        <TitleWrapper 
+          icon={<Video className="h-5 w-5 text-blue-400 mr-2" />}
+          title="Fun Facts" 
+          color="bg-blue-900/30"
+        />
+        <div className="flex space-x-2">
+          {!isFirstContent && (
+            <Button 
+              onClick={onPrevious}
+              variant="outline"
+              size="sm"
+              className="border-purple-500/30 text-purple-300 hover:bg-purple-900/30"
+            >
+              <ArrowLeft className="h-4 w-4 mr-2" /> Previous
+            </Button>
+          )}
+          <Button 
+            onClick={onComplete}
+            size="sm"
+            className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800"
+          >
+            Continue <ArrowRight className="h-4 w-4 ml-2" />
+          </Button>
+        </div>
+      </div>
       
       <p className="text-lg text-transparent bg-gradient-to-r from-blue-300 to-blue-100 bg-clip-text font-medium mb-4 px-1">
         Highlight hidden things and fascinating trivia about {section.title.toLowerCase()}.
@@ -108,26 +129,6 @@ export const ShortVideoContent = ({ section, onComplete, onPrevious, isFirstCont
               }`}
             />
           ))}
-        </div>
-      </div>
-      
-      <div className="mt-4 flex justify-between">
-        {!isFirstContent && (
-          <Button 
-            onClick={onPrevious}
-            variant="outline"
-            className="border-purple-500/30 text-purple-300 hover:bg-purple-900/30"
-          >
-            <ArrowLeft className="h-4 w-4 mr-2" /> Previous
-          </Button>
-        )}
-        <div className={!isFirstContent ? "" : "ml-auto"}>
-          <Button 
-            onClick={onComplete}
-            className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800"
-          >
-            Continue <ArrowRight className="h-4 w-4 ml-2" />
-          </Button>
         </div>
       </div>
     </div>

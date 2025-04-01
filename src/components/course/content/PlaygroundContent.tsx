@@ -76,11 +76,32 @@ export const PlaygroundContent = ({ section, onComplete, onPrevious, isFirstCont
     <div className="w-full h-full">
       <Card className="w-full h-full overflow-hidden flex flex-col bg-space-cosmic-blue/20 backdrop-blur-sm border border-purple-500/20">
         <div className="p-4">
-          <TitleWrapper 
-            icon={<Gamepad2 className="h-5 w-5 text-green-400 mr-2" />}
-            title={interactives[interactiveIndex]?.title || "Interactive Playground"}
-            color="bg-green-900/30"
-          />
+          <div className="flex items-center justify-between mb-4">
+            <TitleWrapper 
+              icon={<Gamepad2 className="h-5 w-5 text-green-400 mr-2" />}
+              title={interactives[interactiveIndex]?.title || "Interactive Playground"}
+              color="bg-green-900/30"
+            />
+            <div className="flex space-x-2">
+              {!isFirstContent && (
+                <Button 
+                  onClick={onPrevious}
+                  variant="outline"
+                  size="sm"
+                  className="border-purple-500/30 text-purple-300 hover:bg-purple-900/30"
+                >
+                  <ArrowLeft className="h-4 w-4 mr-2" /> Previous
+                </Button>
+              )}
+              <Button 
+                onClick={handleContinue}
+                size="sm"
+                className="bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800"
+              >
+                {interactiveIndex < interactives.length - 1 ? 'Next Interactive' : 'Continue'} <ArrowRight className="h-4 w-4 ml-2" />
+              </Button>
+            </div>
+          </div>
           <p className="text-lg text-transparent bg-gradient-to-r from-green-300 to-green-100 bg-clip-text font-medium mb-4 px-1">
             {interactives[interactiveIndex]?.description || "Interact with this simulation to deepen your understanding."}
           </p>
@@ -139,27 +160,6 @@ export const PlaygroundContent = ({ section, onComplete, onPrevious, isFirstCont
               ))}
             </div>
           )}
-        </div>
-        
-        <div className="p-4 flex justify-between">
-          {!isFirstContent && (
-            <Button 
-              onClick={onPrevious}
-              variant="outline"
-              className="border-purple-500/30 text-purple-300 hover:bg-purple-900/30"
-            >
-              <ArrowLeft className="h-4 w-4 mr-2" /> Previous
-            </Button>
-          )}
-          
-          <div className={!isFirstContent ? "ml-auto" : "ml-auto"}>
-            <Button 
-              onClick={handleContinue}
-              className="bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800"
-            >
-              {interactiveIndex < interactives.length - 1 ? 'Next Interactive' : 'Continue'} <ArrowRight className="h-4 w-4 ml-2" />
-            </Button>
-          </div>
         </div>
       </Card>
     </div>

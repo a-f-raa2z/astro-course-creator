@@ -87,11 +87,62 @@ export const QuizContent = ({
   return (
     <div className="w-full h-full">
       <Card className="w-full h-full overflow-auto p-4 bg-space-cosmic-blue/20 backdrop-blur-sm border border-purple-500/20">
-        <TitleWrapper 
-          icon={<HelpCircle className="h-5 w-5 text-orange-400 mr-2" />}
-          title={`Challenge ${currentQuizIndex + 1} of ${totalQuizzes}`} 
-          color="bg-orange-900/30"
-        />
+        <div className="flex items-center justify-between mb-4">
+          <TitleWrapper 
+            icon={<HelpCircle className="h-5 w-5 text-orange-400 mr-2" />}
+            title={`Challenge ${currentQuizIndex + 1} of ${totalQuizzes}`} 
+            color="bg-orange-900/30"
+          />
+          
+          <div className="flex space-x-2">
+            {!isFirstContent && currentQuizIndex === 0 && !localQuizSubmitted && (
+              <Button 
+                onClick={onPrevious}
+                variant="outline"
+                size="sm"
+                className="border-purple-500/30 text-purple-300 hover:bg-purple-900/30"
+              >
+                <ArrowLeft className="h-4 w-4 mr-2" /> Previous
+              </Button>
+            )}
+            
+            {currentQuizIndex > 0 && !localQuizSubmitted && (
+              <Button 
+                onClick={() => {
+                  setCurrentQuizIndex(currentQuizIndex - 1);
+                  setLocalSelectedAnswer(null);
+                  // Remove the last result since we're going back
+                  setQuizResults(prevResults => prevResults.slice(0, -1));
+                }}
+                variant="outline"
+                size="sm"
+                className="border-purple-500/30 text-purple-300 hover:bg-purple-900/30"
+              >
+                <ArrowLeft className="h-4 w-4 mr-2" /> Previous Question
+              </Button>
+            )}
+            
+            {localQuizSubmitted && (
+              !isLastQuiz ? (
+                <Button
+                  onClick={handleNextQuiz}
+                  size="sm"
+                  className="bg-gradient-to-r from-orange-600 to-orange-700 hover:from-orange-700 hover:to-orange-800"
+                >
+                  Next Question <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
+              ) : (
+                <Button
+                  onClick={onComplete}
+                  size="sm"
+                  className="bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800"
+                >
+                  Complete Section <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
+              )
+            )}
+          </div>
+        </div>
         
         <p className="text-lg text-transparent bg-gradient-to-r from-orange-300 to-orange-100 bg-clip-text font-medium mb-4 px-1">
           {!localQuizSubmitted ? "Select the correct answer to proceed." : "Review your answer below."}
@@ -119,53 +170,6 @@ export const QuizContent = ({
             totalQuizzes={totalQuizzes}
           />
         )}
-        
-        <div className="mt-4 flex justify-between">
-          {!isFirstContent && currentQuizIndex === 0 && !localQuizSubmitted && (
-            <Button 
-              onClick={onPrevious}
-              variant="outline"
-              className="border-purple-500/30 text-purple-300 hover:bg-purple-900/30"
-            >
-              <ArrowLeft className="h-4 w-4 mr-2" /> Previous
-            </Button>
-          )}
-          
-          {currentQuizIndex > 0 && !localQuizSubmitted && (
-            <Button 
-              onClick={() => {
-                setCurrentQuizIndex(currentQuizIndex - 1);
-                setLocalSelectedAnswer(null);
-                // Remove the last result since we're going back
-                setQuizResults(prevResults => prevResults.slice(0, -1));
-              }}
-              variant="outline"
-              className="border-purple-500/30 text-purple-300 hover:bg-purple-900/30"
-            >
-              <ArrowLeft className="h-4 w-4 mr-2" /> Previous Question
-            </Button>
-          )}
-          
-          {localQuizSubmitted && (
-            <div className={!(isFirstContent && currentQuizIndex === 0) ? "ml-auto" : "w-full flex justify-end"}>
-              {!isLastQuiz ? (
-                <Button
-                  onClick={handleNextQuiz}
-                  className="bg-gradient-to-r from-orange-600 to-orange-700 hover:from-orange-700 hover:to-orange-800"
-                >
-                  Next Question <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
-              ) : (
-                <Button
-                  onClick={onComplete}
-                  className="bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800"
-                >
-                  Complete Section <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
-              )}
-            </div>
-          )}
-        </div>
       </Card>
     </div>
   );

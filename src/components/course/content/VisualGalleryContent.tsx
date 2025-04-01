@@ -73,11 +73,32 @@ export const VisualGalleryContent = ({ section, onComplete, onPrevious, isFirstC
     <div className="w-full h-full flex flex-col">
       <Card className="w-full h-full overflow-hidden flex flex-col bg-space-cosmic-blue/20 backdrop-blur-sm border border-purple-500/20">
         <div className="p-4">
-          <TitleWrapper 
-            icon={<ImageIcon className="h-5 w-5 text-green-400 mr-2" />}
-            title="Visual Gallery" 
-            color="bg-green-900/30"
-          />
+          <div className="flex items-center justify-between mb-4">
+            <TitleWrapper 
+              icon={<ImageIcon className="h-5 w-5 text-green-400 mr-2" />}
+              title="Visual Gallery" 
+              color="bg-green-900/30"
+            />
+            <div className="flex space-x-2">
+              {!isFirstContent && (
+                <Button 
+                  onClick={onPrevious}
+                  variant="outline"
+                  size="sm"
+                  className="border-purple-500/30 text-purple-300 hover:bg-purple-900/30"
+                >
+                  <ArrowLeft className="h-4 w-4 mr-2" /> Previous
+                </Button>
+              )}
+              <Button 
+                onClick={onComplete}
+                size="sm"
+                className="bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800"
+              >
+                Continue <ArrowRight className="h-4 w-4 ml-2" />
+              </Button>
+            </div>
+          </div>
           <p className="text-lg text-transparent bg-gradient-to-r from-green-300 to-green-100 bg-clip-text font-medium mb-4 px-1">
             Browse through these stunning images of {section.title} to enhance your understanding.
           </p>
@@ -134,27 +155,6 @@ export const VisualGalleryContent = ({ section, onComplete, onPrevious, isFirstC
           <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
             <h3 className="text-xl font-semibold text-white">{galleryImages[currentImageIndex].title}</h3>
             <p className="text-sm text-white/80">{galleryImages[currentImageIndex].description}</p>
-          </div>
-        </div>
-        
-        <div className="p-4 flex justify-between">
-          {!isFirstContent && (
-            <Button 
-              onClick={onPrevious}
-              variant="outline"
-              className="border-purple-500/30 text-purple-300 hover:bg-purple-900/30"
-            >
-              <ArrowLeft className="h-4 w-4 mr-2" /> Previous
-            </Button>
-          )}
-          
-          <div className={!isFirstContent ? "ml-auto" : "ml-auto"}>
-            <Button 
-              onClick={onComplete}
-              className="bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800"
-            >
-              Continue <ArrowRight className="h-4 w-4 ml-2" />
-            </Button>
           </div>
         </div>
       </Card>

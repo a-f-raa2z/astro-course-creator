@@ -41,11 +41,39 @@ export const KeyPointsContent = ({ section, onComplete, onPrevious, isFirstConte
     <div className="w-full h-full">
       <Card className="w-full h-full overflow-hidden flex flex-col bg-space-cosmic-blue/20 backdrop-blur-sm border border-purple-500/20">
         <div className="p-4">
-          <TitleWrapper 
-            icon={<CheckCircle className="h-5 w-5 text-green-500 mr-2" />}
-            title="Key Points to Remember" 
-            color="bg-green-900/30"
-          />
+          <div className="flex items-center justify-between mb-4">
+            <TitleWrapper 
+              icon={<CheckCircle className="h-5 w-5 text-green-500 mr-2" />}
+              title="Key Points to Remember" 
+              color="bg-green-900/30"
+            />
+            <div className="flex space-x-2">
+              {!isFirstContent && (
+                <Button 
+                  onClick={onPrevious}
+                  variant="outline"
+                  size="sm"
+                  className="border-purple-500/30 text-purple-300 hover:bg-purple-900/30"
+                >
+                  <ArrowLeft className="h-4 w-4 mr-2" /> Previous
+                </Button>
+              )}
+              <Button 
+                onClick={onComplete}
+                size="sm"
+                className={`
+                  transition-all ${allChecked 
+                    ? "bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800" 
+                    : "bg-gray-700 text-gray-300 cursor-not-allowed"
+                  }
+                `}
+                disabled={!allChecked}
+              >
+                <CheckSquare className="h-4 w-4 mr-2" />
+                {allChecked ? "Continue" : `Check all points (${checkedPoints.length}/${section.keyPoints.length})`}
+              </Button>
+            </div>
+          </div>
           
           <p className="text-lg text-transparent bg-gradient-to-r from-green-300 to-green-100 bg-clip-text font-medium mb-4 px-1">
             Check off each key point from the lesson to confirm you remember it before moving on.
@@ -87,33 +115,6 @@ export const KeyPointsContent = ({ section, onComplete, onPrevious, isFirstConte
                 </div>
               </div>
             ))}
-          </div>
-        </div>
-        
-        <div className="p-4 flex justify-between">
-          {!isFirstContent && (
-            <Button 
-              onClick={onPrevious}
-              variant="outline"
-              className="border-purple-500/30 text-purple-300 hover:bg-purple-900/30"
-            >
-              <ArrowLeft className="h-4 w-4 mr-2" /> Previous
-            </Button>
-          )}
-          <div className={!isFirstContent ? "" : "ml-auto"}>
-            <Button 
-              onClick={onComplete}
-              className={`
-                transition-all ${allChecked 
-                  ? "bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800" 
-                  : "bg-gray-700 text-gray-300 cursor-not-allowed"
-                }
-              `}
-              disabled={!allChecked}
-            >
-              <CheckSquare className="h-4 w-4 mr-2" />
-              {allChecked ? "Continue" : `Check all points (${checkedPoints.length}/${section.keyPoints.length})`}
-            </Button>
           </div>
         </div>
       </Card>
