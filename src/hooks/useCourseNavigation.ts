@@ -29,9 +29,9 @@ export const useCourseNavigation = (
     if (currentSection) {
       // Create base content list with standard items
       const baseContentList: ContentType[] = [
-        { id: 'introduction', type: 'introduction' as const, title: 'Introduction', completed: false },
-        { id: 'video', type: 'video' as const, title: 'Video Lesson', completed: false },
-        { id: 'key-points', type: 'key-points' as const, title: 'Key Points', completed: false },
+        { id: 'introduction', type: 'introduction' as const, title: 'Introduction', label: 'Introduction', icon: 'book', completed: false },
+        { id: 'video', type: 'video' as const, title: 'Video Lesson', label: 'Video', icon: 'video', completed: false },
+        { id: 'key-points', type: 'key-points' as const, title: 'Key Points', label: 'Key Points', icon: 'list', completed: false },
       ];
       
       // Add Fun Facts tab only if there are any short videos
@@ -43,6 +43,8 @@ export const useCourseNavigation = (
           id: 'short-video', 
           type: 'short-video' as const, 
           title: 'Fun Facts', 
+          label: 'Fun Facts',
+          icon: 'sparkles',
           completed: false 
         });
       }
@@ -52,6 +54,8 @@ export const useCourseNavigation = (
         id: 'image', 
         type: 'image' as const, 
         title: 'Image', 
+        label: 'Image',
+        icon: 'image',
         completed: false 
       });
       
@@ -61,6 +65,8 @@ export const useCourseNavigation = (
           id: 'playground', 
           type: 'playground' as const, 
           title: 'Interactive Playground', 
+          label: 'Interactive',
+          icon: 'gamepad',
           completed: false 
         });
       }
@@ -71,6 +77,8 @@ export const useCourseNavigation = (
           id: 'bonus', 
           type: 'bonus' as const, 
           title: 'Bonus Content', 
+          label: 'Bonus',
+          icon: 'gift',
           completed: false 
         });
       }
@@ -80,6 +88,8 @@ export const useCourseNavigation = (
         id: 'quiz', 
         type: 'quiz' as const, 
         title: 'Knowledge Check', 
+        label: 'Quiz',
+        icon: 'help-circle',
         completed: false 
       });
       

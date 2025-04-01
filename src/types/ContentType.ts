@@ -17,4 +17,7 @@ export type ContentType = {
     | 'visualGallery';
   label: string;
   icon: string;
+  id?: string;
+  title?: string;
+  completed?: boolean;
 }
