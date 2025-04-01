@@ -65,7 +65,9 @@ export const GameContentRenderer = ({
     image: "Visual representation can help cement your understanding. Take a moment to study this image:",
     quiz: "Test your knowledge with this quick quiz about what you've learned:",
     playground: "Try out this interactive playground to explore the concepts hands-on:",
-    bonus: "Here's some bonus content to deepen your understanding:"
+    bonus: "Here's some bonus content to deepen your understanding:",
+    funFacts: "Check out these fun facts about this topic:",
+    visualGallery: "Browse this visual gallery to see more images related to this topic:"
   };
   
   // Process section to ensure it has intro texts

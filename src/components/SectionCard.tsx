@@ -76,11 +76,19 @@ const SectionCard = ({
       case "Earth":
         return <Globe className="h-5 w-5 text-blue-400 mr-2" />;
       case "The Moon":
+      case "The Moon in Our Skies":
+      case "Mapping the Moon":
+      case "The Moon's Unseen Face":
         return <Moon className="h-5 w-5 text-gray-300 mr-2" />;
       case "Stars":
         return <Stars className="h-5 w-5 text-yellow-300 mr-2" />;
       case "The Inner Planets":
         return <Rocket className="h-5 w-5 text-orange-400 mr-2" />;
+      case "Venus":
+        return <Globe className="h-5 w-5 text-yellow-200 mr-2" />;
+      case "Mercury":
+      case "Messenger at Mercury":
+        return <Globe className="h-5 w-5 text-orange-300 mr-2" />;
       case "Telescopes":
         return <Telescope className="h-5 w-5 text-purple-400 mr-2" />;
       case "Space Exploration":
@@ -98,11 +106,20 @@ const SectionCard = ({
       case "The Solar System":
         return "/lovable-uploads/ad48c8d7-8aae-41a6-95ac-22af96b8a45a.png";
       case "The Inner Planets":
-        return "/lovable-uploads/0228ba3e-a126-45c3-a728-10da3a418e4e.png"; // Swapped with Moon image
+        return "/lovable-uploads/0228ba3e-a126-45c3-a728-10da3a418e4e.png";
       case "Earth":
         return "/lovable-uploads/6e29dd9e-5707-44ae-81af-d52de51f84e6.png";
       case "The Moon":
-        return "/lovable-uploads/e0d0af9e-9849-4955-ac58-29cf798cb880.png"; // Swapped with Inner Planets image
+        return "/lovable-uploads/e0d0af9e-9849-4955-ac58-29cf798cb880.png";
+      case "The Moon in Our Skies":
+      case "Mapping the Moon":
+      case "The Moon's Unseen Face":
+        return "/lovable-uploads/e0d0af9e-9849-4955-ac58-29cf798cb880.png";
+      case "Venus":
+        return "/lovable-uploads/3215a500-d237-40e1-aecb-2a9e2b64ee10.png";
+      case "Mercury":
+      case "Messenger at Mercury":
+        return "/lovable-uploads/4feca2b6-a656-4abf-b674-e00f9467fb87.png";
       default:
         return "/lovable-uploads/ad48c8d7-8aae-41a6-95ac-22af96b8a45a.png";
     }

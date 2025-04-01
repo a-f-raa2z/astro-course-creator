@@ -35,26 +35,32 @@ export interface QuizQuestion {
 export interface CourseSection {
   id: string;
   title: string;
-  introduction: string; // Cannot have initializers in interface properties
-  whyLearn: string; // Added this for why we learn this section
+  introduction: string;
+  whyLearn: string;
   videoUrl: string;
   keyPoints: string[];
-  keyPointsIntro?: string; // Added intro text for key points
+  keyPointsIntro?: string;
   shortVideo?: string;
-  shortVideoIntro?: string; // Added intro text for short videos
-  additionalShortVideos?: string[]; // Added missing property
-  visualUrl?: string; // Added missing property
-  visualIntro?: string; // Added intro text for visual playground
-  bonusVideos?: string[]; // Added missing property
-  bonusIntro?: string; // Added intro text for bonus content
+  shortVideoIntro?: string;
+  additionalShortVideos?: string[];
+  visualUrl?: string;
+  visualIntro?: string;
+  bonusVideos?: string[];
+  bonusIntro?: string;
   image: {
     url: string;
     description: string;
-    intro?: string; // Added intro text for image
+    intro?: string;
   };
   quiz: QuizQuestion;
-  quizIntro?: string; // Added intro text for quiz
-  quizzes?: QuizQuestion[]; // Added to support multiple quiz questions
+  quizIntro?: string;
+  quizzes?: QuizQuestion[];
+  mainLesson2Url?: string; // Added for Section 5
+  interactiveUrl2?: string; // Added for Section 5
+  bonusContent2?: string[]; // Added for Section 5
+  visualGalleryUrl?: string; // Added for Section 5-6
+  funFacts?: string[]; // Added for Section 6-7
+  funFacts2?: string[]; // Added for Section 6
 }
 
 export interface Course {
