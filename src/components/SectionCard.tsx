@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { ChevronRight, Rocket, FileText, Youtube, CheckCircle, HelpCircle, Video, 
   Image, Gamepad2, Star, Sun, Globe, Moon, Stars, Telescope, Satellite } from "lucide-react";
-import { generateMockCourse } from "@/utils/courseData";
+import { generateMockCourse } from "@/utils/courses";
 import { Progress } from "@/components/ui/progress";
 
 interface SectionCardProps {

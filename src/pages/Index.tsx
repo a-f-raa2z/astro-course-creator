@@ -1,7 +1,8 @@
+
 import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import QuestionCard from "@/components/QuestionCard";
-import { assessmentQuestions, generateMockCourse } from "@/utils/courseData";
+import { assessmentQuestions, generateMockCourse } from "@/utils/courses";
 import { Assessment } from "@/types/course";
 import { Loader2 } from "lucide-react";
 import { Progress } from "@/components/ui/progress";

@@ -1,9 +1,8 @@
-
 import { useLocation, Link } from "react-router-dom";
 import CourseView from "@/components/CourseView";
 import { Course } from "@/types/course";
-import { generateMockCourse } from "@/utils/courseData";
-import { Button } from "@/components/ui/button";
+import { generateMockCourse } from "@/utils/courses";
+import { Button } from "@/components/ui/card";
 import { BookOpen, Rocket, MapPin, Clock, Calendar, Star } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
@@ -13,18 +12,15 @@ import SectionCard from "@/components/SectionCard";
 
 const CoursePage = () => {
   const location = useLocation();
-  // Use the passed course from state, or generate a default example course
   const course = location.state?.course || generateMockCourse("planets", "intermediate", "visual");
   const { toast } = useToast();
   const [isAddedToCalendar, setIsAddedToCalendar] = useState(false);
   
-  // Mock data - in a real app, these would come from the user's progress
-  const estimatedHours = course.sections.length * 2; // 2 hours per section average
+  const estimatedHours = course.sections.length * 2;
   const userScore = localStorage.getItem(`${course.id}-xp`) ? parseInt(localStorage.getItem(`${course.id}-xp`) || "0") : 0;
   const courseProgress = localStorage.getItem(`${course.id}-completed`) ? 
     (JSON.parse(localStorage.getItem(`${course.id}-completed`) || "[]").length / (course.sections.length * 6)) * 100 : 0;
   
-  // Section data for the five new sections
   const sectionData = [
     {
       title: "The Solar System",
@@ -49,8 +45,6 @@ const CoursePage = () => {
   ];
   
   const handleAddToCalendar = () => {
-    // In a real app, this would integrate with the user's calendar via API
-    // For now, we'll just show a toast
     toast({
       title: "Added to calendar",
       description: `${course.title} has been added to your learning schedule`,
@@ -90,12 +84,10 @@ const CoursePage = () => {
           </div>
         </header>
         
-        {/* Learning Plan Section */}
         <div className="mb-12">
           <h2 className="text-2xl font-bold text-white mb-6">Your Learning Plan</h2>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {/* Course Duration Card */}
             <Card className="cosmic-card p-5">
               <div className="flex items-center mb-4">
                 <div className="bg-purple-600/30 p-3 rounded-full mr-3">
@@ -113,7 +105,6 @@ const CoursePage = () => {
               </p>
             </Card>
             
-            {/* Calendar Integration Card */}
             <Card className="cosmic-card p-5">
               <div className="flex items-center mb-4">
                 <div className="bg-blue-600/30 p-3 rounded-full mr-3">
@@ -131,7 +122,6 @@ const CoursePage = () => {
               </Button>
             </Card>
             
-            {/* Scores and Progress Card */}
             <Card className="cosmic-card p-5">
               <div className="flex items-center mb-4">
                 <div className="bg-yellow-600/30 p-3 rounded-full mr-3">
@@ -162,7 +152,6 @@ const CoursePage = () => {
           </div>
         </div>
         
-        {/* New section for the five section cards */}
         <div className="mb-12">
           <h2 className="text-2xl font-bold text-white mb-6">Course Sections</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

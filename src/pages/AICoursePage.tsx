@@ -8,7 +8,7 @@ import {
 } from "lucide-react";
 import { Course } from "@/types/course";
 import LoadingAnimation from "@/components/LoadingAnimation";
-import { generateMockCourse, aiCourseData } from "@/utils/courseData";
+import { generateMockCourse, aiCourseData } from "@/utils/courses";
 import AISectionCard from "@/components/AISectionCard";
 import { Separator } from "@/components/ui/separator";
 

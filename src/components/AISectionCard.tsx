@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -20,7 +19,7 @@ import {
   Gamepad2
 } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
-import { aiCourseData } from "@/utils/courseData";
+import { aiCourseData } from "@/utils/courses";
 
 interface AISectionCardProps {
   title: string;

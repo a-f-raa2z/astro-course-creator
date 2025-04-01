@@ -1,9 +1,10 @@
+
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, BrainCircuit } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
-import { generateMockCourse } from "@/utils/courseData";
+import { generateMockCourse } from "@/utils/courses";
 import { Course, CourseSection } from "@/types/course";
 import { QuizCard } from "@/components/quiz/QuizCard";
 import { ContentType } from "@/types/ContentType";

@@ -9,7 +9,7 @@ import {
 } from "lucide-react";
 import { Course } from "@/types/course";
 import LoadingAnimation from "@/components/LoadingAnimation";
-import { generateMockCourse } from "@/utils/courseData";
+import { generateMockCourse } from "@/utils/courses";
 import SectionCard from "@/components/SectionCard";
 import { Separator } from "@/components/ui/separator";
 
