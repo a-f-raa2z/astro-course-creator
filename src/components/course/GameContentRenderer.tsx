@@ -10,6 +10,8 @@ import { QuizContent } from "./content/QuizContent";
 import { BonusVideoContent } from "./content/BonusVideoContent";
 import { PlaygroundContent } from "./content/PlaygroundContent";
 import { SectionTransition } from "./content/SectionTransition";
+import { FunFactsContent } from "./content/FunFactsContent";
+import { VisualGalleryContent } from "./content/VisualGalleryContent";
 
 interface GameContentRendererProps {
   contentType: ContentType | ContentType['type'];
@@ -131,6 +133,22 @@ export const GameContentRenderer = ({
              />;
     case 'bonus':
       return <BonusVideoContent
+               section={processedSection}
+               onComplete={handleNextContent}
+               onPrevious={handlePreviousContent}
+               isFirstContent={isFirstContent}
+             />;
+    case 'fun-facts':
+    case 'funFacts':
+      return <FunFactsContent
+               section={processedSection}
+               onComplete={handleNextContent}
+               onPrevious={handlePreviousContent}
+               isFirstContent={isFirstContent}
+             />;
+    case 'visual-gallery':
+    case 'visualGallery':
+      return <VisualGalleryContent
                section={processedSection}
                onComplete={handleNextContent}
                onPrevious={handlePreviousContent}

@@ -16,10 +16,12 @@ interface BonusVideoContentProps {
 
 export const BonusVideoContent = ({ section, onComplete, onPrevious, isFirstContent }: BonusVideoContentProps) => {
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
+  const [bonusSetIndex, setBonusSetIndex] = useState(0); // 0 for main bonus, 1 for bonus2
   
   // Get all bonus videos for this section
   const getBonusVideos = () => {
-    if (section.bonusVideos && section.bonusVideos.length > 0) {
+    // First set of bonus videos
+    if (bonusSetIndex === 0 && section.bonusVideos && section.bonusVideos.length > 0) {
       // Earth's bonus content descriptions
       if (section.title === "Earth") {
         return [
@@ -36,11 +38,45 @@ export const BonusVideoContent = ({ section, onComplete, onPrevious, isFirstCont
         ];
       }
       
+      if (section.title === "The Moon") {
+        return [
+          { 
+            url: section.bonusVideos[0], 
+            title: "PBS Moon Documentary",
+            description: "An in-depth look at Earth's closest neighbor and how it formed."
+          },
+          { 
+            url: section.bonusVideos[1] || section.bonusVideos[0], 
+            title: "NASA Moon Missions",
+            description: "History and future of human and robotic exploration of the Moon."
+          }
+        ];
+      }
+      
       // Generic descriptions for other sections
       return section.bonusVideos.map((url, idx) => ({
         url,
         title: `Bonus Content ${idx + 1}`,
         description: `Additional learning material about ${section.title} to expand your knowledge.`
+      }));
+    }
+    
+    // Second set of bonus videos
+    if (bonusSetIndex === 1 && section.bonusContent2 && section.bonusContent2.length > 0) {
+      if (section.title === "The Moon") {
+        return [
+          { 
+            url: section.bonusContent2[0], 
+            title: "Moon Facts",
+            description: "A quick video about interesting moon facts that might surprise you."
+          }
+        ];
+      }
+      
+      return section.bonusContent2.map((url, idx) => ({
+        url,
+        title: `Additional Bonus ${idx + 1}`,
+        description: `More fascinating content about ${section.title} for advanced learning.`
       }));
     }
     
@@ -67,6 +103,8 @@ export const BonusVideoContent = ({ section, onComplete, onPrevious, isFirstCont
       setCurrentVideoIndex((prev) => (prev === 0 ? bonusVideos.length - 1 : prev - 1));
     }
   };
+  
+  const hasAdditionalBonusContent = Boolean(section.bonusContent2 && section.bonusContent2.length > 0);
 
   const showNavigation = bonusVideos.length > 1;
 
@@ -76,7 +114,7 @@ export const BonusVideoContent = ({ section, onComplete, onPrevious, isFirstCont
         <div className="p-4">
           <TitleWrapper 
             icon={<Star className="h-5 w-5 text-yellow-400 mr-2" />}
-            title="Bonus Content" 
+            title={`Bonus Content ${hasAdditionalBonusContent ? (bonusSetIndex + 1) : ''}`}
             color="bg-orange-900/30"
           />
           <p className="text-lg text-transparent bg-gradient-to-r from-orange-300 to-orange-100 bg-clip-text font-medium mb-4 px-1">
@@ -141,21 +179,44 @@ export const BonusVideoContent = ({ section, onComplete, onPrevious, isFirstCont
         </div>
         
         <div className="p-4 flex justify-between">
-          {!isFirstContent && (
+          {bonusSetIndex === 0 ? (
+            !isFirstContent && (
+              <Button 
+                onClick={onPrevious}
+                variant="outline"
+                className="border-purple-500/30 text-purple-300 hover:bg-purple-900/30"
+              >
+                <ArrowLeft className="h-4 w-4 mr-2" /> Previous
+              </Button>
+            )
+          ) : (
             <Button 
-              onClick={onPrevious}
+              onClick={() => {
+                setBonusSetIndex(0);
+                setCurrentVideoIndex(0);
+              }}
               variant="outline"
               className="border-purple-500/30 text-purple-300 hover:bg-purple-900/30"
             >
-              <ArrowLeft className="h-4 w-4 mr-2" /> Previous
+              <ArrowLeft className="h-4 w-4 mr-2" /> Back to Bonus Set 1
             </Button>
           )}
-          <div className={!isFirstContent ? "" : "ml-auto"}>
+          
+          <div className={(!isFirstContent || bonusSetIndex > 0) ? "" : "ml-auto"}>
             <Button 
-              onClick={onComplete}
+              onClick={() => {
+                if (hasAdditionalBonusContent && bonusSetIndex === 0) {
+                  setBonusSetIndex(1);
+                  setCurrentVideoIndex(0);
+                } else {
+                  onComplete();
+                }
+              }}
               className="bg-gradient-to-r from-orange-600 to-orange-700 hover:from-orange-700 hover:to-orange-800"
             >
-              Continue <ArrowRight className="h-4 w-4 ml-2" />
+              {hasAdditionalBonusContent && bonusSetIndex === 0 
+                ? 'More Bonus Content' 
+                : 'Continue'} <ArrowRight className="h-4 w-4 ml-2" />
             </Button>
           </div>
         </div>

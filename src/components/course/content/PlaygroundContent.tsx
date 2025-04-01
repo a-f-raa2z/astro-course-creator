@@ -1,11 +1,10 @@
-
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { CourseSection } from "@/types/course";
 import { Button } from "@/components/ui/button";
-import { Gamepad2, ArrowRight, ArrowLeft, ExternalLink } from "lucide-react";
+import { Gamepad2, ArrowRight, ArrowLeft, ChevronRight, ChevronLeft } from "lucide-react";
 import { Card } from "@/components/ui/card";
-import { TitleWrapper } from "./TitleWrapper";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
+import { TitleWrapper } from "./TitleWrapper";
 
 interface PlaygroundContentProps {
   section: CourseSection;
@@ -15,96 +14,107 @@ interface PlaygroundContentProps {
 }
 
 export const PlaygroundContent = ({ section, onComplete, onPrevious, isFirstContent }: PlaygroundContentProps) => {
-  // Get the appropriate interactive content based on section title or URL
-  const getInteractiveContent = () => {
-    if (section.visualUrl) {
-      if (section.title === "Earth") {
-        return {
-          title: "Interactive Earth Map",
-          description: "Test your knowledge of Earth's geography with this interactive world map game.",
-          url: section.visualUrl
-        };
-      }
-      
-      if (section.title === "The Moon") {
-        return {
-          title: "NASA's Moon Viewer",
-          description: "Explore the Moon in 3D with NASA's interactive viewer.",
-          url: section.visualUrl
-        };
-      }
-      
-      return {
-        title: `Interactive ${section.title} Explorer`,
-        description: `Explore ${section.title} through this interactive content.`,
-        url: section.visualUrl
-      };
+  const [interactiveIndex, setInteractiveIndex] = useState(0);
+  const [currentInteractiveUrl, setCurrentInteractiveUrl] = useState("");
+
+  useEffect(() => {
+    if (interactiveIndex === 0) {
+      setCurrentInteractiveUrl(section.visualUrl || "");
+    } else if (interactiveIndex === 1 && section.interactiveUrl2) {
+      setCurrentInteractiveUrl(section.interactiveUrl2);
     }
-    
-    // Default content (shouldn't reach here)
-    return {
-      title: "Interactive Content",
-      description: "Explore through interactive content",
-      url: "https://science.nasa.gov/solar-system/"
-    };
+  }, [interactiveIndex, section.visualUrl, section.interactiveUrl2]);
+
+  const hasMultipleInteractives = Boolean(section.interactiveUrl2);
+
+  const getInteractiveTitle = (index: number) => {
+    if (index === 0) {
+      return "Interactive Playground";
+    } else {
+      return "Interactive Playground 2";
+    }
   };
-  
-  const content = getInteractiveContent();
+
+  const getInteractiveDescription = (sectionTitle: string, index: number) => {
+    if (sectionTitle === "The Moon") {
+      if (index === 0) {
+        return "Explore how eclipses happen and learn about the different types of solar and lunar eclipses.";
+      } else {
+        return "Use this NASA interactive tool to explore the 2017 solar eclipse and understand how eclipses work.";
+      }
+    }
+
+    if (index === 0) {
+      return `Interact with this ${sectionTitle} simulation to deepen your understanding.`;
+    } else {
+      return `Explore additional ${sectionTitle} concepts with this interactive resource.`;
+    }
+  };
+
+  const handleContinue = () => {
+    if (hasMultipleInteractives && interactiveIndex === 0) {
+      setInteractiveIndex(1);
+    } else {
+      onComplete();
+    }
+  };
+
+  const title = getInteractiveTitle(interactiveIndex);
+  const description = getInteractiveDescription(section.title, interactiveIndex);
 
   return (
-    <div className="w-full h-full flex flex-col">
+    <div className="w-full h-full">
       <Card className="w-full h-full overflow-hidden flex flex-col bg-space-cosmic-blue/20 backdrop-blur-sm border border-purple-500/20">
         <div className="p-4">
           <TitleWrapper 
             icon={<Gamepad2 className="h-5 w-5 text-green-400 mr-2" />}
-            title="Interactive Playground" 
+            title={title}
             color="bg-green-900/30"
           />
           <p className="text-lg text-transparent bg-gradient-to-r from-green-300 to-green-100 bg-clip-text font-medium mb-4 px-1">
-            {content.description}
+            {description}
           </p>
         </div>
         
-        <div className="flex-grow relative p-4">
-          <AspectRatio ratio={4/3} className="h-auto w-full overflow-hidden rounded-md border border-green-500/30">
+        <div className="flex-grow relative">
+          <AspectRatio ratio={16/9} className="h-full">
             <iframe 
-              src={content.url}
-              title={content.title}
-              className="w-full h-full border-0"
+              className="w-full h-full"
+              src={currentInteractiveUrl}
+              title={`Interactive for ${section.title}`}
+              frameBorder="0"
               allowFullScreen
-            />
+            ></iframe>
           </AspectRatio>
-          
-          <div className="absolute top-7 right-7">
-            <Button 
-              variant="outline" 
-              size="sm" 
-              className="bg-black/30 border border-white/30 text-white"
-              onClick={() => window.open(content.url, '_blank')}
-            >
-              <ExternalLink className="h-4 w-4 mr-2" />
-              Open in New Tab
-            </Button>
-          </div>
         </div>
         
         <div className="p-4 flex justify-between">
-          {!isFirstContent && (
+          {interactiveIndex === 0 ? (
+            !isFirstContent && (
+              <Button 
+                onClick={onPrevious}
+                variant="outline"
+                className="border-purple-500/30 text-purple-300 hover:bg-purple-900/30"
+              >
+                <ArrowLeft className="h-4 w-4 mr-2" /> Previous
+              </Button>
+            )
+          ) : (
             <Button 
-              onClick={onPrevious}
+              onClick={() => setInteractiveIndex(0)}
               variant="outline"
               className="border-purple-500/30 text-purple-300 hover:bg-purple-900/30"
             >
-              <ArrowLeft className="h-4 w-4 mr-2" /> Previous
+              <ArrowLeft className="h-4 w-4 mr-2" /> Back to Interactive 1
             </Button>
           )}
           
-          <div className={!isFirstContent ? "" : "ml-auto"}>
+          <div className={(!isFirstContent || interactiveIndex > 0) ? "ml-auto" : "ml-auto"}>
             <Button 
-              onClick={onComplete}
+              onClick={handleContinue}
               className="bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800"
             >
-              Continue <ArrowRight className="h-4 w-4 ml-2" />
+              {hasMultipleInteractives && interactiveIndex === 0 ? 'Next Interactive' : 'Continue'} <ArrowRight className="h-4 w-4 ml-2" />
             </Button>
           </div>
         </div>

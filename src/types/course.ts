@@ -55,12 +55,12 @@ export interface CourseSection {
   quiz: QuizQuestion;
   quizIntro?: string;
   quizzes?: QuizQuestion[];
-  mainLesson2Url?: string; // Added for Section 5
-  interactiveUrl2?: string; // Added for Section 5
-  bonusContent2?: string[]; // Added for Section 5
-  visualGalleryUrl?: string; // Added for Section 5-6
-  funFacts?: string[]; // Added for Section 6-7
-  funFacts2?: string[]; // Added for Section 6
+  mainLesson2Url?: string;
+  interactiveUrl2?: string;
+  bonusContent2?: string[];
+  visualGalleryUrl?: string;
+  funFacts?: string[];
+  funFacts2?: string[];
 }
 
 export interface Course {

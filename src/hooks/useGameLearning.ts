@@ -45,6 +45,29 @@ export const useGameLearning = (course: Course) => {
       contentTypes.push('bonus');
     }
     
+    if (section.funFacts && section.funFacts.length > 0) {
+      contentTypes.push('fun-facts');
+    }
+    
+    if (section.visualGalleryUrl) {
+      contentTypes.push('visual-gallery');
+    }
+    
+    // Add main lesson 2 if available
+    if (section.mainLesson2Url) {
+      contentTypes.push('video'); // We'll handle this in the VideoContent component
+    }
+    
+    // Add interactive 2 if available
+    if (section.interactiveUrl2) {
+      contentTypes.push('playground'); // We'll handle this in the PlaygroundContent component
+    }
+    
+    // Add bonus content 2 if available
+    if (section.bonusContent2 && section.bonusContent2.length > 0) {
+      contentTypes.push('bonus'); // We'll handle this in the BonusVideoContent component
+    }
+    
     contentTypes.push('quiz');
     
     return contentTypes;
