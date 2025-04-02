@@ -120,11 +120,40 @@ export const ImageContent = ({ section, onComplete, onPrevious, isFirstContent }
     <div className="w-full h-full">
       <Card className="w-full h-full overflow-hidden flex flex-col bg-space-cosmic-blue/20 backdrop-blur-sm border border-purple-500/20">
         <div className="p-4">
-          <TitleWrapper 
-            icon={<ImageIcon className="h-5 w-5 text-yellow-400 mr-2" />}
-            title="Visual Guide" 
-            color="bg-yellow-900/30"
-          />
+          {/* Navigation buttons row - placed between tabs and title */}
+          <div className="flex justify-between items-center mb-4">
+            <div>
+              {!isFirstContent && (
+                <Button 
+                  onClick={onPrevious}
+                  variant="outline"
+                  size="sm"
+                  className="border-purple-500/30 text-purple-300 hover:bg-purple-900/30"
+                >
+                  <ArrowLeft className="h-4 w-4 mr-2" /> Previous
+                </Button>
+              )}
+            </div>
+            
+            <div>
+              <Button 
+                onClick={onComplete}
+                size="sm"
+                className="bg-gradient-to-r from-yellow-600 to-yellow-700 hover:from-yellow-700 hover:to-yellow-800 text-white"
+              >
+                Continue <ArrowRight className="h-4 w-4 ml-2" />
+              </Button>
+            </div>
+          </div>
+          
+          <div className="flex items-center mb-4">
+            <TitleWrapper 
+              icon={<ImageIcon className="h-5 w-5 text-yellow-400 mr-2" />}
+              title="Visual Guide" 
+              color="bg-yellow-900/30"
+            />
+          </div>
+          
           <p className="text-lg text-transparent bg-gradient-to-r from-yellow-300 to-yellow-100 bg-clip-text font-medium mb-4 px-1">
             Explore visual representations of {section.title.toLowerCase()} to enhance your understanding.
           </p>
@@ -155,27 +184,6 @@ export const ImageContent = ({ section, onComplete, onPrevious, isFirstContent }
           
           <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
             <p className="text-sm text-white">{sectionImage.description}</p>
-          </div>
-        </div>
-        
-        <div className="p-4 flex justify-between">
-          {!isFirstContent && (
-            <Button 
-              onClick={onPrevious}
-              variant="outline"
-              className="border-purple-500/30 text-purple-300 hover:bg-purple-900/30"
-            >
-              <ArrowLeft className="h-4 w-4 mr-2" /> Previous
-            </Button>
-          )}
-          
-          <div className={!isFirstContent ? "ml-auto" : "ml-auto"}>
-            <Button 
-              onClick={onComplete}
-              className="bg-gradient-to-r from-yellow-600 to-yellow-700 hover:from-yellow-700 hover:to-yellow-800 animate-fade-in text-white"
-            >
-              Continue <ArrowRight className="h-4 w-4 ml-2" />
-            </Button>
           </div>
         </div>
       </Card>

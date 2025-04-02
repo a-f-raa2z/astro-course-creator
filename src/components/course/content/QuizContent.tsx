@@ -87,14 +87,9 @@ export const QuizContent = ({
   return (
     <div className="w-full h-full">
       <Card className="w-full h-full overflow-auto p-4 bg-space-cosmic-blue/20 backdrop-blur-sm border border-purple-500/20">
-        <div className="flex items-center justify-between mb-4">
-          <TitleWrapper 
-            icon={<HelpCircle className="h-5 w-5 text-orange-400 mr-2" />}
-            title={`Challenge ${currentQuizIndex + 1} of ${totalQuizzes}`} 
-            color="bg-orange-900/30"
-          />
-          
-          <div className="flex space-x-2">
+        {/* Navigation buttons row - placed between tabs and title */}
+        <div className="flex justify-between items-center mb-4">
+          <div>
             {!isFirstContent && currentQuizIndex === 0 && !localQuizSubmitted && (
               <Button 
                 onClick={onPrevious}
@@ -121,7 +116,9 @@ export const QuizContent = ({
                 <ArrowLeft className="h-4 w-4 mr-2" /> Previous Question
               </Button>
             )}
-            
+          </div>
+          
+          <div>
             {localQuizSubmitted && (
               !isLastQuiz ? (
                 <Button
@@ -142,6 +139,14 @@ export const QuizContent = ({
               )
             )}
           </div>
+        </div>
+        
+        <div className="flex items-center mb-4">
+          <TitleWrapper 
+            icon={<HelpCircle className="h-5 w-5 text-orange-400 mr-2" />}
+            title={`Challenge ${currentQuizIndex + 1} of ${totalQuizzes}`} 
+            color="bg-orange-900/30"
+          />
         </div>
         
         <p className="text-lg text-transparent bg-gradient-to-r from-orange-300 to-orange-100 bg-clip-text font-medium mb-4 px-1">

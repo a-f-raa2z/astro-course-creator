@@ -129,13 +129,9 @@ export const VideoContent = ({ section, onComplete, onPrevious, isFirstContent }
     <div className="w-full h-full flex flex-col">
       <Card className="w-full h-full overflow-hidden flex flex-col bg-space-cosmic-blue/20 backdrop-blur-sm border border-purple-500/20">
         <div className="p-4">
-          <div className="flex items-center justify-between mb-4">
-            <TitleWrapper 
-              icon={<Youtube className="h-5 w-5 text-red-500 mr-2" />}
-              title={videoSources[currentVideoIndex]?.title || "Main Video Lesson"}
-              color="bg-red-900/30"
-            />
-            <div className="flex space-x-2">
+          {/* Navigation buttons row - placed between tabs and title */}
+          <div className="flex justify-between items-center mb-4">
+            <div>
               {!isFirstContent && (
                 <Button 
                   onClick={onPrevious}
@@ -146,7 +142,10 @@ export const VideoContent = ({ section, onComplete, onPrevious, isFirstContent }
                   <ArrowLeft className="h-4 w-4 mr-2" /> Previous
                 </Button>
               )}
-              {!videoWatched && (
+            </div>
+            
+            <div>
+              {!videoWatched ? (
                 <Button 
                   onClick={handleVideoComplete}
                   size="sm"
@@ -154,18 +153,28 @@ export const VideoContent = ({ section, onComplete, onPrevious, isFirstContent }
                 >
                   Complete Video <CheckCircle className="h-4 w-4 ml-2" />
                 </Button>
-              )}
-              {showCompletionView && (
-                <Button 
-                  onClick={handleContinue}
-                  size="sm"
-                  className="bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800"
-                >
-                  {currentVideoIndex < videoSources.length - 1 ? 'Next Video' : 'Continue'} <ArrowRight className="h-4 w-4 ml-2" />
-                </Button>
+              ) : (
+                showCompletionView && (
+                  <Button 
+                    onClick={handleContinue}
+                    size="sm"
+                    className="bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800"
+                  >
+                    {currentVideoIndex < videoSources.length - 1 ? 'Next Video' : 'Continue'} <ArrowRight className="h-4 w-4 ml-2" />
+                  </Button>
+                )
               )}
             </div>
           </div>
+          
+          <div className="flex items-center mb-4">
+            <TitleWrapper 
+              icon={<Youtube className="h-5 w-5 text-red-500 mr-2" />}
+              title={videoSources[currentVideoIndex]?.title || "Main Video Lesson"}
+              color="bg-red-900/30"
+            />
+          </div>
+          
           <p className="text-lg text-transparent bg-gradient-to-r from-red-300 to-red-100 bg-clip-text font-medium mb-4 px-1">
             {videoSources[currentVideoIndex]?.description || "Learn about this fascinating topic."}
           </p>

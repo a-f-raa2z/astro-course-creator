@@ -66,13 +66,9 @@ export const FunFactsContent = ({ section, onComplete, onPrevious, isFirstConten
     <div className="w-full h-full flex flex-col">
       <Card className="w-full h-full overflow-hidden flex flex-col bg-space-cosmic-blue/20 backdrop-blur-sm border border-purple-500/20">
         <div className="p-4">
-          <div className="flex items-center justify-between mb-4">
-            <TitleWrapper 
-              icon={<Zap className="h-5 w-5 text-blue-400 mr-2" />}
-              title="Fun Facts" 
-              color="bg-blue-900/30"
-            />
-            <div className="flex space-x-2">
+          {/* Navigation buttons row - placed between tabs and title */}
+          <div className="flex justify-between items-center mb-4">
+            <div>
               {!isFirstContent && (
                 <Button 
                   onClick={onPrevious}
@@ -83,6 +79,9 @@ export const FunFactsContent = ({ section, onComplete, onPrevious, isFirstConten
                   <ArrowLeft className="h-4 w-4 mr-2" /> Previous
                 </Button>
               )}
+            </div>
+            
+            <div>
               <Button 
                 onClick={onComplete}
                 size="sm"
@@ -92,6 +91,15 @@ export const FunFactsContent = ({ section, onComplete, onPrevious, isFirstConten
               </Button>
             </div>
           </div>
+          
+          <div className="flex items-center mb-4">
+            <TitleWrapper 
+              icon={<Zap className="h-5 w-5 text-blue-400 mr-2" />}
+              title="Fun Facts" 
+              color="bg-blue-900/30"
+            />
+          </div>
+          
           <p className="text-lg text-transparent bg-gradient-to-r from-blue-300 to-blue-100 bg-clip-text font-medium mb-4 px-1">
             Check out these interesting quick facts about the {section.title}!
           </p>

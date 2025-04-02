@@ -41,13 +41,9 @@ export const KeyPointsContent = ({ section, onComplete, onPrevious, isFirstConte
     <div className="w-full h-full">
       <Card className="w-full h-full overflow-hidden flex flex-col bg-space-cosmic-blue/20 backdrop-blur-sm border border-purple-500/20">
         <div className="p-4">
-          <div className="flex items-center justify-between mb-4">
-            <TitleWrapper 
-              icon={<CheckCircle className="h-5 w-5 text-green-500 mr-2" />}
-              title="Key Points to Remember" 
-              color="bg-green-900/30"
-            />
-            <div className="flex space-x-2">
+          {/* Navigation buttons row - placed between tabs and title */}
+          <div className="flex justify-between items-center mb-4">
+            <div>
               {!isFirstContent && (
                 <Button 
                   onClick={onPrevious}
@@ -58,6 +54,9 @@ export const KeyPointsContent = ({ section, onComplete, onPrevious, isFirstConte
                   <ArrowLeft className="h-4 w-4 mr-2" /> Previous
                 </Button>
               )}
+            </div>
+            
+            <div>
               <Button 
                 onClick={onComplete}
                 size="sm"
@@ -73,6 +72,14 @@ export const KeyPointsContent = ({ section, onComplete, onPrevious, isFirstConte
                 {allChecked ? "Continue" : `Check all points (${checkedPoints.length}/${section.keyPoints.length})`}
               </Button>
             </div>
+          </div>
+          
+          <div className="flex items-center mb-4">
+            <TitleWrapper 
+              icon={<CheckCircle className="h-5 w-5 text-green-500 mr-2" />}
+              title="Key Points to Remember" 
+              color="bg-green-900/30"
+            />
           </div>
           
           <p className="text-lg text-transparent bg-gradient-to-r from-green-300 to-green-100 bg-clip-text font-medium mb-4 px-1">

@@ -76,13 +76,9 @@ export const PlaygroundContent = ({ section, onComplete, onPrevious, isFirstCont
     <div className="w-full h-full">
       <Card className="w-full h-full overflow-hidden flex flex-col bg-space-cosmic-blue/20 backdrop-blur-sm border border-purple-500/20">
         <div className="p-4">
-          <div className="flex items-center justify-between mb-4">
-            <TitleWrapper 
-              icon={<Gamepad2 className="h-5 w-5 text-green-400 mr-2" />}
-              title={interactives[interactiveIndex]?.title || "Interactive Playground"}
-              color="bg-green-900/30"
-            />
-            <div className="flex space-x-2">
+          {/* Navigation buttons row - placed between tabs and title */}
+          <div className="flex justify-between items-center mb-4">
+            <div>
               {!isFirstContent && (
                 <Button 
                   onClick={onPrevious}
@@ -93,6 +89,9 @@ export const PlaygroundContent = ({ section, onComplete, onPrevious, isFirstCont
                   <ArrowLeft className="h-4 w-4 mr-2" /> Previous
                 </Button>
               )}
+            </div>
+            
+            <div>
               <Button 
                 onClick={handleContinue}
                 size="sm"
@@ -102,6 +101,15 @@ export const PlaygroundContent = ({ section, onComplete, onPrevious, isFirstCont
               </Button>
             </div>
           </div>
+          
+          <div className="flex items-center mb-4">
+            <TitleWrapper 
+              icon={<Gamepad2 className="h-5 w-5 text-green-400 mr-2" />}
+              title={interactives[interactiveIndex]?.title || "Interactive Playground"}
+              color="bg-green-900/30"
+            />
+          </div>
+          
           <p className="text-lg text-transparent bg-gradient-to-r from-green-300 to-green-100 bg-clip-text font-medium mb-4 px-1">
             {interactives[interactiveIndex]?.description || "Interact with this simulation to deepen your understanding."}
           </p>
