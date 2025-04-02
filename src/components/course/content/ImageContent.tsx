@@ -29,15 +29,15 @@ export const ImageContent = ({ section, onComplete, onPrevious, isFirstContent }
     
     if (sectionTitle === "Earth") {
       return {
-        url: "https://science.nasa.gov/wp-content/uploads/2023/06/as17-148-22727-earth-full-disk-apollo-17-1972.width-1320.jpg", 
-        description: "Earth, our home planet, is the only place we know of so far that's inhabited by living things." 
+        url: "/lovable-uploads/33c5fd2a-7ff7-4d34-9ef0-f9b065b5caa5.png", 
+        description: "Earth as seen from space, showing the blue oceans, white clouds, and green and brown landmasses that make our planet unique in the solar system." 
       };
     }
     
     if (sectionTitle === "The Moon") {
       return {
-        url: "https://science.nasa.gov/wp-content/uploads/2023/09/moon.width-1320.jpg", 
-        description: "The Moon is Earth's only natural satellite and the fifth largest moon in the solar system." 
+        url: "/lovable-uploads/c229e2ce-6fad-4e1d-9aa8-e4d7071d42f3.png", 
+        description: "The Moon illuminating a night sky above a silhouetted mountain landscape, showcasing its prominence as Earth's only natural satellite." 
       };
     }
     
@@ -45,6 +45,71 @@ export const ImageContent = ({ section, onComplete, onPrevious, isFirstContent }
       return {
         url: "https://science.nasa.gov/wp-content/uploads/2023/09/solar-system-illustration-new-horizons-trajectory.width-1320.jpg", 
         description: "The Solar System consists of the Sun and the objects that orbit it, including planets, dwarf planets, moons, asteroids, and comets." 
+      };
+    }
+    
+    if (sectionTitle === "Venus") {
+      return {
+        url: "/lovable-uploads/9a4d825b-6142-476f-b40c-2adbc7b34524.png", 
+        description: "Venus, with its thick cloud cover giving it a yellowish appearance, is the hottest planet in our solar system despite not being the closest to the Sun." 
+      };
+    }
+    
+    if (sectionTitle === "Mercury") {
+      return {
+        url: "/lovable-uploads/eec8c514-41eb-4020-ad57-6841a15298df.png", 
+        description: "Mercury shown in two views: a grayscale image showing its cratered surface (left) and a false-color image highlighting its chemical composition (right)." 
+      };
+    }
+    
+    if (sectionTitle === "Messenger at Mercury") {
+      return {
+        url: "/lovable-uploads/8da06395-44da-4447-93f0-da38fbbbff6c.png", 
+        description: "NASA's MESSENGER spacecraft orbiting Mercury, shown against the backdrop of the planet's cratered surface." 
+      };
+    }
+    
+    if (sectionTitle === "The Moon in Our Skies" || 
+        sectionTitle === "The Moon's Unseen Face" || 
+        sectionTitle === "Mapping the Moon") {
+      return {
+        url: "/lovable-uploads/2f1e334a-3eb3-4f1e-a72b-7bbbdb459c0a.png", 
+        description: "Earthrise as seen from the lunar surface, showing Earth hovering over the Moon's horizon - a perspective only seen by Apollo astronauts and robotic spacecraft." 
+      };
+    }
+    
+    if (sectionTitle === "The Sun") {
+      return {
+        url: "/lovable-uploads/0f346c00-bd6b-4610-aa4e-83dec78f53e3.png", 
+        description: "The Sun seen in visible light, showing its perfect spherical shape and surface features like sunspots." 
+      };
+    }
+    
+    if (sectionTitle === "Close to the Sun") {
+      return {
+        url: "/lovable-uploads/6d50892d-4935-4033-bcfc-2a998579227e.png", 
+        description: "The Parker Solar Probe approaching the Sun's corona, shown against the backdrop of a dramatic solar flare eruption." 
+      };
+    }
+    
+    if (sectionTitle === "Mars") {
+      return {
+        url: "/lovable-uploads/28ccf6bc-b95b-4b54-b78c-1be5f91a5be6.png", 
+        description: "A full view of Mars showing its distinctive red surface and features like Valles Marineris, one of the largest canyons in the Solar System." 
+      };
+    }
+    
+    if (sectionTitle === "Mars from Above and the Moons of Mars") {
+      return {
+        url: "/lovable-uploads/973bc422-9419-49ac-ae95-89d2b36f2df8.png", 
+        description: "Mars with its two small moons Phobos and Deimos, which are likely captured asteroids rather than formed alongside the planet." 
+      };
+    }
+    
+    if (sectionTitle === "Roving over Mars") {
+      return {
+        url: "/lovable-uploads/71f04c7c-c819-40bc-9de0-5f293ddadf89.png", 
+        description: "A Mars rover exploring the red planet's surface, equipped with scientific instruments to study the Martian environment." 
       };
     }
     
