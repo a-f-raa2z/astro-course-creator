@@ -84,6 +84,21 @@ export const FunFactsContent = ({ section, onComplete, onPrevious, isFirstConten
       ];
     }
     
+    if (section.title === "Venus") {
+      return [
+        {
+          url: "https://www.youtube.com/embed/vjT10myBoZE",
+          title: "Venus' Atmosphere and Climate",
+          description: "Learn about Venus' extreme atmosphere and climate conditions."
+        },
+        {
+          url: "https://www.youtube.com/embed/2GxhEOnsLY8",
+          title: "Venus Surface Features",
+          description: "Discover the unique surface features of Venus and how they were formed."
+        }
+      ];
+    }
+    
     if (section.title === "The Moon" || section.title === "The Moon in Our Skies" || section.title === "The Moon's Unseen Face") {
       if (section.funFacts && section.funFacts.length > 0) {
         return section.funFacts.map((url, idx) => ({

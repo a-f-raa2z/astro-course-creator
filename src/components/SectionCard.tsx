@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -93,7 +92,11 @@ const SectionCard = ({
       
       if (index === 8 && title === "Venus") {
         mockCourse.sections[index].visualGalleryUrl = "venus-gallery";
-        // Add the Venus quizzes
+        mockCourse.sections[index].videoUrl = "https://www.youtube.com/embed/djP-IdHFQWU";
+        mockCourse.sections[index].funFacts = [
+          "https://www.youtube.com/embed/vjT10myBoZE",
+          "https://www.youtube.com/embed/2GxhEOnsLY8"
+        ];
         mockCourse.sections[index].quizzes = [
           {
             question: "Which planet is called Earth's twin?",

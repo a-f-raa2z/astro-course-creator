@@ -77,6 +77,7 @@ export const useGameLearning = (course: Course) => {
       return [
         'introduction',
         'video',
+        'fun-facts',
         'visual-gallery',
         'quiz'
       ];
