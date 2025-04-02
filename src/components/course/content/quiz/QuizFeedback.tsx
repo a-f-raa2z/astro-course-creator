@@ -5,11 +5,13 @@ import { Award } from "lucide-react";
 interface QuizFeedbackProps {
   isCorrect: boolean;
   correctAnswerText?: string;
+  correctAnswerIndex?: number;
 }
 
 export const QuizFeedback: React.FC<QuizFeedbackProps> = ({ 
   isCorrect, 
-  correctAnswerText 
+  correctAnswerText,
+  correctAnswerIndex
 }) => {
   return (
     <div className="mt-4 p-4 rounded-md bg-space-cosmic-blue/20 border border-purple-400/20">

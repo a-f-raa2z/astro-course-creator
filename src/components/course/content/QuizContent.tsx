@@ -41,6 +41,14 @@ export const QuizContent: React.FC<QuizContentProps> = ({
 }) => {
   const hasNextSection = !!nextSection;
 
+  // Get the correct answer text for feedback
+  const getCorrectAnswerText = () => {
+    if (section.quiz && typeof section.quiz.correctAnswer === 'number') {
+      return section.quiz.options[section.quiz.correctAnswer];
+    }
+    return "";
+  };
+
   return (
     <div className="w-full h-full p-6 flex flex-col">
       <TitleWrapper title="Quiz" subtitle="Test your knowledge">
@@ -81,7 +89,7 @@ export const QuizContent: React.FC<QuizContentProps> = ({
             <>
               <QuizFeedback 
                 isCorrect={selectedAnswer === section.quiz.correctAnswer}
-                correctAnswerIndex={section.quiz.correctAnswer}
+                correctAnswerText={getCorrectAnswerText()}
               />
               <QuizResults 
                 question={section.quiz.question}
@@ -90,7 +98,6 @@ export const QuizContent: React.FC<QuizContentProps> = ({
                 correctAnswer={section.quiz.correctAnswer}
               />
               
-              {/* Removed the "Continue" button here - will now only show Next Section button if there's a next section */}
               <div className="flex justify-between mt-8">
                 {!isFirstContent && (
                   <Button 
@@ -104,7 +111,6 @@ export const QuizContent: React.FC<QuizContentProps> = ({
                 )}
                 <div className="flex-grow"></div>
                 
-                {/* Only show the Next Section button if we have a next section */}
                 {hasNextSection && (
                   <Button 
                     className="bg-purple-600 hover:bg-purple-700 text-white"

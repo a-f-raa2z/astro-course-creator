@@ -6,17 +6,19 @@ import { HelpCircle, ArrowRight, ArrowLeft } from "lucide-react";
 import { TitleWrapper } from "../TitleWrapper";
 
 interface QuizIntroProps {
-  totalQuizzes: number;
-  onStart: () => void;
-  onPrevious: () => void;
-  isFirstContent: boolean;
+  totalQuizzes?: number;
+  onStart?: () => void;
+  onPrevious?: () => void;
+  isFirstContent?: boolean;
+  introText?: string;
 }
 
 export const QuizIntro: React.FC<QuizIntroProps> = ({ 
-  totalQuizzes, 
+  totalQuizzes = 1,
   onStart, 
   onPrevious, 
-  isFirstContent 
+  isFirstContent = false,
+  introText = "Let's test your knowledge on what you've learned!" 
 }) => {
   return (
     <div className="w-full h-full">
@@ -34,21 +36,22 @@ export const QuizIntro: React.FC<QuizIntroProps> = ({
           
           <div className="p-4 bg-purple-900/30 rounded-lg border border-purple-500/30 mb-6 max-w-md">
             <p className="text-purple-200">
-              <span className="font-semibold text-yellow-300">Challenge:</span> Complete {totalQuizzes} quiz questions 
-              to demonstrate your understanding and earn bonus XP!
+              {introText}
             </p>
           </div>
           
-          <Button
-            onClick={onStart}
-            className="bg-gradient-to-r from-orange-600 to-orange-700 hover:from-orange-700 hover:to-orange-800"
-          >
-            Begin Challenge <ArrowRight className="ml-2 h-4 w-4" />
-          </Button>
+          {onStart && (
+            <Button
+              onClick={onStart}
+              className="bg-gradient-to-r from-orange-600 to-orange-700 hover:from-orange-700 hover:to-orange-800"
+            >
+              Begin Challenge <ArrowRight className="ml-2 h-4 w-4" />
+            </Button>
+          )}
         </div>
         
         <div className="mt-4 flex justify-between">
-          {!isFirstContent && (
+          {!isFirstContent && onPrevious && (
             <Button 
               onClick={onPrevious}
               variant="outline"
