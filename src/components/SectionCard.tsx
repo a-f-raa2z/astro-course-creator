@@ -64,6 +64,24 @@ const SectionCard = ({
         mockCourse.sections[index].funFacts = ["https://www.tiktok.com/t/ZT2G7Vmyd/", "https://www.tiktok.com/t/ZT2G761Ss/"];
         mockCourse.sections[index].funFacts2 = ["https://www.youtube.com/embed/rVMvzH1FxfE", "https://www.youtube.com/embed/_fCQQybyiWM"];
       }
+      
+      // Special case for section 0 - The Inner Planets
+      if (index === 0 && title === "The Inner Planets") {
+        mockCourse.sections[index].videoUrl = "https://www.youtube.com/embed/05E1uMh15QQ";
+        mockCourse.sections[index].bonusVideos = ["https://www.youtube.com/embed/_rzAbPtUamA", "https://www.youtube.com/embed/4qCczin1Muo"];
+      }
+      
+      // Special case for section 2 - Earth
+      if (index === 2 && title === "Earth") {
+        mockCourse.sections[index].videoUrl = "https://www.youtube.com/embed/HCDVN7DCzYE";
+        mockCourse.sections[index].bonusVideos = [
+          "https://www.youtube.com/embed/HRwNdMoNUq4",
+          "https://www.youtube.com/embed/eCj5KgfRRGQ",
+          "https://www.youtube.com/embed/PL50KW6aT4Ugw65Ex89Z2XrBxQVZLdyOZ9",
+          "https://www.youtube.com/embed/mrYjJ9Jl9dA"
+        ];
+        mockCourse.sections[index].visualUrl = "https://world-geography-games.com/en/world_earth.html";
+      }
     }
     
     navigate("/astronomy-course-start", { 

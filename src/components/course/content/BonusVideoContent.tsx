@@ -19,6 +19,48 @@ export const BonusVideoContent = ({ section, onComplete, onPrevious, isFirstCont
   
   // Get all bonus videos for this section, merging both bonus arrays
   const getBonusVideos = () => {
+    // Inner Planets special case
+    if (section.title === "The Inner Planets") {
+      return [
+        {
+          url: "https://www.youtube.com/embed/_rzAbPtUamA",
+          title: "Quick Facts: Inner Planets",
+          description: "A short look at interesting facts about the inner planets of our solar system."
+        },
+        {
+          url: "https://www.youtube.com/embed/4qCczin1Muo",
+          title: "Mercury, Venus, Earth and Mars",
+          description: "Learn more about these four rocky worlds and their unique characteristics."
+        }
+      ];
+    }
+    
+    // Earth special case
+    if (section.title === "Earth") {
+      return [
+        {
+          url: "https://www.youtube.com/embed/HRwNdMoNUq4",
+          title: "Earth From Space",
+          description: "See our home planet from orbit and appreciate its beauty."
+        },
+        {
+          url: "https://www.youtube.com/embed/eCj5KgfRRGQ",
+          title: "Earth Facts",
+          description: "Quick and interesting facts about Earth."
+        },
+        {
+          url: "https://www.youtube.com/embed/PL50KW6aT4Ugw65Ex89Z2XrBxQVZLdyOZ9",
+          title: "Earth Documentary Series",
+          description: "An in-depth look at our planet's incredible features and systems."
+        },
+        {
+          url: "https://www.youtube.com/embed/mrYjJ9Jl9dA",
+          title: "Earth's Atmosphere",
+          description: "How Earth's atmosphere protects and sustains life."
+        }
+      ];
+    }
+    
     // Moon section special case
     if (section.title === "The Moon" || section.title === "The Moon in Our Skies") {
       return [

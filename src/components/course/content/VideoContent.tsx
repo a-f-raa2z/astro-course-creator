@@ -63,6 +63,28 @@ export const VideoContent = ({ section, onComplete, onPrevious, isFirstContent }
   const getVideoSources = () => {
     const sources = [];
     
+    // Inner Planets special case
+    if (section.title === "The Inner Planets") {
+      return [
+        {
+          url: "https://www.youtube.com/embed/05E1uMh15QQ",
+          title: "Main Lesson: The Inner Planets",
+          description: "Learn about Mercury, Venus, Earth, and Mars - the four rocky planets closest to the Sun."
+        }
+      ];
+    }
+    
+    // Earth special case
+    if (section.title === "Earth") {
+      return [
+        {
+          url: "https://www.youtube.com/embed/HCDVN7DCzYE",
+          title: "Main Lesson: Earth",
+          description: "Explore our home planet - the blue marble of the Solar System and the only known world with abundant liquid water."
+        }
+      ];
+    }
+    
     // Moon section special case
     if (section.title === "The Moon" || section.title === "The Moon in Our Skies") {
       return [

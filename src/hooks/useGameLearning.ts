@@ -29,6 +29,27 @@ export const useGameLearning = (course: Course) => {
       return ['introduction'];
     }
     
+    // Special case for Inner Planets section
+    if (section.title === "The Inner Planets") {
+      return [
+        'introduction',
+        'video',
+        'bonus',
+        'quiz'
+      ];
+    }
+    
+    // Special case for Earth section
+    if (section.title === "Earth") {
+      return [
+        'introduction',
+        'video',
+        'bonus',
+        'playground',
+        'quiz'
+      ];
+    }
+    
     // Special case for Mapping the Moon section
     if (section.title === "Mapping the Moon") {
       return [
