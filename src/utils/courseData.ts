@@ -1,4 +1,3 @@
-
 import { Course } from "@/types/course";
 
 export const assessmentQuestions = [
@@ -85,7 +84,6 @@ export const assessmentQuestions = [
   }
 ];
 
-// Add the aiCourseData that was missing
 export const aiCourseData: Course = {
   id: "ai-101",
   title: "Introduction to Artificial Intelligence",
@@ -667,118 +665,121 @@ export const generateMockCourse = (
       },
       {
         id: "section-8",
-        title: "Stars",
+        title: "Venus",
         introduction:
-          "An introduction to the life cycle, properties, and classification of stars.",
+          "Explore Venus, the second planet from the Sun and Earth's nearest planetary neighbor, often called Earth's 'sister planet' due to its similar size.",
         whyLearn:
-          "Understanding stars helps us understand the origin of elements, the evolution of galaxies, and the ultimate fate of the universe.",
-        videoUrl: "https://www.youtube.com/embed/H7ykErj9jFg",
+          "Understanding Venus helps us appreciate the extreme greenhouse effect and how planetary evolution can take dramatically different paths.",
+        videoUrl: "https://www.youtube.com/embed/BvXa1n9fjow",
         keyPoints: [
-          "Stars are born in nebulae from collapsing clouds of gas and dust.",
-          "Stars generate energy through nuclear fusion in their cores.",
-          "Stars are classified by their temperature, luminosity, and spectral type.",
-          "Stars evolve through different stages, including main sequence, red giant, and white dwarf.",
-          "Massive stars end their lives in supernova explosions, creating neutron stars or black holes."
+          "Venus has the thickest atmosphere of any terrestrial planet, composed primarily of carbon dioxide.",
+          "Surface temperatures on Venus reach about 900°F (475°C), hot enough to melt lead.",
+          "The extreme greenhouse effect makes Venus the hottest planet in our solar system.",
+          "Venus rotates very slowly and in the opposite direction to most planets.",
+          "Despite being farther from the Sun than Mercury, Venus is hotter due to its thick atmosphere."
         ],
-        shortVideo: "https://www.youtube.com/embed/PM9CQ8i6W20",
+        shortVideo: "https://www.youtube.com/embed/vjT10myBoZE",
         additionalShortVideos: [
-          "https://www.youtube.com/embed/9wF01jJ4790",
-          "https://www.youtube.com/embed/9wF01jJ4790"
+          "https://www.youtube.com/embed/2GxhEOnsLY8"
         ],
         bonusVideos: [
-          "https://www.youtube.com/embed/x0UNG2l3fgE",
-          "https://www.youtube.com/embed/ifKBE62gomk"
+          "https://www.youtube.com/embed/djP-IdHFQWU"
         ],
         image: {
-          url: "/lovable-uploads/9999961a-8219-4999-8999-5c9544845109.png",
-          description: "A colorful image of a nebula, a stellar nursery where stars are born."
+          url: "/lovable-uploads/3215a500-d237-40e1-aecb-2a9e2b64ee10.png",
+          description: "A view of Venus showing its thick, yellowish cloud cover that perpetually shrouds the planet."
         },
         quiz: {
-          question: "What process generates energy in the cores of stars?",
+          question: "What makes Venus the hottest planet in our solar system?",
           options: [
-            "Chemical reactions",
-            "Nuclear fission",
-            "Nuclear fusion",
-            "Gravitational collapse"
+            "Its proximity to the Sun",
+            "Its extreme greenhouse effect",
+            "Volcanic activity",
+            "Solar radiation"
           ],
-          correctAnswer: 2
+          correctAnswer: 1
         }
       },
       {
         id: "section-9",
-        title: "Telescopes",
+        title: "Mercury",
         introduction:
-          "Explore the history and technology of telescopes, from early refracting telescopes to modern space-based observatories.",
+          "Discover Mercury, the smallest and innermost planet in our Solar System, a world of extremes and surprising complexity.",
         whyLearn:
-          "Telescopes allow us to observe distant objects in space and gather information about the universe beyond our solar system.",
-        videoUrl: "https://www.youtube.com/embed/09f75QwzCQE",
+          "Mercury's unique characteristics help us understand planetary formation and the effects of proximity to a star.",
+        videoUrl: "https://www.youtube.com/embed/0KBjnNuhRHs",
+        mainLesson2Url: "https://www.youtube.com/embed/rX_NCCpw5Uo",
         keyPoints: [
-          "Telescopes collect and focus light from distant objects.",
-          "Refracting telescopes use lenses to focus light.",
-          "Reflecting telescopes use mirrors to focus light.",
-          "Space-based telescopes avoid atmospheric distortion.",
-          "Modern telescopes use advanced technologies like adaptive optics and interferometry."
+          "Mercury is the smallest planet in our solar system and closest to the Sun.",
+          "It has virtually no atmosphere, resulting in extreme temperature variations.",
+          "Mercury's day (176 Earth days) is longer than its year (88 Earth days).",
+          "The planet has a surprisingly large iron core relative to its size.",
+          "Mercury's surface is heavily cratered, similar to our Moon."
         ],
-        shortVideo: "https://www.youtube.com/embed/jE1BSj-iZu4",
+        shortVideo: "https://www.youtube.com/embed/uDurw7YxX3U",
         additionalShortVideos: [
-          "https://www.youtube.com/embed/4gnF9j6lL0Q",
-          "https://www.youtube.com/embed/4gnF9j6lL0Q"
+          "https://www.youtube.com/embed/-DuQEeq4ZLw"
         ],
         bonusVideos: [
-          "https://www.youtube.com/embed/zrYxdb-V-iE",
-          "https://www.youtube.com/embed/sQh9wtt8G1E"
+          "https://www.youtube.com/embed/rsa92VNVY7A",
+          "https://www.youtube.com/embed/9T8lLtlZ8Xs",
+          "https://www.youtube.com/embed/31HAFceuvb0",
+          "https://www.youtube.com/embed/B588JHKSlEE"
         ],
         image: {
-          url: "/lovable-uploads/79999b6d-4999-4999-b999-4999999b9999.png",
-          description: "An image of a modern telescope, showcasing its advanced technology."
+          url: "/lovable-uploads/4feca2b6-a656-4abf-b674-e00f9467fb87.png",
+          description: "A detailed view of Mercury's heavily cratered surface, showing its Moon-like appearance."
         },
         quiz: {
-          question: "What type of telescope uses lenses to focus light?",
+          question: "Why does Mercury have such extreme temperature variations?",
           options: [
-            "Reflecting telescope",
-            "Refracting telescope",
-            "Radio telescope",
-            "X-ray telescope"
+            "Its elliptical orbit",
+            "Lack of substantial atmosphere",
+            "Its slow rotation",
+            "Volcanic activity"
           ],
           correctAnswer: 1
         }
       },
       {
         id: "section-10",
-        title: "Space Exploration",
+        title: "Messenger at Mercury",
         introduction:
-          "A journey through the history of space exploration, from the first satellites to human missions to the Moon and beyond.",
+          "Explore NASA's MESSENGER mission, which provided the first comprehensive study of Mercury's surface, atmosphere, and magnetic field.",
         whyLearn:
-          "Space exploration expands our knowledge of the universe, drives technological innovation, and inspires future generations.",
-        videoUrl: "https://www.youtube.com/embed/zSAJ0l4NQmI",
+          "The MESSENGER mission revolutionized our understanding of Mercury and demonstrated the technological challenges of exploring the inner Solar System.",
+        videoUrl: "https://www.youtube.com/embed/1MwGXzKjFfY",
         keyPoints: [
-          "The Space Race between the US and the Soviet Union spurred early space exploration.",
-          "The first artificial satellite was Sputnik 1, launched by the Soviet Union.",
-          "The first human in space was Yuri Gagarin, also from the Soviet Union.",
-          "The Apollo program landed humans on the Moon.",
-          "Future space missions aim to explore Mars, asteroids, and other destinations."
+          "MESSENGER (MErcury Surface, Space ENvironment, GEochemistry, and Ranging) was the first spacecraft to orbit Mercury.",
+          "It completed over 4,000 orbits of Mercury between 2011 and 2015.",
+          "The mission discovered evidence of past volcanic activity and water ice in permanently shadowed polar craters.",
+          "MESSENGER mapped the entire surface of Mercury at high resolution.",
+          "The spacecraft had to withstand extreme temperatures due to Mercury's proximity to the Sun."
         ],
-        shortVideo: "https://www.youtube.com/embed/yPE4fMhEqjk",
+        shortVideo: "https://www.youtube.com/embed/tQjVO6BtT7A",
         additionalShortVideos: [
-          "https://www.youtube.com/embed/lkzuWj7qqUc",
-          "https://www.youtube.com/embed/lkzuWj7qqUc"
+          "https://www.youtube.com/embed/U1cMS8K2uhk"
         ],
         bonusVideos: [
-          "https://www.youtube.com/embed/Ky2j8SOB9bc",
-          "https://www.youtube.com/embed/mgQMw47oXT4"
+          "https://www.youtube.com/embed/NJAfP9QLkN8",
+          "https://www.youtube.com/embed/gHn19Ce2sCE",
+          "https://www.youtube.com/embed/XPy9qQq6QT4"
         ],
         image: {
-          url: "/lovable-uploads/4999999c-9999-4999-b999-999999999999.png",
-          description: "An iconic image of astronauts on the Moon during the Apollo program."
+          url: "/lovable-uploads/4feca2b6-a656-4abf-b674-e00f9467fb87.png",
+          description: "An illustration of the MESSENGER spacecraft orbiting Mercury, showing the challenging environment it operated in."
         },
         quiz: {
-          question: "Which country launched the first artificial satellite into space?",
-          options: ["USA", "Soviet Union", "China", "Germany"],
-          correctAnswer: 1
+          question: "What surprising discovery did the MESSENGER mission make about Mercury?",
+          options: [
+            "Signs of current volcanic activity",
+            "Evidence of a thick atmosphere",
+            "Water ice in permanently shadowed craters",
+            "Signs of microbial life"
+          ],
+          correctAnswer: 2
         }
       },
-
-      // Adding Section 11: The Sun
       {
         id: "section-11",
         title: "The Sun",
@@ -818,8 +819,6 @@ export const generateMockCourse = (
           correctAnswer: 2
         }
       },
-
-      // Adding Section 12: Close to the Sun
       {
         id: "section-12",
         title: "Close to the Sun",
@@ -862,8 +861,6 @@ export const generateMockCourse = (
           correctAnswer: 1
         }
       },
-
-      // Adding Section 13: Mars
       {
         id: "section-13",
         title: "Mars",
@@ -905,8 +902,6 @@ export const generateMockCourse = (
           correctAnswer: 1
         }
       },
-
-      // Adding Section 14: Mars from Above and the Moons of Mars
       {
         id: "section-14",
         title: "Mars from Above and the Moons of Mars",
@@ -946,8 +941,6 @@ export const generateMockCourse = (
           correctAnswer: 1
         }
       },
-
-      // Adding Section 15: Roving over Mars
       {
         id: "section-15",
         title: "Roving over Mars",
