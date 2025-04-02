@@ -29,6 +29,16 @@ export const useGameLearning = (course: Course) => {
       return ['introduction'];
     }
     
+    // Special case for The Solar System section - add fun facts
+    if (section.title === "The Solar System") {
+      return [
+        'introduction',
+        'video',
+        'fun-facts',
+        'quiz'
+      ];
+    }
+    
     // Special case for Inner Planets section
     if (section.title === "The Inner Planets") {
       return [

@@ -19,6 +19,22 @@ export const FunFactsContent = ({ section, onComplete, onPrevious, isFirstConten
   
   // Get all fun facts videos for this section
   const getFunFactsVideos = () => {
+    // Solar System section special case
+    if (section.title === "The Solar System") {
+      return [
+        {
+          url: "https://www.youtube.com/embed/lzsf1-vMUdY",
+          title: "Solar System Fun Fact 1",
+          description: "Interesting facts about our Solar System."
+        },
+        {
+          url: "https://www.youtube.com/embed/HDSKuln-5qU",
+          title: "Solar System Fun Fact 2",
+          description: "More fascinating facts about our Solar System."
+        }
+      ];
+    }
+    
     // Mapping the Moon section special case
     if (section.title === "Mapping the Moon") {
       const videos = [];
