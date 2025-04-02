@@ -119,6 +119,7 @@ export const useGameLearning = (course: Course) => {
       ];
     }
     
+    // For all other sections (including 8-15)
     const contentTypes: ContentType['type'][] = ['introduction', 'video'];
     
     if (section.shortVideo) {
@@ -149,6 +150,168 @@ export const useGameLearning = (course: Course) => {
     contentTypes.push('quiz');
     
     return contentTypes;
+  };
+
+  // Ensure sections 8-15 have 5 quizzes each
+  useEffect(() => {
+    if (course && course.sections) {
+      // For sections 8-15, check if they already have 5 quizzes
+      for (let i = 8; i <= 15 && i < course.sections.length; i++) {
+        const section = course.sections[i];
+        
+        if (section && (!section.quizzes || section.quizzes.length < 5)) {
+          // Generate 5 quizzes for the section, or keep existing ones
+          section.quizzes = generateQuizzesForSection(section);
+        }
+      }
+    }
+  }, [course]);
+  
+  const generateQuizzesForSection = (section: CourseSection): any[] => {
+    // If section already has some quizzes, use those
+    const existingQuizzes = section.quizzes || [];
+    if (existingQuizzes.length === 5) {
+      return existingQuizzes;
+    }
+    
+    // Start with existing quiz as the first quiz
+    const quizzes = existingQuizzes.length > 0 ? [...existingQuizzes] : [section.quiz];
+    
+    // For Venus specifically, return the predefined set of 5 quizzes
+    if (section.title === "Venus") {
+      return [
+        {
+          question: "Which planet is called Earth's twin?",
+          options: ["Mars", "Mercury", "Venus", "Jupiter"],
+          correctAnswer: 2
+        },
+        {
+          question: "Why is Venus hotter than Mercury?",
+          options: ["It's closer to the Sun", "It has more lava", "Thick atmosphere traps heat", "It's made of fire"],
+          correctAnswer: 2
+        },
+        {
+          question: "What's a wild weather fact about Venus?",
+          options: ["It snows", "It has acid rain", "It has blizzards", "It's always sunny"],
+          correctAnswer: 1
+        },
+        {
+          question: "How long is a day on Venus compared to Earth?",
+          options: ["Shorter", "Same", "Longer", "24 hours"],
+          correctAnswer: 2
+        },
+        {
+          question: "What direction does Venus rotate?",
+          options: ["East to West", "It doesn't", "West to East", "Backwards"],
+          correctAnswer: 3
+        }
+      ];
+    }
+    
+    // Add default generated quizzes based on section title to reach 5 quizzes
+    if (quizzes.length < 5) {
+      // Generate generic questions based on section title
+      const additionalQuizzes = generateGenericQuizzes(section, 5 - quizzes.length);
+      quizzes.push(...additionalQuizzes);
+    }
+    
+    return quizzes;
+  };
+  
+  const generateGenericQuizzes = (section: CourseSection, count: number): any[] => {
+    const quizzes = [];
+    const title = section.title;
+    
+    // Generate quizzes based on section title
+    switch (title) {
+      case "Mercury":
+        quizzes.push(
+          {
+            question: "What is Mercury's position in the solar system?",
+            options: ["Second planet", "First planet", "Third planet", "Fourth planet"],
+            correctAnswer: 1
+          },
+          {
+            question: "Why does Mercury have such extreme temperature variations?",
+            options: ["No atmosphere", "Very thin atmosphere", "No magnetic field", "Very slow rotation"],
+            correctAnswer: 0
+          },
+          {
+            question: "How long is a day on Mercury?",
+            options: ["24 hours", "59 Earth days", "88 Earth days", "176 Earth days"],
+            correctAnswer: 1
+          },
+          {
+            question: "What is the surface of Mercury similar to?",
+            options: ["Earth's deserts", "Mars' surface", "Earth's Moon", "Venus' surface"],
+            correctAnswer: 2
+          }
+        );
+        break;
+        
+      case "Mars":
+        quizzes.push(
+          {
+            question: "What gives Mars its reddish appearance?",
+            options: ["Iron oxide (rust)", "Methane gas", "Sulfur compounds", "Reflected sunlight"],
+            correctAnswer: 0
+          },
+          {
+            question: "Which is the largest volcano in the solar system, located on Mars?",
+            options: ["Mauna Loa", "Olympus Mons", "Tharsis Montes", "Elysium Mons"],
+            correctAnswer: 1
+          },
+          {
+            question: "How many moons does Mars have?",
+            options: ["None", "One", "Two", "Three"],
+            correctAnswer: 2
+          },
+          {
+            question: "What are the names of Mars' moons?",
+            options: ["Ganymede and Callisto", "Phobos and Deimos", "Titan and Enceladus", "Europa and Io"],
+            correctAnswer: 1
+          }
+        );
+        break;
+        
+      case "Jupiter":
+        quizzes.push(
+          {
+            question: "What is Jupiter primarily composed of?",
+            options: ["Rock and metal", "Hydrogen and helium", "Ice and water", "Methane and ammonia"],
+            correctAnswer: 1
+          },
+          {
+            question: "What is the Great Red Spot on Jupiter?",
+            options: ["A volcanic eruption", "A storm system", "An impact crater", "A sea of liquid iron"],
+            correctAnswer: 1
+          },
+          {
+            question: "How many moons does Jupiter have?",
+            options: ["4", "16", "67", "79+"],
+            correctAnswer: 3
+          },
+          {
+            question: "What is Jupiter's rank in size among the planets?",
+            options: ["Largest", "Second largest", "Third largest", "Fourth largest"],
+            correctAnswer: 0
+          }
+        );
+        break;
+        
+      default:
+        // Generic space-related questions if no specific section content
+        for (let i = 0; i < count; i++) {
+          quizzes.push({
+            question: `Question ${i+1} about ${title}?`,
+            options: ["Option A", "Option B", "Option C", "Option D"],
+            correctAnswer: i % 4
+          });
+        }
+    }
+    
+    // Return only the number of quizzes requested
+    return quizzes.slice(0, count);
   };
 
   const currentSection = course?.sections[currentSectionIndex] || null;
