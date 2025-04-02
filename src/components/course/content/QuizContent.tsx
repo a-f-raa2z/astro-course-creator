@@ -37,7 +37,7 @@ export const QuizContent = ({
   const [localQuizSubmitted, setLocalQuizSubmitted] = useState(false);
   const [localSelectedAnswer, setLocalSelectedAnswer] = useState<number | null>(null);
   
-  // Use the appropriate quiz based on whether we have multiple quizzes or just one
+  // Always use the quizzes array, which will have the main quiz as the first item
   const quizzes = section.quizzes || [section.quiz];
   const currentQuiz = quizzes[currentQuizIndex];
   const totalQuizzes = quizzes.length;

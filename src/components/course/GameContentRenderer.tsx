@@ -1,4 +1,3 @@
-
 import { CourseSection } from "@/types/course";
 import { ContentType } from "@/types/ContentType";
 import { IntroductionContent } from "./content/IntroductionContent";
@@ -65,7 +64,7 @@ export const GameContentRenderer = ({
     keyPoints: "Here are the key points from this section that you should remember:",
     shortVideo: "Let's check out some fun and interesting facts related to this topic:",
     image: "Visual representation can help cement your understanding. Take a moment to study this image:",
-    quiz: "Test your knowledge with this quick quiz about what you've learned:",
+    quiz: "Test your knowledge with these quick quizzes about what you've learned:",
     playground: "Try out this interactive playground to explore the concepts hands-on:",
     bonus: "Here's some bonus content to deepen your understanding:",
     funFacts: "Check out these fun facts about this topic:",
@@ -83,7 +82,8 @@ export const GameContentRenderer = ({
     },
     quizIntro: currentSection.quizIntro || defaultIntros.quiz,
     visualIntro: currentSection.visualIntro || defaultIntros.playground,
-    bonusIntro: currentSection.bonusIntro || defaultIntros.bonus
+    bonusIntro: currentSection.bonusIntro || defaultIntros.bonus,
+    quizzes: currentSection.quizzes || [currentSection.quiz]
   };
   
   switch (type) {

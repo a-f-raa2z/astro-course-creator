@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -14,6 +15,7 @@ interface QuizCardData {
   sectionIndex: number;
   question: string;
   isCompleted?: boolean;
+  quizIndex?: number;
 }
 
 const AstronomyQuizModePage = () => {
@@ -32,14 +34,29 @@ const AstronomyQuizModePage = () => {
     mockCourse.sections.forEach((section, sectionIndex) => {
       const sectionCards: QuizCardData[] = [];
       
-      const quizCard: QuizCardData = {
-        section,
-        contentType: 'quiz',
-        sectionIndex,
-        question: `Test your ${section.title} knowledge with this quiz`,
-        isCompleted: completedQuizzes[`${sectionIndex}-quiz`] === true
-      };
-      sectionCards.push(quizCard);
+      // Add individual quiz cards for each quiz in the section
+      if (section.quizzes && section.quizzes.length > 0) {
+        section.quizzes.forEach((quiz, quizIndex) => {
+          const quizCard: QuizCardData = {
+            section,
+            contentType: 'quiz',
+            sectionIndex,
+            question: `Quiz ${quizIndex + 1}: ${quiz.question}`,
+            isCompleted: completedQuizzes[`${sectionIndex}-quiz-${quizIndex}`] === true,
+            quizIndex
+          };
+          sectionCards.push(quizCard);
+        });
+      } else {
+        const quizCard: QuizCardData = {
+          section,
+          contentType: 'quiz',
+          sectionIndex,
+          question: `Test your ${section.title} knowledge with this quiz`,
+          isCompleted: completedQuizzes[`${sectionIndex}-quiz`] === true
+        };
+        sectionCards.push(quizCard);
+      }
       
       const introCard: QuizCardData = {
         section,
@@ -122,7 +139,9 @@ const AstronomyQuizModePage = () => {
         Object.keys(updatedQuizCards).forEach(sectionIndexStr => {
           const sectionIndex = parseInt(sectionIndexStr);
           updatedQuizCards[sectionIndex].forEach((card, idx) => {
-            const key = `${card.sectionIndex}-${card.contentType}`;
+            const key = card.quizIndex !== undefined ? 
+              `${card.sectionIndex}-${card.contentType}-${card.quizIndex}` :
+              `${card.sectionIndex}-${card.contentType}`;
             updatedQuizCards[sectionIndex][idx].isCompleted = updatedCompletedQuizzes[key] === true;
           });
           
@@ -174,7 +193,7 @@ const AstronomyQuizModePage = () => {
         
         <Separator className="my-6 bg-purple-500/20" />
         
-        {course.sections.map((section, sectionIndex) => (
+        {course?.sections.map((section, sectionIndex) => (
           <div key={section.id} className="mb-10">
             <h2 className="text-xl font-semibold text-white mb-4 flex items-center">
               <span className="flex items-center justify-center w-8 h-8 rounded-full bg-purple-600 mr-3 text-white font-bold">
@@ -184,9 +203,9 @@ const AstronomyQuizModePage = () => {
             </h2>
             
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 mb-6">
-              {quizCards[sectionIndex]?.map((card) => (
+              {quizCards[sectionIndex]?.map((card, cardIndex) => (
                 <QuizCard 
-                  key={`${card.sectionIndex}-${card.contentType}`}
+                  key={`${card.sectionIndex}-${card.contentType}-${card.quizIndex || cardIndex}`}
                   section={card.section}
                   contentType={card.contentType}
                   sectionIndex={card.sectionIndex}
@@ -195,7 +214,8 @@ const AstronomyQuizModePage = () => {
                     state: { 
                       course, 
                       sectionIndex: card.sectionIndex,
-                      contentType: card.contentType
+                      contentType: card.contentType,
+                      quizIndex: card.quizIndex
                     }
                   })}
                 />

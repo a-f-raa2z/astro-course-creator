@@ -442,7 +442,34 @@ export const generateMockCourse = (
           question: "Which planet is known as the 'Red Planet'?",
           options: ["Earth", "Mars", "Venus", "Jupiter"],
           correctAnswer: 1
-        }
+        },
+        quizzes: [
+          {
+            question: "Which planet is known as the 'Red Planet'?",
+            options: ["Earth", "Mars", "Venus", "Jupiter"],
+            correctAnswer: 1
+          },
+          {
+            question: "What is the largest planet in our solar system?",
+            options: ["Earth", "Saturn", "Jupiter", "Neptune"],
+            correctAnswer: 2
+          },
+          {
+            question: "Where is the asteroid belt located?",
+            options: ["Between Earth and Mars", "Between Mars and Jupiter", "Between Jupiter and Saturn", "Beyond Neptune"],
+            correctAnswer: 1
+          },
+          {
+            question: "What is the Oort cloud?",
+            options: ["A dust cloud near Venus", "A region where comets originate", "An atmospheric feature on Jupiter", "A nebula outside our solar system"],
+            correctAnswer: 1
+          },
+          {
+            question: "How many planets are in our solar system?",
+            options: ["7", "8", "9", "10"],
+            correctAnswer: 1
+          }
+        ]
       },
       {
         id: "section-2",
@@ -987,6 +1014,35 @@ export const generateMockCourse = (
       }
     ]
   };
+
+  baseCourse.sections = baseCourse.sections.map(section => {
+    if (!section.quizzes || section.quizzes.length < 5) {
+      section.quizzes = [
+        section.quiz,
+        {
+          question: `What is another key aspect of ${section.title}?`,
+          options: ["Feature A", "Feature B", "Feature C", "Feature D"],
+          correctAnswer: Math.floor(Math.random() * 4)
+        },
+        {
+          question: `Which statement about ${section.title} is correct?`,
+          options: ["Statement 1", "Statement 2", "Statement 3", "Statement 4"],
+          correctAnswer: Math.floor(Math.random() * 4)
+        },
+        {
+          question: `What's a common misconception about ${section.title}?`,
+          options: ["Misconception 1", "Misconception 2", "Misconception 3", "Misconception 4"],
+          correctAnswer: Math.floor(Math.random() * 4)
+        },
+        {
+          question: `Which of these is most closely related to ${section.title}?`,
+          options: ["Related concept 1", "Related concept 2", "Related concept 3", "Related concept 4"],
+          correctAnswer: Math.floor(Math.random() * 4)
+        }
+      ];
+    }
+    return section;
+  });
 
   return baseCourse;
 };

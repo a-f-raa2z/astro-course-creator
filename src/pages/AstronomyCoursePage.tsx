@@ -24,7 +24,42 @@ const AstronomyCoursePage = () => {
     if (location.state?.course) {
       setCourse(location.state.course);
     } else {
-      setCourse(generateMockCourse("planets", "intermediate", "visual"));
+      // Make sure the generated course has multiple quizzes
+      const mockCourse = generateMockCourse("planets", "intermediate", "visual");
+      
+      // Ensure each section has 5 quizzes
+      mockCourse.sections = mockCourse.sections.map(section => {
+        if (!section.quizzes || section.quizzes.length < 5) {
+          // Generate 5 quizzes using the existing quiz as a template
+          const baseQuiz = section.quiz;
+          section.quizzes = [
+            baseQuiz,
+            {
+              question: `What is another key aspect of ${section.title}?`,
+              options: ["Option A", "Option B", "Option C", "Option D"],
+              correctAnswer: Math.floor(Math.random() * 4)
+            },
+            {
+              question: `Which statement about ${section.title} is correct?`,
+              options: ["Statement 1", "Statement 2", "Statement 3", "Statement 4"],
+              correctAnswer: Math.floor(Math.random() * 4)
+            },
+            {
+              question: `What's a common misconception about ${section.title}?`,
+              options: ["Misconception 1", "Misconception 2", "Misconception 3", "Misconception 4"],
+              correctAnswer: Math.floor(Math.random() * 4)
+            },
+            {
+              question: `Which of these is most closely related to ${section.title}?`,
+              options: ["Related concept 1", "Related concept 2", "Related concept 3", "Related concept 4"],
+              correctAnswer: Math.floor(Math.random() * 4)
+            }
+          ];
+        }
+        return section;
+      });
+      
+      setCourse(mockCourse);
     }
     
     if (course && course.sections.length > 0) {
@@ -76,11 +111,11 @@ const AstronomyCoursePage = () => {
           </Button>
           <h1 className="text-2xl font-bold text-white flex items-center">
             <Rocket className="mr-2 h-6 w-6 text-purple-400" />
-            {course.title}
+            {course?.title}
           </h1>
         </div>
         
-        <p className="text-gray-300 mb-4 max-w-3xl leading-relaxed">{course.description}</p>
+        <p className="text-gray-300 mb-4 max-w-3xl leading-relaxed">{course?.description}</p>
         
         <div className="mb-8 flex flex-wrap gap-4 items-center">
           <Button 
@@ -101,11 +136,11 @@ const AstronomyCoursePage = () => {
           <div className="text-gray-400 text-sm">
             <span className="inline-flex items-center bg-purple-900/30 px-3 py-1 rounded-full">
               <span className="h-2 w-2 bg-purple-400 rounded-full mr-2"></span>
-              {course.forLevel || "Intermediate"} Level
+              {course?.forLevel || "Intermediate"} Level
             </span>
             <span className="inline-flex items-center bg-blue-900/30 px-3 py-1 rounded-full ml-2">
               <span className="h-2 w-2 bg-blue-400 rounded-full mr-2"></span>
-              {course.sections.length} Sections
+              {course?.sections.length} Sections
             </span>
           </div>
         </div>
@@ -115,7 +150,7 @@ const AstronomyCoursePage = () => {
         <h2 className="text-xl font-semibold text-white mb-6">Course Content</h2>
 
         <div className="relative journey-path">
-          {course.sections.map((section, index) => (
+          {course?.sections.map((section, index) => (
             <div key={section.id} className="flex mb-8 relative">
               <div className="relative z-10">
                 <div className={`flex items-center justify-center w-12 h-12 rounded-full mr-4 border-2 ${
@@ -142,6 +177,7 @@ const AstronomyCoursePage = () => {
                     []}
                   visualUrl={section.visualUrl}
                   bonusUrls={section.bonusVideos}
+                  quizCount={section.quizzes?.length || 1}
                 />
               </div>
             </div>
