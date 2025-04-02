@@ -763,6 +763,352 @@ export const generateMockCourse = (
             correctAnswer: 3
           }
         ]
+      },
+      {
+        id: "section-7",
+        title: "The Moon's Unseen Face",
+        introduction:
+          "Discover the fascinating far side of the Moon, which remained a mystery until the space age.",
+        whyLearn:
+          "Understanding the far side of the Moon provides insights into lunar formation and evolution.",
+        videoUrl: "https://www.youtube.com/embed/6AviDjR9mmo",
+        keyPoints: [
+          "The far side of the Moon was first photographed by the Soviet Luna 3 probe in 1959.",
+          "The far side has more craters and fewer maria than the near side.",
+          "The crust on the far side is thicker than on the near side.",
+          "Radio telescopes on the far side would be shielded from Earth's radio interference.",
+          "Future missions plan to explore and potentially establish bases on the far side."
+        ],
+        shortVideo: "https://www.youtube.com/embed/6z-Dr-Dsj14",
+        additionalShortVideos: [
+          "https://www.youtube.com/embed/mCzchPx3yF8",
+          "https://www.youtube.com/embed/0tEygSxIP1M"
+        ],
+        bonusVideos: [
+          "https://www.youtube.com/embed/VkAVfsw5xSQ",
+          "https://www.youtube.com/embed/LdMgLBBlQVU"
+        ],
+        image: {
+          url: "/lovable-uploads/52a450ef-41cd-45ec-90a2-c256e58d0d6a.png",
+          description: "A composite image of the far side of the Moon based on data from lunar orbiters."
+        },
+        quiz: {
+          question: "When was the far side of the Moon first photographed?",
+          options: ["1959", "1969", "1976", "1989"],
+          correctAnswer: 0
+        }
+      },
+      {
+        id: "section-8",
+        title: "Venus",
+        introduction:
+          "Explore Earth's hellish twin - a world of extreme temperatures, crushing pressure, and acid clouds.",
+        whyLearn:
+          "Venus provides a stark example of how planetary evolution can diverge dramatically, offering insights into climate change and atmospheric science.",
+        videoUrl: "https://www.youtube.com/embed/BvXa1n9fjow",
+        keyPoints: [
+          "Venus is the hottest planet in our solar system, despite not being closest to the Sun.",
+          "Its thick atmosphere creates an extreme greenhouse effect, with surface temperatures over 900°F (475°C).",
+          "Venus rotates backwards compared to most planets.",
+          "The atmospheric pressure on Venus is 92 times that of Earth.",
+          "Venus has more volcanoes than any other planet in our solar system."
+        ],
+        shortVideo: "https://www.youtube.com/embed/i0TgvV_npF0",
+        additionalShortVideos: [
+          "https://www.youtube.com/embed/HB97G8yg8Jg",
+          "https://www.youtube.com/embed/VGeD3v8EY68"
+        ],
+        bonusVideos: [
+          "https://www.youtube.com/embed/D0C3ZcLQpGY",
+          "https://www.youtube.com/embed/Lt0rqBnQK_A"
+        ],
+        image: {
+          url: "/lovable-uploads/b87f40a8-a8d2-42de-943b-b6f586bc75b1.png",
+          description: "A false-color image of Venus's surface, revealing its volcanic features and mountain ranges."
+        },
+        quiz: {
+          question: "Which feature is NOT true of Venus?",
+          options: [
+            "It has the longest day of any planet",
+            "It has a magnetic field similar to Earth's",
+            "It has the most volcanoes in the solar system",
+            "It has clouds of sulfuric acid"
+          ],
+          correctAnswer: 1
+        }
+      },
+      {
+        id: "section-9",
+        title: "Mercury",
+        introduction:
+          "Examine the smallest planet in our solar system and the closest to the Sun.",
+        whyLearn:
+          "Mercury's extreme temperatures and unusual rotation provide insights into how planets form and evolve in challenging environments.",
+        videoUrl: "https://www.youtube.com/embed/P3GkZe4wNSg",
+        keyPoints: [
+          "Mercury has virtually no atmosphere and experiences extreme temperature variations.",
+          "Its day (one rotation) is about 59 Earth days, while its year is 88 Earth days.",
+          "Mercury has a large iron core, making up about 60% of its volume.",
+          "The planet's surface is heavily cratered, similar to our Moon.",
+          "Mercury has ice in permanently shadowed craters at its poles, despite its proximity to the Sun."
+        ],
+        shortVideo: "https://www.youtube.com/embed/4PdJXnK1Ggw",
+        additionalShortVideos: [
+          "https://www.youtube.com/embed/4c4J4Fu54JY",
+          "https://www.youtube.com/embed/mnUSSPaVFiM"
+        ],
+        bonusVideos: [
+          "https://www.youtube.com/embed/H7H1c3UJhOA",
+          "https://www.youtube.com/embed/1esou5rq70o"
+        ],
+        image: {
+          url: "/lovable-uploads/98ea4cdd-0d5e-49fd-bc16-139cdce24388.png",
+          description: "Close-up view of Mercury's heavily cratered surface captured during MESSENGER mission flybys."
+        },
+        quiz: {
+          question: "What makes Mercury's orbit unique?",
+          options: [
+            "It's perfectly circular",
+            "It has the most eccentric orbit of all planets",
+            "It crosses other planetary orbits",
+            "It takes longer than Venus's orbit"
+          ],
+          correctAnswer: 1
+        }
+      },
+      {
+        id: "section-10",
+        title: "Messenger at Mercury",
+        introduction:
+          "Explore the discoveries made by NASA's MESSENGER mission, the first spacecraft to orbit Mercury.",
+        whyLearn:
+          "The MESSENGER mission revolutionized our understanding of Mercury, revealing its composition, structure, and geological history.",
+        videoUrl: "https://www.youtube.com/embed/soTVpBM-Uq0",
+        keyPoints: [
+          "MESSENGER (MErcury Surface, Space ENvironment, GEochemistry, and Ranging) orbited Mercury from 2011 to 2015.",
+          "It discovered evidence of past volcanic activity on Mercury.",
+          "The mission confirmed the presence of water ice at Mercury's poles.",
+          "MESSENGER found that Mercury's magnetic field is offset from the planet's center.",
+          "The spacecraft mapped Mercury's surface in unprecedented detail before its planned crash into the planet."
+        ],
+        shortVideo: "https://www.youtube.com/embed/Z_BqMT_m9vc",
+        additionalShortVideos: [
+          "https://www.youtube.com/embed/5bDJTXoTPSw",
+          "https://www.youtube.com/embed/ugCbbpTzysk"
+        ],
+        bonusVideos: [
+          "https://www.youtube.com/embed/DsJ9Cu1SjZg",
+          "https://www.youtube.com/embed/obBqRfm1JBo"
+        ],
+        image: {
+          url: "/lovable-uploads/bee533e9-3edc-4aa8-8fd6-2ee0683ab436.png",
+          description: "Artist's rendering of the MESSENGER spacecraft in orbit around Mercury."
+        },
+        quiz: {
+          question: "What was one major discovery of the MESSENGER mission?",
+          options: [
+            "Mercury has a thick atmosphere",
+            "Mercury has active volcanoes",
+            "Mercury has polar ice deposits",
+            "Mercury has a large moon"
+          ],
+          correctAnswer: 2
+        }
+      },
+      {
+        id: "section-11",
+        title: "The Sun",
+        introduction:
+          "Dive into the heart of our solar system - the Sun, a dynamic star that powers life on Earth.",
+        whyLearn:
+          "Understanding the Sun helps us appreciate its crucial role in sustaining life and its potential impacts on Earth through space weather.",
+        videoUrl: "https://www.youtube.com/embed/2HoTK_Gqi2Q",
+        keyPoints: [
+          "The Sun contains 99.8% of the solar system's mass.",
+          "It fuses hydrogen into helium, releasing enormous energy in the process.",
+          "The Sun's core reaches temperatures of about 15 million degrees Celsius (27 million degrees Fahrenheit).",
+          "Solar flares and coronal mass ejections can impact Earth's magnetic field and technology.",
+          "The Sun is approximately 4.6 billion years old and halfway through its life cycle."
+        ],
+        shortVideo: "https://www.youtube.com/embed/oHHSSJDJ4oo",
+        additionalShortVideos: [
+          "https://www.youtube.com/embed/b22HKFMIfWo",
+          "https://www.youtube.com/embed/6tmbeLTHC_0"
+        ],
+        bonusVideos: [
+          "https://www.youtube.com/embed/l3QQQu7QLoM",
+          "https://www.youtube.com/embed/kS57VH3QN1g"
+        ],
+        image: {
+          url: "/lovable-uploads/17b434e9-217c-4068-8b8b-1c628209901d.png",
+          description: "A high-resolution image of the Sun showing its dynamic surface features, including sunspots and solar flares."
+        },
+        quiz: {
+          question: "What process powers the Sun?",
+          options: [
+            "Chemical combustion",
+            "Nuclear fusion",
+            "Nuclear fission",
+            "Electromagnetic induction"
+          ],
+          correctAnswer: 1
+        }
+      },
+      {
+        id: "section-12",
+        title: "Close to the Sun",
+        introduction:
+          "Learn about NASA's Parker Solar Probe and other missions designed to study our nearest star up close.",
+        whyLearn:
+          "Solar missions help us understand space weather, which can affect satellites, power grids, and communications on Earth.",
+        videoUrl: "https://www.youtube.com/embed/LkaLfbuB_6E",
+        keyPoints: [
+          "The Parker Solar Probe is designed to fly closer to the Sun than any spacecraft before it.",
+          "Its heat shield protects it from temperatures of up to 1,370°C (2,500°F).",
+          "The probe will help scientists understand how the solar corona is heated and how solar wind is accelerated.",
+          "Solar Orbiter, a ESA/NASA mission, complements Parker by providing detailed images of the Sun's poles.",
+          "These missions aim to improve our ability to predict solar storms that can affect Earth."
+        ],
+        shortVideo: "https://www.youtube.com/embed/XBudjihQKsw",
+        additionalShortVideos: [
+          "https://www.youtube.com/embed/UY1YcZGKJ6c",
+          "https://www.youtube.com/embed/TUhhlF8oTUo"
+        ],
+        bonusVideos: [
+          "https://www.youtube.com/embed/2DlzQbq3gMc",
+          "https://www.youtube.com/embed/l3QQQu7QLoM"
+        ],
+        image: {
+          url: "/lovable-uploads/6d50892d-4935-4033-bcfc-2a998579227e.png",
+          description: "Artist's rendering of the Parker Solar Probe approaching the Sun with its heat shield deployed."
+        },
+        quiz: {
+          question: "What is the main purpose of the Parker Solar Probe?",
+          options: [
+            "To land on the Sun",
+            "To study solar wind and coronal heating",
+            "To detect alien signals near the Sun",
+            "To collect solar material for return to Earth"
+          ],
+          correctAnswer: 1
+        }
+      },
+      {
+        id: "section-13",
+        title: "Mars",
+        introduction:
+          "Journey to the Red Planet, a world of canyons, volcanoes, and dried-up riverbeds that once flowed with water.",
+        whyLearn:
+          "Mars provides valuable insights into planetary evolution and is the focus of future human exploration and potential settlement.",
+        videoUrl: "https://www.youtube.com/embed/D8pnmwOXhoY",
+        keyPoints: [
+          "Mars is home to Olympus Mons, the largest volcano in the solar system.",
+          "Valles Marineris is a vast canyon system that would stretch across the United States if placed on Earth.",
+          "Evidence suggests Mars once had flowing water and a thicker atmosphere.",
+          "The planet has two small moons, Phobos and Deimos, likely captured asteroids.",
+          "Mars experiences seasons similar to Earth due to its axial tilt."
+        ],
+        shortVideo: "https://www.youtube.com/embed/d4mYB7iKJYQ",
+        additionalShortVideos: [
+          "https://www.youtube.com/embed/ZEyAs3NWH4A",
+          "https://www.youtube.com/embed/xnDEZxO-ZsI"
+        ],
+        bonusVideos: [
+          "https://www.youtube.com/embed/N9p6y3_c4DI",
+          "https://www.youtube.com/embed/KRgm5wCeff4"
+        ],
+        image: {
+          url: "/lovable-uploads/28ccf6bc-b95b-4b54-b78c-1be5f91a5be6.png",
+          description: "A composite image showing the diverse terrain of Mars, including its polar ice caps and volcanic regions."
+        },
+        quiz: {
+          question: "What gives Mars its reddish appearance?",
+          options: [
+            "Volcanic activity",
+            "Iron oxide (rust) on its surface",
+            "Reflection from its moons",
+            "Atmospheric gases"
+          ],
+          correctAnswer: 1
+        }
+      },
+      {
+        id: "section-14",
+        title: "Mars from Above and the Moons of Mars",
+        introduction:
+          "Examine Mars through the eyes of orbiting spacecraft and learn about its two tiny moons.",
+        whyLearn:
+          "Orbital observations of Mars reveal its global patterns and history, while studying its moons provides clues about the early solar system.",
+        videoUrl: "https://www.youtube.com/embed/OzyMrDli-i8",
+        keyPoints: [
+          "Orbiting spacecraft have mapped the entire surface of Mars in high resolution.",
+          "These maps reveal ancient river valleys, impact craters, and potential landing sites for missions.",
+          "Phobos, the larger moon, orbits so close to Mars that it rises in the west and sets in the east twice a day.",
+          "Deimos appears similar in size to a bright star when viewed from Mars.",
+          "Both moons are irregularly shaped and may be captured asteroids."
+        ],
+        shortVideo: "https://www.youtube.com/embed/Sr7YRfvOowg",
+        additionalShortVideos: [
+          "https://www.youtube.com/embed/MQnLbZ0zkFs",
+          "https://www.youtube.com/embed/9IV2g6a-iH8"
+        ],
+        bonusVideos: [
+          "https://www.youtube.com/embed/N9p6y3_c4DI",
+          "https://www.youtube.com/embed/KRgm5wCeff4"
+        ],
+        image: {
+          url: "/lovable-uploads/973bc422-9419-49ac-ae95-89d2b36f2df8.png",
+          description: "High-resolution image of Mars from orbit, showing its varied topography, alongside images of Phobos and Deimos."
+        },
+        quiz: {
+          question: "What is unusual about Phobos's orbit around Mars?",
+          options: [
+            "It orbits incredibly slowly",
+            "It orbits backwards compared to most moons",
+            "It orbits faster than Mars rotates",
+            "It has an extremely elliptical orbit"
+          ],
+          correctAnswer: 2
+        }
+      },
+      {
+        id: "section-15",
+        title: "Roving over Mars",
+        introduction:
+          "Follow the journeys of the robotic explorers that have traveled across the Martian surface.",
+        whyLearn:
+          "Mars rovers provide ground-level insights that complement orbital data, helping scientists understand the planet's history and potential for past or present life.",
+        videoUrl: "https://www.youtube.com/embed/sMrPy8GMRwY",
+        keyPoints: [
+          "Sojourner, the first Mars rover, landed in 1997 and operated for 83 days.",
+          "Spirit and Opportunity, the twin rovers, far exceeded their 90-day missions, with Opportunity operating for over 14 years.",
+          "Curiosity carries sophisticated laboratory instruments to analyze Martian soil and rocks.",
+          "Perseverance, which landed in 2021, is searching for signs of ancient microbial life.",
+          "The Ingenuity helicopter demonstrated the first powered flight on another planet."
+        ],
+        shortVideo: "https://www.youtube.com/embed/qXdNiA-dYZs",
+        additionalShortVideos: [
+          "https://www.youtube.com/embed/Ai2HmvAXcU0",
+          "https://www.youtube.com/embed/DUaHcV3Lw9Q"
+        ],
+        bonusVideos: [
+          "https://www.youtube.com/embed/LgCXgFeWz3Q",
+          "https://www.youtube.com/embed/jEXoMpmfJcM"
+        ],
+        image: {
+          url: "/lovable-uploads/71f04c7c-c819-40bc-9de0-5f293ddadf89.png",
+          description: "A self-portrait of the Curiosity rover on the surface of Mars, with Mount Sharp in the background."
+        },
+        quiz: {
+          question: "Which Mars rover carried a helicopter?",
+          options: [
+            "Spirit",
+            "Opportunity",
+            "Curiosity",
+            "Perseverance"
+          ],
+          correctAnswer: 3
+        }
       }
     ]
   };
