@@ -36,9 +36,9 @@ export const VisualGalleryContent = ({ section, onComplete, onPrevious, isFirstC
     if (section.title === "Mapping the Moon") {
       return [
         {
-          url: "/lovable-uploads/1afadff6-a4c9-48c7-a8d6-5fe1fcecc2dd.png",
-          title: "Earth Rising Over Lunar Surface",
-          description: "This iconic view shows our blue planet Earth rising above the barren lunar landscape with footprints visible in the lunar soil."
+          url: "/lovable-uploads/2ddf84f7-83a1-4fe4-bb0b-a7167c3ab99a.png",
+          title: "Moon Features You Can See From Earth",
+          description: "A detailed map showing the major features of the lunar surface that are visible from Earth's northern hemisphere, including maria (seas) and major craters."
         },
         {
           url: "/lovable-uploads/3215a500-d237-40e1-aecb-2a9e2b64ee10.png",
