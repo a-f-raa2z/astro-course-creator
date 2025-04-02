@@ -505,32 +505,32 @@ export const generateMockCourse = (
           correctAnswer: 1
         },
         quizzes: [
-        {
-          question: "If you were on a spaceship touring The Inner Planets, what would blow your mind the most?",
-          options: ["An endless night", "Crazy dust storms", "A sea of lava", "A swirling gas tornado"],
-          correctAnswer: 2
-        },
-        {
-          question: "Which mission would be your ultimate backstage pass to explore The Inner Planets?",
-          options: ["New Horizons", "Curiosity", "Apollo", "Voyager"],
-          correctAnswer: 1
-        },
-        {
-          question: "Why do scientists geek out over The Inner Planets?",
-          options: ["It holds secrets about how our solar system was born", "It's full of alien life", "It's made of gold", "It glows in rainbow colors"],
-          correctAnswer: 0
-        },
-        {
-          question: "What's the biggest challenge of exploring The Inner Planets?",
-          options: ["Too many selfie spots", "Running out of snacks", "Crazy radiation and temperature swings", "Finding parking for your spaceship"],
-          correctAnswer: 2
-        },
-        {
-          question: "What's a weird but true fact about The Inner Planets?",
-          options: ["It has a heartbeat", "It rains diamonds", "It spins backwards", "It sings in radio waves"],
-          correctAnswer: 2
-        }
-      ]
+          {
+            question: "If you were on a spaceship touring The Inner Planets, what would blow your mind the most?",
+            options: ["An endless night", "Crazy dust storms", "A sea of lava", "A swirling gas tornado"],
+            correctAnswer: 2
+          },
+          {
+            question: "Which mission would be your ultimate backstage pass to explore The Inner Planets?",
+            options: ["New Horizons", "Curiosity", "Apollo", "Voyager"],
+            correctAnswer: 1
+          },
+          {
+            question: "Why do scientists geek out over The Inner Planets?",
+            options: ["It holds secrets about how our solar system was born", "It's full of alien life", "It's made of gold", "It glows in rainbow colors"],
+            correctAnswer: 0
+          },
+          {
+            question: "What's the biggest challenge of exploring The Inner Planets?",
+            options: ["Too many selfie spots", "Running out of snacks", "Crazy radiation and temperature swings", "Finding parking for your spaceship"],
+            correctAnswer: 2
+          },
+          {
+            question: "What's a weird but true fact about The Inner Planets?",
+            options: ["It has a heartbeat", "It rains diamonds", "It spins backwards", "It sings in radio waves"],
+            correctAnswer: 2
+          }
+        ]
       },
       {
         id: "section-3",
