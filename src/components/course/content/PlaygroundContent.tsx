@@ -44,7 +44,19 @@ export const PlaygroundContent = ({ section, onComplete, onPrevious, isFirstCont
     };
   };
   
+  // Get the appropriate URL for the interactive visualization
+  const getPlaygroundUrl = () => {
+    // For Moon sections specifically add the NASA Eyes link
+    if (section.title === "The Moon" || section.title === "The Moon in Our Skies" || section.title === "The Moon's Unseen Face") {
+      return "https://eyes.nasa.gov/apps/solar-system/#/earth/moons/moon";
+    }
+    
+    // Return the section's configured URL or empty string if none exists
+    return section.visualUrl || "";
+  };
+  
   const { title, description } = getPlaygroundInfo();
+  const playgroundUrl = getPlaygroundUrl();
   
   return (
     <div className="w-full h-full flex flex-col">
@@ -93,7 +105,7 @@ export const PlaygroundContent = ({ section, onComplete, onPrevious, isFirstCont
           <AspectRatio ratio={16/9} className="h-full">
             <iframe 
               className="w-full h-full"
-              src={section.visualUrl || ""}
+              src={playgroundUrl}
               title={`Interactive playground for ${section.title}`}
               frameBorder="0"
               allowFullScreen
