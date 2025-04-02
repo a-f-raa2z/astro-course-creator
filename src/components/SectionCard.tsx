@@ -54,6 +54,16 @@ const SectionCard = ({
       if (bonusUrls && bonusUrls.length > 0) {
         mockCourse.sections[index].bonusVideos = bonusUrls;
       }
+      
+      // Special case for section 6 - Mapping the Moon
+      if (index === 5 && title === "Mapping the Moon") {
+        mockCourse.sections[index].videoUrl = "https://www.youtube.com/embed/2iSZMv64wuU";
+        mockCourse.sections[index].bonusVideos = ["https://www.youtube.com/embed/j91XTV_p9pc"];
+        mockCourse.sections[index].visualUrl = "https://moon.nasa.gov/moon-observation/daily-moon-guide/?intent=021";
+        mockCourse.sections[index].visualGalleryUrl = "https://www.planetary.org/space-images/moon-features-you-can-see-from-earths-northern-hemisphere-square";
+        mockCourse.sections[index].funFacts = ["https://www.tiktok.com/t/ZT2G7Vmyd/", "https://www.tiktok.com/t/ZT2G761Ss/"];
+        mockCourse.sections[index].funFacts2 = ["https://www.youtube.com/embed/rVMvzH1FxfE", "https://www.youtube.com/embed/_fCQQybyiWM"];
+      }
     }
     
     navigate("/astronomy-course-start", { 

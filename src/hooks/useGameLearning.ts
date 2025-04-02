@@ -29,7 +29,20 @@ export const useGameLearning = (course: Course) => {
       return ['introduction'];
     }
     
-    // Special case for Moon section to include all content types
+    // Special case for Mapping the Moon section
+    if (section.title === "Mapping the Moon") {
+      return [
+        'introduction',
+        'video',
+        'fun-facts',
+        'bonus',
+        'playground',
+        'visual-gallery',
+        'quiz'
+      ];
+    }
+    
+    // Special case for Moon sections
     if (section.title === "The Moon" || section.title === "The Moon in Our Skies") {
       return [
         'introduction', 

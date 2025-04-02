@@ -19,6 +19,37 @@ export const FunFactsContent = ({ section, onComplete, onPrevious, isFirstConten
   
   // Get all fun facts videos for this section
   const getFunFactsVideos = () => {
+    // Mapping the Moon section special case
+    if (section.title === "Mapping the Moon") {
+      const videos = [];
+      
+      // Add funFacts if available
+      if (section.funFacts && section.funFacts.length > 0) {
+        videos.push(...section.funFacts.map((url, idx) => ({
+          url,
+          title: `Moon Mapping Fun Fact ${idx + 1}`,
+          description: "Learn interesting facts about the features and mapping of the lunar surface."
+        })));
+      }
+      
+      // Add funFacts2 if available
+      if (section.funFacts2 && section.funFacts2.length > 0) {
+        videos.push(...section.funFacts2.map((url, idx) => ({
+          url,
+          title: `Additional Moon Fact ${idx + 1}`,
+          description: "Discover more fascinating facts about our lunar neighbor."
+        })));
+      }
+      
+      return videos.length > 0 ? videos : [
+        { 
+          url: "https://www.youtube.com/embed/rVMvzH1FxfE", 
+          title: "Moon Fun Fact",
+          description: "Did you know these fascinating facts about the Moon?"
+        }
+      ];
+    }
+    
     // Moon section special case
     if (section.title === "The Moon" || section.title === "The Moon in Our Skies") {
       return [
@@ -35,6 +66,7 @@ export const FunFactsContent = ({ section, onComplete, onPrevious, isFirstConten
       ];
     }
     
+    // Add funFacts if available
     if (section.funFacts && section.funFacts.length > 0) {
       return section.funFacts.map((url, idx) => ({
         url,
@@ -43,7 +75,7 @@ export const FunFactsContent = ({ section, onComplete, onPrevious, isFirstConten
       }));
     }
 
-    // Add fun facts2 if available
+    // Add funFacts2 if available
     if (section.funFacts2 && section.funFacts2.length > 0) {
       return section.funFacts2.map((url, idx) => ({
         url,
@@ -62,7 +94,28 @@ export const FunFactsContent = ({ section, onComplete, onPrevious, isFirstConten
     ];
   };
   
-  const funFactsVideos = getFunFactsVideos();
+  // Combine both funFacts and funFacts2 arrays
+  const getAllFunFactsVideos = () => {
+    const videos = getFunFactsVideos();
+    
+    // Check if we need to convert TikTok URLs to embed URLs
+    return videos.map(video => {
+      let url = video.url;
+      
+      // Convert TikTok URLs to embed URLs if needed
+      if (url.includes('tiktok.com')) {
+        // For TikTok we display a message that it needs to be viewed on TikTok's site
+        return {
+          ...video,
+          isTikTok: true
+        };
+      }
+      
+      return video;
+    });
+  };
+  
+  const funFactsVideos = getAllFunFactsVideos();
   
   const nextVideo = () => {
     if (funFactsVideos.length > 1) {
@@ -77,6 +130,8 @@ export const FunFactsContent = ({ section, onComplete, onPrevious, isFirstConten
   };
 
   const showNavigation = funFactsVideos.length > 1;
+  const currentVideo = funFactsVideos[currentVideoIndex];
+  const isTikTok = currentVideo && currentVideo.isTikTok;
 
   return (
     <div className="w-full h-full flex flex-col">
@@ -122,15 +177,38 @@ export const FunFactsContent = ({ section, onComplete, onPrevious, isFirstConten
         </div>
         
         <div className="flex-grow relative">
-          <AspectRatio ratio={16/9} className="h-full">
-            <iframe 
-              className="w-full h-full"
-              src={funFactsVideos[currentVideoIndex].url}
-              title={funFactsVideos[currentVideoIndex].title}
-              frameBorder="0"
-              allowFullScreen
-            ></iframe>
-          </AspectRatio>
+          {isTikTok ? (
+            <div className="flex items-center justify-center h-full flex-col p-6 text-center">
+              <img 
+                src="/lovable-uploads/fb49e844-5050-4fb0-9560-fd65c5e4dad5.png" 
+                alt="TikTok Logo" 
+                className="w-24 h-24 mb-4"
+              />
+              <h3 className="text-2xl font-bold text-white mb-2">{currentVideo.title}</h3>
+              <p className="text-lg text-gray-300 mb-6">{currentVideo.description}</p>
+              <div className="bg-black/30 p-4 rounded-lg max-w-md">
+                <p className="text-white mb-4">TikTok content needs to be viewed directly on TikTok's website due to embedding restrictions.</p>
+                <a
+                  href={currentVideo.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block px-6 py-3 bg-[#fe2c55] text-white font-semibold rounded-md hover:bg-opacity-90 transition-all"
+                >
+                  Watch on TikTok
+                </a>
+              </div>
+            </div>
+          ) : (
+            <AspectRatio ratio={16/9} className="h-full">
+              <iframe 
+                className="w-full h-full"
+                src={currentVideo.url}
+                title={currentVideo.title}
+                frameBorder="0"
+                allowFullScreen
+              ></iframe>
+            </AspectRatio>
+          )}
           
           {showNavigation && (
             <>
