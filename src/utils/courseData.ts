@@ -1,4 +1,402 @@
+
 import { Course } from "@/types/course";
+
+export const assessmentQuestions = [
+  {
+    id: "interest",
+    question: "What aspect of space interests you most?",
+    description: "This helps us tailor the content to your preferences.",
+    options: [
+      {
+        id: "planets",
+        label: "Planets and moons",
+        icon: "Planet"
+      },
+      {
+        id: "stars",
+        label: "Stars and galaxies",
+        icon: "Stars"
+      },
+      {
+        id: "exploration",
+        label: "Space exploration",
+        icon: "Rocket"
+      },
+      {
+        id: "phenomena",
+        label: "Cosmic phenomena",
+        icon: "Zap"
+      }
+    ]
+  },
+  {
+    id: "level",
+    question: "How would you describe your knowledge of astronomy?",
+    description: "We'll adjust the complexity of the content accordingly.",
+    options: [
+      {
+        id: "beginner",
+        label: "Beginner",
+        icon: "Sparkles"
+      },
+      {
+        id: "intermediate",
+        label: "Intermediate",
+        icon: "Star"
+      },
+      {
+        id: "advanced",
+        label: "Advanced",
+        icon: "Telescope"
+      },
+      {
+        id: "expert",
+        label: "Expert",
+        icon: "Binary"
+      }
+    ]
+  },
+  {
+    id: "learningStyle",
+    question: "How do you prefer to learn?",
+    description: "We'll emphasize content that matches your learning style.",
+    options: [
+      {
+        id: "visual",
+        label: "Visual learning",
+        icon: "Eye"
+      },
+      {
+        id: "reading",
+        label: "Reading text",
+        icon: "BookOpen"
+      },
+      {
+        id: "interactive",
+        label: "Interactive exercises",
+        icon: "Mouse"
+      },
+      {
+        id: "video",
+        label: "Video content",
+        icon: "Video"
+      }
+    ]
+  }
+];
+
+// Add the aiCourseData that was missing
+export const aiCourseData: Course = {
+  id: "ai-101",
+  title: "Introduction to Artificial Intelligence",
+  description:
+    "Explore the fascinating world of artificial intelligence, from basic concepts to cutting-edge applications. Learn about machine learning, neural networks, and how AI is shaping our future.",
+  forInterest: "artificial intelligence",
+  forLevel: "intermediate",
+  forLearningStyle: "visual",
+  sections: [
+    {
+      id: "ai-section-1",
+      title: "Intro of Artificial Intelligence",
+      introduction:
+        "An overview of what AI is, its history, and why it's important in today's world.",
+      whyLearn:
+        "Understanding AI fundamentals helps appreciate its capabilities, limitations, and ethical implications.",
+      videoUrl: "https://www.youtube.com/embed/oV74Najm6Nc",
+      keyPoints: [
+        "AI refers to systems that can perform tasks requiring human intelligence.",
+        "The term 'Artificial Intelligence' was coined in 1956 at Dartmouth College.",
+        "AI can be narrow (specific tasks) or general (human-like intelligence).",
+        "Machine learning is a subset of AI focused on learning from data.",
+        "Ethics and responsible AI development are crucial considerations."
+      ],
+      shortVideo: "https://www.youtube.com/embed/LZ8sZnNQ6JA",
+      additionalShortVideos: [
+        "https://www.youtube.com/embed/a0_lo_GDcFw",
+        "https://www.youtube.com/embed/kWmX3pd1f10"
+      ],
+      bonusVideos: [
+        "https://www.youtube.com/embed/5pRE-J053xU",
+        "https://www.youtube.com/embed/ad79nYk2keg"
+      ],
+      image: {
+        url: "/lovable-uploads/d3507279-5142-4833-b3ff-7603ecd9be87.png",
+        description: "A visual representation of artificial intelligence concepts."
+      },
+      quiz: {
+        question: "Which of these is NOT a type of AI?",
+        options: ["Narrow AI", "General AI", "Super AI", "Natural AI"],
+        correctAnswer: 3
+      }
+    },
+    {
+      id: "ai-section-2",
+      title: "Machine Learning",
+      introduction:
+        "Explore how machines can learn from data to make predictions or decisions without being explicitly programmed.",
+      whyLearn:
+        "Machine learning powers many modern applications, from recommendation systems to predictive analytics.",
+      videoUrl: "https://www.youtube.com/embed/HcqpanDadyQ",
+      keyPoints: [
+        "Machine learning algorithms improve through experience and data.",
+        "Supervised learning uses labeled data to make predictions.",
+        "Unsupervised learning finds patterns in unlabeled data.",
+        "Reinforcement learning learns through trial and error with rewards.",
+        "Feature selection and engineering are crucial for ML performance."
+      ],
+      shortVideo: "https://www.youtube.com/embed/f_uwKZIAeM0",
+      additionalShortVideos: [
+        "https://www.youtube.com/embed/IpGxLWOIZy4",
+        "https://www.youtube.com/embed/EuK2wsuUJQ0"
+      ],
+      bonusVideos: [
+        "https://www.youtube.com/embed/NMIUCZgezE8",
+        "https://www.youtube.com/embed/40riCqvRoMs"
+      ],
+      image: {
+        url: "/lovable-uploads/46e4fa94-5626-45ca-b547-dd52d6d65789.png",
+        description: "A diagram showing different machine learning approaches."
+      },
+      quiz: {
+        question: "Which learning type uses labeled training data?",
+        options: ["Unsupervised Learning", "Supervised Learning", "Reinforcement Learning", "Transfer Learning"],
+        correctAnswer: 1
+      }
+    },
+    {
+      id: "ai-section-3",
+      title: "Deep Learning",
+      introduction:
+        "Discover neural networks and how they're revolutionizing AI capabilities through multi-layered learning.",
+      whyLearn:
+        "Deep learning has enabled breakthroughs in computer vision, natural language processing, and more.",
+      videoUrl: "https://www.youtube.com/embed/DooxDIRAkPA",
+      keyPoints: [
+        "Deep learning uses neural networks with multiple layers.",
+        "Each layer in a neural network extracts different features from data.",
+        "Deep learning requires large amounts of data and computational power.",
+        "Convolutional neural networks excel at image recognition tasks.",
+        "Recurrent neural networks are designed for sequential data like text."
+      ],
+      shortVideo: "https://www.youtube.com/embed/6M5VXKLf4D4",
+      additionalShortVideos: [
+        "https://www.youtube.com/embed/O5xeyoRL95U",
+        "https://www.youtube.com/embed/ILsA4nyG7I0"
+      ],
+      bonusVideos: [
+        "https://www.youtube.com/embed/oJNHXPs0XDk",
+        "https://www.youtube.com/embed/zBdrhfjt0K4"
+      ],
+      image: {
+        url: "/lovable-uploads/3d8b75cf-5e69-49ac-9444-9c3f6c33fb4c.png",
+        description: "A visual representation of deep neural networks."
+      },
+      quiz: {
+        question: "Which neural network type is specially designed for image processing?",
+        options: ["Recurrent Neural Network", "Convolutional Neural Network", "Generative Adversarial Network", "Transformer Network"],
+        correctAnswer: 1
+      }
+    },
+    {
+      id: "ai-section-4",
+      title: "Generative AI",
+      introduction:
+        "Explore how AI can create new content like images, music, text, and more.",
+      whyLearn:
+        "Generative AI is transforming creative industries and enabling new forms of human-AI collaboration.",
+      videoUrl: "https://www.youtube.com/embed/4zMLIe2tLLI",
+      keyPoints: [
+        "Generative AI creates new content based on patterns in training data.",
+        "Generative Adversarial Networks (GANs) use competing neural networks.",
+        "Diffusion models gradually transform noise into coherent content.",
+        "Text-to-image models like DALL-E and Stable Diffusion create images from descriptions.",
+        "Large Language Models can generate human-like text conversations."
+      ],
+      shortVideo: "https://www.youtube.com/embed/yi3WnBJ3Jds",
+      additionalShortVideos: [
+        "https://www.youtube.com/embed/WTl4XbOUgAk",
+        "https://www.youtube.com/embed/1CIpzeNxIhU"
+      ],
+      bonusVideos: [
+        "https://www.youtube.com/embed/8BG8gGtq-Mg",
+        "https://www.youtube.com/embed/R_f-v6prMqI"
+      ],
+      visualUrl: "https://editor.p5js.org/ml5/full/jE-5p5XhK",
+      image: {
+        url: "/lovable-uploads/930c9c02-d768-4457-9ff9-0304dc9579c7.png",
+        description: "Examples of AI-generated artwork and design."
+      },
+      quiz: {
+        question: "What do GANs consist of?",
+        options: [
+          "A generator and a discriminator",
+          "A compiler and an interpreter",
+          "An encoder and a decoder",
+          "A transformer and a processor"
+        ],
+        correctAnswer: 0
+      }
+    },
+    {
+      id: "ai-section-5",
+      title: "Chatbots",
+      introduction:
+        "Learn how conversational AI works and how it's changing how we interact with technology.",
+      whyLearn:
+        "Chatbots and virtual assistants are becoming ubiquitous in customer service, personal assistance, and more.",
+      videoUrl: "https://www.youtube.com/embed/pX2qR_UPDGo",
+      keyPoints: [
+        "Modern chatbots use natural language processing to understand context.",
+        "Large language models power the most advanced conversational AI systems.",
+        "Intent recognition helps chatbots understand what users want to achieve.",
+        "Entity extraction identifies specific information in user queries.",
+        "Dialog management handles the flow of conversation."
+      ],
+      shortVideo: "https://www.youtube.com/embed/sgUFDbj4qos",
+      additionalShortVideos: [
+        "https://www.youtube.com/embed/KNJ19rIgBi4",
+        "https://www.youtube.com/embed/9n7pPEO8xbY"
+      ],
+      bonusVideos: [
+        "https://www.youtube.com/embed/aiwv-rJwS_c",
+        "https://www.youtube.com/embed/PjoP3RNIxA4"
+      ],
+      image: {
+        url: "/lovable-uploads/3215a500-d237-40e1-aecb-2a9e2b64ee10.png",
+        description: "A visual representation of conversational AI systems."
+      },
+      quiz: {
+        question: "What technology allows chatbots to understand the meaning of text?",
+        options: [
+          "Computer vision",
+          "Natural language processing",
+          "Blockchain",
+          "Quantum computing"
+        ],
+        correctAnswer: 1
+      }
+    },
+    {
+      id: "ai-section-6",
+      title: "Robots and Automation",
+      introduction:
+        "Discover how AI is empowering physical machines to perform complex tasks and interact with the world.",
+      whyLearn:
+        "Robotics and automation are transforming manufacturing, healthcare, logistics, and everyday life.",
+      videoUrl: "https://www.youtube.com/embed/sOEg_YZQsTI",
+      keyPoints: [
+        "Robots combine AI with mechanical engineering for physical interaction.",
+        "Computer vision helps robots perceive and navigate their environment.",
+        "Reinforcement learning allows robots to learn complex physical tasks.",
+        "Collaborative robots (cobots) work alongside humans safely.",
+        "Autonomous vehicles use multiple AI technologies to navigate."
+      ],
+      shortVideo: "https://www.youtube.com/embed/fn3KWM1kuAw",
+      additionalShortVideos: [
+        "https://www.youtube.com/embed/hSh_UFS1jdA",
+        "https://www.youtube.com/embed/jnEBWHkGIhE"
+      ],
+      bonusVideos: [
+        "https://www.youtube.com/embed/cYUdE5fkxck",
+        "https://www.youtube.com/embed/ysomllz9J5A"
+      ],
+      image: {
+        url: "/lovable-uploads/a8856a2f-8eb5-4bfc-91c3-b4baf426b804.png",
+        description: "A robot working in an automated environment."
+      },
+      quiz: {
+        question: "Which term describes robots designed to work safely alongside humans?",
+        options: [
+          "Autonomous robots",
+          "Humanoid robots",
+          "Collaborative robots",
+          "Android robots"
+        ],
+        correctAnswer: 2
+      }
+    },
+    {
+      id: "ai-section-7",
+      title: "AI for Music",
+      introduction:
+        "Explore how AI is creating new sounds, helping musicians compose, and transforming the music industry.",
+      whyLearn:
+        "AI music tools are creating new possibilities for creation, production, and discovery.",
+      videoUrl: "https://www.youtube.com/embed/T44KYYTuSIE",
+      keyPoints: [
+        "AI can generate original musical compositions in various styles.",
+        "Neural networks can be trained on specific genres or artists.",
+        "AI assists with mixing, mastering, and music production.",
+        "Music recommendation systems use AI to personalize playlists.",
+        "Some AI tools can separate vocals from instrumental tracks."
+      ],
+      shortVideo: "https://www.youtube.com/embed/plC7CiOE2UU",
+      additionalShortVideos: [
+        "https://www.youtube.com/embed/33xGQATVL5Y",
+        "https://www.youtube.com/embed/vgYS-dI1I2s"
+      ],
+      bonusVideos: [
+        "https://www.youtube.com/embed/uPBO5kjW3yk",
+        "https://www.youtube.com/embed/vNqAufuXPAI"
+      ],
+      visualUrl: "https://artsandculture.google.com/experiment/blob-opera/AAHWrq360NcGbw",
+      image: {
+        url: "/lovable-uploads/dac0c33f-58a2-44f3-81eb-5f00fda40b1b.png",
+        description: "AI-generated musical notation and audio visualization."
+      },
+      quiz: {
+        question: "What can AI music tools do?",
+        options: [
+          "Only generate simple melodies",
+          "Compose music but can't perform it",
+          "Generate complete compositions in various styles",
+          "Only remix existing music"
+        ],
+        correctAnswer: 2
+      }
+    },
+    {
+      id: "ai-section-8",
+      title: "AI for Arts",
+      introduction:
+        "Discover how AI is creating new artistic possibilities and transforming creative expression.",
+      whyLearn:
+        "AI art tools are enabling new forms of creativity and challenging our understanding of art.",
+      videoUrl: "https://www.youtube.com/embed/9Mxw_ilpvwA",
+      keyPoints: [
+        "AI can generate original images, paintings, and designs.",
+        "Text-to-image models transform descriptions into visual art.",
+        "Style transfer allows applying artistic styles to photographs.",
+        "AI art raises questions about creativity and authorship.",
+        "Artists are incorporating AI as a collaborative creative tool."
+      ],
+      shortVideo: "https://www.youtube.com/embed/I-EIVlHvHRM",
+      additionalShortVideos: [
+        "https://www.youtube.com/embed/9bcQwYCtg8Y",
+        "https://www.youtube.com/embed/cu3GPkcc5w4"
+      ],
+      bonusVideos: [
+        "https://www.youtube.com/embed/ga9_QlpfG8U",
+        "https://www.youtube.com/embed/JRclN2qpzUc"
+      ],
+      visualUrl: "https://experiments.withgoogle.com/collection/ai",
+      image: {
+        url: "/lovable-uploads/930c9c02-d768-4457-9ff9-0304dc9579c7.png",
+        description: "Examples of AI-generated artwork in various styles."
+      },
+      quiz: {
+        question: "What is 'style transfer' in AI art?",
+        options: [
+          "Copying an artist's signature",
+          "Applying the visual style of one image to another",
+          "Transferring ownership of digital art",
+          "Converting between art mediums"
+        ],
+        correctAnswer: 1
+      }
+    }
+  ]
+};
 
 export const generateMockCourse = (
   interest: string,
