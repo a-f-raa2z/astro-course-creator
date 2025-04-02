@@ -28,7 +28,6 @@ export const useGameLearning = (course: Course) => {
       return ['introduction'];
     }
     
-    // Special case for The Solar System section - add fun facts
     if (section.title === "The Solar System") {
       return [
         'introduction',
@@ -38,7 +37,6 @@ export const useGameLearning = (course: Course) => {
       ];
     }
     
-    // Special case for Inner Planets section
     if (section.title === "The Inner Planets") {
       return [
         'introduction',
@@ -48,7 +46,6 @@ export const useGameLearning = (course: Course) => {
       ];
     }
     
-    // Special case for Earth section
     if (section.title === "Earth") {
       return [
         'introduction',
@@ -59,7 +56,6 @@ export const useGameLearning = (course: Course) => {
       ];
     }
     
-    // Special case for Mapping the Moon section
     if (section.title === "Mapping the Moon") {
       return [
         'introduction',
@@ -72,7 +68,6 @@ export const useGameLearning = (course: Course) => {
       ];
     }
     
-    // Special case for Venus section
     if (section.title === "Venus") {
       return [
         'introduction',
@@ -83,7 +78,6 @@ export const useGameLearning = (course: Course) => {
       ];
     }
     
-    // Special case for Mercury section
     if (section.title === "Mercury") {
       return [
         'introduction',
@@ -95,7 +89,6 @@ export const useGameLearning = (course: Course) => {
       ];
     }
     
-    // Special case for Moon sections
     if (section.title === "The Moon" || section.title === "The Moon in Our Skies" || section.title === "The Moon's Unseen Face") {
       return [
         'introduction', 
@@ -108,7 +101,6 @@ export const useGameLearning = (course: Course) => {
       ];
     }
     
-    // Special case for Roving over Mars - updated content
     if (section.title === "Roving over Mars") {
       return [
         'introduction',
@@ -119,7 +111,6 @@ export const useGameLearning = (course: Course) => {
       ];
     }
     
-    // For all other sections (including 8-15)
     const contentTypes: ContentType['type'][] = ['introduction', 'video'];
     
     if (section.shortVideo) {
@@ -152,15 +143,12 @@ export const useGameLearning = (course: Course) => {
     return contentTypes;
   };
 
-  // Ensure sections 8-15 have 5 quizzes each
   useEffect(() => {
     if (course && course.sections) {
-      // For sections 8-15, check if they already have 5 quizzes
       for (let i = 8; i <= 15 && i < course.sections.length; i++) {
         const section = course.sections[i];
         
         if (section && (!section.quizzes || section.quizzes.length < 5)) {
-          // Generate 5 quizzes for the section, or keep existing ones
           section.quizzes = generateQuizzesForSection(section);
         }
       }
@@ -168,16 +156,13 @@ export const useGameLearning = (course: Course) => {
   }, [course]);
   
   const generateQuizzesForSection = (section: CourseSection): any[] => {
-    // If section already has some quizzes, use those
     const existingQuizzes = section.quizzes || [];
     if (existingQuizzes.length === 5) {
       return existingQuizzes;
     }
     
-    // Start with existing quiz as the first quiz
     const quizzes = existingQuizzes.length > 0 ? [...existingQuizzes] : [section.quiz];
     
-    // For Venus specifically, return the predefined set of 5 quizzes
     if (section.title === "Venus") {
       return [
         {
@@ -208,9 +193,67 @@ export const useGameLearning = (course: Course) => {
       ];
     }
     
-    // Add default generated quizzes based on section title to reach 5 quizzes
+    if (section.title === "Mercury") {
+      return [
+        {
+          question: "Which planet is closest to the Sun?",
+          options: ["Venus", "Earth", "Mars", "Mercury"],
+          correctAnswer: 3
+        },
+        {
+          question: "What's surprising about Mercury's temperature?",
+          options: ["Always hot", "Cold all the time", "Extreme hot and cold", "Covered in snow"],
+          correctAnswer: 2
+        },
+        {
+          question: "Does Mercury have any moons?",
+          options: ["One", "Two", "None", "Five"],
+          correctAnswer: 2
+        },
+        {
+          question: "What is Mercury's surface like?",
+          options: ["Gas", "Ocean", "Rocky with craters", "Lush forests"],
+          correctAnswer: 2
+        },
+        {
+          question: "How long does Mercury take to orbit the Sun?",
+          options: ["365 days", "88 days", "180 days", "24 hours"],
+          correctAnswer: 1
+        }
+      ];
+    }
+    
+    if (section.title === "Messenger at Mercury") {
+      return [
+        {
+          question: "What was MESSENGER's job?",
+          options: ["Take selfies", "Map Mercury", "Fly to Mars", "Study the Moon"],
+          correctAnswer: 1
+        },
+        {
+          question: "What did MESSENGER discover on Mercury?",
+          options: ["Aliens", "Volcanoes", "Ice", "Canyons"],
+          correctAnswer: 2
+        },
+        {
+          question: "How did MESSENGER end its mission?",
+          options: ["Landed safely", "Flew to Venus", "Crashed into Mercury", "Got lost in space"],
+          correctAnswer: 2
+        },
+        {
+          question: "Why was it hard for MESSENGER to orbit Mercury?",
+          options: ["Too much wind", "High gravity", "Close to Sun's heat", "Too small"],
+          correctAnswer: 2
+        },
+        {
+          question: "What's one cool fact from MESSENGER's mission?",
+          options: ["Mercury has no gravity", "Mercury is shrinking", "Mercury has clouds", "Mercury has rings"],
+          correctAnswer: 1
+        }
+      ];
+    }
+    
     if (quizzes.length < 5) {
-      // Generate generic questions based on section title
       const additionalQuizzes = generateGenericQuizzes(section, 5 - quizzes.length);
       quizzes.push(...additionalQuizzes);
     }
@@ -222,7 +265,6 @@ export const useGameLearning = (course: Course) => {
     const quizzes = [];
     const title = section.title;
     
-    // Generate quizzes based on section title
     switch (title) {
       case "Mercury":
         quizzes.push(
@@ -300,7 +342,6 @@ export const useGameLearning = (course: Course) => {
         break;
         
       default:
-        // Generic space-related questions if no specific section content
         for (let i = 0; i < count; i++) {
           quizzes.push({
             question: `Question ${i+1} about ${title}?`,
@@ -310,7 +351,6 @@ export const useGameLearning = (course: Course) => {
         }
     }
     
-    // Return only the number of quizzes requested
     return quizzes.slice(0, count);
   };
 
@@ -380,9 +420,8 @@ export const useGameLearning = (course: Course) => {
     if (currentContentIndex < availableContentTypes.length - 1) {
       setCurrentContentIndex(prevIndex => prevIndex + 1);
     } else if (currentSectionIndex < course.sections.length - 1) {
-      // Section is complete, but we don't automatically move to the next section
-      // We let the section transition UI handle this instead
-      // The AstronomyCourseStartPage will show the transition screen
+      setCurrentSectionIndex(prevIndex => prevIndex + 1);
+      setCurrentContentIndex(0);
     } else {
       toast({
         title: "🎉 Course Complete! 🎉",
