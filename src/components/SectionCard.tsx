@@ -1,3 +1,4 @@
+
 import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -133,22 +134,23 @@ const SectionCard = ({
       case "The Inner Planets":
         return "/lovable-uploads/0228ba3e-a126-45c3-a728-10da3a418e4e.png";
       case "Earth":
-        return "/lovable-uploads/34bde558-8d2c-41ff-bd25-b4c545393355.png"; // Updated Earth image
+        return "/lovable-uploads/34bde558-8d2c-41ff-bd25-b4c545393355.png";
       case "The Moon":
-      case "The Moon in Our Skies":
         return "/lovable-uploads/54548175-965e-4d7f-ae75-071e6b49cb4d.png";
+      case "The Moon in Our Skies":
+        return "/lovable-uploads/f04bd424-c991-4a08-8792-e83af1f09539.png"; // Updated Moon in Our Skies image
       case "The Moon's Unseen Face":
         return "/lovable-uploads/52a450ef-41cd-45ec-90a2-c256e58d0d6a.png";
       case "Mapping the Moon":
-        return "/lovable-uploads/1afadff6-a4c9-48c7-a8d6-5fe1fcecc2dd.png"; // Updated Mapping the Moon image
+        return "/lovable-uploads/1afadff6-a4c9-48c7-a8d6-5fe1fcecc2dd.png";
       case "Venus":
-        return "/lovable-uploads/b87f40a8-a8d2-42de-943b-b6f586bc75b1.png"; // Updated Venus image
+        return "/lovable-uploads/b87f40a8-a8d2-42de-943b-b6f586bc75b1.png";
       case "Mercury":
-        return "/lovable-uploads/46193bf4-1ca3-4f35-92c5-8ce7b94e9165.png"; // Updated Mercury image
+        return "/lovable-uploads/46193bf4-1ca3-4f35-92c5-8ce7b94e9165.png";
       case "Messenger at Mercury":
-        return "/lovable-uploads/8da06395-44da-4447-93f0-da38fbbbff6c.png";
+        return "/lovable-uploads/bee533e9-3edc-4aa8-8fd6-2ee0683ab436.png"; // Updated Messenger at Mercury image
       case "The Sun":
-        return "/lovable-uploads/0f346c00-bd6b-4610-aa4e-83dec78f53e3.png";
+        return "/lovable-uploads/17b434e9-217c-4068-8b8b-1c628209901d.png"; // Updated Sun image
       case "Close to the Sun":
         return "/lovable-uploads/6d50892d-4935-4033-bcfc-2a998579227e.png";
       case "Mars":

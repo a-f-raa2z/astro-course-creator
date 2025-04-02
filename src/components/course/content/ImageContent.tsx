@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { CourseSection } from "@/types/course";
 import { Button } from "@/components/ui/button";
@@ -32,10 +33,17 @@ export const ImageContent = ({ section, onComplete, onPrevious, isFirstContent }
       };
     }
     
-    if (sectionTitle === "The Moon" || sectionTitle === "The Moon in Our Skies") {
+    if (sectionTitle === "The Moon") {
       return {
         url: "/lovable-uploads/54548175-965e-4d7f-ae75-071e6b49cb4d.png", 
         description: "Earth rising above the lunar surface, as seen from the Moon. This iconic view shows our planet suspended in the blackness of space above the barren lunar landscape." 
+      };
+    }
+    
+    if (sectionTitle === "The Moon in Our Skies") {
+      return {
+        url: "/lovable-uploads/f04bd424-c991-4a08-8792-e83af1f09539.png", 
+        description: "A full moon rising over a mountain landscape at dusk, with a gradient blue sky and the silhouette of hills on the horizon. This view represents how we see the Moon from Earth." 
       };
     }
     
@@ -76,15 +84,15 @@ export const ImageContent = ({ section, onComplete, onPrevious, isFirstContent }
     
     if (sectionTitle === "Messenger at Mercury") {
       return {
-        url: "/lovable-uploads/8da06395-44da-4447-93f0-da38fbbbff6c.png", 
-        description: "NASA's MESSENGER spacecraft orbiting Mercury, shown against the backdrop of the planet's cratered surface." 
+        url: "/lovable-uploads/bee533e9-3edc-4aa8-8fd6-2ee0683ab436.png", 
+        description: "NASA's MESSENGER spacecraft orbiting Mercury, shown against the backdrop of the planet's cratered, blue-tinted surface. The spacecraft's solar panels and scientific instruments are visible as it conducts its mission to study Mercury's composition and environment." 
       };
     }
     
     if (sectionTitle === "The Sun") {
       return {
-        url: "/lovable-uploads/0f346c00-bd6b-4610-aa4e-83dec78f53e3.png", 
-        description: "The Sun seen in visible light, showing its perfect spherical shape and surface features like sunspots." 
+        url: "/lovable-uploads/17b434e9-217c-4068-8b8b-1c628209901d.png", 
+        description: "The Sun captured in visible light showing its perfect spherical shape and uniform orange-yellow surface. Small dark spots visible on the surface are sunspots, regions of intense magnetic activity that appear darker because they're slightly cooler than the surrounding areas." 
       };
     }
     
