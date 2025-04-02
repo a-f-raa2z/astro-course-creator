@@ -732,3 +732,40 @@ export const generateMockCourse = (
           correctAnswer: 2
         },
         quizzes: [
+          {
+            question: "What is a lunar crater?",
+            options: [
+              "A Moon mountain",
+              "A Moon lake",
+              "A hole from an impact",
+              "A volcano"
+            ],
+            correctAnswer: 2
+          },
+          {
+            question: "Which missions helped us map the Moon?",
+            options: ["Mars Rover", "Apollo missions", "Hubble Telescope", "ISS"],
+            correctAnswer: 1
+          },
+          {
+            question: "What tool do scientists use to map the Moon?",
+            options: ["Binoculars", "Seismographs", "Radar", "Lasers"],
+            correctAnswer: 2
+          },
+          {
+            question: "Why map the Moon?",
+            options: ["To build houses", "For selfies", "To understand its surface", "To find treasure"],
+            correctAnswer: 2
+          },
+          {
+            question: "What part of the Moon do we map less?",
+            options: ["Near side", "Middle", "Equator", "Far side"],
+            correctAnswer: 3
+          }
+        ]
+      }
+    ]
+  };
+  
+  return baseCourse;
+};
