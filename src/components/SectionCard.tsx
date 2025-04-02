@@ -1,3 +1,4 @@
+
 import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -108,7 +109,7 @@ const SectionCard = ({
       case "The Inner Planets":
         return "/lovable-uploads/0228ba3e-a126-45c3-a728-10da3a418e4e.png";
       case "Earth":
-        return "/lovable-uploads/33c5fd2a-7ff7-4d34-9ef0-f9b065b5caa5.png";
+        return "/lovable-uploads/34bde558-8d2c-41ff-bd25-b4c545393355.png"; // Updated Earth image
       case "The Moon":
       case "The Moon in Our Skies":
         return "/lovable-uploads/54548175-965e-4d7f-ae75-071e6b49cb4d.png";

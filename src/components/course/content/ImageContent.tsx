@@ -28,8 +28,8 @@ export const ImageContent = ({ section, onComplete, onPrevious, isFirstContent }
     
     if (sectionTitle === "Earth") {
       return {
-        url: "/lovable-uploads/33c5fd2a-7ff7-4d34-9ef0-f9b065b5caa5.png", 
-        description: "Earth as seen from space, showing the blue oceans, white clouds, and green and brown landmasses that make our planet unique in the solar system." 
+        url: "/lovable-uploads/34bde558-8d2c-41ff-bd25-b4c545393355.png", // Updated Earth image
+        description: "Earth as seen from space, showing North America, Central America, and parts of South America with blue oceans, white cloud patterns, and the diverse terrain of the continental landmasses."
       };
     }
     
