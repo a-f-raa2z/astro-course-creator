@@ -146,7 +146,7 @@ const SectionCard = ({
       case "Mapping the Moon":
         return "/lovable-uploads/1afadff6-a4c9-48c7-a8d6-5fe1fcecc2dd.png"; // Updated Mapping the Moon image
       case "Venus":
-        return "/lovable-uploads/9a4d825b-6142-476f-b40c-2adbc7b34524.png";
+        return "/lovable-uploads/b87f40a8-a8d2-42de-943b-b6f586bc75b1.png"; // Updated Venus image
       case "Mercury":
         return "/lovable-uploads/eec8c514-41eb-4020-ad57-6841a15298df.png";
       case "Messenger at Mercury":

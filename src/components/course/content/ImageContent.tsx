@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { CourseSection } from "@/types/course";
 import { Button } from "@/components/ui/button";
@@ -64,8 +63,8 @@ export const ImageContent = ({ section, onComplete, onPrevious, isFirstContent }
     
     if (sectionTitle === "Venus") {
       return {
-        url: "/lovable-uploads/9a4d825b-6142-476f-b40c-2adbc7b34524.png", 
-        description: "Venus, with its thick cloud cover giving it a yellowish appearance, is the hottest planet in our solar system despite not being the closest to the Sun." 
+        url: "/lovable-uploads/b87f40a8-a8d2-42de-943b-b6f586bc75b1.png", 
+        description: "Venus, with its thick, golden cloud cover illuminated by the Sun. Although similar in size to Earth, Venus has a harsh, hot environment with a thick atmosphere primarily composed of carbon dioxide, making it the hottest planet in our solar system."
       };
     }
     
