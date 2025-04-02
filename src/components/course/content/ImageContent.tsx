@@ -17,7 +17,6 @@ export const ImageContent = ({ section, onComplete, onPrevious, isFirstContent }
   const [imageCaptured, setImageCaptured] = useState(false);
   const { toast } = useToast();
   
-  // Define images based on section title
   const getSectionImage = (sectionTitle: string) => {
     if (sectionTitle === "The Inner Planets") {
       return {
@@ -28,7 +27,7 @@ export const ImageContent = ({ section, onComplete, onPrevious, isFirstContent }
     
     if (sectionTitle === "Earth") {
       return {
-        url: "/lovable-uploads/34bde558-8d2c-41ff-bd25-b4c545393355.png", // Updated Earth image
+        url: "/lovable-uploads/34bde558-8d2c-41ff-bd25-b4c545393355.png", 
         description: "Earth as seen from space, showing North America, Central America, and parts of South America with blue oceans, white cloud patterns, and the diverse terrain of the continental landmasses."
       };
     }
@@ -70,8 +69,8 @@ export const ImageContent = ({ section, onComplete, onPrevious, isFirstContent }
     
     if (sectionTitle === "Mercury") {
       return {
-        url: "/lovable-uploads/eec8c514-41eb-4020-ad57-6841a15298df.png", 
-        description: "Mercury shown in two views: a grayscale image showing its cratered surface (left) and a false-color image highlighting its chemical composition (right)." 
+        url: "/lovable-uploads/46193bf4-1ca3-4f35-92c5-8ce7b94e9165.png", 
+        description: "Mercury shown in two views: a grayscale image showing its cratered surface (left) and a false-color image highlighting its chemical composition and mineral distribution (right)." 
       };
     }
     
@@ -166,7 +165,6 @@ export const ImageContent = ({ section, onComplete, onPrevious, isFirstContent }
       };
     }
     
-    // Default image for any section without a specific image
     return {
       url: "https://science.nasa.gov/wp-content/uploads/2023/09/solar-system-illustration-new-horizons-trajectory.width-1320.jpg", 
       description: "Visual representation of " + sectionTitle + ". Capturing this image will help you remember the key concepts." 
@@ -189,7 +187,6 @@ export const ImageContent = ({ section, onComplete, onPrevious, isFirstContent }
     <div className="w-full h-full">
       <Card className="w-full h-full overflow-hidden flex flex-col bg-space-cosmic-blue/20 backdrop-blur-sm border border-purple-500/20">
         <div className="p-4">
-          {/* Navigation buttons row - placed between tabs and title */}
           <div className="flex justify-between items-center mb-4">
             <div>
               {!isFirstContent && (
@@ -237,7 +234,6 @@ export const ImageContent = ({ section, onComplete, onPrevious, isFirstContent }
             />
           </div>
           
-          {/* Capture button positioned in the top-right corner */}
           <div className="absolute top-4 right-4 z-10">
             <Button 
               variant="outline" 

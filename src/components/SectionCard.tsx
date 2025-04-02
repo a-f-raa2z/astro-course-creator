@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -55,7 +54,6 @@ const SectionCard = ({
         mockCourse.sections[index].bonusVideos = bonusUrls;
       }
       
-      // Special case for section 6 - Mapping the Moon
       if (index === 5 && title === "Mapping the Moon") {
         mockCourse.sections[index].videoUrl = "https://www.youtube.com/embed/2iSZMv64wuU";
         mockCourse.sections[index].bonusVideos = ["https://www.youtube.com/embed/j91XTV_p9pc"];
@@ -65,13 +63,11 @@ const SectionCard = ({
         mockCourse.sections[index].funFacts2 = ["https://www.youtube.com/embed/rVMvzH1FxfE", "https://www.youtube.com/embed/_fCQQybyiWM"];
       }
       
-      // Special case for section 0 - The Inner Planets
       if (index === 0 && title === "The Inner Planets") {
         mockCourse.sections[index].videoUrl = "https://www.youtube.com/embed/05E1uMh15QQ";
         mockCourse.sections[index].bonusVideos = ["https://www.youtube.com/embed/_rzAbPtUamA", "https://www.youtube.com/embed/4qCczin1Muo"];
       }
       
-      // Special case for section 2 - Earth
       if (index === 2 && title === "Earth") {
         mockCourse.sections[index].videoUrl = "https://www.youtube.com/embed/HCDVN7DCzYE";
         mockCourse.sections[index].bonusVideos = [
@@ -148,7 +144,7 @@ const SectionCard = ({
       case "Venus":
         return "/lovable-uploads/b87f40a8-a8d2-42de-943b-b6f586bc75b1.png"; // Updated Venus image
       case "Mercury":
-        return "/lovable-uploads/eec8c514-41eb-4020-ad57-6841a15298df.png";
+        return "/lovable-uploads/46193bf4-1ca3-4f35-92c5-8ce7b94e9165.png"; // Updated Mercury image
       case "Messenger at Mercury":
         return "/lovable-uploads/8da06395-44da-4447-93f0-da38fbbbff6c.png";
       case "The Sun":
