@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { CourseSection } from "@/types/course";
 import { Button } from "@/components/ui/button";
@@ -40,10 +41,17 @@ export const ImageContent = ({ section, onComplete, onPrevious, isFirstContent }
       };
     }
     
-    if (sectionTitle === "The Moon's Unseen Face" || sectionTitle === "Mapping the Moon") {
+    if (sectionTitle === "The Moon's Unseen Face") {
       return {
         url: "/lovable-uploads/52a450ef-41cd-45ec-90a2-c256e58d0d6a.png", 
         description: "Side-by-side comparison of the Moon's near side (left) that we can see from Earth and the far side (right) that remained unknown until spacecraft flew around the Moon." 
+      };
+    }
+    
+    if (sectionTitle === "Mapping the Moon") {
+      return {
+        url: "/lovable-uploads/1afadff6-a4c9-48c7-a8d6-5fe1fcecc2dd.png", 
+        description: "View of Earth rising over the lunar surface, showing the Moon's cratered landscape in the foreground with footprints visible from astronaut exploration." 
       };
     }
     

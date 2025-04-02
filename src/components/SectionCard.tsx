@@ -114,8 +114,9 @@ const SectionCard = ({
       case "The Moon in Our Skies":
         return "/lovable-uploads/54548175-965e-4d7f-ae75-071e6b49cb4d.png";
       case "The Moon's Unseen Face":
-      case "Mapping the Moon":
         return "/lovable-uploads/52a450ef-41cd-45ec-90a2-c256e58d0d6a.png";
+      case "Mapping the Moon":
+        return "/lovable-uploads/1afadff6-a4c9-48c7-a8d6-5fe1fcecc2dd.png"; // Updated Mapping the Moon image
       case "Venus":
         return "/lovable-uploads/9a4d825b-6142-476f-b40c-2adbc7b34524.png";
       case "Mercury":
