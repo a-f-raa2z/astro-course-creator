@@ -1,7 +1,7 @@
 
 import { useState, useEffect } from 'react';
 import { Badge } from "@/components/ui/badge";
-import { Star, ChevronUp } from 'lucide-react';
+import { Star, ChevronUp, Sparkles } from 'lucide-react';
 import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover";
 
 interface XPPopupProps {
@@ -20,7 +20,7 @@ export const XPPopup = ({ xpPoints, level, levelProgress }: XPPopupProps) => {
     if (xpPoints > previousXp && previousXp !== 0) {
       setGainedXp(xpPoints - previousXp);
       setShowAnimation(true);
-      const timer = setTimeout(() => setShowAnimation(false), 2000);
+      const timer = setTimeout(() => setShowAnimation(false), 3000);
       return () => clearTimeout(timer);
     }
     setPreviousXp(xpPoints);
@@ -37,9 +37,44 @@ export const XPPopup = ({ xpPoints, level, levelProgress }: XPPopupProps) => {
               <ChevronUp className="h-4 w-4 text-purple-300 opacity-70" />
             </div>
             {showAnimation && (
-              <div className="absolute -right-1 -top-8 animate-fade-in">
-                <Badge className="bg-yellow-400 text-yellow-950">+{gainedXp} XP</Badge>
-              </div>
+              <>
+                <div className="absolute -right-1 -top-8 animate-fade-in">
+                  <Badge className="bg-yellow-400 text-yellow-950 flex items-center gap-1">
+                    <Sparkles className="h-3 w-3" />
+                    +{gainedXp} XP
+                  </Badge>
+                </div>
+                {/* Sparkle effects */}
+                {[...Array(10)].map((_, i) => (
+                  <div 
+                    key={i}
+                    className="absolute animate-twinkle" 
+                    style={{
+                      top: `${Math.random() * 60 - 30}px`,
+                      left: `${Math.random() * 100 - 20}px`,
+                      animationDelay: `${Math.random() * 0.5}s`,
+                      animationDuration: `${1 + Math.random() * 2}s`,
+                      opacity: 0.7
+                    }}
+                  >
+                    <Sparkles className={`h-${Math.floor(Math.random() * 2) + 2} w-${Math.floor(Math.random() * 2) + 2} text-yellow-${Math.random() > 0.5 ? '300' : '400'}`} />
+                  </div>
+                ))}
+                {/* Star particles */}
+                {[...Array(8)].map((_, i) => (
+                  <div 
+                    key={`star-${i}`}
+                    className="absolute h-1 w-1 rounded-full bg-yellow-300 animate-ping"
+                    style={{
+                      top: `${Math.random() * 60 - 20}px`,
+                      left: `${Math.random() * 100}px`,
+                      animationDuration: `${0.5 + Math.random() * 1.5}s`,
+                      animationDelay: `${Math.random() * 0.5}s`,
+                      opacity: Math.random() * 0.7 + 0.3
+                    }}
+                  />
+                ))}
+              </>
             )}
           </div>
         </PopoverTrigger>

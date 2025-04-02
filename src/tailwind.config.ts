@@ -113,8 +113,19 @@ export default {
 					'100%': { transform: 'scale(1)' }
 				},
 				'twinkle': {
-					'0%, 100%': { opacity: '0.3', transform: 'scale(1)' },
-					'50%': { opacity: '1', transform: 'scale(1.2)' }
+					'0%': { transform: 'scale(1) rotate(0deg)', opacity: '0.3' },
+					'50%': { transform: 'scale(1.3) rotate(15deg)', opacity: '1' },
+					'100%': { transform: 'scale(1) rotate(0deg)', opacity: '0.3' }
+				},
+				'ping': {
+					'75%, 100%': {
+						transform: 'scale(2)',
+						opacity: '0'
+					}
+				},
+				'sparkle': {
+					'0%': { transform: 'translateY(0) scale(1)', opacity: '1' },
+					'100%': { transform: 'translateY(-20px) scale(0)', opacity: '0' }
 				}
 			},
 			animation: {
@@ -123,7 +134,9 @@ export default {
 				'star-pulse': 'star-pulse 3s ease-in-out infinite',
 				'fade-in': 'fade-in 0.5s ease-out',
 				'zoom-in': 'zoom-in 0.5s ease-out',
-				'twinkle': 'twinkle 3s ease-in-out infinite'
+				'twinkle': 'twinkle 2s ease-in-out infinite',
+				'ping': 'ping 1s cubic-bezier(0, 0, 0.2, 1) infinite',
+				'sparkle': 'sparkle 2s forwards'
 			},
 			backgroundImage: {
 				'space-gradient': 'linear-gradient(to bottom, #0A1128, #1F2D5A, #5A3687)',

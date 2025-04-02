@@ -9,7 +9,8 @@ import { CourseContent } from "@/components/course/CourseContent";
 import { useCourseNavigation } from "@/hooks/useCourseNavigation";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
-import { ChevronLeft, Rocket, Flag } from "lucide-react";
+import { ChevronLeft, Rocket, Flag, User } from "lucide-react";
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 
 const AICourseStartPage = () => {
   const location = useLocation();
@@ -68,6 +69,18 @@ const AICourseStartPage = () => {
               <Rocket className="mr-2 h-5 w-5 text-purple-400" />
               {course.title}
             </h2>
+          </div>
+          
+          {/* User Profile Section */}
+          <div className="mb-6 bg-purple-900/20 p-3 rounded-lg border border-purple-500/30 flex items-center">
+            <Avatar className="h-10 w-10 border-2 border-purple-400">
+              <AvatarImage src="https://images.unsplash.com/photo-1582562124811-c09040d0a901" alt="Ana" />
+              <AvatarFallback className="bg-purple-800 text-purple-200">AN</AvatarFallback>
+            </Avatar>
+            <div className="ml-3">
+              <p className="text-sm font-medium text-white">Ana</p>
+              <p className="text-xs text-purple-300">Space Explorer</p>
+            </div>
           </div>
           
           <Separator className="my-4 bg-purple-500/30" />
