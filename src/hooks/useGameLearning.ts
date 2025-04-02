@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { Course, CourseSection } from "@/types/course";
@@ -107,13 +108,22 @@ export const useGameLearning = (course: Course) => {
       ];
     }
     
+    // Special case for Roving over Mars - remove image
+    if (section.title === "Roving over Mars") {
+      return [
+        'introduction',
+        'video',
+        'quiz'
+      ];
+    }
+    
     const contentTypes: ContentType['type'][] = ['introduction', 'video'];
     
     if (section.shortVideo) {
       contentTypes.push('short-video');
     }
     
-    if (section.image && section.title !== "The Moon") {
+    if (section.image && section.title !== "The Moon" && section.title !== "Roving over Mars") {
       contentTypes.push('image');
     }
     

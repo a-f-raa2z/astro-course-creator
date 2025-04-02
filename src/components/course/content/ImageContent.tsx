@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { CourseSection } from "@/types/course";
 import { Button } from "@/components/ui/button";
@@ -114,13 +113,6 @@ export const ImageContent = ({ section, onComplete, onPrevious, isFirstContent }
       return {
         url: "/lovable-uploads/973bc422-9419-49ac-ae95-89d2b36f2df8.png", 
         description: "Mars with its two small moons Phobos and Deimos, which are likely captured asteroids rather than formed alongside the planet." 
-      };
-    }
-    
-    if (sectionTitle === "Roving over Mars") {
-      return {
-        url: "/lovable-uploads/71f04c7c-c819-40bc-9de0-5f293ddadf89.png", 
-        description: "A Mars rover exploring the red planet's surface, equipped with scientific instruments to study the Martian environment." 
       };
     }
     
