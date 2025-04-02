@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { CourseSection } from "@/types/course";
 import { Button } from "@/components/ui/button";
@@ -32,6 +31,22 @@ export const VisualGalleryContent = ({ section, onComplete, onPrevious, isFirstC
   }, [section.visualGalleryUrl]);
   
   const getGalleryImages = () => {
+    // For Venus section
+    if (section.title === "Venus") {
+      return [
+        {
+          url: "/lovable-uploads/e2cc6735-e5ff-4982-be75-c06a724f23f0.png",
+          title: "Venus Surface Crater",
+          description: "Radar image of a volcanic crater on the surface of Venus. The image shows the crater's central peak surrounded by a bright, radar-reflective lava flow region against the darker Venusian surface."
+        },
+        {
+          url: "/lovable-uploads/b87f40a8-a8d2-42de-943b-b6f586bc75b1.png",
+          title: "Venus from Space",
+          description: "Venus seen from space, with its thick, golden cloud cover illuminated by the Sun. Although similar in size to Earth, Venus has a harsh, hot environment with a thick atmosphere primarily composed of carbon dioxide."
+        }
+      ];
+    }
+    
     // For Mapping the Moon section
     if (section.title === "Mapping the Moon") {
       return [

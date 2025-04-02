@@ -72,6 +72,16 @@ export const useGameLearning = (course: Course) => {
       ];
     }
     
+    // Special case for Venus section
+    if (section.title === "Venus") {
+      return [
+        'introduction',
+        'video',
+        'visual-gallery',
+        'quiz'
+      ];
+    }
+    
     // Special case for Moon sections
     if (section.title === "The Moon" || section.title === "The Moon in Our Skies" || section.title === "The Moon's Unseen Face") {
       return [

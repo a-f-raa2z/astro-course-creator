@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -90,6 +89,10 @@ const SectionCard = ({
       if (index === 4 && title === "The Moon's Unseen Face") {
         mockCourse.sections[index].videoUrl = "https://www.youtube.com/embed/kJkVegBsNyE";
       }
+      
+      if (index === 8 && title === "Venus") {
+        mockCourse.sections[index].visualGalleryUrl = "venus-gallery";
+      }
     }
     
     navigate("/astronomy-course-start", { 
@@ -177,6 +180,10 @@ const SectionCard = ({
   
   const sectionImage = getSectionImage();
   
+  const hasVisualGallery = () => {
+    return (index === 8 && title === "Venus") || (index === 5 && title === "Mapping the Moon");
+  };
+  
   return (
     <Card className="cosmic-card overflow-hidden hover:shadow-lg hover:shadow-purple-500/10 transition-all border-purple-500/20 w-full">
       <div className="md:flex">
@@ -242,6 +249,11 @@ const SectionCard = ({
               {visualUrl && (
                 <div className="bg-green-900/30 p-2 rounded flex items-center justify-center" title="Interactive Playground">
                   <Gamepad2 className="h-4 w-4 text-green-400" />
+                </div>
+              )}
+              {hasVisualGallery() && (
+                <div className="bg-green-900/30 p-2 rounded flex items-center justify-center" title="Visual Gallery">
+                  <Image className="h-4 w-4 text-green-400" />
                 </div>
               )}
             </div>
