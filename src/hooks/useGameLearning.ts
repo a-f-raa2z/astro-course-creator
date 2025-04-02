@@ -88,6 +88,8 @@ export const useGameLearning = (course: Course) => {
         'introduction',
         'video',
         'image',
+        'fun-facts',
+        'bonus',
         'quiz'
       ];
     }

@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { CourseSection } from "@/types/course";
 import { Button } from "@/components/ui/button";
@@ -28,7 +27,6 @@ export const VideoContent = ({ section, onComplete, onPrevious, isFirstContent }
   
   const isAICourse = location.pathname.includes('ai-course');
   
-  // Define getVideoDescription function first
   const getVideoDescription = (sectionTitle: string, index: number) => {
     const descriptionMap: Record<string, string[]> = {
       "The Inner Planets": [
@@ -46,6 +44,10 @@ export const VideoContent = ({ section, onComplete, onPrevious, isFirstContent }
       "The Moon in Our Skies": [
         "Understanding the Moon's phases and how they affect Earth.",
         "Exploring the Moon's orbit and its fascinating relationship with our planet."
+      ],
+      "Mercury": [
+        "Discover the smallest and innermost planet in our Solar System - a rocky world with extreme temperatures.",
+        "Learn about Mercury's unusual orbit and the MESSENGER mission that mapped its surface."
       ]
     };
     
@@ -59,11 +61,9 @@ export const VideoContent = ({ section, onComplete, onPrevious, isFirstContent }
       : "Additional insights into this fascinating cosmic subject.";
   };
   
-  // Get all video sources
   const getVideoSources = () => {
     const sources = [];
     
-    // Inner Planets special case
     if (section.title === "The Inner Planets") {
       return [
         {
@@ -74,7 +74,6 @@ export const VideoContent = ({ section, onComplete, onPrevious, isFirstContent }
       ];
     }
     
-    // Earth special case
     if (section.title === "Earth") {
       return [
         {
@@ -85,7 +84,6 @@ export const VideoContent = ({ section, onComplete, onPrevious, isFirstContent }
       ];
     }
     
-    // Moon section special case
     if (section.title === "The Moon" || section.title === "The Moon in Our Skies") {
       return [
         {
@@ -101,7 +99,21 @@ export const VideoContent = ({ section, onComplete, onPrevious, isFirstContent }
       ];
     }
     
-    // The Moon's Unseen Face special case
+    if (section.title === "Mercury") {
+      return [
+        {
+          url: "https://www.youtube.com/embed/0KBjnNuhRHs",
+          title: "Main Lesson: Mercury",
+          description: "Explore the smallest planet in our Solar System - a cratered world closest to the Sun."
+        },
+        {
+          url: "https://www.youtube.com/embed/rX_NCCpw5Uo",
+          title: "Mercury Up Close",
+          description: "A detailed look at Mercury's features, composition, and the missions that have explored it."
+        }
+      ];
+    }
+    
     if (section.title === "The Moon's Unseen Face") {
       return [
         {
@@ -112,7 +124,6 @@ export const VideoContent = ({ section, onComplete, onPrevious, isFirstContent }
       ];
     }
     
-    // Regular case
     if (section.videoUrl) {
       sources.push({
         url: section.videoUrl,
@@ -183,7 +194,6 @@ export const VideoContent = ({ section, onComplete, onPrevious, isFirstContent }
     <div className="w-full h-full flex flex-col">
       <Card className="w-full h-full overflow-hidden flex flex-col bg-space-cosmic-blue/20 backdrop-blur-sm border border-purple-500/20">
         <div className="p-4">
-          {/* Navigation buttons row - placed between tabs and title */}
           <div className="flex justify-between items-center mb-4">
             <div>
               {!isFirstContent && (

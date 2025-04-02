@@ -95,6 +95,18 @@ const SectionCard = ({
       }
       
       if (index === 9 && title === "Mercury") {
+        mockCourse.sections[index].videoUrl = "https://www.youtube.com/embed/0KBjnNuhRHs";
+        mockCourse.sections[index].mainLesson2Url = "https://www.youtube.com/embed/rX_NCCpw5Uo";
+        mockCourse.sections[index].bonusVideos = [
+          "https://www.youtube.com/embed/rsa92VNVY7A",
+          "https://www.youtube.com/embed/9T8lLtlZ8Xs",
+          "https://www.youtube.com/embed/31HAFceuvb0",
+          "https://www.youtube.com/embed/B588JHKSlEE"
+        ];
+        mockCourse.sections[index].funFacts = [
+          "https://www.youtube.com/embed/uDurw7YxX3U",
+          "https://www.youtube.com/embed/-DuQEeq4ZLw"
+        ];
         mockCourse.sections[index].image = {
           url: "/lovable-uploads/98ea4cdd-0d5e-49fd-bc16-139cdce24388.png",
           description: "Close-up view of Mercury's heavily cratered surface captured during a flyby mission."

@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { CourseSection } from "@/types/course";
 import { Button } from "@/components/ui/button";
@@ -17,9 +16,7 @@ interface BonusVideoContentProps {
 export const BonusVideoContent = ({ section, onComplete, onPrevious, isFirstContent }: BonusVideoContentProps) => {
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
   
-  // Get all bonus videos for this section, merging both bonus arrays
   const getBonusVideos = () => {
-    // Inner Planets special case
     if (section.title === "The Inner Planets") {
       return [
         {
@@ -35,7 +32,6 @@ export const BonusVideoContent = ({ section, onComplete, onPrevious, isFirstCont
       ];
     }
     
-    // Earth special case
     if (section.title === "Earth") {
       return [
         {
@@ -61,7 +57,31 @@ export const BonusVideoContent = ({ section, onComplete, onPrevious, isFirstCont
       ];
     }
     
-    // Moon section special case
+    if (section.title === "Mercury") {
+      return [
+        {
+          url: "https://www.youtube.com/embed/rsa92VNVY7A",
+          title: "Mercury Facts",
+          description: "Interesting facts about the closest planet to the Sun."
+        },
+        {
+          url: "https://www.youtube.com/embed/9T8lLtlZ8Xs",
+          title: "Exploring Mercury",
+          description: "A detailed look at Mercury's composition and orbit."
+        },
+        {
+          url: "https://www.youtube.com/embed/31HAFceuvb0",
+          title: "Mercury's Extreme Temperatures",
+          description: "Learn about the extreme temperature variations on Mercury's surface."
+        },
+        {
+          url: "https://www.youtube.com/embed/B588JHKSlEE",
+          title: "Mercury Missions",
+          description: "The spacecraft and missions that have explored Mercury."
+        }
+      ];
+    }
+    
     if (section.title === "The Moon" || section.title === "The Moon in Our Skies") {
       return [
         {
@@ -84,7 +104,6 @@ export const BonusVideoContent = ({ section, onComplete, onPrevious, isFirstCont
     
     const allBonusVideos: {url: string; title: string; description: string}[] = [];
     
-    // Add main bonus videos
     if (section.bonusVideos && section.bonusVideos.length > 0) {
       section.bonusVideos.forEach((url, idx) => {
         allBonusVideos.push({
@@ -95,7 +114,6 @@ export const BonusVideoContent = ({ section, onComplete, onPrevious, isFirstCont
       });
     }
     
-    // Add bonus content 2 videos
     if (section.bonusContent2 && section.bonusContent2.length > 0) {
       section.bonusContent2.forEach((url, idx) => {
         allBonusVideos.push({
@@ -106,7 +124,6 @@ export const BonusVideoContent = ({ section, onComplete, onPrevious, isFirstCont
       });
     }
     
-    // Default fallback if no videos are available
     if (allBonusVideos.length === 0) {
       allBonusVideos.push({ 
         url: "https://www.youtube.com/embed/lcZTcfdZ3Ow", 
@@ -138,7 +155,6 @@ export const BonusVideoContent = ({ section, onComplete, onPrevious, isFirstCont
     <div className="w-full h-full flex flex-col">
       <Card className="w-full h-full overflow-hidden flex flex-col bg-space-cosmic-blue/20 backdrop-blur-sm border border-purple-500/20">
         <div className="p-4">
-          {/* Navigation buttons row - placed between tabs and title */}
           <div className="flex justify-between items-center mb-4">
             <div>
               {!isFirstContent && (
@@ -190,7 +206,6 @@ export const BonusVideoContent = ({ section, onComplete, onPrevious, isFirstCont
           
           {showNavigation && (
             <>
-              {/* Video navigation controls */}
               <div className="absolute top-1/2 left-0 right-0 flex justify-between px-4 transform -translate-y-1/2 pointer-events-none">
                 <Button 
                   onClick={prevVideo} 
@@ -213,7 +228,6 @@ export const BonusVideoContent = ({ section, onComplete, onPrevious, isFirstCont
                 </Button>
               </div>
 
-              {/* Indicator dots */}
               <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-2">
                 {bonusVideos.map((_, idx) => (
                   <div 

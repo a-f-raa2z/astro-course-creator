@@ -54,6 +54,21 @@ export const FunFactsContent = ({ section, onComplete, onPrevious, isFirstConten
       ];
     }
     
+    if (section.title === "Mercury") {
+      return [
+        {
+          url: "https://www.youtube.com/embed/uDurw7YxX3U",
+          title: "Mercury Fun Fact 1",
+          description: "Fascinating facts about the smallest planet in our solar system."
+        },
+        {
+          url: "https://www.youtube.com/embed/-DuQEeq4ZLw",
+          title: "Mercury Fun Fact 2",
+          description: "More interesting tidbits about Mercury's unique characteristics."
+        }
+      ];
+    }
+    
     if (section.title === "The Moon" || section.title === "The Moon in Our Skies" || section.title === "The Moon's Unseen Face") {
       if (section.funFacts && section.funFacts.length > 0) {
         return section.funFacts.map((url, idx) => ({
