@@ -44,33 +44,46 @@ export const XPPopup = ({ xpPoints, level, levelProgress }: XPPopupProps) => {
                     +{gainedXp} XP
                   </Badge>
                 </div>
-                {/* Sparkle effects */}
-                {[...Array(10)].map((_, i) => (
+                {/* More sparkle effects */}
+                {[...Array(15)].map((_, i) => (
                   <div 
                     key={i}
                     className="absolute animate-twinkle" 
                     style={{
                       top: `${Math.random() * 60 - 30}px`,
-                      left: `${Math.random() * 100 - 20}px`,
+                      left: `${Math.random() * 120 - 40}px`,
                       animationDelay: `${Math.random() * 0.5}s`,
-                      animationDuration: `${1 + Math.random() * 2}s`,
-                      opacity: 0.7
+                      animationDuration: `${0.8 + Math.random() * 2}s`,
+                      opacity: 0.8
                     }}
                   >
-                    <Sparkles className={`h-${Math.floor(Math.random() * 2) + 2} w-${Math.floor(Math.random() * 2) + 2} text-yellow-${Math.random() > 0.5 ? '300' : '400'}`} />
+                    <Sparkles className={`h-${Math.floor(Math.random() * 2) + 2} w-${Math.floor(Math.random() * 2) + 2} text-yellow-${Math.random() > 0.5 ? '300' : '200'}`} />
                   </div>
                 ))}
                 {/* Star particles */}
-                {[...Array(8)].map((_, i) => (
+                {[...Array(12)].map((_, i) => (
                   <div 
                     key={`star-${i}`}
                     className="absolute h-1 w-1 rounded-full bg-yellow-300 animate-ping"
                     style={{
-                      top: `${Math.random() * 60 - 20}px`,
-                      left: `${Math.random() * 100}px`,
-                      animationDuration: `${0.5 + Math.random() * 1.5}s`,
+                      top: `${Math.random() * 80 - 30}px`,
+                      left: `${Math.random() * 120 - 20}px`,
+                      animationDuration: `${0.4 + Math.random() * 1.5}s`,
                       animationDelay: `${Math.random() * 0.5}s`,
-                      opacity: Math.random() * 0.7 + 0.3
+                      opacity: Math.random() * 0.8 + 0.3
+                    }}
+                  />
+                ))}
+                {/* Additional sparkle particles that move upward */}
+                {[...Array(8)].map((_, i) => (
+                  <div 
+                    key={`sparkle-${i}`}
+                    className="absolute h-1.5 w-1.5 rounded-full bg-yellow-200"
+                    style={{
+                      top: `${Math.random() * 40}px`,
+                      left: `${Math.random() * 100 - 10}px`,
+                      animation: `sparkle ${1 + Math.random() * 2}s forwards`,
+                      animationDelay: `${Math.random() * 0.8}s`
                     }}
                   />
                 ))}
