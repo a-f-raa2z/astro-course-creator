@@ -1,3 +1,4 @@
+
 import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -92,6 +93,34 @@ const SectionCard = ({
       
       if (index === 8 && title === "Venus") {
         mockCourse.sections[index].visualGalleryUrl = "venus-gallery";
+        // Add the Venus quizzes
+        mockCourse.sections[index].quizzes = [
+          {
+            question: "Which planet is called Earth's twin?",
+            options: ["Mars", "Mercury", "Venus", "Jupiter"],
+            correctAnswer: 2
+          },
+          {
+            question: "Why is Venus hotter than Mercury?",
+            options: ["It's closer to the Sun", "It has more lava", "Thick atmosphere traps heat", "It's made of fire"],
+            correctAnswer: 2
+          },
+          {
+            question: "What's a wild weather fact about Venus?",
+            options: ["It snows", "It has acid rain", "It has blizzards", "It's always sunny"],
+            correctAnswer: 1
+          },
+          {
+            question: "How long is a day on Venus compared to Earth?",
+            options: ["Shorter", "Same", "Longer", "24 hours"],
+            correctAnswer: 2
+          },
+          {
+            question: "What direction does Venus rotate?",
+            options: ["East to West", "It doesn't", "West to East", "Backwards"],
+            correctAnswer: 3
+          }
+        ];
       }
       
       if (index === 9 && title === "Mercury") {
