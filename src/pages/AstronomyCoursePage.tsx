@@ -177,7 +177,6 @@ const AstronomyCoursePage = () => {
                     []}
                   visualUrl={section.visualUrl}
                   bonusUrls={section.bonusVideos}
-                  quizCount={section.quizzes?.length || 1}
                 />
               </div>
             </div>

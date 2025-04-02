@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -53,6 +52,13 @@ const SectionCard = ({
       
       if (bonusUrls && bonusUrls.length > 0) {
         mockCourse.sections[index].bonusVideos = bonusUrls;
+      }
+      
+      if (index === 0 && title === "The Solar System") {
+        mockCourse.sections[index].funFacts = [
+          "https://www.youtube.com/embed/lzsf1-vMUdY", 
+          "https://www.youtube.com/embed/HDSKuln-5qU"
+        ];
       }
       
       if (index === 5 && title === "Mapping the Moon") {
@@ -138,7 +144,7 @@ const SectionCard = ({
       case "The Moon":
         return "/lovable-uploads/54548175-965e-4d7f-ae75-071e6b49cb4d.png";
       case "The Moon in Our Skies":
-        return "/lovable-uploads/f04bd424-c991-4a08-8792-e83af1f09539.png"; // Updated Moon in Our Skies image
+        return "/lovable-uploads/f04bd424-c991-4a08-8792-e83af1f09539.png";
       case "The Moon's Unseen Face":
         return "/lovable-uploads/52a450ef-41cd-45ec-90a2-c256e58d0d6a.png";
       case "Mapping the Moon":
@@ -148,9 +154,9 @@ const SectionCard = ({
       case "Mercury":
         return "/lovable-uploads/46193bf4-1ca3-4f35-92c5-8ce7b94e9165.png";
       case "Messenger at Mercury":
-        return "/lovable-uploads/bee533e9-3edc-4aa8-8fd6-2ee0683ab436.png"; // Updated Messenger at Mercury image
+        return "/lovable-uploads/bee533e9-3edc-4aa8-8fd6-2ee0683ab436.png";
       case "The Sun":
-        return "/lovable-uploads/17b434e9-217c-4068-8b8b-1c628209901d.png"; // Updated Sun image
+        return "/lovable-uploads/17b434e9-217c-4068-8b8b-1c628209901d.png";
       case "Close to the Sun":
         return "/lovable-uploads/6d50892d-4935-4033-bcfc-2a998579227e.png";
       case "Mars":

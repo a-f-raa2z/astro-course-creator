@@ -54,7 +54,7 @@ export interface CourseSection {
   };
   quiz: QuizQuestion;
   quizIntro?: string;
-  quizzes: QuizQuestion[];
+  quizzes?: QuizQuestion[];
   mainLesson2Url?: string;
   interactiveUrl2?: string;
   bonusContent2?: string[];
