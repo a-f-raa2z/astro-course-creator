@@ -36,36 +36,16 @@ export const FunFactsContent = ({ section, onComplete, onPrevious, isFirstConten
     
     // Mapping the Moon section special case
     if (section.title === "Mapping the Moon") {
-      const videos = [];
-      
-      // Add funFacts if available
-      if (section.funFacts && section.funFacts.length > 0) {
-        videos.push(...section.funFacts.map((url, idx) => ({
-          url,
-          title: `Moon Mapping Fun Fact ${idx + 1}`,
-          description: "Learn interesting facts about the features and mapping of the lunar surface."
-        })));
-      }
-      
-      // Add funFacts2 if available
-      if (section.funFacts2 && section.funFacts2.length > 0) {
-        videos.push(...section.funFacts2.map((url, idx) => ({
-          url,
-          title: `Additional Moon Fact ${idx + 1}`,
-          description: "Discover more fascinating facts about our lunar neighbor."
-        })));
-      }
-      
-      return videos.length > 0 ? videos : [
+      return [
         { 
           url: "https://www.youtube.com/embed/rVMvzH1FxfE", 
-          title: "Moon Fun Fact",
-          description: "Did you know these fascinating facts about the Moon?"
+          title: "Moon Mapping Fun Fact 1",
+          description: "Learn interesting facts about the features and mapping of the lunar surface."
         },
         {
-          url: "https://www.youtube.com/embed/fTok7usLXb4",
-          title: "Additional Moon Facts",
-          description: "More incredible facts about lunar exploration and mapping."
+          url: "https://www.youtube.com/embed/_fCQQybyiWM",
+          title: "Moon Mapping Fun Fact 2",
+          description: "Discover more fascinating facts about our lunar neighbor."
         }
       ];
     }
