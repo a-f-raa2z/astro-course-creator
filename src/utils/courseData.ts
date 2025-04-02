@@ -1,1048 +1,865 @@
-import { Course } from "@/types/course";
+import { Course, CourseSection, QuizQuestion } from "@/types/course";
 
-export const assessmentQuestions = [
-  {
-    id: "interest",
-    question: "What aspect of space interests you most?",
-    description: "This helps us tailor the content to your preferences.",
-    options: [
-      {
-        id: "planets",
-        label: "Planets and moons",
-        icon: "Planet"
-      },
-      {
-        id: "stars",
-        label: "Stars and galaxies",
-        icon: "Stars"
-      },
-      {
-        id: "exploration",
-        label: "Space exploration",
-        icon: "Rocket"
-      },
-      {
-        id: "phenomena",
-        label: "Cosmic phenomena",
-        icon: "Zap"
-      }
-    ]
-  },
-  {
-    id: "level",
-    question: "How would you describe your knowledge of astronomy?",
-    description: "We'll adjust the complexity of the content accordingly.",
-    options: [
-      {
-        id: "beginner",
-        label: "Beginner",
-        icon: "Sparkles"
-      },
-      {
-        id: "intermediate",
-        label: "Intermediate",
-        icon: "Star"
-      },
-      {
-        id: "advanced",
-        label: "Advanced",
-        icon: "Telescope"
-      },
-      {
-        id: "expert",
-        label: "Expert",
-        icon: "Binary"
-      }
-    ]
-  },
-  {
-    id: "learningStyle",
-    question: "How do you prefer to learn?",
-    description: "We'll emphasize content that matches your learning style.",
-    options: [
-      {
-        id: "visual",
-        label: "Visual learning",
-        icon: "Eye"
-      },
-      {
-        id: "reading",
-        label: "Reading text",
-        icon: "BookOpen"
-      },
-      {
-        id: "interactive",
-        label: "Interactive exercises",
-        icon: "Mouse"
-      },
-      {
-        id: "video",
-        label: "Video content",
-        icon: "Video"
-      }
-    ]
-  }
-];
-
-export const aiCourseData: Course = {
-  id: "ai-101",
-  title: "Introduction to Artificial Intelligence",
-  description:
-    "Explore the fascinating world of artificial intelligence, from basic concepts to cutting-edge applications. Learn about machine learning, neural networks, and how AI is shaping our future.",
-  forInterest: "artificial intelligence",
-  forLevel: "intermediate",
-  forLearningStyle: "visual",
-  sections: [
-    {
-      id: "ai-section-1",
-      title: "Intro of Artificial Intelligence",
-      introduction:
-        "An overview of what AI is, its history, and why it's important in today's world.",
-      whyLearn:
-        "Understanding AI fundamentals helps appreciate its capabilities, limitations, and ethical implications.",
-      videoUrl: "https://www.youtube.com/embed/oV74Najm6Nc",
-      keyPoints: [
-        "AI refers to systems that can perform tasks requiring human intelligence.",
-        "The term 'Artificial Intelligence' was coined in 1956 at Dartmouth College.",
-        "AI can be narrow (specific tasks) or general (human-like intelligence).",
-        "Machine learning is a subset of AI focused on learning from data.",
-        "Ethics and responsible AI development are crucial considerations."
-      ],
-      shortVideo: "https://www.youtube.com/embed/LZ8sZnNQ6JA",
-      additionalShortVideos: [
-        "https://www.youtube.com/embed/a0_lo_GDcFw",
-        "https://www.youtube.com/embed/kWmX3pd1f10"
-      ],
-      bonusVideos: [
-        "https://www.youtube.com/embed/5pRE-J053xU",
-        "https://www.youtube.com/embed/ad79nYk2keg"
-      ],
-      image: {
-        url: "/lovable-uploads/d3507279-5142-4833-b3ff-7603ecd9be87.png",
-        description: "A visual representation of artificial intelligence concepts."
-      },
-      quiz: {
-        question: "Which of these is NOT a type of AI?",
-        options: ["Narrow AI", "General AI", "Super AI", "Natural AI"],
-        correctAnswer: 3
-      }
-    },
-    {
-      id: "ai-section-2",
-      title: "Machine Learning",
-      introduction:
-        "Explore how machines can learn from data to make predictions or decisions without being explicitly programmed.",
-      whyLearn:
-        "Machine learning powers many modern applications, from recommendation systems to predictive analytics.",
-      videoUrl: "https://www.youtube.com/embed/HcqpanDadyQ",
-      keyPoints: [
-        "Machine learning algorithms improve through experience and data.",
-        "Supervised learning uses labeled data to make predictions.",
-        "Unsupervised learning finds patterns in unlabeled data.",
-        "Reinforcement learning learns through trial and error with rewards.",
-        "Feature selection and engineering are crucial for ML performance."
-      ],
-      shortVideo: "https://www.youtube.com/embed/f_uwKZIAeM0",
-      additionalShortVideos: [
-        "https://www.youtube.com/embed/IpGxLWOIZy4",
-        "https://www.youtube.com/embed/EuK2wsuUJQ0"
-      ],
-      bonusVideos: [
-        "https://www.youtube.com/embed/NMIUCZgezE8",
-        "https://www.youtube.com/embed/40riCqvRoMs"
-      ],
-      image: {
-        url: "/lovable-uploads/46e4fa94-5626-45ca-b547-dd52d6d65789.png",
-        description: "A diagram showing different machine learning approaches."
-      },
-      quiz: {
-        question: "Which learning type uses labeled training data?",
-        options: ["Unsupervised Learning", "Supervised Learning", "Reinforcement Learning", "Transfer Learning"],
-        correctAnswer: 1
-      }
-    },
-    {
-      id: "ai-section-3",
-      title: "Deep Learning",
-      introduction:
-        "Discover neural networks and how they're revolutionizing AI capabilities through multi-layered learning.",
-      whyLearn:
-        "Deep learning has enabled breakthroughs in computer vision, natural language processing, and more.",
-      videoUrl: "https://www.youtube.com/embed/DooxDIRAkPA",
-      keyPoints: [
-        "Deep learning uses neural networks with multiple layers.",
-        "Each layer in a neural network extracts different features from data.",
-        "Deep learning requires large amounts of data and computational power.",
-        "Convolutional neural networks excel at image recognition tasks.",
-        "Recurrent neural networks are designed for sequential data like text."
-      ],
-      shortVideo: "https://www.youtube.com/embed/6M5VXKLf4D4",
-      additionalShortVideos: [
-        "https://www.youtube.com/embed/O5xeyoRL95U",
-        "https://www.youtube.com/embed/ILsA4nyG7I0"
-      ],
-      bonusVideos: [
-        "https://www.youtube.com/embed/oJNHXPs0XDk",
-        "https://www.youtube.com/embed/zBdrhfjt0K4"
-      ],
-      image: {
-        url: "/lovable-uploads/3d8b75cf-5e69-49ac-9444-9c3f6c33fb4c.png",
-        description: "A visual representation of deep neural networks."
-      },
-      quiz: {
-        question: "Which neural network type is specially designed for image processing?",
-        options: ["Recurrent Neural Network", "Convolutional Neural Network", "Generative Adversarial Network", "Transformer Network"],
-        correctAnswer: 1
-      }
-    },
-    {
-      id: "ai-section-4",
-      title: "Generative AI",
-      introduction:
-        "Explore how AI can create new content like images, music, text, and more.",
-      whyLearn:
-        "Generative AI is transforming creative industries and enabling new forms of human-AI collaboration.",
-      videoUrl: "https://www.youtube.com/embed/4zMLIe2tLLI",
-      keyPoints: [
-        "Generative AI creates new content based on patterns in training data.",
-        "Generative Adversarial Networks (GANs) use competing neural networks.",
-        "Diffusion models gradually transform noise into coherent content.",
-        "Text-to-image models like DALL-E and Stable Diffusion create images from descriptions.",
-        "Large Language Models can generate human-like text conversations."
-      ],
-      shortVideo: "https://www.youtube.com/embed/yi3WnBJ3Jds",
-      additionalShortVideos: [
-        "https://www.youtube.com/embed/WTl4XbOUgAk",
-        "https://www.youtube.com/embed/1CIpzeNxIhU"
-      ],
-      bonusVideos: [
-        "https://www.youtube.com/embed/8BG8gGtq-Mg",
-        "https://www.youtube.com/embed/R_f-v6prMqI"
-      ],
-      visualUrl: "https://editor.p5js.org/ml5/full/jE-5p5XhK",
-      image: {
-        url: "/lovable-uploads/930c9c02-d768-4457-9ff9-0304dc9579c7.png",
-        description: "Examples of AI-generated artwork and design."
-      },
-      quiz: {
-        question: "What do GANs consist of?",
-        options: [
-          "A generator and a discriminator",
-          "A compiler and an interpreter",
-          "An encoder and a decoder",
-          "A transformer and a processor"
-        ],
-        correctAnswer: 0
-      }
-    },
-    {
-      id: "ai-section-5",
-      title: "Chatbots",
-      introduction:
-        "Learn how conversational AI works and how it's changing how we interact with technology.",
-      whyLearn:
-        "Chatbots and virtual assistants are becoming ubiquitous in customer service, personal assistance, and more.",
-      videoUrl: "https://www.youtube.com/embed/pX2qR_UPDGo",
-      keyPoints: [
-        "Modern chatbots use natural language processing to understand context.",
-        "Large language models power the most advanced conversational AI systems.",
-        "Intent recognition helps chatbots understand what users want to achieve.",
-        "Entity extraction identifies specific information in user queries.",
-        "Dialog management handles the flow of conversation."
-      ],
-      shortVideo: "https://www.youtube.com/embed/sgUFDbj4qos",
-      additionalShortVideos: [
-        "https://www.youtube.com/embed/KNJ19rIgBi4",
-        "https://www.youtube.com/embed/9n7pPEO8xbY"
-      ],
-      bonusVideos: [
-        "https://www.youtube.com/embed/aiwv-rJwS_c",
-        "https://www.youtube.com/embed/PjoP3RNIxA4"
-      ],
-      image: {
-        url: "/lovable-uploads/3215a500-d237-40e1-aecb-2a9e2b64ee10.png",
-        description: "A visual representation of conversational AI systems."
-      },
-      quiz: {
-        question: "What technology allows chatbots to understand the meaning of text?",
-        options: [
-          "Computer vision",
-          "Natural language processing",
-          "Blockchain",
-          "Quantum computing"
-        ],
-        correctAnswer: 1
-      }
-    },
-    {
-      id: "ai-section-6",
-      title: "Robots and Automation",
-      introduction:
-        "Discover how AI is empowering physical machines to perform complex tasks and interact with the world.",
-      whyLearn:
-        "Robotics and automation are transforming manufacturing, healthcare, logistics, and everyday life.",
-      videoUrl: "https://www.youtube.com/embed/sOEg_YZQsTI",
-      keyPoints: [
-        "Robots combine AI with mechanical engineering for physical interaction.",
-        "Computer vision helps robots perceive and navigate their environment.",
-        "Reinforcement learning allows robots to learn complex physical tasks.",
-        "Collaborative robots (cobots) work alongside humans safely.",
-        "Autonomous vehicles use multiple AI technologies to navigate."
-      ],
-      shortVideo: "https://www.youtube.com/embed/fn3KWM1kuAw",
-      additionalShortVideos: [
-        "https://www.youtube.com/embed/hSh_UFS1jdA",
-        "https://www.youtube.com/embed/jnEBWHkGIhE"
-      ],
-      bonusVideos: [
-        "https://www.youtube.com/embed/cYUdE5fkxck",
-        "https://www.youtube.com/embed/ysomllz9J5A"
-      ],
-      image: {
-        url: "/lovable-uploads/a8856a2f-8eb5-4bfc-91c3-b4baf426b804.png",
-        description: "A robot working in an automated environment."
-      },
-      quiz: {
-        question: "Which term describes robots designed to work safely alongside humans?",
-        options: [
-          "Autonomous robots",
-          "Humanoid robots",
-          "Collaborative robots",
-          "Android robots"
-        ],
-        correctAnswer: 2
-      }
-    },
-    {
-      id: "ai-section-7",
-      title: "AI for Music",
-      introduction:
-        "Explore how AI is creating new sounds, helping musicians compose, and transforming the music industry.",
-      whyLearn:
-        "AI music tools are creating new possibilities for creation, production, and discovery.",
-      videoUrl: "https://www.youtube.com/embed/T44KYYTuSIE",
-      keyPoints: [
-        "AI can generate original musical compositions in various styles.",
-        "Neural networks can be trained on specific genres or artists.",
-        "AI assists with mixing, mastering, and music production.",
-        "Music recommendation systems use AI to personalize playlists.",
-        "Some AI tools can separate vocals from instrumental tracks."
-      ],
-      shortVideo: "https://www.youtube.com/embed/plC7CiOE2UU",
-      additionalShortVideos: [
-        "https://www.youtube.com/embed/33xGQATVL5Y",
-        "https://www.youtube.com/embed/vgYS-dI1I2s"
-      ],
-      bonusVideos: [
-        "https://www.youtube.com/embed/uPBO5kjW3yk",
-        "https://www.youtube.com/embed/vNqAufuXPAI"
-      ],
-      visualUrl: "https://artsandculture.google.com/experiment/blob-opera/AAHWrq360NcGbw",
-      image: {
-        url: "/lovable-uploads/dac0c33f-58a2-44f3-81eb-5f00fda40b1b.png",
-        description: "AI-generated musical notation and audio visualization."
-      },
-      quiz: {
-        question: "What can AI music tools do?",
-        options: [
-          "Only generate simple melodies",
-          "Compose music but can't perform it",
-          "Generate complete compositions in various styles",
-          "Only remix existing music"
-        ],
-        correctAnswer: 2
-      }
-    },
-    {
-      id: "ai-section-8",
-      title: "AI for Arts",
-      introduction:
-        "Discover how AI is creating new artistic possibilities and transforming creative expression.",
-      whyLearn:
-        "AI art tools are enabling new forms of creativity and challenging our understanding of art.",
-      videoUrl: "https://www.youtube.com/embed/9Mxw_ilpvwA",
-      keyPoints: [
-        "AI can generate original images, paintings, and designs.",
-        "Text-to-image models transform descriptions into visual art.",
-        "Style transfer allows applying artistic styles to photographs.",
-        "AI art raises questions about creativity and authorship.",
-        "Artists are incorporating AI as a collaborative creative tool."
-      ],
-      shortVideo: "https://www.youtube.com/embed/I-EIVlHvHRM",
-      additionalShortVideos: [
-        "https://www.youtube.com/embed/9bcQwYCtg8Y",
-        "https://www.youtube.com/embed/cu3GPkcc5w4"
-      ],
-      bonusVideos: [
-        "https://www.youtube.com/embed/ga9_QlpfG8U",
-        "https://www.youtube.com/embed/JRclN2qpzUc"
-      ],
-      visualUrl: "https://experiments.withgoogle.com/collection/ai",
-      image: {
-        url: "/lovable-uploads/930c9c02-d768-4457-9ff9-0304dc9579c7.png",
-        description: "Examples of AI-generated artwork in various styles."
-      },
-      quiz: {
-        question: "What is 'style transfer' in AI art?",
-        options: [
-          "Copying an artist's signature",
-          "Applying the visual style of one image to another",
-          "Transferring ownership of digital art",
-          "Converting between art mediums"
-        ],
-        correctAnswer: 1
-      }
-    }
-  ]
-};
-
-export const generateMockCourse = (
-  interest: string,
-  level: string,
-  learningStyle: string
-): Course => {
-  const baseCourse: Course = {
-    id: "astronomy-101",
-    title: "Astronomy: Exploring Our Universe",
-    description:
-      "Embark on a cosmic journey through our solar system and beyond. Discover planets, moons, stars, and the mysteries of space in this comprehensive astronomy course.",
-    forInterest: interest,
-    forLevel: level,
-    forLearningStyle: learningStyle,
-    sections: [
-      {
-        id: "section-1",
-        title: "The Solar System",
-        introduction:
-          "An overview of the planets, asteroids, and comets that make up our solar system.",
-        whyLearn:
-          "Understanding the solar system helps us appreciate our place in the cosmos and the unique conditions that support life on Earth.",
-        videoUrl: "https://www.youtube.com/embed/libKVRa01L8",
-        keyPoints: [
-          "The solar system consists of the Sun, planets, moons, asteroids, and comets.",
-          "Planets are divided into inner, rocky planets and outer, gas giant planets.",
-          "The asteroid belt lies between Mars and Jupiter.",
-          "The Oort cloud is a distant region where comets originate.",
-          "Gravity is the force that holds the solar system together."
-        ],
-        shortVideo: "https://www.youtube.com/embed/ht0ncjEkzLc",
-        additionalShortVideos: [
-          "https://www.youtube.com/embed/wt0dkj1k4xk",
-          "https://www.youtube.com/embed/K0kJ6DypF3I"
-        ],
-        bonusVideos: [
-          "https://www.youtube.com/embed/DMlqjCq-mSs",
-          "https://www.youtube.com/embed/hewYl4wByRQ"
-        ],
-        image: {
-          url: "/lovable-uploads/ad48c8d7-8aae-41a6-95ac-22af96b8a45a.png",
-          description: "A visual representation of the solar system, showing the orbits of the planets around the Sun."
+// Generate quizzes based on section title
+const generateQuizzes = (sectionTitle: string): QuizQuestion[] => {
+  switch(sectionTitle) {
+    case "The Solar System":
+      return [
+        {
+          question: "What is the correct order of planets from the Sun?",
+          options: [
+            "Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, Neptune",
+            "Mercury, Venus, Earth, Mars, Saturn, Jupiter, Uranus, Neptune",
+            "Venus, Mercury, Earth, Mars, Jupiter, Saturn, Neptune, Uranus",
+            "Mercury, Earth, Venus, Mars, Jupiter, Saturn, Uranus, Neptune"
+          ],
+          correctAnswer: 0
         },
-        quiz: {
-          question: "Which planet is known as the 'Red Planet'?",
-          options: ["Earth", "Mars", "Venus", "Jupiter"],
+        {
+          question: "Which of these is NOT considered a planet in our Solar System?",
+          options: ["Mars", "Pluto", "Neptune", "Saturn"],
           correctAnswer: 1
         },
-        quizzes: [
-          {
-            question: "Which planet is known as the 'Red Planet'?",
-            options: ["Earth", "Mars", "Venus", "Jupiter"],
-            correctAnswer: 1
-          },
-          {
-            question: "What is the largest planet in our solar system?",
-            options: ["Earth", "Saturn", "Jupiter", "Neptune"],
-            correctAnswer: 2
-          },
-          {
-            question: "Where is the asteroid belt located?",
-            options: ["Between Earth and Mars", "Between Mars and Jupiter", "Between Jupiter and Saturn", "Beyond Neptune"],
-            correctAnswer: 1
-          },
-          {
-            question: "What is the Oort cloud?",
-            options: ["A dust cloud near Venus", "A region where comets originate", "An atmospheric feature on Jupiter", "A nebula outside our solar system"],
-            correctAnswer: 1
-          },
-          {
-            question: "How many planets are in our solar system?",
-            options: ["7", "8", "9", "10"],
-            correctAnswer: 1
-          }
-        ]
-      },
-      {
-        id: "section-2",
-        title: "The Inner Planets",
-        introduction:
-          "A closer look at Mercury, Venus, Earth, and Mars - the four terrestrial planets closest to the Sun.",
-        whyLearn:
-          "Studying the inner planets helps us understand the conditions necessary for life and the geological processes that shape planetary surfaces.",
-        videoUrl: "https://www.youtube.com/embed/QtdjMLbqmCw",
-        keyPoints: [
-          "The inner planets are rocky and dense, with solid surfaces.",
-          "Mercury is the smallest planet and closest to the Sun.",
-          "Venus has a thick atmosphere and is extremely hot.",
-          "Earth is the only known planet with liquid water on its surface.",
-          "Mars has a thin atmosphere and evidence of past liquid water."
-        ],
-        shortVideo: "https://www.youtube.com/embed/KY2j8SOB9bc",
-        additionalShortVideos: [
-          "https://www.youtube.com/embed/NsBqJ59W4WM",
-          "https://www.youtube.com/embed/bmJ0ROH-Ezs"
-        ],
-        bonusVideos: [
-          "https://www.youtube.com/embed/qjF47wVvXA0",
-          "https://www.youtube.com/embed/mgQMw47oXT4"
-        ],
-        image: {
-          url: "/lovable-uploads/0228ba3e-a126-45c3-a728-10da3a418e4e.png",
-          description: "A comparison of the sizes and features of the inner planets."
+        {
+          question: "Approximately how old is our Solar System?",
+          options: ["1 billion years", "4.6 billion years", "10 billion years", "13.8 billion years"],
+          correctAnswer: 1
         },
-        quiz: {
-          question: "Which inner planet has the thickest atmosphere?",
+        {
+          question: "What object contains approximately 99.8% of all the mass in our Solar System?",
+          options: ["Jupiter", "The Sun", "All planets combined", "The asteroid belt"],
+          correctAnswer: 1
+        },
+        {
+          question: "What force keeps planets in orbit around the Sun?",
+          options: ["Magnetic force", "Nuclear force", "Gravitational force", "Centrifugal force"],
+          correctAnswer: 2
+        }
+      ];
+    
+    case "The Inner Planets":
+      return [
+        {
+          question: "Which of these is NOT an inner planet?",
+          options: ["Mercury", "Venus", "Earth", "Jupiter"],
+          correctAnswer: 3
+        },
+        {
+          question: "What distinguishes inner planets from outer planets?",
+          options: [
+            "Inner planets are made primarily of rock and metal",
+            "Inner planets have more moons",
+            "Inner planets are larger",
+            "Inner planets have ring systems"
+          ],
+          correctAnswer: 0
+        },
+        {
+          question: "Which is the largest inner planet?",
+          options: ["Mercury", "Venus", "Earth", "Mars"],
+          correctAnswer: 2
+        },
+        {
+          question: "What zone of the Solar System do the inner planets occupy?",
+          options: ["Habitable zone", "Frost line", "Terrestrial zone", "Kuiper belt"],
+          correctAnswer: 0
+        },
+        {
+          question: "Which inner planet has the longest day?",
           options: ["Mercury", "Venus", "Earth", "Mars"],
           correctAnswer: 1
         }
-      },
-      {
-        id: "section-3",
-        title: "Earth",
-        introduction:
-          "Our home planet - the blue marble of the Solar System and the only known world with abundant liquid water.",
-        whyLearn:
-          "Understanding Earth's systems is crucial for addressing environmental challenges and ensuring a sustainable future.",
-        videoUrl: "https://www.youtube.com/embed/J8HA2J5OOUU",
-        keyPoints: [
-          "Earth has a diverse climate and a wide range of ecosystems.",
-          "The atmosphere protects Earth from harmful solar radiation.",
-          "The water cycle distributes water around the planet.",
-          "Plate tectonics shape Earth's surface and cause earthquakes and volcanoes.",
-          "Life on Earth depends on the interaction of the atmosphere, hydrosphere, and lithosphere."
-        ],
-        shortVideo: "https://www.youtube.com/embed/Ip2nUDygKWs",
-        additionalShortVideos: [
-          "https://www.youtube.com/embed/ZHjNJBzsH-w",
-          "https://www.youtube.com/embed/D6iazvCuVA4"
-        ],
-        bonusVideos: [
-          "https://www.youtube.com/embed/vIrwimxsU-s",
-          "https://www.youtube.com/embed/HjtjJ5vvIjM"
-        ],
-        image: {
-          url: "/lovable-uploads/6e29dd9e-5707-44ae-81af-d52de51f84e6.png",
-          description: "A stunning view of Earth from space, showcasing its oceans, continents, and atmosphere."
+      ];
+      
+    case "Earth":
+      return [
+        {
+          question: "What percentage of Earth's surface is covered by water?",
+          options: ["50%", "60%", "71%", "85%"],
+          correctAnswer: 2
         },
-        quiz: {
-          question: "What is the primary gas in Earth's atmosphere?",
-          options: ["Oxygen", "Nitrogen", "Carbon Dioxide", "Hydrogen"],
+        {
+          question: "What is Earth's position from the Sun?",
+          options: ["First", "Second", "Third", "Fourth"],
+          correctAnswer: 2
+        },
+        {
+          question: "How long does it take Earth to complete one orbit around the Sun?",
+          options: ["365 days", "365.25 days", "366 days", "364 days"],
+          correctAnswer: 1
+        },
+        {
+          question: "What is the name of Earth's magnetic field?",
+          options: ["Biosphere", "Magnetosphere", "Atmosphere", "Lithosphere"],
+          correctAnswer: 1
+        },
+        {
+          question: "What causes Earth's seasons?",
+          options: [
+            "Variable distance from the Sun",
+            "Earth's axial tilt",
+            "Solar flares",
+            "Ocean currents"
+          ],
           correctAnswer: 1
         }
-      },
-      {
-        id: "section-4",
-        title: "The Moon",
-        introduction:
-          "Earth's natural satellite and our closest celestial neighbor.",
-        whyLearn:
-          "Studying the Moon helps us understand the early history of the solar system and the processes that shape planetary bodies.",
-        videoUrl: "https://www.youtube.com/embed/F326bq6WwYg",
-        keyPoints: [
-          "The Moon is tidally locked to Earth, so we only see one side.",
-          "The Moon has no atmosphere and extreme temperature variations.",
-          "The lunar surface is covered in craters and maria (dark, basaltic plains).",
-          "The Moon likely formed from debris after a giant impact on Earth.",
-          "Future lunar missions aim to establish a permanent human presence on the Moon."
-        ],
-        shortVideo: "https://www.youtube.com/embed/o-f7BvJvH0w",
-        additionalShortVideos: [
-          "https://www.youtube.com/embed/qxzWv_jNTOE",
-          "https://www.youtube.com/embed/UIQmSpJ-edg"
-        ],
-        bonusVideos: [
-          "https://www.youtube.com/embed/mJ_fK7a8xXo",
-          "https://www.youtube.com/embed/wSFv1euqVwo"
-        ],
-        image: {
-          url: "/lovable-uploads/e0d0af9e-9849-4955-ac58-29cf798cb880.png",
-          description: "A detailed view of the Moon's surface, showing craters and maria."
+      ];
+      
+    case "The Moon":
+      return [
+        {
+          question: "How was the Moon likely formed?",
+          options: [
+            "It was captured by Earth's gravity",
+            "From a collision between Earth and a Mars-sized object",
+            "It formed alongside Earth from the solar nebula",
+            "It broke off from Earth during early formation"
+          ],
+          correctAnswer: 1
         },
-        quiz: {
-          question: "What is the dark, basaltic plains on the Moon called?",
-          options: ["Craters", "Maria", "Highlands", "Rilles"],
+        {
+          question: "What is the approximate diameter of the Moon?",
+          options: ["1,000 km", "2,159 km", "3,475 km", "5,000 km"],
+          correctAnswer: 2
+        },
+        {
+          question: "What phenomenon is caused by the Moon's gravitational pull on Earth?",
+          options: ["Seasons", "Tides", "Earthquakes", "Auroras"],
+          correctAnswer: 1
+        },
+        {
+          question: "How long does it take the Moon to complete one orbit around Earth?",
+          options: ["24 hours", "7 days", "27.3 days", "30 days"],
+          correctAnswer: 2
+        },
+        {
+          question: "What is unusual about the Moon's rotation compared to other satellites?",
+          options: [
+            "It rotates backward",
+            "It shows the same face to Earth at all times",
+            "It doesn't rotate at all",
+            "It rotates faster than Earth"
+          ],
           correctAnswer: 1
         }
-      },
-      {
-        id: "section-5",
-        title: "The Moon in Our Skies",
-        introduction:
-          "Explore the phases of the Moon and its influence on Earth's tides.",
-        whyLearn:
-          "Understanding the Moon's phases and its effects on Earth helps us appreciate the interconnectedness of celestial bodies.",
-        videoUrl: "https://www.youtube.com/embed/NC-ORyFvj8I",
-        keyPoints: [
-          "The Moon's phases are caused by the changing angles at which we view its illuminated surface.",
-          "The Moon's gravity causes tides on Earth.",
-          "Eclipses occur when the Sun, Earth, and Moon align.",
-          "The Moon's orbit is elliptical, so its distance from Earth varies.",
-          "The Moon has a synchronous rotation, so it always shows the same face to Earth."
-        ],
-        shortVideo: "https://www.youtube.com/embed/lK9-J99qVd0",
-        additionalShortVideos: [
-          "https://www.youtube.com/embed/MtAT-Gn1N5w",
-          "https://www.youtube.com/embed/mz19W2R-K-w"
-        ],
-        bonusVideos: [
-          "https://www.youtube.com/embed/mJ_fK7a8xXo",
-          "https://www.youtube.com/embed/wSFv1euqVwo"
-        ],
-        image: {
-          url: "/lovable-uploads/e0d0af9e-9849-4955-ac58-29cf798cb880.png",
-          description: "A diagram showing the different phases of the Moon."
-        },
-        quiz: {
+      ];
+      
+    case "The Moon in Our Skies":
+      return [
+        {
           question: "What causes the phases of the Moon?",
           options: [
-            "Earth's shadow",
-            "The Moon's rotation",
-            "Changing angles of sunlight",
-            "Volcanic activity"
+            "Earth's shadow on the Moon",
+            "The changing angle from which we see the illuminated part of the Moon",
+            "Clouds in Earth's atmosphere",
+            "The Moon's own light production"
+          ],
+          correctAnswer: 1
+        },
+        {
+          question: "During which Moon phase is the entire face visible from Earth?",
+          options: ["New Moon", "Waxing Crescent", "Full Moon", "Waning Gibbous"],
+          correctAnswer: 2
+        },
+        {
+          question: "What is a lunar eclipse?",
+          options: [
+            "When the Moon passes between Earth and the Sun",
+            "When Earth passes between the Moon and the Sun",
+            "When the Moon is not visible in the night sky",
+            "When the Moon appears larger than usual"
+          ],
+          correctAnswer: 1
+        },
+        {
+          question: "How often does the Moon rise each day?",
+          options: [
+            "Exactly once every 24 hours",
+            "About 50 minutes later each day",
+            "At the exact same time each day",
+            "Twice per day"
+          ],
+          correctAnswer: 1
+        },
+        {
+          question: "What is the 'Harvest Moon'?",
+          options: [
+            "A special red-colored Moon",
+            "The full Moon closest to the autumnal equinox",
+            "The largest full Moon of the year",
+            "A Moon that appears during daytime"
+          ],
+          correctAnswer: 1
+        }
+      ];
+      
+    case "Mapping the Moon":
+      return [
+        {
+          question: "What are the dark patches visible on the Moon?",
+          options: ["Mountains", "Oceans", "Maria (ancient lava flows)", "Forests"],
+          correctAnswer: 2
+        },
+        {
+          question: "Which astronauts first mapped the far side of the Moon?",
+          options: [
+            "Apollo astronauts",
+            "Soviet Luna 3 mission (unmanned)",
+            "Chinese Chang'e mission",
+            "Hubble Space Telescope scientists"
+          ],
+          correctAnswer: 1
+        },
+        {
+          question: "How are most features on the Moon's surface formed?",
+          options: ["Volcanic activity", "Meteor impacts", "Tectonic movement", "Erosion"],
+          correctAnswer: 1
+        },
+        {
+          question: "What are lunar 'seas' actually made of?",
+          options: ["Water", "Frozen ice", "Basaltic lava", "Silicon dust"],
+          correctAnswer: 2
+        },
+        {
+          question: "What is a lunar 'rille'?",
+          options: [
+            "A mountain range",
+            "A valley or channel on the Moon's surface",
+            "A crater chain",
+            "A dome-shaped feature"
+          ],
+          correctAnswer: 1
+        }
+      ];
+      
+    case "The Moon's Unseen Face":
+      return [
+        {
+          question: "Why can't we see the far side of the Moon from Earth?",
+          options: [
+            "It's too dark",
+            "It's always facing away from the Sun",
+            "The Moon's rotation and orbit are synchronized",
+            "Earth's atmosphere blocks the view"
           ],
           correctAnswer: 2
-        }
-      },
-      {
-        id: "section-6",
-        title: "Mapping the Moon",
-        introduction:
-          "Learn about the history of lunar cartography and how we've mapped the Moon's surface.",
-        whyLearn:
-          "Mapping the Moon is essential for planning future lunar missions and understanding its geological features.",
-        videoUrl: "https://www.youtube.com/embed/Q96vJaduGJA",
-        keyPoints: [
-          "Early lunar maps were based on telescopic observations.",
-          "The first detailed lunar maps were created in the 17th century.",
-          "Modern lunar maps are based on satellite imagery and laser altimetry.",
-          "Lunar maps are used to identify potential landing sites for future missions.",
-          "The Moon's far side was first mapped by the Soviet Luna 3 mission."
-        ],
-        shortVideo: "https://www.youtube.com/embed/rdlS-QEUlSQ",
-        additionalShortVideos: [
-          "https://www.youtube.com/embed/o-f7BvJvH0w",
-          "https://www.youtube.com/embed/qxzWv_jNTOE"
-        ],
-        bonusVideos: [
-          "https://www.youtube.com/embed/mJ_fK7a8xXo",
-          "https://www.youtube.com/embed/wSFv1euqVwo"
-        ],
-        image: {
-          url: "/lovable-uploads/e0d0af9e-9849-4955-ac58-29cf798cb880.png",
-          description: "A detailed map of the Moon's surface, showing craters, maria, and other features."
         },
-        quiz: {
-          question: "What is laser altimetry used for in lunar mapping?",
+        {
+          question: "How does the far side of the Moon differ from the near side?",
           options: [
-            "Measuring surface temperatures",
-            "Determining chemical composition",
-            "Measuring surface elevations",
-            "Detecting magnetic fields"
+            "It has more maria (dark areas)",
+            "It has fewer craters",
+            "It has more craters and fewer maria",
+            "It has a different color"
           ],
           correctAnswer: 2
-        }
-      },
-      {
-        id: "section-7",
-        title: "The Moon's Unseen Face",
-        introduction:
-          "Discover the hidden side of the Moon and its unique characteristics.",
-        whyLearn:
-          "Exploring the far side of the Moon helps us understand its formation and the differences between its two hemispheres.",
-        videoUrl: "https://www.youtube.com/embed/vJ3zxJ9rocw",
-        keyPoints: [
-          "The far side of the Moon is not visible from Earth.",
-          "The far side has a thicker crust and fewer maria than the near side.",
-          "The South Pole-Aitken basin is the largest impact crater in the solar system.",
-          "The far side was first photographed by the Soviet Luna 3 mission.",
-          "Future missions aim to establish a radio telescope on the far side."
-        ],
-        shortVideo: "https://www.youtube.com/embed/rdlS-QEUlSQ",
-        additionalShortVideos: [
-          "https://www.youtube.com/embed/o-f7BvJvH0w",
-          "https://www.youtube.com/embed/qxzWv_jNTOE"
-        ],
-        bonusVideos: [
-          "https://www.youtube.com/embed/mJ_fK7a8xXo",
-          "https://www.youtube.com/embed/wSFv1euqVwo"
-        ],
-        image: {
-          url: "/lovable-uploads/e0d0af9e-9849-4955-ac58-29cf798cb880.png",
-          description: "A view of the far side of the Moon, showing its heavily cratered surface."
         },
-        quiz: {
-          question: "Which mission first photographed the far side of the Moon?",
+        {
+          question: "When was the far side of the Moon first photographed?",
+          options: ["1959", "1969", "1972", "1986"],
+          correctAnswer: 0
+        },
+        {
+          question: "What spacecraft first landed on the far side of the Moon?",
           options: [
-            "Apollo 8",
-            "Luna 3",
+            "Apollo 11",
+            "Luna 9",
             "Chang'e 4",
             "Surveyor 1"
           ],
-          correctAnswer: 1
-        }
-      },
-      {
-        id: "section-8",
-        title: "Venus",
-        introduction:
-          "Explore Venus, the second planet from the Sun and Earth's nearest planetary neighbor, often called Earth's 'sister planet' due to its similar size.",
-        whyLearn:
-          "Understanding Venus helps us appreciate the extreme greenhouse effect and how planetary evolution can take dramatically different paths.",
-        videoUrl: "https://www.youtube.com/embed/BvXa1n9fjow",
-        keyPoints: [
-          "Venus has the thickest atmosphere of any terrestrial planet, composed primarily of carbon dioxide.",
-          "Surface temperatures on Venus reach about 900°F (475°C), hot enough to melt lead.",
-          "The extreme greenhouse effect makes Venus the hottest planet in our solar system.",
-          "Venus rotates very slowly and in the opposite direction to most planets.",
-          "Despite being farther from the Sun than Mercury, Venus is hotter due to its thick atmosphere."
-        ],
-        shortVideo: "https://www.youtube.com/embed/vjT10myBoZE",
-        additionalShortVideos: [
-          "https://www.youtube.com/embed/2GxhEOnsLY8"
-        ],
-        bonusVideos: [
-          "https://www.youtube.com/embed/djP-IdHFQWU"
-        ],
-        image: {
-          url: "/lovable-uploads/3215a500-d237-40e1-aecb-2a9e2b64ee10.png",
-          description: "A view of Venus showing its thick, yellowish cloud cover that perpetually shrouds the planet."
-        },
-        quiz: {
-          question: "What makes Venus the hottest planet in our solar system?",
-          options: [
-            "Its proximity to the Sun",
-            "Its extreme greenhouse effect",
-            "Volcanic activity",
-            "Solar radiation"
-          ],
-          correctAnswer: 1
-        }
-      },
-      {
-        id: "section-9",
-        title: "Mercury",
-        introduction:
-          "Discover Mercury, the smallest and innermost planet in our Solar System, a world of extremes and surprising complexity.",
-        whyLearn:
-          "Mercury's unique characteristics help us understand planetary formation and the effects of proximity to a star.",
-        videoUrl: "https://www.youtube.com/embed/0KBjnNuhRHs",
-        mainLesson2Url: "https://www.youtube.com/embed/rX_NCCpw5Uo",
-        keyPoints: [
-          "Mercury is the smallest planet in our solar system and closest to the Sun.",
-          "It has virtually no atmosphere, resulting in extreme temperature variations.",
-          "Mercury's day (176 Earth days) is longer than its year (88 Earth days).",
-          "The planet has a surprisingly large iron core relative to its size.",
-          "Mercury's surface is heavily cratered, similar to our Moon."
-        ],
-        shortVideo: "https://www.youtube.com/embed/uDurw7YxX3U",
-        additionalShortVideos: [
-          "https://www.youtube.com/embed/-DuQEeq4ZLw"
-        ],
-        bonusVideos: [
-          "https://www.youtube.com/embed/rsa92VNVY7A",
-          "https://www.youtube.com/embed/9T8lLtlZ8Xs",
-          "https://www.youtube.com/embed/31HAFceuvb0",
-          "https://www.youtube.com/embed/B588JHKSlEE"
-        ],
-        image: {
-          url: "/lovable-uploads/4feca2b6-a656-4abf-b674-e00f9467fb87.png",
-          description: "A detailed view of Mercury's heavily cratered surface, showing its Moon-like appearance."
-        },
-        quiz: {
-          question: "Why does Mercury have such extreme temperature variations?",
-          options: [
-            "Its elliptical orbit",
-            "Lack of substantial atmosphere",
-            "Its slow rotation",
-            "Volcanic activity"
-          ],
-          correctAnswer: 1
-        }
-      },
-      {
-        id: "section-10",
-        title: "Messenger at Mercury",
-        introduction:
-          "Explore NASA's MESSENGER mission, which provided the first comprehensive study of Mercury's surface, atmosphere, and magnetic field.",
-        whyLearn:
-          "The MESSENGER mission revolutionized our understanding of Mercury and demonstrated the technological challenges of exploring the inner Solar System.",
-        videoUrl: "https://www.youtube.com/embed/1MwGXzKjFfY",
-        keyPoints: [
-          "MESSENGER (MErcury Surface, Space ENvironment, GEochemistry, and Ranging) was the first spacecraft to orbit Mercury.",
-          "It completed over 4,000 orbits of Mercury between 2011 and 2015.",
-          "The mission discovered evidence of past volcanic activity and water ice in permanently shadowed polar craters.",
-          "MESSENGER mapped the entire surface of Mercury at high resolution.",
-          "The spacecraft had to withstand extreme temperatures due to Mercury's proximity to the Sun."
-        ],
-        shortVideo: "https://www.youtube.com/embed/tQjVO6BtT7A",
-        additionalShortVideos: [
-          "https://www.youtube.com/embed/U1cMS8K2uhk"
-        ],
-        bonusVideos: [
-          "https://www.youtube.com/embed/NJAfP9QLkN8",
-          "https://www.youtube.com/embed/gHn19Ce2sCE",
-          "https://www.youtube.com/embed/XPy9qQq6QT4"
-        ],
-        image: {
-          url: "/lovable-uploads/4feca2b6-a656-4abf-b674-e00f9467fb87.png",
-          description: "An illustration of the MESSENGER spacecraft orbiting Mercury, showing the challenging environment it operated in."
-        },
-        quiz: {
-          question: "What surprising discovery did the MESSENGER mission make about Mercury?",
-          options: [
-            "Signs of current volcanic activity",
-            "Evidence of a thick atmosphere",
-            "Water ice in permanently shadowed craters",
-            "Signs of microbial life"
-          ],
           correctAnswer: 2
-        }
-      },
-      {
-        id: "section-11",
-        title: "The Sun",
-        introduction:
-          "The Sun is our nearest star and the center of our solar system. This section explores its incredible power, structure, and importance to life on Earth.",
-        whyLearn:
-          "Understanding the Sun is essential to understanding our place in the universe and how it powers all life on Earth.",
-        videoUrl: "https://www.youtube.com/embed/2HoTK_Gqi2Q",
-        mainLesson2Url: "https://www.youtube.com/embed/C7cqc9jHFdg",
-        keyPoints: [
-          "The Sun is a G-type main-sequence star at the center of our solar system.",
-          "It accounts for about 99.86% of the total mass of the Solar System.",
-          "The Sun's core reaches temperatures of about 15 million degrees Celsius.",
-          "Solar flares and coronal mass ejections can impact Earth's magnetic field.",
-          "The Sun is approximately 4.6 billion years old and is halfway through its life cycle."
-        ],
-        shortVideo: "https://www.youtube.com/embed/pRQwXcn5VAA",
-        additionalShortVideos: [
-          "https://www.youtube.com/embed/4LFxL9VEM8w"
-        ],
-        bonusVideos: [
-          "https://www.youtube.com/embed/X40Re7j1WlI",
-          "https://www.youtube.com/embed/d-z0eQOEzkE"
-        ],
-        image: {
-          url: "/lovable-uploads/fb49e844-5050-4fb0-9560-fd65c5e4dad5.png",
-          description: "The Sun in different wavelengths, showing its various atmospheric layers and features."
         },
-        quiz: {
-          question: "What is the approximate temperature at the Sun's core?",
+        {
+          question: "Why is radio astronomy particularly valuable on the far side of the Moon?",
           options: [
-            "5,500 degrees Celsius",
-            "1 million degrees Celsius",
-            "15 million degrees Celsius",
-            "100 million degrees Celsius"
-          ],
-          correctAnswer: 2
-        }
-      },
-      {
-        id: "section-12",
-        title: "Close to the Sun",
-        introduction:
-          "This section explores the missions and spacecraft that have ventured close to our star to study its mysteries and help us understand solar activity.",
-        whyLearn:
-          "Learning about solar missions helps us understand how scientists gather data about the Sun's behavior and its effects on Earth and space weather.",
-        videoUrl: "https://www.youtube.com/embed/B3aNeJ5s7ew",
-        keyPoints: [
-          "The Parker Solar Probe is the closest human-made object to the Sun, designed to study its outer corona.",
-          "The Solar Orbiter mission provides unprecedented close-up observations of the Sun.",
-          "Solar missions must withstand extreme temperatures and radiation.",
-          "Understanding the Sun helps predict space weather that affects Earth's technology.",
-          "Solar observatories use special instruments to observe different wavelengths of solar radiation."
-        ],
-        shortVideo: "https://www.youtube.com/embed/DO03iFYdpp8",
-        additionalShortVideos: [
-          "https://www.youtube.com/embed/OCKb1v7k8i0"
-        ],
-        bonusVideos: [
-          "https://www.youtube.com/embed/_OQzGKJkQEE",
-          "https://www.youtube.com/embed/W_cLSvP9qSU",
-          "https://www.youtube.com/embed/48_qGtI08i8",
-          "https://www.youtube.com/embed/D56oR9-J5wE",
-          "https://www.youtube.com/embed/SLmWY_ycFUA"
-        ],
-        visualUrl: "https://solarsystem.nasa.gov/gltf_embed/2352",
-        image: {
-          url: "/lovable-uploads/dac0c33f-58a2-44f3-81eb-5f00fda40b1b.png",
-          description: "The Parker Solar Probe approaching the Sun's corona, protected by its heat shield."
-        },
-        quiz: {
-          question: "Which spacecraft has traveled closest to the Sun?",
-          options: [
-            "Voyager 1",
-            "Parker Solar Probe",
-            "Solar Orbiter",
-            "Helios 2"
+            "Higher temperatures allow better signal processing",
+            "The Moon blocks Earth's radio interference",
+            "Signals from deep space are stronger there",
+            "Lunar soil enhances radio reception"
           ],
           correctAnswer: 1
-        }
-      },
-      {
-        id: "section-13",
-        title: "Mars",
-        introduction:
-          "Mars, the fourth planet from the Sun, has captivated human imagination for centuries. Known as the Red Planet, it's the most Earth-like world in our solar system.",
-        whyLearn:
-          "Mars is a primary target for human exploration and possibly future colonization, making it essential to understand its environment and history.",
-        videoUrl: "https://www.youtube.com/embed/E-PuUs25rJA",
-        mainLesson2Url: "https://www.youtube.com/embed/wFTGP7-n3J8",
-        keyPoints: [
-          "Mars has a thin atmosphere composed mainly of carbon dioxide.",
-          "The planet experiences seasons due to its axial tilt, similar to Earth.",
-          "Evidence suggests Mars once had liquid water flowing on its surface.",
-          "Mars has the largest volcano in the solar system, Olympus Mons.",
-          "The red color of Mars comes from iron oxide (rust) on its surface."
-        ],
-        shortVideo: "https://www.youtube.com/embed/p7f8oR5ELwk",
-        additionalShortVideos: [
-          "https://www.youtube.com/embed/dZ3vHb6YPmA"
-        ],
-        bonusVideos: [
-          "https://www.youtube.com/embed/wFTGP7-n3J8?list=PL2gLpWRK0QlCXPhOqQD0wqPhLIvjq0BUj"
-        ],
-        bonusContent2: [
-          "NASA's InSight lander detected and recorded sounds of Martian winds, giving us the first 'sounds' from another planet."
-        ],
-        image: {
-          url: "/lovable-uploads/3d8b75cf-5e69-49ac-9444-9c3f6c33fb4c.png",
-          description: "The surface of Mars showing its distinctive red landscape and rocky terrain."
-        },
-        quiz: {
-          question: "What gives Mars its distinctive red color?",
-          options: [
-            "Volcanic activity",
-            "Iron oxide (rust) in the soil",
-            "Reflection from its moons",
-            "Atmospheric methane"
-          ],
-          correctAnswer: 1
-        }
-      },
-      {
-        id: "section-14",
-        title: "Mars from Above and the Moons of Mars",
-        introduction:
-          "This section explores the stunning geographical features of Mars as seen from orbit, along with its two small moons, Phobos and Deimos.",
-        whyLearn:
-          "Understanding Mars' geography and its moons provides crucial information for future exploration missions and insights into the planet's formation.",
-        videoUrl: "https://www.youtube.com/embed/wFTGP7-n3J8",
-        keyPoints: [
-          "Mars has two small, irregularly shaped moons: Phobos and Deimos.",
-          "Valles Marineris is a vast canyon system that would stretch across the United States.",
-          "The Tharsis region contains massive shield volcanoes including Olympus Mons.",
-          "Mars has polar ice caps composed of water ice and dry ice (frozen CO2).",
-          "Global dust storms can occasionally cover the entire Martian surface."
-        ],
-        shortVideo: "https://www.youtube.com/embed/Oo51KBdURMo",
-        additionalShortVideos: [
-          "https://www.youtube.com/embed/8rjb4fM6EC8",
-          "https://www.youtube.com/embed/lHSfFieToSM",
-          "https://www.youtube.com/embed/o7RJeAdDmmE",
-          "https://www.youtube.com/embed/cTMiM1UZfTc",
-          "https://www.youtube.com/embed/JIzw9ap13yk"
-        ],
-        visualGalleryUrl: "https://mars.nasa.gov/mars2020/multimedia/raw-images/",
-        image: {
-          url: "/lovable-uploads/444d4246-3b56-42bd-8f43-4c561d66cd37.png",
-          description: "Valles Marineris, the 'Grand Canyon of Mars,' stretching over 4,000 km across the planet's surface."
-        },
-        quiz: {
-          question: "What is the name of the largest canyon system on Mars?",
-          options: [
-            "Olympus Canyon",
-            "Valles Marineris",
-            "Hellas Basin",
-            "Mariner Valley"
-          ],
-          correctAnswer: 1
-        }
-      },
-      {
-        id: "section-15",
-        title: "Roving over Mars",
-        introduction:
-          "This section focuses on the robotic explorers that have landed on Mars, from the early missions to the sophisticated rovers like Curiosity and Perseverance.",
-        whyLearn:
-          "Mars rovers represent the cutting edge of robotic exploration and have revolutionized our understanding of the Red Planet's history and potential for past life.",
-        videoUrl: "https://www.youtube.com/embed/OO5CTBBgtXs",
-        mainLesson2Url: "https://www.youtube.com/embed/WrTHX8t0yl8",
-        keyPoints: [
-          "Rovers have confirmed that Mars once had persistent liquid water on its surface.",
-          "The Perseverance rover includes instruments specifically designed to look for signs of ancient microbial life.",
-          "Mars rovers use nuclear power (RTGs) to operate for years despite dust storms and harsh conditions.",
-          "The Ingenuity helicopter demonstrated the first powered flight on another planet.",
-          "Rovers collect samples for potential future return to Earth for detailed analysis."
-        ],
-        shortVideo: "https://www.youtube.com/embed/IhFK-b5yd2M",
-        additionalShortVideos: [
-          "https://www.youtube.com/embed/3sbbk-VlRPk",
-          "https://www.youtube.com/embed/3wwcN__g3kM",
-          "https://www.youtube.com/embed/mfi7-12z_nE"
-        ],
-        bonusVideos: [
-          "https://www.youtube.com/embed/T4UKr7W-YC8",
-          "https://www.youtube.com/embed/WNrTttvdIMc",
-          "https://www.youtube.com/embed/CIaHiGbFybQ",
-          "https://www.youtube.com/embed/iK64wy0b2ic"
-        ],
-        visualUrl: "https://mars.nasa.gov/gltf_embed/24881",
-        image: {
-          url: "/lovable-uploads/930c9c02-d768-4457-9ff9-0304dc9579c7.png",
-          description: "The Mars Perseverance rover exploring the Martian surface, equipped with scientific instruments and the Ingenuity helicopter."
-        },
-        quiz: {
-          question: "What historic achievement did the Ingenuity helicopter accomplish?",
-          options: [
-            "First sample return from Mars",
-            "First image of Mars from orbit",
-            "First powered flight on another planet",
-            "First detection of methane on Mars"
-          ],
-          correctAnswer: 2
-        }
-      }
-    ]
-  };
-
-  baseCourse.sections = baseCourse.sections.map(section => {
-    if (!section.quizzes || section.quizzes.length < 5) {
-      section.quizzes = [
-        section.quiz,
-        {
-          question: `What is another key aspect of ${section.title}?`,
-          options: ["Feature A", "Feature B", "Feature C", "Feature D"],
-          correctAnswer: Math.floor(Math.random() * 4)
-        },
-        {
-          question: `Which statement about ${section.title} is correct?`,
-          options: ["Statement 1", "Statement 2", "Statement 3", "Statement 4"],
-          correctAnswer: Math.floor(Math.random() * 4)
-        },
-        {
-          question: `What's a common misconception about ${section.title}?`,
-          options: ["Misconception 1", "Misconception 2", "Misconception 3", "Misconception 4"],
-          correctAnswer: Math.floor(Math.random() * 4)
-        },
-        {
-          question: `Which of these is most closely related to ${section.title}?`,
-          options: ["Related concept 1", "Related concept 2", "Related concept 3", "Related concept 4"],
-          correctAnswer: Math.floor(Math.random() * 4)
         }
       ];
-    }
-    return section;
-  });
-
-  return baseCourse;
+      
+    case "Venus":
+      return [
+        {
+          question: "Why is Venus often called Earth's sister planet?",
+          options: [
+            "They formed at the same time",
+            "They have similar size and mass",
+            "They both have oceans",
+            "They have similar atmospheres"
+          ],
+          correctAnswer: 1
+        },
+        {
+          question: "What is the surface temperature on Venus?",
+          options: ["100°C (212°F)", "260°C (500°F)", "462°C (864°F)", "600°C (1112°F)"],
+          correctAnswer: 2
+        },
+        {
+          question: "What makes Venus's atmosphere so thick?",
+          options: [
+            "Oxygen and nitrogen",
+            "Carbon dioxide and nitrogen",
+            "Sulfuric acid clouds",
+            "Water vapor"
+          ],
+          correctAnswer: 1
+        },
+        {
+          question: "In which direction does Venus rotate compared to other planets?",
+          options: [
+            "Same direction as Earth (counterclockwise)",
+            "Opposite direction to Earth (clockwise)",
+            "It doesn't rotate",
+            "It flips direction periodically"
+          ],
+          correctAnswer: 1
+        },
+        {
+          question: "What is unusual about a Venusian day compared to its year?",
+          options: [
+            "It has no day/night cycle",
+            "Its day is longer than its year",
+            "Its day and year are exactly the same length",
+            "It has multiple sunrises per day"
+          ],
+          correctAnswer: 1
+        }
+      ];
+      
+    case "Mercury":
+      return [
+        {
+          question: "What makes Mercury's temperature so extreme?",
+          options: [
+            "Its proximity to the Sun and lack of substantial atmosphere",
+            "Its metallic core generates heat",
+            "Volcanic activity across the surface",
+            "Its slow rotation causes heat buildup"
+          ],
+          correctAnswer: 0
+        },
+        {
+          question: "What is the temperature range on Mercury?",
+          options: [
+            "0°C to 100°C (32°F to 212°F)",
+            "-173°C to 427°C (-280°F to 800°F)",
+            "-200°C to 200°C (-328°F to 392°F)",
+            "100°C to 300°C (212°F to 572°F)"
+          ],
+          correctAnswer: 1
+        },
+        {
+          question: "How long is a day on Mercury?",
+          options: ["24 Earth hours", "59 Earth days", "176 Earth days", "88 Earth days"],
+          correctAnswer: 2
+        },
+        {
+          question: "What is Mercury's surface mostly comprised of?",
+          options: [
+            "Iron deserts",
+            "Rocky, cratered terrain similar to the Moon",
+            "Ice sheets and glaciers",
+            "Liquid metal lakes"
+          ],
+          correctAnswer: 1
+        },
+        {
+          question: "What causes Mercury's 'wandering' movement as viewed from Earth?",
+          options: [
+            "Its elliptical orbit",
+            "Earth's wobbling axis",
+            "Mercury's retrograde rotation",
+            "The Sun's gravitational influence"
+          ],
+          correctAnswer: 0
+        }
+      ];
+      
+    case "Messenger at Mercury":
+      return [
+        {
+          question: "What was NASA's first mission to orbit Mercury?",
+          options: ["Mariner 10", "Pioneer Venus", "MESSENGER", "BepiColombo"],
+          correctAnswer: 2
+        },
+        {
+          question: "What does the MESSENGER acronym stand for?",
+          options: [
+            "Mercury Surface, Space Environment, Geochemistry, and Ranging",
+            "Mercury Exploration and Scientific Study in Elliptical Networked Gravitational Exploration Regime",
+            "Mercury Environmental Research and Mapping of Surface Systems Exploration and Navigation by Global Executives Reconnaissance",
+            "Mercury Study and Survey of Elemental Nomenclature, Geomorphology, and Radiation"
+          ],
+          correctAnswer: 0
+        },
+        {
+          question: "What discovery did MESSENGER make about Mercury's poles?",
+          options: [
+            "Active volcanoes",
+            "Frozen water ice",
+            "Magnetic anomalies",
+            "Atmosphere pockets"
+          ],
+          correctAnswer: 1
+        },
+        {
+          question: "How did the MESSENGER mission end?",
+          options: [
+            "It continues to orbit Mercury today",
+            "It was redirected to Venus",
+            "It crashed into Mercury's surface",
+            "It ran out of fuel and is now a derelict satellite"
+          ],
+          correctAnswer: 2
+        },
+        {
+          question: "What was challenging about sending a spacecraft to Mercury?",
+          options: [
+            "The high radiation from the Sun",
+            "Mercury has a powerful magnetic field that disrupts electronics",
+            "The extreme heat and the Sun's gravitational pull",
+            "All of the above"
+          ],
+          correctAnswer: 2
+        }
+      ];
+      
+    case "The Sun":
+      return [
+        {
+          question: "What is the Sun primarily composed of?",
+          options: ["Oxygen and carbon", "Iron and nickel", "Hydrogen and helium", "Silicon and aluminum"],
+          correctAnswer: 2
+        },
+        {
+          question: "What is the Sun's core temperature?",
+          options: ["5,500°C", "1 million °C", "15 million °C", "100 million °C"],
+          correctAnswer: 2
+        },
+        {
+          question: "What are sunspots?",
+          options: [
+            "Solar flares visible from Earth",
+            "Cooler regions on the Sun's surface",
+            "Fusion reaction sites",
+            "Holes in the Sun's corona"
+          ],
+          correctAnswer: 1
+        },
+        {
+          question: "What causes the Sun to shine?",
+          options: [
+            "Chemical burning",
+            "Nuclear fusion",
+            "Radioactive decay",
+            "Electrical discharge"
+          ],
+          correctAnswer: 1
+        },
+        {
+          question: "How old is the Sun estimated to be?",
+          options: ["1 billion years", "4.6 billion years", "10 billion years", "13.8 billion years"],
+          correctAnswer: 1
+        }
+      ];
+      
+    case "Close to the Sun":
+      return [
+        {
+          question: "Which NASA mission was designed specifically to study the Sun's corona?",
+          options: ["Solar Dynamics Observatory", "Ulysses", "Parker Solar Probe", "Solar and Heliospheric Observatory"],
+          correctAnswer: 2
+        },
+        {
+          question: "What is the Sun's corona?",
+          options: [
+            "The Sun's core",
+            "The visible surface of the Sun",
+            "The outer atmosphere of the Sun",
+            "The Sun's magnetic field"
+          ],
+          correctAnswer: 2
+        },
+        {
+          question: "What is the 'solar wind'?",
+          options: [
+            "Strong winds on Earth caused by solar heating",
+            "A stream of charged particles ejected from the Sun",
+            "The movement of gases inside the Sun",
+            "The rotation of the Sun's surface"
+          ],
+          correctAnswer: 1
+        },
+        {
+          question: "What protects Earth from the full force of the solar wind?",
+          options: [
+            "Earth's atmosphere",
+            "Earth's magnetic field (magnetosphere)",
+            "The ozone layer",
+            "The Moon's shadow"
+          ],
+          correctAnswer: 1
+        },
+        {
+          question: "What phenomenon on Earth is directly caused by particles from the Sun?",
+          options: [
+            "Earthquakes",
+            "Hurricanes",
+            "Aurora borealis (Northern Lights)",
+            "Tsunamis"
+          ],
+          correctAnswer: 2
+        }
+      ];
+      
+    case "Mars":
+      return [
+        {
+          question: "What gives Mars its distinctive red color?",
+          options: [
+            "Iron oxide (rust) in the soil",
+            "Red vegetation",
+            "Reflection from its moons",
+            "Atmospheric gases"
+          ],
+          correctAnswer: 0
+        },
+        {
+          question: "What are the names of Mars' two moons?",
+          options: [
+            "Europa and Ganymede",
+            "Titan and Enceladus",
+            "Phobos and Deimos",
+            "Luna and Charon"
+          ],
+          correctAnswer: 2
+        },
+        {
+          question: "What is Olympus Mons?",
+          options: [
+            "A Martian crater",
+            "The largest volcano in the solar system",
+            "A Martian moon",
+            "An ancient Martian sea"
+          ],
+          correctAnswer: 1
+        },
+        {
+          question: "What evidence suggests Mars once had liquid water?",
+          options: [
+            "The presence of methane",
+            "Channels and valley networks on its surface",
+            "Its red color",
+            "Its thin atmosphere"
+          ],
+          correctAnswer: 1
+        },
+        {
+          question: "How long is a day on Mars?",
+          options: ["24 hours and 37 minutes", "36 hours", "12 hours", "7 days"],
+          correctAnswer: 0
+        }
+      ];
+      
+    case "Mars from Above and the Moons of Mars":
+      return [
+        {
+          question: "What are the largest canyons on Mars called?",
+          options: [
+            "Olympus Canyons",
+            "Martian Trenches",
+            "Valles Marineris",
+            "Tharsis Valleys"
+          ],
+          correctAnswer: 2
+        },
+        {
+          question: "What is unusual about Phobos compared to most moons?",
+          options: [
+            "It orbits in the opposite direction of Mars' rotation",
+            "It orbits Mars faster than Mars rotates",
+            "It's a captured asteroid",
+            "It has a substantial atmosphere"
+          ],
+          correctAnswer: 1
+        },
+        {
+          question: "What will eventually happen to Phobos?",
+          options: [
+            "It will escape Mars' gravity",
+            "It will crash into Mars",
+            "It will combine with Deimos",
+            "It will become a ring around Mars"
+          ],
+          correctAnswer: 1
+        },
+        {
+          question: "What geological feature covers much of Mars' northern hemisphere?",
+          options: [
+            "Olympus Mons",
+            "Tharsis Bulge",
+            "Northern Lowlands (Vastitas Borealis)",
+            "Hellas Basin"
+          ],
+          correctAnswer: 2
+        },
+        {
+          question: "Which spacecraft first mapped Mars in detail from orbit?",
+          options: [
+            "Viking 1",
+            "Mars Global Surveyor",
+            "Mariner 9",
+            "Mars Reconnaissance Orbiter"
+          ],
+          correctAnswer: 2
+        }
+      ];
+      
+    case "Roving over Mars":
+      return [
+        {
+          question: "Which was the first rover to successfully operate on Mars?",
+          options: ["Curiosity", "Opportunity", "Sojourner", "Perseverance"],
+          correctAnswer: 2
+        },
+        {
+          question: "What powered the Opportunity and Spirit rovers?",
+          options: [
+            "Nuclear power",
+            "Solar panels",
+            "Batteries only",
+            "Hydrogen fuel cells"
+          ],
+          correctAnswer: 1
+        },
+        {
+          question: "What instrument on the Curiosity rover analyzes Martian soil and rock samples?",
+          options: [
+            "MOXIE",
+            "ChemCam",
+            "MAHLI",
+            "SAM (Sample Analysis at Mars)"
+          ],
+          correctAnswer: 3
+        },
+        {
+          question: "What is the main objective of the Perseverance rover mission?",
+          options: [
+            "To search for evidence of ancient microbial life",
+            "To establish a human colony",
+            "To mine valuable minerals",
+            "To capture Mars' moons"
+          ],
+          correctAnswer: 0
+        },
+        {
+          question: "What small aircraft accompanied Perseverance to Mars?",
+          options: [
+            "Mars Flyer",
+            "Ingenuity helicopter",
+            "RedWing drone",
+            "Martian Glider"
+          ],
+          correctAnswer: 1
+        }
+      ];
+      
+    default:
+      // Default quiz for any other section
+      return [
+        {
+          question: `What is the primary focus of ${sectionTitle}?`,
+          options: ["Planetary formation", "Stellar evolution", "Space exploration", "Astronomical observation"],
+          correctAnswer: 2
+        },
+        {
+          question: `Which instrument is most commonly used to study ${sectionTitle}?`,
+          options: ["Radio telescope", "Optical telescope", "Spectrometer", "Space probe"],
+          correctAnswer: 3
+        },
+        {
+          question: `When did scientists first begin serious study of ${sectionTitle}?`,
+          options: ["Ancient times", "17th century", "20th century", "21st century"],
+          correctAnswer: 2
+        },
+        {
+          question: `Which space agency has contributed most to our understanding of ${sectionTitle}?`,
+          options: ["NASA", "ESA", "Roscosmos", "CNSA"],
+          correctAnswer: 0
+        },
+        {
+          question: `What is the biggest challenge in studying ${sectionTitle}?`,
+          options: ["Distance", "Atmospheric interference", "Technical limitations", "Funding constraints"],
+          correctAnswer: 0
+        }
+      ];
+  }
 };
+
+// Create a basic quiz if needed
+const createBasicQuiz = (sectionTitle: string): QuizQuestion => {
+  return {
+    question: `Test your knowledge about ${sectionTitle}`,
+    options: [
+      "Option A is correct",
+      "Option B is incorrect",
+      "Option C is incorrect",
+      "Option D is incorrect"
+    ],
+    correctAnswer: 0
+  };
+};
+
+// Function to generate a mock course
+export const generateMockCourse = (
+  interest: string = "planets",
+  level: string = "beginner",
+  learningStyle: string = "visual"
+): Course => {
+  const courseTitle = `Astronomy ${level} Course for ${interest} Learners`;
+  const courseDescription = `This course is designed for ${level} learners who are interested in ${interest}. It is a ${learningStyle} learning style course.`;
+
+  const sections: CourseSection[] = [
+    {
+      id: "section1",
+      title: "The Solar System",
+      introduction: "The Solar System is our cosmic neighborhood, comprising the Sun and everything that orbits around it. This includes planets, dwarf planets, moons, asteroids, comets, and more.",
+      whyLearn: "Understanding the Solar System helps us comprehend our place in the cosmos and the forces that shape our existence.",
+      videoUrl: "https://www.youtube.com/embed/libKVRa01L8",
+      keyPoints: [
+        "The Solar System formed about 4.6 billion years ago from a cloud of gas and dust",
+        "It consists of the Sun, eight planets, dwarf planets, moons, and smaller objects",
+        "The four inner planets (Mercury, Venus, Earth, Mars) are rocky, while the outer planets are gas giants",
+        "The Sun contains 99.8% of the Solar System's mass",
+        "The planets all orbit the Sun in the same direction and roughly the same plane"
+      ],
+      image: {
+        url: "https://images.unsplash.com/photo-1614642264762-d0a3b8bf3700",
+        description: "A schematic view of our Solar System showing the Sun and planets in their orbital paths."
+      },
+      shortVideo: "https://www.youtube.com/embed/pS7p6FfU4bE?si=QJHfJh5SyF3cnqI-",
+      quiz: createBasicQuiz("The Solar System"),
+      quizzes: generateQuizzes("The Solar System"),
+      funFacts: [
+        "If you could fly a plane to Pluto, it would take more than 800 years",
+        "The Great Red Spot on Jupiter is a storm that has been raging for at least 400 years",
+        "One day on Venus is longer than one year on Venus",
+        "Saturn is the only planet that could float in water (if there were a bathtub big enough)",
+        "All planets in our Solar System could fit between Earth and the Moon"
+      ]
+    },
+    {
+      id: "section2",
+      title: "The Inner Planets",
+      introduction: "The inner planets, also known as terrestrial planets, are the four planets closest to the Sun: Mercury, Venus, Earth, and Mars.",
+      whyLearn: "The inner planets provide clues about Earth's formation and potential future, as well as possibilities for human exploration.",
+      videoUrl: "https://www.youtube.com/embed/JyDGO7GH5_M",
+      keyPoints: [
+        "Inner planets are relatively small and composed primarily of rock and metal",
+        "They have few or no moons compared to the outer planets",
+        "Their surfaces are solid with features like mountains, valleys, and craters",
+        "They have relatively thin atmospheres compared to gas giants",
+        "They formed from the accretion of heavy elements close to the Sun"
+      ],
+      image: {
+        url: "https://images.unsplash.com/photo-1614642264762-d0a3b8bf3700",
+        description: "The four inner planets of our Solar System: Mercury, Venus, Earth, and Mars, shown to scale."
+      },
+      shortVideo: "https://www.youtube.com/embed/pS7p6FfU4bE?si=QJHfJh5SyF3cnqI-",
+      quiz: createBasicQuiz("The Inner Planets"),
+      quizzes: generateQuizzes("The Inner Planets")
+    },
+    {
+      id: "section3",
+      title: "Earth",
+      introduction: "Earth is our home planet, the only known world where life exists, with liquid water on the surface and an oxygen-rich atmosphere.",
+      whyLearn: "Understanding Earth's unique properties helps us appreciate its fragility and the conditions necessary for life.",
+      videoUrl: "https://www.youtube.com/embed/HCDVN7DCzYE",
+      keyPoints: [
+        "Earth is the third planet from the Sun and the only known planet with abundant liquid water",
+        "It has a protective magnetic field that shields us from harmful solar radiation",
+        "The atmosphere consists primarily of nitrogen (78%) and oxygen (21%)",
+        "Earth's climate is regulated by a complex system of ocean and atmospheric circulation",
+        "The planet is geologically active with plate tectonics reshaping its surface"
+      ],
+      image: {
+        url: "https://images.unsplash.com/photo-1614730321146-b6fa6a46bcb4",
+        description: "Earth as seen from space, showing the blue oceans, green and brown landmasses, and white cloud formations."
+      },
+      shortVideo: "https://www.youtube.com/embed/JGXi_9A__Vc",
+      visualUrl: "https://www.youtube.com/embed/YeTMJYEDvnk", 
+      quiz: createBasicQuiz("Earth"),
+      quizzes: generateQuizzes("Earth"),
+      bonusVideos: ["https://www.youtube.com/embed/0MzqdQ_ZNvA"]
+    },
+    {
+      id: "section4",
+      title: "The Moon",
+      introduction: "The Moon is Earth's only natural satellite and our closest celestial neighbor, playing a vital role in Earth's evolution and our understanding of the Solar System.",
+      whyLearn: "The Moon helps us understand planetary formation and has been crucial to the development of life on Earth by stabilizing our planet's rotation.",
+      videoUrl: "https://www.youtube.com/embed/mCzchPx3yF8",
+      keyPoints: [
+        "The Moon is believed to have formed about 4.5 billion years ago from debris after a Mars-sized object collided with Earth",
+        "It has no atmosphere and experiences extreme temperature variations",
+        "The Moon is gradually moving away from Earth at about 3.8 cm per year",
+        "Its surface is covered with regolith, a layer of fine dust and broken rock",
+        "The Moon influences Earth's tides and helped stabilize Earth's axial tilt"
+      ],
+      image: {
+        url: "https://images.unsplash.com/photo-1532693322450-2cb5c511067d",
+        description: "The Moon's cratered surface as seen from Earth, showing the contrast between the dark maria and lighter highlands."
+      },
+      shortVideo: "https://www.youtube.com/embed/6AviDjR9mmo",
+      visualUrl: "https://www.youtube.com/embed/XgsQNXrFmBc",
+      funFacts: [
+        "The Moon is not a perfect sphere but is slightly egg-shaped",
+        "A person would weigh about 1/6th on the Moon compared to Earth",
+        "The Moon has moonquakes, caused by the gravitational influence of Earth",
+        "The far side of the Moon was first photographed in 1959",
+        "There's enough gold on the Moon's surface to cover a football field"
+      ],
+      quiz: createBasicQuiz("The Moon"),
+      quizzes: generateQuizzes("The Moon")
+    },
+    {
+      id: "section5",
+      title: "The Moon in Our Skies",
+      introduction: "The Moon's appearance changes dramatically as seen from Earth, creating phases and influencing human culture throughout history.",
+      whyLearn: "Understanding the Moon's phases and movement helps us connect astronomical observations to everyday experiences.",
+      videoUrl: "https://www.youtube.com/embed/AQ5vty8f9Xc",
+      keyPoints: [
+        "Moon phases occur because we see different portions of the illuminated half as it orbits Earth",
+        "A complete cycle of phases takes about 29.5 days (a synodic month)",
+        "Lunar and solar eclipses occur when the Sun, Earth, and Moon align",
+        "The Moon rises about 50 minutes later each day due to its orbital motion",
+        "The Moon always shows the same face to Earth due to tidal locking"
+      ],
+      image: {
+        url: "https://images.unsplash.com/photo-1532693322450-2cb5c511067d",
+        description: "A composite showing the different phases of the Moon throughout its monthly cycle."
+      },
+      shortVideo: "https://www.youtube.com/embed/AQ5vty8f9Xc",
+      visualUrl: "https://www.youtube.com/embed/1SN1BOpLZAs",
+      quiz: createBasicQuiz("The Moon in Our Skies"),
+      quizzes: generateQuizzes("The Moon in Our Skies")
+    },
+    {
+      id: "section6",
+      title: "Mapping the Moon",
+      introduction: "Scientists have mapped the Moon's surface in increasing detail over centuries, revealing a complex landscape with unique features and history.",
+      whyLearn: "Lunar mapping helps us understand the Moon's geological history and plan future exploration missions.",
+      videoUrl: "https://www.youtube.com/embed/UIKmSQqp8wY",
+      keyPoints: [
+        "The Moon's surface features include maria (dark plains), highlands, craters, mountains, and rilles",
+        "Maria are ancient lava flows that filled impact basins billions of years ago",
+        "Craters were formed by asteroid and meteor impacts over billions of years",
+        "The Moon has no active plate tectonics or significant erosion",
+        "Modern mapping uses laser altimetry and high-resolution cameras from orbit"
+      ],
+      image: {
+        url: "https://images.unsplash.com/photo-1614732414444-096e5f1122d5",
+        description: "A detailed topographical map of the Moon's surface showing major craters and maria
