@@ -564,7 +564,34 @@ export const generateMockCourse = (
           question: "What is the primary gas in Earth's atmosphere?",
           options: ["Oxygen", "Nitrogen", "Carbon Dioxide", "Hydrogen"],
           correctAnswer: 1
-        }
+        },
+        quizzes: [
+          {
+            question: "Which layer of Earth protects us from getting sunburned?",
+            options: ["Crust", "Mantle", "Outer Core", "Ozone Layer"],
+            correctAnswer: 3
+          },
+          {
+            question: "Which planet is known as the \"Blue Marble\"?",
+            options: ["Venus", "Mars", "Earth", "Jupiter"],
+            correctAnswer: 2
+          },
+          {
+            question: "What causes the seasons on Earth?",
+            options: ["Earth's distance from the Sun", "Moon's gravity", "Earth's tilted axis", "Ocean tides"],
+            correctAnswer: 2
+          },
+          {
+            question: "How long does it take Earth to orbit the Sun?",
+            options: ["30 days", "180 days", "365 days", "24 hours"],
+            correctAnswer: 2
+          },
+          {
+            question: "Which part of Earth experiences 24 hours of daylight in summer?",
+            options: ["Equator", "South Pole", "North Pole", "Tropics"],
+            correctAnswer: 2
+          }
+        ]
       },
       {
         id: "section-4",
