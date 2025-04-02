@@ -722,96 +722,13 @@ export const generateMockCourse = (
           description: "A detailed map of the Moon's surface, showing craters, maria, and other features."
         },
         quiz: {
-          question: "What is laser altimetry used for in lunar mapping?",
+          question: "What is a lunar crater?",
           options: [
-            "Measuring surface temperatures",
-            "Determining chemical composition",
-            "Measuring surface elevations",
-            "Detecting magnetic fields"
+            "A Moon mountain",
+            "A Moon lake",
+            "A hole from an impact",
+            "A volcano"
           ],
           correctAnswer: 2
-        }
-      },
-      {
-        id: "section-7",
-        title: "The Moon's Unseen Face",
-        introduction:
-          "Discover the hidden side of the Moon and its unique characteristics.",
-        whyLearn:
-          "Exploring the far side of the Moon helps us understand its formation and the differences between its two hemispheres.",
-        videoUrl: "https://www.youtube.com/embed/vJ3zxJ9rocw",
-        keyPoints: [
-          "The far side of the Moon is not visible from Earth.",
-          "The far side has a thicker crust and fewer maria than the near side.",
-          "The South Pole-Aitken basin is the largest impact crater in the solar system.",
-          "The far side was first photographed by the Soviet Luna 3 mission.",
-          "Future missions aim to establish a radio telescope on the far side."
-        ],
-        shortVideo: "https://www.youtube.com/embed/rdlS-QEUlSQ",
-        additionalShortVideos: [
-          "https://www.youtube.com/embed/o-f7BvJvH0w",
-          "https://www.youtube.com/embed/qxzWv_jNTOE"
-        ],
-        bonusVideos: [
-          "https://www.youtube.com/embed/mJ_fK7a8xXo",
-          "https://www.youtube.com/embed/wSFv1euqVwo"
-        ],
-        image: {
-          url: "/lovable-uploads/e0d0af9e-9849-4955-ac58-29cf798cb880.png",
-          description: "A view of the far side of the Moon, showing its heavily cratered surface."
         },
-        quiz: {
-          question: "Which mission first photographed the far side of the Moon?",
-          options: [
-            "Apollo 8",
-            "Luna 3",
-            "Chang'e 4",
-            "Surveyor 1"
-          ],
-          correctAnswer: 1
-        }
-      },
-      {
-        id: "section-8",
-        title: "Venus",
-        introduction:
-          "Explore Venus, the second planet from the Sun and Earth's nearest planetary neighbor, often called Earth's twin due to its similar size and composition.",
-        whyLearn:
-          "Venus provides valuable insights into greenhouse effects and planetary evolution, helping us better understand climate dynamics on Earth.",
-        videoUrl: "https://www.youtube.com/embed/BvXa1n9fjow",
-        keyPoints: [
-          "Venus has a thick atmosphere composed mainly of carbon dioxide.",
-          "Its surface temperature is hot enough to melt lead (around 900°F/475°C).",
-          "Venus rotates in the opposite direction compared to most planets.",
-          "The planet is covered in volcanic features and lava plains.",
-          "Venus has no moons and no magnetic field like Earth does."
-        ],
-        shortVideo: "https://www.youtube.com/embed/HqFVbS_dVyU",
-        additionalShortVideos: [
-          "https://www.youtube.com/embed/NUl7LsOKoLE",
-          "https://www.youtube.com/embed/2DZbZYggJvk"
-        ],
-        bonusVideos: [
-          "https://www.youtube.com/embed/Xdz8jtGoMqY",
-          "https://www.youtube.com/embed/54U-xZ6snCI"
-        ],
-        image: {
-          url: "/lovable-uploads/34bde558-8d2c-41ff-bd25-b4c545393355.png",
-          description: "A detailed visualization of Venus showing its thick cloud covering and surface features."
-        },
-        quiz: {
-          question: "Why is Venus often called Earth's twin?",
-          options: [
-            "It has oceans like Earth",
-            "It has a similar size and composition",
-            "It has plant life",
-            "It has a similar atmosphere"
-          ],
-          correctAnswer: 1
-        }
-      }
-    ]
-  };
-  
-  return baseCourse;
-};
+        quizzes: [
