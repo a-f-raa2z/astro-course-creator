@@ -9,6 +9,7 @@ import { QuizIntro } from "./quiz/QuizIntro";
 import { QuizQuestion } from "./quiz/QuizQuestion";
 import { QuizFeedback } from "./quiz/QuizFeedback";
 import { QuizResults } from "./quiz/QuizResults";
+import { CompletionView } from "./CompletionView";
 
 interface QuizContentProps {
   section: CourseSection;
@@ -19,6 +20,8 @@ interface QuizContentProps {
   onComplete: () => void;
   onPrevious: () => void;
   isFirstContent: boolean;
+  nextSection?: CourseSection | null;
+  onStartNextSection?: () => void;
 }
 
 export const QuizContent = ({ 
@@ -29,13 +32,16 @@ export const QuizContent = ({
   handleQuizSubmit,
   onComplete,
   onPrevious,
-  isFirstContent
+  isFirstContent,
+  nextSection,
+  onStartNextSection
 }: QuizContentProps) => {
   const [currentQuizIndex, setCurrentQuizIndex] = useState(0);
   const [quizResults, setQuizResults] = useState<boolean[]>([]);
   const [showIntro, setShowIntro] = useState(true);
   const [localQuizSubmitted, setLocalQuizSubmitted] = useState(false);
   const [localSelectedAnswer, setLocalSelectedAnswer] = useState<number | null>(null);
+  const [showCompletionView, setShowCompletionView] = useState(false);
   
   // Always use the quizzes array, which will have the main quiz as the first item
   const quizzes = section.quizzes || [section.quiz];
@@ -61,6 +67,9 @@ export const QuizContent = ({
       setCurrentQuizIndex(currentQuizIndex + 1);
       setLocalSelectedAnswer(null);
       setLocalQuizSubmitted(false);
+    } else {
+      // Show completion view instead of immediately continuing
+      setShowCompletionView(true);
     }
   };
   
@@ -72,6 +81,30 @@ export const QuizContent = ({
     }
     return completedResults.filter(result => result).length;
   };
+  
+  if (showCompletionView) {
+    return (
+      <CompletionView 
+        sectionTitle={section.title}
+        onReviewKeyPoints={() => {
+          setShowCompletionView(false);
+          setLocalQuizSubmitted(false);
+          setCurrentQuizIndex(0);
+          setQuizResults([]);
+          setShowIntro(true);
+        }}
+        onRewatchVideo={() => {
+          // Go back to video content
+          onPrevious();
+          onPrevious();
+          onPrevious();
+        }}
+        onContinue={onComplete}
+        nextSectionTitle={nextSection?.title}
+        onStartNextSection={onStartNextSection}
+      />
+    );
+  }
   
   if (showIntro) {
     return (
@@ -130,7 +163,7 @@ export const QuizContent = ({
                 </Button>
               ) : (
                 <Button
-                  onClick={onComplete}
+                  onClick={handleNextQuiz}
                   size="sm"
                   className="bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800"
                 >

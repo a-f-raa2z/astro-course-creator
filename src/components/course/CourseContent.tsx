@@ -19,6 +19,7 @@ interface CourseContentProps {
   nextSectionTitle: string;
   onStartNextSection: () => void;
   isFirstContent: boolean;
+  allSections: CourseSection[];
 }
 
 export const CourseContent: React.FC<CourseContentProps> = ({
@@ -33,9 +34,13 @@ export const CourseContent: React.FC<CourseContentProps> = ({
   showSectionTransition,
   nextSectionTitle,
   onStartNextSection,
-  isFirstContent
+  isFirstContent,
+  allSections
 }) => {
   const currentContentType = contentTypes[currentContentIndex] || 'introduction';
+  
+  // Get the next section if available
+  const nextSection = sectionIndex < allSections.length - 1 ? allSections[sectionIndex + 1] : null;
   
   return (
     <>
@@ -63,6 +68,7 @@ export const CourseContent: React.FC<CourseContentProps> = ({
           showSectionTransition={showSectionTransition}
           nextSectionTitle={nextSectionTitle}
           onStartNextSection={onStartNextSection}
+          nextSection={nextSection}
         />
       </Card>
     </>

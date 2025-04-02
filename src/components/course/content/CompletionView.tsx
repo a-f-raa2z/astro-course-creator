@@ -9,6 +9,8 @@ interface CompletionViewProps {
   onRewatchVideo: () => void;
   onContinue: () => void;
   showKeyPointsButton?: boolean;
+  nextSectionTitle?: string;
+  onStartNextSection?: () => void;
 }
 
 export const CompletionView = ({ 
@@ -16,7 +18,9 @@ export const CompletionView = ({
   onReviewKeyPoints, 
   onRewatchVideo, 
   onContinue,
-  showKeyPointsButton = true
+  showKeyPointsButton = true,
+  nextSectionTitle,
+  onStartNextSection
 }: CompletionViewProps) => {
   return (
     <div className="flex-grow flex flex-col items-center justify-center p-8 text-center">
@@ -53,6 +57,18 @@ export const CompletionView = ({
           Continue <ArrowRight className="h-4 w-4 ml-2" />
         </Button>
       </div>
+      
+      {nextSectionTitle && onStartNextSection && (
+        <div className="mt-8 border-t pt-6 border-purple-500/30 w-full max-w-md">
+          <p className="text-purple-200 mb-4">Ready for your next adventure?</p>
+          <Button 
+            onClick={onStartNextSection}
+            className="bg-purple-600 hover:bg-purple-700"
+          >
+            Start Next Section: {nextSectionTitle} <ArrowRight className="h-4 w-4 ml-2" />
+          </Button>
+        </div>
+      )}
     </div>
   );
 };

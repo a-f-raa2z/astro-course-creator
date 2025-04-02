@@ -1,3 +1,4 @@
+
 import { CourseSection } from "@/types/course";
 import { ContentType } from "@/types/ContentType";
 import { IntroductionContent } from "./content/IntroductionContent";
@@ -25,6 +26,7 @@ interface GameContentRendererProps {
   showSectionTransition?: boolean;
   nextSectionTitle?: string;
   onStartNextSection?: () => void;
+  nextSection?: CourseSection | null;
 }
 
 export const GameContentRenderer = ({
@@ -39,7 +41,8 @@ export const GameContentRenderer = ({
   isFirstContent,
   showSectionTransition = false,
   nextSectionTitle,
-  onStartNextSection
+  onStartNextSection,
+  nextSection
 }: GameContentRendererProps) => {
   
   if (!currentSection) {
@@ -165,6 +168,8 @@ export const GameContentRenderer = ({
           onComplete={handleNextContent}
           onPrevious={handlePreviousContent}
           isFirstContent={isFirstContent}
+          nextSection={nextSection}
+          onStartNextSection={onStartNextSection}
         />
       );
     default:

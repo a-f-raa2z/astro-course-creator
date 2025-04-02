@@ -169,6 +169,7 @@ const AstronomyCourseStartPage = () => {
                 showSectionTransition={showSectionTransition}
                 nextSectionTitle={getNextSectionTitle()}
                 onStartNextSection={handleStartNextSection}
+                nextSection={currentSectionIndex < course.sections.length - 1 ? course.sections[currentSectionIndex + 1] : null}
               />
             </div>
           </div>
