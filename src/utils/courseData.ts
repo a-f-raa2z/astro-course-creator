@@ -721,4 +721,43 @@ export const generateMockCourse = (
         id: "section-8",
         title: "Venus",
         introduction:
-          "Explore Venus, the second planet from the Sun and Earth's nearest planetary neighbor, often called Earth
+          "Explore Venus, the second planet from the Sun and Earth's nearest planetary neighbor, often called Earth's twin due to its similar size and composition.",
+        whyLearn:
+          "Venus provides valuable insights into greenhouse effects and planetary evolution, helping us better understand climate dynamics on Earth.",
+        videoUrl: "https://www.youtube.com/embed/BvXa1n9fjow",
+        keyPoints: [
+          "Venus has a thick atmosphere composed mainly of carbon dioxide.",
+          "Its surface temperature is hot enough to melt lead (around 900°F/475°C).",
+          "Venus rotates in the opposite direction compared to most planets.",
+          "The planet is covered in volcanic features and lava plains.",
+          "Venus has no moons and no magnetic field like Earth does."
+        ],
+        shortVideo: "https://www.youtube.com/embed/HqFVbS_dVyU",
+        additionalShortVideos: [
+          "https://www.youtube.com/embed/NUl7LsOKoLE",
+          "https://www.youtube.com/embed/2DZbZYggJvk"
+        ],
+        bonusVideos: [
+          "https://www.youtube.com/embed/Xdz8jtGoMqY",
+          "https://www.youtube.com/embed/54U-xZ6snCI"
+        ],
+        image: {
+          url: "/lovable-uploads/34bde558-8d2c-41ff-bd25-b4c545393355.png",
+          description: "A detailed visualization of Venus showing its thick cloud covering and surface features."
+        },
+        quiz: {
+          question: "Why is Venus often called Earth's twin?",
+          options: [
+            "It has oceans like Earth",
+            "It has a similar size and composition",
+            "It has plant life",
+            "It has a similar atmosphere"
+          ],
+          correctAnswer: 1
+        }
+      }
+    ]
+  };
+  
+  return baseCourse;
+};
