@@ -1,5 +1,5 @@
 
-import React, { useState } from "react";
+import React from "react";
 import { Button } from "@/components/ui/button";
 import { CourseSection } from "@/types/course";
 import { QuizIntro } from "./quiz/QuizIntro";
@@ -40,37 +40,6 @@ export const QuizContent: React.FC<QuizContentProps> = ({
   nextSection
 }) => {
   const hasNextSection = !!nextSection;
-  const [currentQuizIndex, setCurrentQuizIndex] = useState(0);
-  
-  // Use either the quizzes array or create one with the single quiz
-  const quizzes = section.quizzes || [section.quiz];
-  
-  // Get the current quiz
-  const currentQuiz = quizzes[currentQuizIndex];
-
-  // Get the correct answer text for feedback
-  const getCorrectAnswerText = () => {
-    if (currentQuiz && typeof currentQuiz.correctAnswer === 'number') {
-      return currentQuiz.options[currentQuiz.correctAnswer];
-    }
-    return "";
-  };
-
-  // Handle moving to the next quiz
-  const handleNextQuiz = () => {
-    if (currentQuizIndex < quizzes.length - 1) {
-      setCurrentQuizIndex(currentQuizIndex + 1);
-      setSelectedAnswer(null);
-    }
-  };
-
-  // Handle moving to the previous quiz
-  const handlePrevQuiz = () => {
-    if (currentQuizIndex > 0) {
-      setCurrentQuizIndex(currentQuizIndex - 1);
-      setSelectedAnswer(null);
-    }
-  };
 
   return (
     <div className="w-full h-full p-6 flex flex-col">
@@ -81,27 +50,9 @@ export const QuizContent: React.FC<QuizContentProps> = ({
               <QuizIntro 
                 introText={section.quizIntro || "Let's test your knowledge on what you've learned!"} 
               />
-              
-              {/* Show quiz progress for multiple quizzes */}
-              {quizzes.length > 1 && (
-                <div className="mb-4 flex justify-between items-center">
-                  <span className="text-sm text-purple-300">
-                    Quiz {currentQuizIndex + 1} of {quizzes.length}
-                  </span>
-                  <div className="flex space-x-1">
-                    {quizzes.map((_, idx) => (
-                      <div 
-                        key={idx} 
-                        className={`w-3 h-1 rounded-full ${currentQuizIndex === idx ? 'bg-purple-500' : 'bg-purple-500/30'}`}
-                      />
-                    ))}
-                  </div>
-                </div>
-              )}
-              
               <QuizQuestion
-                question={currentQuiz.question}
-                options={currentQuiz.options}
+                question={section.quiz.question}
+                options={section.quiz.options}
                 selectedAnswer={selectedAnswer}
                 setSelectedAnswer={setSelectedAnswer}
               />
@@ -129,17 +80,17 @@ export const QuizContent: React.FC<QuizContentProps> = ({
           ) : (
             <>
               <QuizFeedback 
-                isCorrect={selectedAnswer === currentQuiz.correctAnswer}
-                correctAnswerText={getCorrectAnswerText()}
-                correctAnswerIndex={currentQuiz.correctAnswer}
+                isCorrect={selectedAnswer === section.quiz.correctAnswer}
+                correctAnswerIndex={section.quiz.correctAnswer}
               />
               <QuizResults 
-                question={currentQuiz.question}
-                options={currentQuiz.options}
+                question={section.quiz.question}
+                options={section.quiz.options}
                 selectedAnswer={selectedAnswer || 0}
-                correctAnswer={currentQuiz.correctAnswer}
+                correctAnswer={section.quiz.correctAnswer}
               />
               
+              {/* Removed the "Continue" button here - will now only show Next Section button if there's a next section */}
               <div className="flex justify-between mt-8">
                 {!isFirstContent && (
                   <Button 
@@ -153,24 +104,15 @@ export const QuizContent: React.FC<QuizContentProps> = ({
                 )}
                 <div className="flex-grow"></div>
                 
-                {currentQuizIndex < quizzes.length - 1 ? (
-                  <Button 
-                    className="bg-purple-600 hover:bg-purple-700 text-white"
-                    onClick={() => {
-                      handleNextQuiz();
-                      setSelectedAnswer(null);
-                    }}
-                  >
-                    Next Quiz
-                  </Button>
-                ) : hasNextSection ? (
+                {/* Only show the Next Section button if we have a next section */}
+                {hasNextSection && (
                   <Button 
                     className="bg-purple-600 hover:bg-purple-700 text-white"
                     onClick={onStartNextSection}
                   >
                     Start Next Section
                   </Button>
-                ) : null}
+                )}
               </div>
             </>
           )}

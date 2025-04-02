@@ -2,55 +2,39 @@
 import React from "react";
 import { Check, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { QuizQuestion as QuizQuestionType } from "@/types/course";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
 interface QuizQuestionProps {
-  quiz?: {
-    question: string;
-    options: string[];
-    correctAnswer: number;
-  };
-  question?: string;
-  options?: string[];
+  quiz: QuizQuestionType;
   selectedAnswer: number | null;
-  quizSubmitted?: boolean;
-  onSelectAnswer?: (index: number) => void;
-  onSubmit?: () => void;
-  setSelectedAnswer?: (index: number | null) => void;
+  quizSubmitted: boolean;
+  onSelectAnswer: (index: number) => void;
+  onSubmit: () => void;
 }
 
 export const QuizQuestion: React.FC<QuizQuestionProps> = ({
   quiz,
-  question,
-  options,
   selectedAnswer,
-  quizSubmitted = false,
+  quizSubmitted,
   onSelectAnswer,
-  onSubmit,
-  setSelectedAnswer
+  onSubmit
 }) => {
-  const questionText = question || (quiz ? quiz.question : "");
-  const questionOptions = options || (quiz ? quiz.options : []);
-  
-  const handleSelect = (idx: number) => {
-    if (onSelectAnswer) onSelectAnswer(idx);
-    if (setSelectedAnswer) setSelectedAnswer(idx);
-  };
-
   return (
     <div className="space-y-4">
       <div className="p-4 bg-space-cosmic-blue/20 backdrop-blur-sm rounded-lg border border-purple-500/20 mb-4">
-        <p className="text-white">{questionText}</p>
+        <p className="text-white">{quiz.question}</p>
       </div>
       
       <div className="space-y-3 mb-4">
-        {questionOptions.map((option, idx) => (
+        {quiz.options.map((option, idx) => (
           <button
             key={idx}
-            onClick={() => !quizSubmitted && handleSelect(idx)}
+            onClick={() => !quizSubmitted && onSelectAnswer(idx)}
             disabled={quizSubmitted}
             className={`w-full text-left p-3 rounded-md transition-all ${
               selectedAnswer === idx
-                ? quizSubmitted && quiz
+                ? quizSubmitted
                   ? idx === quiz.correctAnswer
                     ? "bg-green-600/30 border border-green-500"
                     : "bg-red-600/30 border border-red-500"
@@ -60,12 +44,12 @@ export const QuizQuestion: React.FC<QuizQuestionProps> = ({
           >
             <div className="flex justify-between items-center">
               <span>{option}</span>
-              {quizSubmitted && quiz && selectedAnswer === idx && (
+              {quizSubmitted && selectedAnswer === idx && (
                 idx === quiz.correctAnswer 
                   ? <Check className="h-4 w-4 text-green-400" /> 
                   : <X className="h-4 w-4 text-red-400" />
               )}
-              {quizSubmitted && quiz && selectedAnswer !== idx && idx === quiz.correctAnswer && (
+              {quizSubmitted && selectedAnswer !== idx && idx === quiz.correctAnswer && (
                 <Check className="h-4 w-4 text-green-400" />
               )}
             </div>
@@ -73,7 +57,7 @@ export const QuizQuestion: React.FC<QuizQuestionProps> = ({
         ))}
       </div>
       
-      {!quizSubmitted && onSubmit && (
+      {!quizSubmitted && (
         <div className="flex justify-center">
           <Button 
             onClick={onSubmit}
