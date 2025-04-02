@@ -3,13 +3,12 @@ import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Course } from "@/types/course";
 import { GameProgress } from "@/components/course/GameProgress";
-import { XPPopup } from "@/components/course/XPPopup";
 import { CourseHeader } from "@/components/course/CourseHeader";
 import { CourseContent } from "@/components/course/CourseContent";
 import { useCourseNavigation } from "@/hooks/useCourseNavigation";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
-import { ChevronLeft, Rocket, Flag, User } from "lucide-react";
+import { ChevronLeft, Rocket, Flag, User, Star } from "lucide-react";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 
 const AICourseStartPage = () => {
@@ -49,8 +48,6 @@ const AICourseStartPage = () => {
 
   return (
     <div className="min-h-screen bg-space text-white">
-      <XPPopup xpPoints={xpEarned} level={1} levelProgress={0} />
-      
       <div className="flex w-full">
         {/* Left sidebar - Gamification Panel (1/5 of page) */}
         <div className="w-1/5 px-4 py-4 border-r border-purple-500/30">
@@ -67,7 +64,7 @@ const AICourseStartPage = () => {
             
             <h2 className="text-lg font-bold text-white flex items-center mb-4">
               <Rocket className="mr-2 h-5 w-5 text-purple-400" />
-              {course.title}
+              Astronomy
             </h2>
           </div>
           
@@ -80,6 +77,23 @@ const AICourseStartPage = () => {
             <div className="ml-3">
               <p className="text-sm font-medium text-white">Ana</p>
               <p className="text-xs text-purple-300">Space Explorer</p>
+            </div>
+          </div>
+          
+          {/* XP Counter */}
+          <div className="mb-6 p-3 bg-purple-900/30 rounded-lg border border-purple-500/20">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center">
+                <Star className="h-5 w-5 text-yellow-400 mr-2" />
+                <span className="text-yellow-300 font-semibold">{xpEarned} XP</span>
+              </div>
+              <div className="text-xs text-purple-300">Level 1</div>
+            </div>
+            <div className="mt-2 w-full bg-purple-900/50 h-2 rounded-full overflow-hidden">
+              <div 
+                className="bg-gradient-to-r from-purple-600 to-purple-400 h-full rounded-full transition-all duration-500"
+                style={{ width: `0%` }}
+              ></div>
             </div>
           </div>
           

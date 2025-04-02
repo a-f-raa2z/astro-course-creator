@@ -7,12 +7,12 @@ import { GameContentRenderer } from "@/components/course/GameContentRenderer";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight, Rocket, Flag, User } from "lucide-react";
 import { GameProgress } from "@/components/course/GameProgress";
-import { XPPopup } from "@/components/course/XPPopup";
 import { Separator } from "@/components/ui/separator";
 import { useToast } from "@/hooks/use-toast";
 import { useGameLearning } from "@/hooks/useGameLearning";
 import { GameContentTabs } from "@/components/course/GameContentTabs";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+import { Star } from "lucide-react";
 
 const AstronomyCourseStartPage = () => {
   const location = useLocation();
@@ -106,8 +106,6 @@ const AstronomyCourseStartPage = () => {
 
   return (
     <div className="bg-space min-h-screen py-4">
-      <XPPopup xpPoints={xpPoints} level={level} levelProgress={levelProgress} />
-      
       <div className="flex w-full">
         {/* Left sidebar - Gamification Panel (1/5 of page) */}
         <div className="w-1/5 px-4 py-4 border-r border-purple-500/30">
@@ -124,7 +122,7 @@ const AstronomyCourseStartPage = () => {
             
             <h2 className="text-lg font-bold text-white flex items-center mb-4">
               <Rocket className="mr-2 h-5 w-5 text-purple-400" />
-              {course.title}
+              Astronomy
             </h2>
           </div>
           
@@ -137,6 +135,23 @@ const AstronomyCourseStartPage = () => {
             <div className="ml-3">
               <p className="text-sm font-medium text-white">Ana</p>
               <p className="text-xs text-purple-300">Space Explorer</p>
+            </div>
+          </div>
+          
+          {/* XP Counter */}
+          <div className="mb-6 p-3 bg-purple-900/30 rounded-lg border border-purple-500/20">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center">
+                <Star className="h-5 w-5 text-yellow-400 mr-2" />
+                <span className="text-yellow-300 font-semibold">{xpPoints} XP</span>
+              </div>
+              <div className="text-xs text-purple-300">Level {level}</div>
+            </div>
+            <div className="mt-2 w-full bg-purple-900/50 h-2 rounded-full overflow-hidden">
+              <div 
+                className="bg-gradient-to-r from-purple-600 to-purple-400 h-full rounded-full transition-all duration-500"
+                style={{ width: `${levelProgress}%` }}
+              ></div>
             </div>
           </div>
           

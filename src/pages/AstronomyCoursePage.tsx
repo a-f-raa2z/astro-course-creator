@@ -111,7 +111,7 @@ const AstronomyCoursePage = () => {
           </Button>
           <h1 className="text-2xl font-bold text-white flex items-center">
             <Rocket className="mr-2 h-6 w-6 text-purple-400" />
-            {course?.title}
+            Astronomy
           </h1>
         </div>
         

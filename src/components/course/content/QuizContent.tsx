@@ -99,7 +99,7 @@ export const QuizContent = ({
           onPrevious();
           onPrevious();
         }}
-        onContinue={onComplete}
+        onContinue={nextSection ? onStartNextSection : undefined}
         nextSectionTitle={nextSection?.title}
         onStartNextSection={onStartNextSection}
       />
