@@ -92,7 +92,7 @@ const SectionCard = ({
       }
       
       if (index === 14 && title === "Mars from Above and the Moons of Mars") {
-        mockCourse.sections[index].videoUrl = "https://www.youtube.com/embed/wFTGP7-n3J8";
+        mockCourse.sections[index].videoUrl = "https://www.youtube.com/embed/wFTGP7-n3J8?si=p6sU7OglCo-lzqkv";
         mockCourse.sections[index].funFacts = [
           "https://www.youtube.com/embed/Oo51KBdURMo",
           "https://www.youtube.com/embed/8rjb4fM6EC8",
