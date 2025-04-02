@@ -31,12 +31,9 @@ const SectionCard = ({
   const navigate = useNavigate();
   
   const handleStartSection = () => {
-    // Generate a course object with this section's data
     const mockCourse = generateMockCourse("planets", "intermediate", "visual");
     
-    // Update the specific section with our data
     if (index < mockCourse.sections.length) {
-      // Add video URLs to the appropriate section
       if (videoUrl) {
         mockCourse.sections[index].videoUrl = videoUrl;
       }
@@ -58,7 +55,6 @@ const SectionCard = ({
       }
     }
     
-    // Navigate to the astronomy course start page with the course and initial section
     navigate("/astronomy-course-start", { 
       state: { 
         course: mockCourse,
@@ -67,7 +63,6 @@ const SectionCard = ({
     });
   };
   
-  // Get appropriate icon based on section title
   const getSectionIcon = () => {
     switch (title) {
       case "The Solar System":
@@ -106,7 +101,6 @@ const SectionCard = ({
     }
   };
   
-  // Get section background image based on section title
   const getSectionImage = () => {
     switch (title) {
       case "The Solar System":
@@ -117,9 +111,10 @@ const SectionCard = ({
         return "/lovable-uploads/33c5fd2a-7ff7-4d34-9ef0-f9b065b5caa5.png";
       case "The Moon":
       case "The Moon in Our Skies":
-      case "Mapping the Moon":
+        return "/lovable-uploads/54548175-965e-4d7f-ae75-071e6b49cb4d.png";
       case "The Moon's Unseen Face":
-        return "/lovable-uploads/c229e2ce-6fad-4e1d-9aa8-e4d7071d42f3.png";
+      case "Mapping the Moon":
+        return "/lovable-uploads/52a450ef-41cd-45ec-90a2-c256e58d0d6a.png";
       case "Venus":
         return "/lovable-uploads/9a4d825b-6142-476f-b40c-2adbc7b34524.png";
       case "Mercury":

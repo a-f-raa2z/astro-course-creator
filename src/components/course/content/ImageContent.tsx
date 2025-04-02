@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { CourseSection } from "@/types/course";
 import { Button } from "@/components/ui/button";
@@ -34,10 +33,17 @@ export const ImageContent = ({ section, onComplete, onPrevious, isFirstContent }
       };
     }
     
-    if (sectionTitle === "The Moon") {
+    if (sectionTitle === "The Moon" || sectionTitle === "The Moon in Our Skies") {
       return {
-        url: "/lovable-uploads/c229e2ce-6fad-4e1d-9aa8-e4d7071d42f3.png", 
-        description: "The Moon illuminating a night sky above a silhouetted mountain landscape, showcasing its prominence as Earth's only natural satellite." 
+        url: "/lovable-uploads/54548175-965e-4d7f-ae75-071e6b49cb4d.png", 
+        description: "Earth rising above the lunar surface, as seen from the Moon. This iconic view shows our planet suspended in the blackness of space above the barren lunar landscape." 
+      };
+    }
+    
+    if (sectionTitle === "The Moon's Unseen Face" || sectionTitle === "Mapping the Moon") {
+      return {
+        url: "/lovable-uploads/52a450ef-41cd-45ec-90a2-c256e58d0d6a.png", 
+        description: "Side-by-side comparison of the Moon's near side (left) that we can see from Earth and the far side (right) that remained unknown until spacecraft flew around the Moon." 
       };
     }
     
@@ -66,15 +72,6 @@ export const ImageContent = ({ section, onComplete, onPrevious, isFirstContent }
       return {
         url: "/lovable-uploads/8da06395-44da-4447-93f0-da38fbbbff6c.png", 
         description: "NASA's MESSENGER spacecraft orbiting Mercury, shown against the backdrop of the planet's cratered surface." 
-      };
-    }
-    
-    if (sectionTitle === "The Moon in Our Skies" || 
-        sectionTitle === "The Moon's Unseen Face" || 
-        sectionTitle === "Mapping the Moon") {
-      return {
-        url: "/lovable-uploads/2f1e334a-3eb3-4f1e-a72b-7bbbdb459c0a.png", 
-        description: "Earthrise as seen from the lunar surface, showing Earth hovering over the Moon's horizon - a perspective only seen by Apollo astronauts and robotic spacecraft." 
       };
     }
     

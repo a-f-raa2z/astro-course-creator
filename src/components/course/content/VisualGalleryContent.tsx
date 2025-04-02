@@ -17,28 +17,28 @@ export const VisualGalleryContent = ({ section, onComplete, onPrevious, isFirstC
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   
   const getGalleryImages = () => {
-    // For Section 5 - The Moon (we can make this more dynamic if needed)
-    if (section.title.includes("Moon") && section.visualGalleryUrl === "https://unsplash.com/s/photos/supermoon") {
+    // For Moon sections (we have both section 6 and 7 about the moon)
+    if (section.title.includes("Moon")) {
       return [
         {
-          url: "https://images.unsplash.com/photo-1516339901601-2e1b62dc0c45?q=80&w=1200&auto=format&fit=crop",
-          title: "Full Moon",
-          description: "A stunning view of the full moon rising over the horizon."
+          url: "/lovable-uploads/54548175-965e-4d7f-ae75-071e6b49cb4d.png",
+          title: "Earth Rising from Lunar Surface",
+          description: "This iconic view shows our blue planet Earth rising above the barren lunar landscape."
         },
         {
-          url: "https://images.unsplash.com/photo-1532693748080-db766088bfc5?q=80&w=1200&auto=format&fit=crop",
-          title: "Super Moon",
-          description: "A beautiful supermoon appears larger and brighter than typical full moons."
+          url: "/lovable-uploads/52a450ef-41cd-45ec-90a2-c256e58d0d6a.png",
+          title: "Near Side vs Far Side of the Moon",
+          description: "Side-by-side comparison showing the familiar near side of the Moon (left) and the rarely seen far side (right)."
+        },
+        {
+          url: "/lovable-uploads/c229e2ce-6fad-4e1d-9aa8-e4d7071d42f3.png",
+          title: "Full Moon",
+          description: "The Moon illuminating a night sky, showing the familiar features we can observe from Earth."
         },
         {
           url: "https://images.unsplash.com/photo-1517729329959-f9d2d7887545?q=80&w=1200&auto=format&fit=crop",
           title: "Blood Moon",
           description: "A lunar eclipse gives the Moon a reddish appearance, known as a 'Blood Moon'."
-        },
-        {
-          url: "https://images.unsplash.com/photo-1504013078537-d5cb53f0e46b?q=80&w=1200&auto=format&fit=crop",
-          title: "Moon and Clouds",
-          description: "The moon visible through wisps of clouds creates a mystical atmosphere."
         }
       ];
     }
