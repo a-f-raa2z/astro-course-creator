@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { Course, CourseSection } from "@/types/course";
@@ -74,14 +73,13 @@ export const useGameLearning = (course: Course) => {
     }
     
     // Special case for Moon sections
-    if (section.title === "The Moon" || section.title === "The Moon in Our Skies") {
+    if (section.title === "The Moon" || section.title === "The Moon in Our Skies" || section.title === "The Moon's Unseen Face") {
       return [
         'introduction', 
         'video', 
-        'short-video',
+        'fun-facts',
         'playground',
         'bonus',
-        'fun-facts',
         'visual-gallery',
         'quiz'
       ];

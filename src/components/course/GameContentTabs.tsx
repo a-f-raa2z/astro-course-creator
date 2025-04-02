@@ -1,6 +1,6 @@
 
 import { ContentType } from "@/types/ContentType";
-import { FileText, Youtube, CheckCircle, Video, Image, HelpCircle, Star, Gamepad2, BookOpen } from "lucide-react";
+import { FileText, Youtube, CheckCircle, Video, Image, HelpCircle, Star, Gamepad2, BookOpen, Zap } from "lucide-react";
 
 interface GameContentTabsProps {
   contentTypes: string[];
@@ -24,6 +24,8 @@ export const GameContentTabs = ({
       case 'video': return <Youtube className="h-4 w-4" />;
       case 'shortVideo': 
       case 'short-video': return <Video className="h-4 w-4" />;
+      case 'fun-facts':
+      case 'funFacts': return <Zap className="h-4 w-4" />;
       case 'image': return <Image className="h-4 w-4" />;
       case 'quiz': return <HelpCircle className="h-4 w-4" />;
       case 'bonus': return <Star className="h-4 w-4" />;
@@ -38,10 +40,14 @@ export const GameContentTabs = ({
       case 'video': return 'Main Lesson';
       case 'shortVideo': 
       case 'short-video': return 'Fun Facts';
+      case 'fun-facts':
+      case 'funFacts': return 'Fun Facts';
       case 'image': return 'Visual Guide';
       case 'quiz': return 'Knowledge Check';
       case 'bonus': return 'Bonus Content';
       case 'playground': return 'Interactive';
+      case 'visual-gallery':
+      case 'visualGallery': return 'Gallery';
       default: return type;
     }
   };
@@ -52,10 +58,14 @@ export const GameContentTabs = ({
       case 'video': return 'text-red-500';
       case 'shortVideo': 
       case 'short-video': return 'text-blue-400';
+      case 'fun-facts':
+      case 'funFacts': return 'text-blue-400';
       case 'image': return 'text-yellow-400';
       case 'quiz': return 'text-orange-400';
       case 'bonus': return 'text-yellow-400';
       case 'playground': return 'text-green-400';
+      case 'visual-gallery':
+      case 'visualGallery': return 'text-indigo-400';
       default: return 'text-gray-400';
     }
   };

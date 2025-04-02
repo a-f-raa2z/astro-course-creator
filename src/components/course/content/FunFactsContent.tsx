@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { CourseSection } from "@/types/course";
 import { Button } from "@/components/ui/button";
@@ -71,16 +70,26 @@ export const FunFactsContent = ({ section, onComplete, onPrevious, isFirstConten
       ];
     }
     
-    // Moon section special case
-    if (section.title === "The Moon" || section.title === "The Moon in Our Skies") {
+    // Moon section special case - consolidate all moon sections to use the same format
+    if (section.title === "The Moon" || section.title === "The Moon in Our Skies" || section.title === "The Moon's Unseen Face") {
+      // First check if there are specific funFacts defined for this section
+      if (section.funFacts && section.funFacts.length > 0) {
+        return section.funFacts.map((url, idx) => ({
+          url,
+          title: `Moon Fun Fact ${idx + 1}`,
+          description: "Interesting facts about our lunar companion."
+        }));
+      }
+      
+      // Otherwise use default Moon fun facts
       return [
         {
-          url: "https://www.youtube.com/embed/1lwke71q6hs",
+          url: "https://www.youtube.com/embed/rVMvzH1FxfE",
           title: "Moon Fun Fact 1",
           description: "Interesting facts about our lunar companion."
         },
         {
-          url: "https://www.youtube.com/embed/MikmkUbz8eo",
+          url: "https://www.youtube.com/embed/fTok7usLXb4",
           title: "Moon Fun Fact 2",
           description: "More fascinating facts about the Moon and its influence on Earth."
         }
