@@ -253,6 +253,36 @@ export const useGameLearning = (course: Course) => {
       ];
     }
     
+    if (section.title === "Close to the Sun") {
+      return [
+        {
+          question: "Which spacecraft is flying closest to the Sun?",
+          options: ["Hubble", "Voyager", "Parker Solar Probe", "Juno"],
+          correctAnswer: 2
+        },
+        {
+          question: "What does the Parker Solar Probe study?",
+          options: ["Sun's surface", "Sun's corona", "Earth's shadow", "Jupiter's storms"],
+          correctAnswer: 1
+        },
+        {
+          question: "What's a danger for spacecraft near the Sun?",
+          options: ["Aliens", "Asteroids", "Extreme heat", "Lack of gravity"],
+          correctAnswer: 2
+        },
+        {
+          question: "What special shield protects the Parker Probe?",
+          options: ["Iron", "Gold foil", "Carbon heat shield", "Ice armor"],
+          correctAnswer: 2
+        },
+        {
+          question: "Why go near the Sun?",
+          options: ["For selfies", "To measure time", "To understand solar storms", "To block light"],
+          correctAnswer: 2
+        }
+      ];
+    }
+    
     if (quizzes.length < 5) {
       const additionalQuizzes = generateGenericQuizzes(section, 5 - quizzes.length);
       quizzes.push(...additionalQuizzes);
