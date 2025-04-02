@@ -62,6 +62,11 @@ export const FunFactsContent = ({ section, onComplete, onPrevious, isFirstConten
           url: "https://www.youtube.com/embed/rVMvzH1FxfE", 
           title: "Moon Fun Fact",
           description: "Did you know these fascinating facts about the Moon?"
+        },
+        {
+          url: "https://www.youtube.com/embed/fTok7usLXb4",
+          title: "Additional Moon Facts",
+          description: "More incredible facts about lunar exploration and mapping."
         }
       ];
     }
@@ -103,9 +108,14 @@ export const FunFactsContent = ({ section, onComplete, onPrevious, isFirstConten
     // Default fallback
     return [
       { 
-        url: "https://www.youtube.com/embed/1lwke71q6hs", 
-        title: "Moon Fun Fact",
-        description: "Did you know these fascinating facts about the Moon?"
+        url: "https://www.youtube.com/embed/rVMvzH1FxfE", 
+        title: "Fun Fact 1",
+        description: "Did you know these fascinating facts about space and astronomy?"
+      },
+      {
+        url: "https://www.youtube.com/embed/fTok7usLXb4",
+        title: "Fun Fact 2",
+        description: "More incredible facts about our universe and beyond."
       }
     ];
   };
