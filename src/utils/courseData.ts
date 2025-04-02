@@ -503,7 +503,34 @@ export const generateMockCourse = (
           question: "Which inner planet has the thickest atmosphere?",
           options: ["Mercury", "Venus", "Earth", "Mars"],
           correctAnswer: 1
-        }
+        },
+        quizzes: [
+          {
+            question: "What is a key characteristic of The Inner Planets?",
+            options: ["It supports life", "It has a thick atmosphere", "It is made entirely of gas", "It has rings"],
+            correctAnswer: 0
+          },
+          {
+            question: "Which spacecraft studied The Inner Planets?",
+            options: ["Pioneer 10", "Hubble", "Cassini", "Voyager 1"],
+            correctAnswer: 1
+          },
+          {
+            question: "Why are The Inner Planets important in astronomy?",
+            options: ["They support alien life", "They help us understand planet formation", "They are the brightest objects", "They are farthest from Earth"],
+            correctAnswer: 1
+          },
+          {
+            question: "What challenge do scientists face studying The Inner Planets?",
+            options: ["Extreme temperatures", "Lack of light", "Radiation interference", "Distance from Earth"],
+            correctAnswer: 0
+          },
+          {
+            question: "What interesting fact is associated with The Inner Planets?",
+            options: ["They have ice caps", "They have liquid water", "They have magnetic fields", "They rotate backwards"],
+            correctAnswer: 2
+          }
+        ]
       },
       {
         id: "section-3",
