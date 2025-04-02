@@ -1,3 +1,4 @@
+
 import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -84,6 +85,10 @@ const SectionCard = ({
           "https://www.youtube.com/embed/mrYjJ9Jl9dA"
         ];
         mockCourse.sections[index].visualUrl = "https://world-geography-games.com/en/world_earth.html";
+      }
+      
+      if (index === 4 && title === "The Moon's Unseen Face") {
+        mockCourse.sections[index].videoUrl = "https://www.youtube.com/embed/kJkVegBsNyE";
       }
     }
     

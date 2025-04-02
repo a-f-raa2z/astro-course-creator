@@ -101,6 +101,17 @@ export const VideoContent = ({ section, onComplete, onPrevious, isFirstContent }
       ];
     }
     
+    // The Moon's Unseen Face special case
+    if (section.title === "The Moon's Unseen Face") {
+      return [
+        {
+          url: "https://www.youtube.com/embed/kJkVegBsNyE",
+          title: "Main Lesson: The Moon's Unseen Face",
+          description: "Discover the mysteries of the far side of the Moon - the hemisphere we never see from Earth."
+        }
+      ];
+    }
+    
     // Regular case
     if (section.videoUrl) {
       sources.push({
