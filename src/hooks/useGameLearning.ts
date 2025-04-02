@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { Course, CourseSection } from "@/types/course";
@@ -26,6 +27,20 @@ export const useGameLearning = (course: Course) => {
   const getAvailableContentTypes = (section: CourseSection): ContentType['type'][] => {
     if (!section) {
       return ['introduction'];
+    }
+    
+    // Special case for Moon section to include all content types
+    if (section.title === "The Moon" || section.title === "The Moon in Our Skies") {
+      return [
+        'introduction', 
+        'video', 
+        'short-video',
+        'playground',
+        'bonus',
+        'fun-facts',
+        'visual-gallery',
+        'quiz'
+      ];
     }
     
     const contentTypes: ContentType['type'][] = ['introduction', 'video'];

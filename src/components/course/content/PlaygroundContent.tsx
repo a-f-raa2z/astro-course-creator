@@ -18,6 +18,22 @@ export const PlaygroundContent = ({ section, onComplete, onPrevious, isFirstCont
   const [interactiveIndex, setInteractiveIndex] = useState(0);
   
   const getInteractives = () => {
+    // Moon section special case
+    if (section.title === "The Moon" || section.title === "The Moon in Our Skies") {
+      return [
+        {
+          url: "https://spaceplace.nasa.gov/eclipses/en/",
+          title: "Eclipse Interactive",
+          description: "Explore how eclipses happen and learn about the different types of solar and lunar eclipses."
+        },
+        {
+          url: "https://eyes.nasa.gov/apps/eclipse2017/",
+          title: "NASA Eclipse Explorer",
+          description: "Use this NASA interactive tool to explore the 2017 solar eclipse and understand how eclipses work."
+        }
+      ];
+    }
+    
     const interactives = [];
     
     if (section.visualUrl) {

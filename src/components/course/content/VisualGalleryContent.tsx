@@ -17,9 +17,24 @@ export const VisualGalleryContent = ({ section, onComplete, onPrevious, isFirstC
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   
   const getGalleryImages = () => {
-    // For Moon sections (we have both section 6 and 7 about the moon)
-    if (section.title.includes("Moon")) {
+    // For Moon sections
+    if (section.title === "The Moon" || section.title === "The Moon in Our Skies") {
       return [
+        {
+          url: "https://images.unsplash.com/photo-1470813740244-df37b8c1edcb?q=80&w=1200&auto=format&fit=crop",
+          title: "Full Supermoon",
+          description: "A magnificent supermoon shining bright against a dark, starry night sky."
+        },
+        {
+          url: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?q=80&w=1200&auto=format&fit=crop",
+          title: "Supermoon Over Mountains",
+          description: "A supermoon rising above a misty mountain range, creating a breathtaking landscape view."
+        },
+        {
+          url: "https://images.unsplash.com/photo-1482881497185-d4a9ddbe4151?q=80&w=1200&auto=format&fit=crop",
+          title: "Desert Supermoon",
+          description: "A dramatic supermoon illuminating a desert landscape, casting shadows across the sand dunes."
+        },
         {
           url: "/lovable-uploads/54548175-965e-4d7f-ae75-071e6b49cb4d.png",
           title: "Earth Rising from Lunar Surface",
@@ -29,16 +44,6 @@ export const VisualGalleryContent = ({ section, onComplete, onPrevious, isFirstC
           url: "/lovable-uploads/52a450ef-41cd-45ec-90a2-c256e58d0d6a.png",
           title: "Near Side vs Far Side of the Moon",
           description: "Side-by-side comparison showing the familiar near side of the Moon (left) and the rarely seen far side (right)."
-        },
-        {
-          url: "/lovable-uploads/c229e2ce-6fad-4e1d-9aa8-e4d7071d42f3.png",
-          title: "Full Moon",
-          description: "The Moon illuminating a night sky, showing the familiar features we can observe from Earth."
-        },
-        {
-          url: "https://images.unsplash.com/photo-1517729329959-f9d2d7887545?q=80&w=1200&auto=format&fit=crop",
-          title: "Blood Moon",
-          description: "A lunar eclipse gives the Moon a reddish appearance, known as a 'Blood Moon'."
         }
       ];
     }

@@ -19,6 +19,27 @@ export const BonusVideoContent = ({ section, onComplete, onPrevious, isFirstCont
   
   // Get all bonus videos for this section, merging both bonus arrays
   const getBonusVideos = () => {
+    // Moon section special case
+    if (section.title === "The Moon" || section.title === "The Moon in Our Skies") {
+      return [
+        {
+          url: "https://www.youtube.com/embed/VW2xRR75lKE",
+          title: "PBS Moon Documentary",
+          description: "An in-depth look at Earth's closest neighbor and how it formed."
+        },
+        {
+          url: "https://www.youtube.com/embed/AebowXnINj4",
+          title: "NASA Moon Missions",
+          description: "History and future of human and robotic exploration of the Moon."
+        },
+        {
+          url: "https://www.youtube.com/embed/BkQH8VdSdyc",
+          title: "Moon Facts",
+          description: "A quick video about interesting moon facts that might surprise you."
+        }
+      ];
+    }
+    
     const allBonusVideos: {url: string; title: string; description: string}[] = [];
     
     // Add main bonus videos
@@ -41,18 +62,6 @@ export const BonusVideoContent = ({ section, onComplete, onPrevious, isFirstCont
           description: `More fascinating content about ${section.title} for advanced learning.`
         });
       });
-    }
-    
-    // Add custom descriptions for The Moon section
-    if (section.title === "The Moon" && allBonusVideos.length >= 3) {
-      allBonusVideos[0].title = "PBS Moon Documentary";
-      allBonusVideos[0].description = "An in-depth look at Earth's closest neighbor and how it formed.";
-      
-      allBonusVideos[1].title = "NASA Moon Missions";
-      allBonusVideos[1].description = "History and future of human and robotic exploration of the Moon.";
-      
-      allBonusVideos[2].title = "Moon Facts";
-      allBonusVideos[2].description = "A quick video about interesting moon facts that might surprise you.";
     }
     
     // Default fallback if no videos are available

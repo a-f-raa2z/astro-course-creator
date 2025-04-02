@@ -41,7 +41,11 @@ export const VideoContent = ({ section, onComplete, onPrevious, isFirstContent }
       ],
       "The Moon": [
         "Earth's natural satellite and our closest celestial neighbor.",
-        "How the Moon's phases work and its influence on Earth."
+        "How the Moon influences Earth and the important role it plays in our solar system."
+      ],
+      "The Moon in Our Skies": [
+        "Understanding the Moon's phases and how they affect Earth.",
+        "Exploring the Moon's orbit and its fascinating relationship with our planet."
       ]
     };
     
@@ -59,6 +63,23 @@ export const VideoContent = ({ section, onComplete, onPrevious, isFirstContent }
   const getVideoSources = () => {
     const sources = [];
     
+    // Moon section special case
+    if (section.title === "The Moon" || section.title === "The Moon in Our Skies") {
+      return [
+        {
+          url: "https://www.youtube.com/embed/lhKMQIRdaeo",
+          title: "Main Lesson",
+          description: "Learn about Earth's natural satellite and how it formed."
+        },
+        {
+          url: "https://www.youtube.com/embed/cxrLRbkOwKs",
+          title: "Our Moon",
+          description: "Exploring the Moon's features and its influence on Earth."
+        }
+      ];
+    }
+    
+    // Regular case
     if (section.videoUrl) {
       sources.push({
         url: section.videoUrl,

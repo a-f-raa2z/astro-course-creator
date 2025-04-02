@@ -19,6 +19,22 @@ export const FunFactsContent = ({ section, onComplete, onPrevious, isFirstConten
   
   // Get all fun facts videos for this section
   const getFunFactsVideos = () => {
+    // Moon section special case
+    if (section.title === "The Moon" || section.title === "The Moon in Our Skies") {
+      return [
+        {
+          url: "https://www.youtube.com/embed/1lwke71q6hs",
+          title: "Moon Fun Fact 1",
+          description: "Interesting facts about our lunar companion."
+        },
+        {
+          url: "https://www.youtube.com/embed/MikmkUbz8eo",
+          title: "Moon Fun Fact 2",
+          description: "More fascinating facts about the Moon and its influence on Earth."
+        }
+      ];
+    }
+    
     if (section.funFacts && section.funFacts.length > 0) {
       return section.funFacts.map((url, idx) => ({
         url,
