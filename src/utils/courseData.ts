@@ -591,8 +591,8 @@ export const generateMockCourse = (
           "https://www.youtube.com/embed/wSFv1euqVwo"
         ],
         image: {
-          url: "/lovable-uploads/e0d0af9e-9849-4955-ac58-29cf798cb880.png",
-          description: "A detailed view of the Moon's surface, showing craters and maria."
+          url: "https://images.unsplash.com/photo-1614732414444-096e5f1122d5",
+          description: "A detailed topographical map of the Moon's surface showing major craters and maria."
         },
         quiz: {
           question: "What is the dark, basaltic plains on the Moon called?",
