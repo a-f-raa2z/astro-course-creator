@@ -13,12 +13,17 @@ interface FunFactsContentProps {
   isFirstContent: boolean;
 }
 
+interface FunFactVideo {
+  url: string;
+  title: string;
+  description: string;
+  isTikTok?: boolean;
+}
+
 export const FunFactsContent = ({ section, onComplete, onPrevious, isFirstContent }: FunFactsContentProps) => {
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
   
-  // Get all fun facts videos for this section
-  const getFunFactsVideos = () => {
-    // Solar System section special case
+  const getFunFactsVideos = (): FunFactVideo[] => {
     if (section.title === "The Solar System") {
       return [
         {
@@ -34,7 +39,6 @@ export const FunFactsContent = ({ section, onComplete, onPrevious, isFirstConten
       ];
     }
     
-    // Mapping the Moon section special case
     if (section.title === "Mapping the Moon") {
       return [
         { 
@@ -50,9 +54,7 @@ export const FunFactsContent = ({ section, onComplete, onPrevious, isFirstConten
       ];
     }
     
-    // Moon section special case - consolidate all moon sections to use the same format
     if (section.title === "The Moon" || section.title === "The Moon in Our Skies" || section.title === "The Moon's Unseen Face") {
-      // First check if there are specific funFacts defined for this section
       if (section.funFacts && section.funFacts.length > 0) {
         return section.funFacts.map((url, idx) => ({
           url,
@@ -61,7 +63,6 @@ export const FunFactsContent = ({ section, onComplete, onPrevious, isFirstConten
         }));
       }
       
-      // Otherwise use default Moon fun facts
       return [
         {
           url: "https://www.youtube.com/embed/rVMvzH1FxfE",
@@ -76,7 +77,6 @@ export const FunFactsContent = ({ section, onComplete, onPrevious, isFirstConten
       ];
     }
     
-    // Add funFacts if available
     if (section.funFacts && section.funFacts.length > 0) {
       return section.funFacts.map((url, idx) => ({
         url,
@@ -85,7 +85,6 @@ export const FunFactsContent = ({ section, onComplete, onPrevious, isFirstConten
       }));
     }
 
-    // Add funFacts2 if available
     if (section.funFacts2 && section.funFacts2.length > 0) {
       return section.funFacts2.map((url, idx) => ({
         url,
@@ -94,7 +93,6 @@ export const FunFactsContent = ({ section, onComplete, onPrevious, isFirstConten
       }));
     }
     
-    // Default fallback
     return [
       { 
         url: "https://www.youtube.com/embed/rVMvzH1FxfE", 
@@ -109,17 +107,13 @@ export const FunFactsContent = ({ section, onComplete, onPrevious, isFirstConten
     ];
   };
   
-  // Combine both funFacts and funFacts2 arrays
-  const getAllFunFactsVideos = () => {
+  const getAllFunFactsVideos = (): FunFactVideo[] => {
     const videos = getFunFactsVideos();
     
-    // Check if we need to convert TikTok URLs to embed URLs
     return videos.map(video => {
       let url = video.url;
       
-      // Convert TikTok URLs to embed URLs if needed
       if (url.includes('tiktok.com')) {
-        // For TikTok we display a message that it needs to be viewed on TikTok's site
         return {
           ...video,
           isTikTok: true
@@ -146,13 +140,12 @@ export const FunFactsContent = ({ section, onComplete, onPrevious, isFirstConten
 
   const showNavigation = funFactsVideos.length > 1;
   const currentVideo = funFactsVideos[currentVideoIndex];
-  const isTikTok = currentVideo && currentVideo.isTikTok;
+  const isTikTok = currentVideo && currentVideo.isTikTok === true;
 
   return (
     <div className="w-full h-full flex flex-col">
       <Card className="w-full h-full overflow-hidden flex flex-col bg-space-cosmic-blue/20 backdrop-blur-sm border border-purple-500/20">
         <div className="p-4">
-          {/* Navigation buttons row - placed between tabs and title */}
           <div className="flex justify-between items-center mb-4">
             <div>
               {!isFirstContent && (
@@ -227,7 +220,6 @@ export const FunFactsContent = ({ section, onComplete, onPrevious, isFirstConten
           
           {showNavigation && (
             <>
-              {/* Video navigation controls */}
               <div className="absolute top-1/2 left-0 right-0 flex justify-between px-4 transform -translate-y-1/2 pointer-events-none">
                 <Button 
                   onClick={prevVideo} 
@@ -250,7 +242,6 @@ export const FunFactsContent = ({ section, onComplete, onPrevious, isFirstConten
                 </Button>
               </div>
 
-              {/* Indicator dots */}
               <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-2">
                 {funFactsVideos.map((_, idx) => (
                   <div 
