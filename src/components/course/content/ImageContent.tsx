@@ -77,8 +77,8 @@ export const ImageContent = ({ section, onComplete, onPrevious, isFirstContent }
     
     if (sectionTitle === "Mercury") {
       return {
-        url: "/lovable-uploads/46193bf4-1ca3-4f35-92c5-8ce7b94e9165.png", 
-        description: "Mercury shown in two views: a grayscale image showing its cratered surface (left) and a false-color image highlighting its chemical composition and mineral distribution (right)." 
+        url: "/lovable-uploads/98ea4cdd-0d5e-49fd-bc16-139cdce24388.png", 
+        description: "Close-up view of Mercury's heavily cratered surface captured during a flyby mission. The image shows the distinctive terrain of Mercury with numerous impact craters of various sizes, highlighting the planet's long history of bombardment in the inner solar system."
       };
     }
     

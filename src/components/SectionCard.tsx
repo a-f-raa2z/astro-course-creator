@@ -93,6 +93,13 @@ const SectionCard = ({
       if (index === 8 && title === "Venus") {
         mockCourse.sections[index].visualGalleryUrl = "venus-gallery";
       }
+      
+      if (index === 9 && title === "Mercury") {
+        mockCourse.sections[index].image = {
+          url: "/lovable-uploads/98ea4cdd-0d5e-49fd-bc16-139cdce24388.png",
+          description: "Close-up view of Mercury's heavily cratered surface captured during a flyby mission."
+        };
+      }
     }
     
     navigate("/astronomy-course-start", { 
@@ -160,7 +167,7 @@ const SectionCard = ({
       case "Venus":
         return "/lovable-uploads/b87f40a8-a8d2-42de-943b-b6f586bc75b1.png";
       case "Mercury":
-        return "/lovable-uploads/46193bf4-1ca3-4f35-92c5-8ce7b94e9165.png";
+        return "/lovable-uploads/98ea4cdd-0d5e-49fd-bc16-139cdce24388.png";
       case "Messenger at Mercury":
         return "/lovable-uploads/bee533e9-3edc-4aa8-8fd6-2ee0683ab436.png";
       case "The Sun":
