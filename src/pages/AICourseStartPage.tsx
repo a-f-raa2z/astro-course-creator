@@ -1,3 +1,4 @@
+
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Course } from "@/types/course";
@@ -68,6 +69,7 @@ const AICourseStartPage = () => {
           nextSectionTitle={nextSectionTitle}
           onStartNextSection={handleStartNextSection}
           isFirstContent={currentContentIndex === 0 && currentSectionIndex === 0}
+          allSections={course.sections}
         />
       </div>
       
