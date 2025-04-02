@@ -1,3 +1,4 @@
+
 import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -88,6 +89,18 @@ const SectionCard = ({
       
       if (index === 4 && title === "The Moon's Unseen Face") {
         mockCourse.sections[index].videoUrl = "https://www.youtube.com/embed/kJkVegBsNyE";
+      }
+      
+      if (index === 14 && title === "Mars from Above and the Moons of Mars") {
+        mockCourse.sections[index].videoUrl = "https://www.youtube.com/embed/wFTGP7-n3J8";
+        mockCourse.sections[index].funFacts = [
+          "https://www.youtube.com/embed/Oo51KBdURMo",
+          "https://www.youtube.com/embed/8rjb4fM6EC8",
+          "https://www.youtube.com/embed/lHSfFieToSM",
+          "https://www.youtube.com/embed/o7RJeAdDmmE",
+          "https://www.youtube.com/embed/cTMiM1UZfTc",
+          "https://www.youtube.com/embed/JIzw9ap13yk"
+        ];
       }
       
       if (index === 8 && title === "Venus") {

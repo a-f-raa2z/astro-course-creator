@@ -69,6 +69,41 @@ export const FunFactsContent = ({ section, onComplete, onPrevious, isFirstConten
       ];
     }
     
+    if (section.title === "Mars from Above and the Moons of Mars") {
+      return [
+        {
+          url: "https://www.youtube.com/embed/Oo51KBdURMo",
+          title: "Mars' Moons",
+          description: "Learn about Phobos and Deimos, the two small moons of Mars."
+        },
+        {
+          url: "https://www.youtube.com/embed/8rjb4fM6EC8",
+          title: "Mars from Space",
+          description: "See amazing aerial views of the Martian landscape from orbit."
+        },
+        {
+          url: "https://www.youtube.com/embed/lHSfFieToSM",
+          title: "Mars' Surface Features",
+          description: "Explore the fascinating terrain and geological features of Mars."
+        },
+        {
+          url: "https://www.youtube.com/embed/o7RJeAdDmmE",
+          title: "Mars' Atmosphere",
+          description: "Learn about the thin Martian atmosphere and its composition."
+        },
+        {
+          url: "https://www.youtube.com/embed/cTMiM1UZfTc",
+          title: "Water on Mars",
+          description: "Discover evidence of ancient water on the Martian surface."
+        },
+        {
+          url: "https://www.youtube.com/embed/JIzw9ap13yk",
+          title: "Mars' Polar Caps",
+          description: "Explore the ice caps at Mars' north and south poles."
+        }
+      ];
+    }
+    
     if (section.title === "Roving over Mars") {
       return [
         {

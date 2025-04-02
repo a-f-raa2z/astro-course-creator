@@ -1,4 +1,3 @@
-
 import React from "react";
 import { CourseSection } from "@/types/course";
 import { Button } from "@/components/ui/button";
@@ -38,6 +37,13 @@ export const PlaygroundContent = ({ section, onComplete, onPrevious, isFirstCont
       };
     }
     
+    if (section.title === "Mars from Above and the Moons of Mars") {
+      return {
+        title: "Mars 3D Explorer",
+        description: "Explore the surface of Mars and its moons in this interactive visualization."
+      };
+    }
+    
     return {
       title: "Interactive Playground",
       description: "Explore this topic hands-on with this interactive tool."
@@ -49,6 +55,10 @@ export const PlaygroundContent = ({ section, onComplete, onPrevious, isFirstCont
     // For Moon sections specifically add the NASA Eyes link
     if (section.title === "The Moon" || section.title === "The Moon in Our Skies" || section.title === "The Moon's Unseen Face") {
       return "https://eyes.nasa.gov/apps/solar-system/#/earth/moons/moon";
+    }
+    
+    if (section.title === "Mars from Above and the Moons of Mars") {
+      return "https://eyes.nasa.gov/apps/mars2020/#/home";
     }
     
     // Return the section's configured URL or empty string if none exists
