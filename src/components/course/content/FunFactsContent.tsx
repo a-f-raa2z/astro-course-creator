@@ -23,7 +23,7 @@ interface FunFactVideo {
 export const FunFactsContent = ({ section, onComplete, onPrevious, isFirstContent }: FunFactsContentProps) => {
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
   
-  const getFunFactsVideos = (): FunFactVideo[] => {
+  const getFunFactsContent = () => {
     if (section.title === "The Solar System") {
       return [
         {
@@ -58,13 +58,28 @@ export const FunFactsContent = ({ section, onComplete, onPrevious, isFirstConten
       return [
         {
           url: "https://www.youtube.com/embed/uDurw7YxX3U",
-          title: "Mercury Fun Fact 1",
-          description: "Fascinating facts about the smallest planet in our solar system."
+          title: "Mercury's Extreme Temperatures",
+          description: "Learn about Mercury's incredible temperature variations between day and night."
         },
         {
           url: "https://www.youtube.com/embed/-DuQEeq4ZLw",
-          title: "Mercury Fun Fact 2",
-          description: "More interesting tidbits about Mercury's unique characteristics."
+          title: "Mercury's Strange Day",
+          description: "Why a day on Mercury is longer than its year, and other strange facts."
+        }
+      ];
+    }
+    
+    if (section.title === "Roving over Mars") {
+      return [
+        {
+          url: "https://www.youtube.com/embed/IhFK-b5yd2M",
+          title: "Rover Fun Facts",
+          description: "Interesting and lesser-known facts about Mars rovers and their missions."
+        },
+        {
+          url: "https://www.youtube.com/embed/3sbbk-VlRPk",
+          title: "Martian Surface Exploration",
+          description: "Fascinating discoveries about the Martian surface made by rovers."
         }
       ];
     }
@@ -123,7 +138,7 @@ export const FunFactsContent = ({ section, onComplete, onPrevious, isFirstConten
   };
   
   const getAllFunFactsVideos = (): FunFactVideo[] => {
-    const videos = getFunFactsVideos();
+    const videos = getFunFactsContent();
     
     return videos.map(video => {
       let url = video.url;

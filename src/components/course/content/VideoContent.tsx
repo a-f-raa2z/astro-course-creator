@@ -124,6 +124,26 @@ export const VideoContent = ({ section, onComplete, onPrevious, isFirstContent }
       ];
     }
     
+    if (section.title === "Roving over Mars") {
+      return [
+        {
+          url: "https://www.youtube.com/embed/OO5CTBBgtXs",
+          title: "Mars Rovers Overview",
+          description: "An introduction to the Mars rovers and their missions to explore the Red Planet."
+        },
+        {
+          url: "https://www.youtube.com/embed/WrTHX8t0yl8",
+          title: "Perseverance Rover",
+          description: "Learn about NASA's most advanced Mars rover and its search for signs of ancient life."
+        },
+        {
+          url: "https://www.youtube.com/embed/iK64wy0b2ic",
+          title: "Mars Rover Technology",
+          description: "Explore the incredible technology that allows rovers to navigate and study the Martian surface."
+        }
+      ];
+    }
+    
     if (section.videoUrl) {
       sources.push({
         url: section.videoUrl,

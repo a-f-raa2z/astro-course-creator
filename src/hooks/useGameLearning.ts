@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { Course, CourseSection } from "@/types/course";
@@ -108,11 +107,13 @@ export const useGameLearning = (course: Course) => {
       ];
     }
     
-    // Special case for Roving over Mars - remove image
+    // Special case for Roving over Mars - updated content
     if (section.title === "Roving over Mars") {
       return [
         'introduction',
         'video',
+        'fun-facts',
+        'bonus',
         'quiz'
       ];
     }
