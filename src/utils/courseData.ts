@@ -796,7 +796,34 @@ export const generateMockCourse = (
           question: "When was the far side of the Moon first photographed?",
           options: ["1959", "1969", "1976", "1989"],
           correctAnswer: 0
-        }
+        },
+        quizzes: [
+          {
+            question: "Why don't we see the far side of the Moon?",
+            options: ["It's invisible", "It's always nighttime", "Tidal locking", "It's too fast"],
+            correctAnswer: 2
+          },
+          {
+            question: "Which mission first photographed the far side?",
+            options: ["Apollo 13", "Luna 3", "Gemini 7", "Curiosity"],
+            correctAnswer: 1
+          },
+          {
+            question: "What's different about the far side?",
+            options: ["No gravity", "More oceans", "More craters", "Green mountains"],
+            correctAnswer: 2
+          },
+          {
+            question: "Why is it harder to explore the far side?",
+            options: ["Too bright", "Too cold", "No direct signal from Earth", "Aliens live there"],
+            correctAnswer: 2
+          },
+          {
+            question: "What do we call the side we never see?",
+            options: ["Hidden moon", "Moon cave", "Backside", "Dark side"],
+            correctAnswer: 3
+          }
+        ]
       },
       {
         id: "section-8",
