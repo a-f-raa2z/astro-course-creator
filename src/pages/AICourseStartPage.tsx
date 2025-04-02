@@ -46,6 +46,11 @@ const AICourseStartPage = () => {
     navigate("/ai-course", { state: { course } });
   };
 
+  // Function to handle starting next section - ensuring correct section sequence
+  const handleStartNextSectionInOrder = () => {
+    handleStartNextSection();
+  };
+
   return (
     <div className="min-h-screen bg-space text-white">
       <div className="flex w-full">
@@ -153,7 +158,7 @@ const AICourseStartPage = () => {
               handleNextContent={handleNextContent}
               showSectionTransition={showSectionTransition}
               nextSectionTitle={nextSectionTitle}
-              onStartNextSection={handleStartNextSection}
+              onStartNextSection={handleStartNextSectionInOrder}
               isFirstContent={currentContentIndex === 0 && currentSectionIndex === 0}
               allSections={course.sections}
             />
