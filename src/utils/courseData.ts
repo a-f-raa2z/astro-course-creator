@@ -664,7 +664,34 @@ export const generateMockCourse = (
             "Volcanic activity"
           ],
           correctAnswer: 2
-        }
+        },
+        quizzes: [
+          {
+            question: "What causes a lunar eclipse?",
+            options: ["Sun blocks the Moon", "Moon moves behind Mars", "Earth's shadow covers the Moon", "The Moon disappears"],
+            correctAnswer: 2
+          },
+          {
+            question: "What effect does the Moon have on Earth?",
+            options: ["Earthquakes", "Wind", "Tides", "Rain"],
+            correctAnswer: 2
+          },
+          {
+            question: "What's a full moon?",
+            options: ["The Moon is closest to the Sun", "The Moon is invisible", "The Moon is fully lit", "The Moon rotates"],
+            correctAnswer: 2
+          },
+          {
+            question: "How often do we see a full moon?",
+            options: ["Once a week", "Every night", "About once a month", "Once a year"],
+            correctAnswer: 2
+          },
+          {
+            question: "What do we call two full moons in one month?",
+            options: ["Double moon", "Supermoon", "Blue moon", "Luna duo"],
+            correctAnswer: 2
+          }
+        ]
       },
       {
         id: "section-6",
