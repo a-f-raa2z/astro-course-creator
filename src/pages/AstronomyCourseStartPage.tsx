@@ -67,14 +67,12 @@ const AstronomyCourseStartPage = () => {
     }
   };
 
-  // Updated handleStartNextSection function to follow the correct section order
   const handleStartNextSection = () => {
     // First make sure we update the section index directly
     const nextSectionIndex = currentSectionIndex + 1;
     
     // Ensure we're within bounds
     if (nextSectionIndex < course.sections.length) {
-      // Ensure we navigate to the next section in the specified order
       setCurrentSectionIndex(nextSectionIndex);
       // Reset to the first content of the new section
       setCurrentContentIndex(0);
