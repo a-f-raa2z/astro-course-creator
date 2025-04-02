@@ -115,36 +115,63 @@ const AstronomyCoursePage = () => {
         <h2 className="text-xl font-semibold text-white mb-6">Course Content</h2>
 
         <div className="relative journey-path">
-          {course.sections.map((section, index) => (
-            <div key={section.id} className="flex mb-8 relative">
-              <div className="relative z-10">
-                <div className={`flex items-center justify-center w-12 h-12 rounded-full mr-4 border-2 ${
-                  sectionProgress[index] === 100 
-                    ? 'bg-green-600 border-green-400' 
-                    : sectionProgress[index] > 0 
-                    ? 'bg-purple-600 border-purple-400' 
-                    : 'bg-space-cosmic-blue border-purple-500/40'
-                }`}>
-                  <span className="text-white font-bold">{index + 1}</span>
-                </div>
-              </div>
-              
-              <div className="flex-1">
-                <SectionCard 
-                  key={section.id} 
-                  title={section.title} 
-                  description={section.introduction}
-                  index={index}
-                  progress={sectionProgress[index] || 0}
-                  videoUrl={section.videoUrl}
-                  shortVideoUrls={section.shortVideo ? 
-                    [section.shortVideo, ...(section.additionalShortVideos || [])] : 
-                    []}
-                  visualUrl={section.visualUrl}
-                  bonusUrls={section.bonusVideos}
-                />
+          {/* Special row layout for section 3 (index 2) */}
+          {course.sections.length > 2 && (
+            <div className="mb-8">
+              <h3 className="text-lg font-semibold text-purple-200 mb-4">Section 3</h3>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                {course.sections[2] && (
+                  <SectionCard 
+                    key={course.sections[2].id} 
+                    title={course.sections[2].title} 
+                    description={course.sections[2].introduction}
+                    index={2}
+                    progress={sectionProgress[2] || 0}
+                    videoUrl={course.sections[2].videoUrl}
+                    shortVideoUrls={course.sections[2].shortVideo ? 
+                      [course.sections[2].shortVideo, ...(course.sections[2].additionalShortVideos || [])] : 
+                      []}
+                    visualUrl={course.sections[2].visualUrl}
+                    bonusUrls={course.sections[2].bonusVideos}
+                  />
+                )}
               </div>
             </div>
+          )}
+
+          {/* Regular vertical layout for other sections */}
+          {course.sections.map((section, index) => (
+            index !== 2 && (
+              <div key={section.id} className="flex mb-8 relative">
+                <div className="relative z-10">
+                  <div className={`flex items-center justify-center w-12 h-12 rounded-full mr-4 border-2 ${
+                    sectionProgress[index] === 100 
+                      ? 'bg-green-600 border-green-400' 
+                      : sectionProgress[index] > 0 
+                      ? 'bg-purple-600 border-purple-400' 
+                      : 'bg-space-cosmic-blue border-purple-500/40'
+                  }`}>
+                    <span className="text-white font-bold">{index + 1}</span>
+                  </div>
+                </div>
+                
+                <div className="flex-1">
+                  <SectionCard 
+                    key={section.id} 
+                    title={section.title} 
+                    description={section.introduction}
+                    index={index}
+                    progress={sectionProgress[index] || 0}
+                    videoUrl={section.videoUrl}
+                    shortVideoUrls={section.shortVideo ? 
+                      [section.shortVideo, ...(section.additionalShortVideos || [])] : 
+                      []}
+                    visualUrl={section.visualUrl}
+                    bonusUrls={section.bonusVideos}
+                  />
+                </div>
+              </div>
+            )
           ))}
         </div>
       </div>
