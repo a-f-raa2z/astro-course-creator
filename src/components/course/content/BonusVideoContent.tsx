@@ -75,6 +75,37 @@ export const BonusVideoContent = ({ section, onComplete, onPrevious, isFirstCont
       ];
     }
     
+    // Add Close to the Sun bonus content
+    if (section.title === "Close to the Sun") {
+      return [
+        {
+          url: "https://www.youtube.com/embed/_OQzGKJkQEE",
+          title: "Parker Solar Probe",
+          description: "Learn about NASA's mission to 'touch' the Sun with the Parker Solar Probe."
+        },
+        {
+          url: "https://www.youtube.com/embed/W_cLSvP9qSU",
+          title: "Solar Flares",
+          description: "Understand the powerful solar flares and their impact on Earth."
+        },
+        {
+          url: "https://www.youtube.com/embed/48_qGtI08i8",
+          title: "Solar Storm Dangers",
+          description: "Discover the potential dangers of solar storms to our technology and planet."
+        },
+        {
+          url: "https://www.youtube.com/embed/D56oR9-J5wE",
+          title: "The Sun's Layers",
+          description: "Explore the different layers of our Sun and their unique properties."
+        },
+        {
+          url: "https://www.youtube.com/embed/SLmWY_ycFUA",
+          title: "Solar Dynamics Observatory",
+          description: "See how NASA's Solar Dynamics Observatory studies the Sun."
+        }
+      ];
+    }
+    
     if (section.bonusVideos && section.bonusVideos.length > 0) {
       return section.bonusVideos.map((url, index) => ({
         url: url,
