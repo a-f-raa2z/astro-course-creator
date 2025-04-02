@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { CourseSection } from "@/types/course";
 import { Button } from "@/components/ui/button";
@@ -15,29 +16,8 @@ interface BonusContentProps {
 
 export const BonusVideoContent = ({ section, onComplete, onPrevious, isFirstContent }: BonusContentProps) => {
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
-  const bonusContent = getBonusContent();
-  const hasBonusContent = bonusContent && bonusContent.length > 0;
 
-  useEffect(() => {
-    setCurrentVideoIndex(0);
-  }, [section]);
-
-  const handleNextVideo = () => {
-    if (currentVideoIndex < bonusContent.length - 1) {
-      setCurrentVideoIndex(currentVideoIndex + 1);
-    } else {
-      onComplete();
-    }
-  };
-
-  const handlePreviousVideo = () => {
-    if (currentVideoIndex > 0) {
-      setCurrentVideoIndex(currentVideoIndex - 1);
-    } else {
-      onPrevious();
-    }
-  };
-
+  // Define the getBonusContent function before using it
   const getBonusContent = () => {
     if (section.title === "Mercury") {
       return [
@@ -112,6 +92,29 @@ export const BonusVideoContent = ({ section, onComplete, onPrevious, isFirstCont
     }
     
     return [];
+  };
+
+  const bonusContent = getBonusContent();
+  const hasBonusContent = bonusContent && bonusContent.length > 0;
+
+  useEffect(() => {
+    setCurrentVideoIndex(0);
+  }, [section]);
+
+  const handleNextVideo = () => {
+    if (currentVideoIndex < bonusContent.length - 1) {
+      setCurrentVideoIndex(currentVideoIndex + 1);
+    } else {
+      onComplete();
+    }
+  };
+
+  const handlePreviousVideo = () => {
+    if (currentVideoIndex > 0) {
+      setCurrentVideoIndex(currentVideoIndex - 1);
+    } else {
+      onPrevious();
+    }
   };
 
   if (!hasBonusContent) {
