@@ -1066,7 +1066,7 @@ export const generateMockCourse = (
           "Examine Mars through the eyes of orbiting spacecraft and learn about its two tiny moons.",
         whyLearn:
           "Orbital observations of Mars reveal its global patterns and history, while studying its moons provides clues about the early solar system.",
-        videoUrl: "https://www.youtube.com/embed/OzyMrDli-i8",
+        videoUrl: "https://www.youtube.com/watch?v=wFTGP7-n3J8",
         keyPoints: [
           "Orbiting spacecraft have mapped the entire surface of Mars in high resolution.",
           "These maps reveal ancient river valleys, impact craters, and potential landing sites for missions.",
@@ -1074,14 +1074,13 @@ export const generateMockCourse = (
           "Deimos appears similar in size to a bright star when viewed from Mars.",
           "Both moons are irregularly shaped and may be captured asteroids."
         ],
-        shortVideo: "https://www.youtube.com/embed/Sr7YRfvOowg",
+        shortVideo: "https://www.youtube.com/embed/Oo51KBdURMo",
         additionalShortVideos: [
-          "https://www.youtube.com/embed/MQnLbZ0zkFs",
-          "https://www.youtube.com/embed/9IV2g6a-iH8"
-        ],
-        bonusVideos: [
-          "https://www.youtube.com/embed/N9p6y3_c4DI",
-          "https://www.youtube.com/embed/KRgm5wCeff4"
+          "https://www.youtube.com/embed/Oo51KBdURMo",
+          "https://www.youtube.com/embed/8rjb4fM6EC8",
+          "https://www.youtube.com/embed/o7RJeAdDmmE",
+          "https://www.youtube.com/embed/cTMiM1UZfTc",
+          "https://www.youtube.com/embed/lHSfFieToSM",
         ],
         image: {
           url: "/lovable-uploads/973bc422-9419-49ac-ae95-89d2b36f2df8.png",
