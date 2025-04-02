@@ -221,9 +221,7 @@ const generateQuizzes = (sectionTitle: string): QuizQuestion[] => {
           correctAnswer: 2
         },
         {
-          question: "What is a lunar 'rille'?",
-          options: [
-            "A mountain range",
+          question: "What is a lunar 'rille'?\",\n          options: [\n            \"A mountain range",
             "A valley or channel on the Moon's surface",
             "A crater chain",
             "A dome-shaped feature"
@@ -862,4 +860,4 @@ export const generateMockCourse = (
       ],
       image: {
         url: "https://images.unsplash.com/photo-1614732414444-096e5f1122d5",
-        description: "A detailed topographical map of the Moon's surface showing major craters and maria
+        description: "A detailed topographical map of the Moon's surface showing major craters and maria."
