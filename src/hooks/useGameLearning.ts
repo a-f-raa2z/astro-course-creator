@@ -283,6 +283,36 @@ export const useGameLearning = (course: Course) => {
       ];
     }
     
+    if (section.title === "Roving over Mars") {
+      return [
+        {
+          question: "What's the purpose of Mars rovers?",
+          options: ["Drive humans", "Look for life", "Take over Mars", "Build malls"],
+          correctAnswer: 1
+        },
+        {
+          question: "Which rover landed in 2021?",
+          options: ["Opportunity", "Spirit", "Curiosity", "Perseverance"],
+          correctAnswer: 3
+        },
+        {
+          question: "How do rovers get energy?",
+          options: ["Solar panels", "Batteries", "Nuclear power", "Both A & C"],
+          correctAnswer: 3
+        },
+        {
+          question: "What did Mars rovers find that excited scientists?",
+          options: ["Gold", "Ancient water clues", "Aliens", "Moon rocks"],
+          correctAnswer: 1
+        },
+        {
+          question: "What cool skill does Perseverance have?",
+          options: ["Takes selfies", "Launches drones", "Talks", "Builds robots"],
+          correctAnswer: 1
+        }
+      ];
+    }
+    
     if (quizzes.length < 5) {
       const additionalQuizzes = generateGenericQuizzes(section, 5 - quizzes.length);
       quizzes.push(...additionalQuizzes);
