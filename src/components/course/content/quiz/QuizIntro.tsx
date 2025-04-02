@@ -32,11 +32,6 @@ export const QuizIntro: React.FC<QuizIntroProps> = ({
             Ready for the Ultimate Challenge?
           </h3>
           
-          <p className="text-lg mb-6 text-purple-100">
-            You've learned a lot in this section. Now it's time to test your knowledge with a series of questions.
-            Get ready to apply what you've learned!
-          </p>
-          
           <div className="p-4 bg-purple-900/30 rounded-lg border border-purple-500/30 mb-6 max-w-md">
             <p className="text-purple-200">
               <span className="font-semibold text-yellow-300">Challenge:</span> Complete {totalQuizzes} quiz questions 
