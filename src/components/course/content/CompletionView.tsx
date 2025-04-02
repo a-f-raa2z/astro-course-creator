@@ -1,7 +1,7 @@
 
 import React from "react";
 import { Button } from "@/components/ui/button";
-import { CheckCircle, Youtube, ListChecks } from "lucide-react";
+import { CheckCircle, Youtube, ListChecks, ArrowRight } from "lucide-react";
 
 interface CompletionViewProps {
   sectionTitle: string;
@@ -46,7 +46,12 @@ export const CompletionView = ({
         >
           <Youtube className="h-4 w-4 mr-2" /> Rewatch Video
         </Button>
-        {/* Removed the Continue button here */}
+        <Button 
+          onClick={onContinue}
+          className="bg-green-600 hover:bg-green-700 mb-2 sm:mb-0"
+        >
+          Continue <ArrowRight className="h-4 w-4 ml-2" />
+        </Button>
       </div>
     </div>
   );

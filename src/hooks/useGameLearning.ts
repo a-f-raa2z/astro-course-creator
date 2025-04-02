@@ -154,8 +154,9 @@ export const useGameLearning = (course: Course) => {
     if (currentContentIndex < availableContentTypes.length - 1) {
       setCurrentContentIndex(prevIndex => prevIndex + 1);
     } else if (currentSectionIndex < course.sections.length - 1) {
-      // We handle this transition in AstronomyCourseStartPage.tsx now
-      // The transition screen logic will take care of updating these values
+      // Section is complete, but we don't automatically move to the next section
+      // We let the section transition UI handle this instead
+      // The AstronomyCourseStartPage will show the transition screen
     } else {
       toast({
         title: "🎉 Course Complete! 🎉",
