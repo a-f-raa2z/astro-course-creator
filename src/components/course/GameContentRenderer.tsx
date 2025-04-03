@@ -12,6 +12,7 @@ import { PlaygroundContent } from "./content/PlaygroundContent";
 import { SectionTransition } from "./content/SectionTransition";
 import { FunFactsContent } from "./content/FunFactsContent";
 import { VisualGalleryContent } from "./content/VisualGalleryContent";
+import { TrueFalseContent } from "./content/TrueFalseContent"; // Import the new component
 
 interface GameContentRendererProps {
   contentType: ContentType | ContentType['type'];
@@ -91,7 +92,7 @@ export const GameContentRenderer = ({
   
   switch (type) {
     case 'introduction':
-      return <IntroductionContent 
+      return <TrueFalseContent 
                section={processedSection} 
                onComplete={handleNextContent} 
                onPrevious={handlePreviousContent}
