@@ -12,7 +12,7 @@ import { PlaygroundContent } from "./content/PlaygroundContent";
 import { SectionTransition } from "./content/SectionTransition";
 import { FunFactsContent } from "./content/FunFactsContent";
 import { VisualGalleryContent } from "./content/VisualGalleryContent";
-import { TrueFalseContent } from "./content/TrueFalseContent"; // Import the new component
+import { TrueFalseContent } from "./content/TrueFalseContent";
 
 interface GameContentRendererProps {
   contentType: ContentType | ContentType['type'];
@@ -28,6 +28,7 @@ interface GameContentRendererProps {
   nextSectionTitle?: string;
   onStartNextSection?: () => void;
   nextSection?: CourseSection | null;
+  onAddXp?: (points: number, message: string) => void;
 }
 
 export const GameContentRenderer = ({
@@ -43,7 +44,8 @@ export const GameContentRenderer = ({
   showSectionTransition = false,
   nextSectionTitle,
   onStartNextSection,
-  nextSection
+  nextSection,
+  onAddXp
 }: GameContentRendererProps) => {
   
   if (!currentSection) {
@@ -97,6 +99,7 @@ export const GameContentRenderer = ({
                onComplete={handleNextContent} 
                onPrevious={handlePreviousContent}
                isFirstContent={isFirstContent}
+               onAddXp={onAddXp}
              />;
     case 'video':
       return <VideoContent 

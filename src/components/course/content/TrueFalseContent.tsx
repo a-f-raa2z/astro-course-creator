@@ -6,15 +6,24 @@ import { ArrowRight, ArrowLeft, CheckCircle, XCircle, HelpCircle } from "lucide-
 import { Card } from "@/components/ui/card";
 import { TitleWrapper } from "./TitleWrapper";
 import { motion } from "framer-motion";
+import { useToast } from "@/hooks/use-toast";
 
 interface TrueFalseContentProps {
   section: CourseSection;
   onComplete: () => void;
   onPrevious: () => void;
   isFirstContent: boolean;
+  onAddXp?: (points: number, message: string) => void;
 }
 
-export const TrueFalseContent = ({ section, onComplete, onPrevious, isFirstContent }: TrueFalseContentProps) => {
+export const TrueFalseContent = ({ 
+  section, 
+  onComplete, 
+  onPrevious, 
+  isFirstContent,
+  onAddXp
+}: TrueFalseContentProps) => {
+  const { toast } = useToast();
   const [selectedAnswer, setSelectedAnswer] = useState<boolean | null>(null);
   const [showAnswer, setShowAnswer] = useState(false);
   
@@ -127,6 +136,21 @@ export const TrueFalseContent = ({ section, onComplete, onPrevious, isFirstConte
   };
   
   const handleContinue = () => {
+    // Award XP points based on correctness
+    if (onAddXp) {
+      if (selectedAnswer === trueFalseQuestion.answer) {
+        onAddXp(10, "Correct answer!");
+      } else {
+        onAddXp(5, "Keep learning!");
+      }
+    } else {
+      // If onAddXp is not provided, show a toast directly
+      toast({
+        title: `XP gained!`,
+        description: selectedAnswer === trueFalseQuestion.answer ? "Correct answer!" : "Keep learning!",
+      });
+    }
+    
     setSelectedAnswer(null);
     setShowAnswer(false);
     onComplete();

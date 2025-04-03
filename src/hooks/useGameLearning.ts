@@ -143,18 +143,6 @@ export const useGameLearning = (course: Course) => {
     return contentTypes;
   };
 
-  useEffect(() => {
-    if (course && course.sections) {
-      for (let i = 8; i <= 15 && i < course.sections.length; i++) {
-        const section = course.sections[i];
-        
-        if (section && (!section.quizzes || section.quizzes.length < 5)) {
-          section.quizzes = generateQuizzesForSection(section);
-        }
-      }
-    }
-  }, [course]);
-  
   const generateQuizzesForSection = (section: CourseSection): any[] => {
     const existingQuizzes = section.quizzes || [];
     if (existingQuizzes.length === 5) {
@@ -418,6 +406,14 @@ export const useGameLearning = (course: Course) => {
   const availableContentTypes = currentSection ? getAvailableContentTypes(currentSection) : ['introduction'];
   const currentContentType = availableContentTypes[currentContentIndex] || 'introduction';
 
+  const addXpPoints = (points: number, message: string) => {
+    setXpPoints(prev => prev + points);
+    toast({
+      title: `+${points} XP gained!`,
+      description: message,
+    });
+  };
+
   const markContentAsCompleted = () => {
     const contentKey = `${currentSectionIndex}-${currentContentIndex}`;
     if (!completedContents.includes(contentKey)) {
@@ -583,6 +579,7 @@ export const useGameLearning = (course: Course) => {
     level,
     levelProgress,
     completedContents,
-    setCurrentContentIndex
+    setCurrentContentIndex,
+    addXpPoints
   };
 };

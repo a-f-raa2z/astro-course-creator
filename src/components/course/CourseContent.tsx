@@ -20,6 +20,7 @@ interface CourseContentProps {
   onStartNextSection: () => void;
   isFirstContent: boolean;
   allSections: CourseSection[];
+  onAddXp?: (points: number, message: string) => void;
 }
 
 export const CourseContent: React.FC<CourseContentProps> = ({
@@ -35,7 +36,8 @@ export const CourseContent: React.FC<CourseContentProps> = ({
   nextSectionTitle,
   onStartNextSection,
   isFirstContent,
-  allSections
+  allSections,
+  onAddXp
 }) => {
   const currentContentType = contentTypes[currentContentIndex] || 'introduction';
   
@@ -69,6 +71,7 @@ export const CourseContent: React.FC<CourseContentProps> = ({
           nextSectionTitle={nextSectionTitle}
           onStartNextSection={onStartNextSection}
           nextSection={nextSection}
+          onAddXp={onAddXp}
         />
       </Card>
     </>
