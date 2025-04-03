@@ -608,11 +608,6 @@ export const generateMockCourse = (
           "The Moon likely formed from debris after a giant impact on Earth.",
           "Future lunar missions aim to establish a permanent human presence on the Moon."
         ],
-        shortVideo: "https://www.youtube.com/embed/o-f7BvJvH0w",
-        additionalShortVideos: [
-          "https://www.youtube.com/embed/qxzWv_jNTOE",
-          "https://www.youtube.com/embed/UIQmSpJ-edg"
-        ],
         bonusVideos: [
           "https://www.youtube.com/embed/mJ_fK7a8xXo",
           "https://www.youtube.com/embed/wSFv1euqVwo"
@@ -625,7 +620,35 @@ export const generateMockCourse = (
           question: "What is the dark, basaltic plains on the Moon called?",
           options: ["Craters", "Maria", "Highlands", "Rilles"],
           correctAnswer: 1
-        }
+        },
+        quizzes: [
+          {
+            question: "What causes moon phases?",
+            options: ["Moon changing shape", "Earth's shadow", "Moon’s orbit around Earth", "Sunlight moving"],
+            correctAnswer: 2
+          },
+          {
+            question: "Which mission first landed humans on the Moon?",
+            options: ["Voyager", "Apollo 11", "Challenger", "Gemini 4"],
+            correctAnswer: 1
+          },
+          {
+            question: "Why do we always see the same side of the Moon?",
+            options: ["It’s flat", "It rotates really fast", "Tidal locking", "It doesn’t rotate"],
+            correctAnswer: 2
+          },
+          {
+            question: "What is the surface of the Moon mostly made of?",
+            options: ["Ice", "Gas", "Dust and rock", "Metal"],
+            correctAnswer: 2
+          },
+          {
+            question: "How long does it take the Moon to orbit Earth?",
+            options: ["1 day", "7 days", "27.3 days", "365 days"],
+            correctAnswer: 2
+          }
+        ]
+        
       },
       {
         id: "section-5",
@@ -862,7 +885,35 @@ export const generateMockCourse = (
             "It has clouds of sulfuric acid"
           ],
           correctAnswer: 1
-        }
+        },
+        quizzes: [
+          {
+            question: "Which planet is called Earth's twin?",
+            options: ["Mars", "Mercury", "Venus", "Jupiter"],
+            correctAnswer: 2
+          },
+          {
+            question: "Why is Venus hotter than Mercury?",
+            options: ["It’s closer to the Sun", "It has more lava", "Thick atmosphere traps heat", "It's made of fire"],
+            correctAnswer: 2
+          },
+          {
+            question: "What’s a wild weather fact about Venus?",
+            options: ["It snows", "It has acid rain", "It has blizzards", "It’s always sunny"],
+            correctAnswer: 1
+          },
+          {
+            question: "How long is a day on Venus compared to Earth?",
+            options: ["Shorter", "Same", "Longer", "24 hours"],
+            correctAnswer: 2
+          },
+          {
+            question: "What direction does Venus rotate?",
+            options: ["East to West", "It doesn't", "West to East", "Backwards"],
+            correctAnswer: 3
+          }
+        ]
+        
       },
       {
         id: "section-9",
@@ -1066,7 +1117,7 @@ export const generateMockCourse = (
           "Examine Mars through the eyes of orbiting spacecraft and learn about its two tiny moons.",
         whyLearn:
           "Orbital observations of Mars reveal its global patterns and history, while studying its moons provides clues about the early solar system.",
-        videoUrl: "https://www.youtube.com/watch?v=wFTGP7-n3J8",
+        videoUrl: "https://www.youtube.com/embed/wFTGP7-n3J8",
         keyPoints: [
           "Orbiting spacecraft have mapped the entire surface of Mars in high resolution.",
           "These maps reveal ancient river valleys, impact craters, and potential landing sites for missions.",
