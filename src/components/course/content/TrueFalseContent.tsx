@@ -139,19 +139,69 @@ export const TrueFalseContent = ({ section, onComplete, onPrevious, isFirstConte
       ? "bg-green-900/20 border border-green-500/30" 
       : "bg-red-900/20 border border-red-500/30";
   };
+
+  const getSectionImage = () => {
+    switch (section.title) {
+      case "The Solar System":
+        return "/lovable-uploads/ad48c8d7-8aae-41a6-95ac-22af96b8a45a.png";
+      case "The Inner Planets":
+        return "/lovable-uploads/0228ba3e-a126-45c3-a728-10da3a418e4e.png";
+      case "Earth":
+        return "/lovable-uploads/34bde558-8d2c-41ff-bd25-b4c545393355.png";
+      case "The Moon":
+        return "/lovable-uploads/54548175-965e-4d7f-ae75-071e6b49cb4d.png";
+      case "The Moon in Our Skies":
+        return "/lovable-uploads/f04bd424-c991-4a08-8792-e83af1f09539.png";
+      case "The Moon's Unseen Face":
+        return "/lovable-uploads/52a450ef-41cd-45ec-90a2-c256e58d0d6a.png";
+      case "Mapping the Moon":
+        return "/lovable-uploads/1afadff6-a4c9-48c7-a8d6-5fe1fcecc2dd.png";
+      case "Venus":
+        return "/lovable-uploads/b87f40a8-a8d2-42de-943b-b6f586bc75b1.png";
+      case "Mercury":
+        return "/lovable-uploads/98ea4cdd-0d5e-49fd-bc16-139cdce24388.png";
+      case "Messenger at Mercury":
+        return "/lovable-uploads/bee533e9-3edc-4aa8-8fd6-2ee0683ab436.png";
+      case "The Sun":
+        return "/lovable-uploads/17b434e9-217c-4068-8b8b-1c628209901d.png";
+      case "Close to the Sun":
+        return "/lovable-uploads/6d50892d-4935-4033-bcfc-2a998579227e.png";
+      case "Mars":
+        return "/lovable-uploads/28ccf6bc-b95b-4b54-b78c-1be5f91a5be6.png";
+      case "Mars from Above and the Moons of Mars":
+        return "/lovable-uploads/973bc422-9419-49ac-ae95-89d2b36f2df8.png";
+      case "Roving over Mars":
+        return "/lovable-uploads/71f04c7c-c819-40bc-9de0-5f293ddadf89.png";
+      default:
+        return "/lovable-uploads/ad48c8d7-8aae-41a6-95ac-22af96b8a45a.png";
+    }
+  };
+  
+  const sectionImage = getSectionImage();
   
   return (
     <div className="w-full h-full flex items-center justify-center">
       <Card className={`w-full h-full flex flex-col p-4 backdrop-blur-sm transition-colors ${getBackgroundColor()}`}>
         <TitleWrapper 
           icon={<HelpCircle className="h-5 w-5 text-purple-400 mr-2" />}
-          title="Quick Question" 
+          title="Preview Your Knowledge: What Do You Already Know?" 
           color="bg-purple-800/50"
         />
         
         <div className="flex-1 overflow-auto p-2 flex flex-col justify-center items-center">
           <div className="max-w-xl mx-auto text-center">
-            <h3 className="text-xl font-semibold text-white mb-6">{trueFalseQuestion.question}</h3>
+            <div className="mb-6 flex flex-col items-center">
+              {sectionImage && (
+                <div className="w-48 h-48 mb-4 rounded-full overflow-hidden border-4 border-purple-500/30 shadow-lg shadow-purple-500/20">
+                  <img 
+                    src={sectionImage} 
+                    alt={section.title} 
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              )}
+              <h3 className="text-xl font-semibold text-white mt-3">{trueFalseQuestion.question}</h3>
+            </div>
             
             {!showAnswer ? (
               <div className="flex gap-4 justify-center mt-6">
